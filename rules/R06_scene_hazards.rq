@@ -1,0 +1,161 @@
+# RULE R06_scene_hazards
+# Derive hazards from scene descriptions (feeds CQ24/CQ25). Each UNION branch is one hazard rule — add or tune rules here.
+# Executed in file-name order by scripts/run_cqs.py (CONSTRUCT results are added to the graph).
+
+PREFIX ffonto:  <http://purl.org/ffonto#>
+PREFIX ffv:  <http://purl.org/ffonto/vocab#>
+PREFIX ffd:  <http://purl.org/ffonto/data/>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+CONSTRUCT {
+  ?h a ffonto:Hazard ;
+     ffonto:hasHazardType ?ht ;
+     ffonto:threatens ?target ;
+     ffonto:inEvent ?ev ;
+     prov:wasDerivedFrom ?src ;
+     rdfs:comment ?why .
+}
+WHERE {
+  {
+    ?sd ffonto:depicts ?target , ?src .
+    ?target ffonto:hasKind/skos:broader* ffv:Person .
+    ?src ffonto:hasKind/skos:broader* ffv:FirePhenomenonKind .
+    ?target ffonto:near|^ffonto:near ?src .
+    BIND(ffv:FlameProximity AS ?ht)
+    BIND("Person depicted near a fire phenomenon." AS ?why)
+  }
+  UNION
+  {
+    ?sd ffonto:depicts ?target , ?src .
+    ?target ffonto:hasKind/skos:broader* ffv:Building .
+    ?src ffonto:hasKind/skos:broader* ffv:FirePhenomenonKind .
+    ?src ffonto:advancingToward|ffonto:near|^ffonto:near ?target .
+    BIND(ffv:StructureIgnitionRisk AS ?ht)
+    BIND("Fire phenomenon near / advancing toward a building." AS ?why)
+  }
+  UNION
+  {
+    ?sd ffonto:depicts ?target .
+    ?target ffonto:hasKind/skos:broader* ffv:Building ;
+            ffonto:hasState ffv:Threatened .
+    BIND(?target AS ?src)
+    BIND(ffv:StructureIgnitionRisk AS ?ht)
+    BIND("Building marked as threatened by the scene extractor." AS ?why)
+  }
+  UNION
+  {
+    ?sd ffonto:depicts ?target , ?src .
+    ?target ffonto:hasKind ffv:PropaneTank .
+    ?src ffonto:hasKind/skos:broader* ffv:FirePhenomenonKind .
+    ?target ffonto:near|^ffonto:near ?src .
+    BIND(ffv:ExplosionHazard AS ?ht)
+    BIND("Pressurised tank near a fire phenomenon." AS ?why)
+  }
+  UNION
+  {
+    ?sd ffonto:hasObservation ?src ; ffonto:depicts ?target .
+    ?src sosa:observedProperty ffv:VisibilityLevel ; ffonto:hasValueConcept ffv:Low .
+    VALUES ?k { ffv:Road ffv:GroundVehicle ffv:Aircraft }
+    ?target ffonto:hasKind/skos:broader* ?k .
+    BIND(ffv:SmokeVisibilityHazard AS ?ht)
+    BIND("Low visibility while a road, vehicle or aircraft is in the scene." AS ?why)
+  }
+  UNION
+  {
+    ?sd ffonto:hasObservation ?src ; ffonto:depicts ?target .
+    ?src sosa:observedProperty ffv:SmokeDensity ; ffonto:hasValueConcept ?dens .
+    VALUES ?dens { ffv:High ffv:Extreme }
+    ?target ffonto:hasKind/skos:broader* ffv:Person .
+    BIND(ffv:RespiratoryHazard AS ?ht)
+    BIND("Dense smoke with people present." AS ?why)
+  }
+  UNION
+  {
+    ?sd ffonto:depicts ?target .
+    VALUES ?k { ffv:PowerLine ffv:PowerPole ffv:Transformer }
+    VALUES ?st { ffv:Down ffv:Damaged ffv:OnFire ffv:Leaning }
+    ?target ffonto:hasKind ?k ; ffonto:hasState ?st .
+    BIND(?target AS ?src)
+    BIND(ffv:DownedPowerLineHazard AS ?ht)
+    BIND("Power infrastructure down, damaged or burning." AS ?why)
+  }
+  UNION
+  {
+    ?sd ffonto:depicts ?target .
+    ?target ffonto:hasKind ?k .
+    ?k ffonto:requiredPPE ?ppe .
+    FILTER NOT EXISTS { ?target ffonto:wears ?ppe }
+    BIND(?target AS ?src)
+    BIND(ffv:MissingPPEHazard AS ?ht)
+    BIND("Person not seen wearing an item of required PPE." AS ?why)
+  }
+  UNION
+  {
+    ?sd ffonto:hasObservation ?src ; ffonto:depicts ?target .
+    ?src sosa:observedProperty ffv:FireIntensity ; ffonto:hasValueConcept ?lvl .
+    VALUES ?lvl { ffv:High ffv:Extreme }
+    VALUES ?k { ffv:ConiferousForest ffv:LadderFuel }
+    ?target ffonto:hasKind ?k .
+    BIND(ffv:CrownFireTransition AS ?ht)
+    BIND("High fire intensity next to conifers or ladder fuels." AS ?why)
+  }
+  UNION
+  {
+    ?sd ffonto:depicts ?src .
+    VALUES ?k { ffv:SpotFire ffv:Ember }
+    ?src ffonto:hasKind ?k .
+    BIND(ffv:SpottingHazard AS ?ht)
+    BIND("Spot fires or embers visible." AS ?why)
+  }
+  UNION
+  {
+    ?sd ffonto:depicts ?target .
+    ?target ffonto:hasKind ffv:Road ; ffonto:hasState ffv:Blocked .
+    BIND(?target AS ?src)
+    BIND(ffv:EvacuationRouteBlocked AS ?ht)
+    BIND("Road marked as blocked." AS ?why)
+  }
+  UNION
+  {
+    ?sd ffonto:depicts ?src .
+    { ?src ffonto:hasKind ffv:Snag }
+    UNION
+    { ?src ffonto:hasKind ffv:Tree . VALUES ?st { ffv:Dead ffv:Charred } ?src ffonto:hasState ?st }
+    BIND(ffv:FallingTreeHazard AS ?ht)
+    BIND("Snags or dead / charred trees visible." AS ?why)
+  }
+  UNION
+  {
+    ?sd ffonto:depicts ?src .
+    { VALUES ?k { ffv:Smouldering ffv:Hotspot } ?src ffonto:hasKind ?k }
+    UNION
+    { ?src ffonto:hasState ffv:SmoulderingState }
+    BIND(ffv:ReignitionHazard AS ?ht)
+    BIND("Smouldering material or hotspots visible." AS ?why)
+  }
+  UNION
+  {
+    ?sd ffonto:depicts ?src .
+    VALUES ?k { ffv:ErosionRill ffv:ExposedMineralSoil }
+    ?src ffonto:hasKind ?k .
+    BIND(ffv:ErosionRisk AS ?ht)
+    BIND("Erosion rills or exposed mineral soil visible." AS ?why)
+  }
+  UNION
+  {
+    ?sd ffonto:depicts ?target , ?src .
+    ?target ffonto:hasKind/skos:broader* ffv:Animal .
+    ?src ffonto:hasKind/skos:broader* ffv:FirePhenomenonKind .
+    ?target ffonto:near|^ffonto:near ?src .
+    BIND(ffv:WildlifeThreat AS ?ht)
+    BIND("Animals near a fire phenomenon." AS ?why)
+  }
+  OPTIONAL { ?sd ffonto:describesRecord/ffonto:aboutEvent ?ev }
+  BIND(IRI(CONCAT(STR(?sd), "/hazard/", STRAFTER(STR(?ht), "#"), "/",
+                  MD5(COALESCE(STR(?target), STR(?src))))) AS ?h)
+}

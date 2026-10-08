@@ -1,0 +1,22 @@
+{
+  "scene_id": "scene_evoDJI_0001_frame12",
+  "image_record_uuid": "3f6d562f-33d3-49ee-a40b-3a8b6cf07823",
+  "extractor": {"model_name": "EXAMPLE-VLM (hand-written fixture, replace with real VLM output)", "model_version": "0"},
+  "human_validated": false,
+  "entities": [
+    {"id": "e1", "kind": "FlameFront", "count": 1, "position": "HeadOfFire", "near": ["e4"]},
+    {"id": "e2", "kind": "SmokePlume", "count": 1},
+    {"id": "e3", "kind": "ConiferousForest", "state": ["Dense", "Dry"]},
+    {"id": "e4", "kind": "Lake"}
+  ],
+  "attributes": {
+    "SmokeColour": "Gray",
+    "SmokeDensity": "High",
+    "PlumeDirection": "Drifting",
+    "VisibilityLevel": "Medium",
+    "LightCondition": "Daytime",
+    "FireType": "SurfaceFireType",
+    "FireIntensity": "Medium",
+    "ScenePurpose": "Wildfire"
+  }
+}

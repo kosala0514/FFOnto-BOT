@@ -1,0 +1,3 @@
+modality,site,grid_x,grid_y,country,day_name,day_of_month,month_num,year,temp_c,rh_pct,wind_kmh,rain_mm ,FFMC,DMC,DC,ISI,BUI,FWI,fire_occured,area_ha,event_id
+Tabular,demo_site_A,2,2,,mon,27,8,2012,15.9,51,4.5,0,92.1,99.0,610.5,9.2,140.8,21.3,0,0,
+Tabular,demo_site_A,2,2,,tue,28,8,2012,17.4,43,6.7,0,94.8,108.3,647.1,17.0,150.4,33.1,1,1.07,ev_demo_081

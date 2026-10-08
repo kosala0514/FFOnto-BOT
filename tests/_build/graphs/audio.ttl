@@ -1,0 +1,96 @@
+@prefix ffonto: <http://purl.org/ffonto#> .
+@prefix ffv: <http://purl.org/ffonto/vocab#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://purl.org/ffonto/data/event/ev-22e029d3b190> a ffonto:FireEvent ;
+    ffonto:eventCode "ev_22e029d3b190" .
+
+<http://purl.org/ffonto/data/event/ev-demo-081> a ffonto:FireEvent ;
+    ffonto:eventCode "ev_demo_081" .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/obs/0> a ffonto:ModelObservation ;
+    ffonto:confidence 8.1e-01 ;
+    ffonto:labelCategory "fire_audio" ;
+    ffonto:labelSource ffv:AudioTaggerSource ;
+    ffonto:maxConfidence 8.8e-01 ;
+    ffonto:meanConfidence 8.1e-01 ;
+    ffonto:predictedClass ffv:Explosion ;
+    ffonto:topKLabel "crackle",
+        "explosion" ;
+    ffonto:usedThreshold <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/threshold/Explosion> ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/google-yamnet/1> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081> .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/obs/1> a ffonto:ModelObservation ;
+    ffonto:confidence 3.5e-01 ;
+    ffonto:labelCategory "fire_audio" ;
+    ffonto:labelSource ffv:AudioTaggerSource ;
+    ffonto:maxConfidence 5.2e-01 ;
+    ffonto:meanConfidence 3.5e-01 ;
+    ffonto:predictedClass ffv:Siren ;
+    ffonto:topKLabel "siren" ;
+    ffonto:usedThreshold <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/threshold/Siren> ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/google-yamnet/1> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081> .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/threshold/Explosion> a ffonto:Threshold ;
+    ffonto:forClass ffv:Explosion ;
+    ffonto:thresholdValue 2e-01 .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/threshold/Siren> a ffonto:Threshold ;
+    ffonto:forClass ffv:Siren ;
+    ffonto:thresholdValue 2e-01 .
+
+<http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a> a ffonto:AudioRecord ;
+    ffonto:aboutEvent <http://purl.org/ffonto/data/event/ev-22e029d3b190> ;
+    ffonto:durationMs 4.8e+02 ;
+    ffonto:fileURI "/home/cse/Documents/AudioToText/dataset/videoplayback_14.wav" ;
+    ffonto:globalThreshold 2e-01 ;
+    ffonto:hasObservation <http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a/obs/0> ;
+    ffonto:recordUUID "7cd6773c-c37e-4acc-a594-20a8d0a5c74a" ;
+    ffonto:schemaVersion "1.0.0" ;
+    ffonto:sourceName "unknown_microphone" .
+
+<http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a/obs/0> a ffonto:ModelObservation ;
+    ffonto:confidence 7.337e-01 ;
+    ffonto:labelCategory "fire_audio" ;
+    ffonto:labelSource ffv:AudioTaggerSource ;
+    ffonto:maxConfidence 7.337e-01 ;
+    ffonto:meanConfidence 7.337e-01 ;
+    ffonto:predictedClass ffv:Explosion ;
+    ffonto:topKLabel "explosion" ;
+    ffonto:usedThreshold <http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a/threshold/Explosion> ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/google-yamnet/1> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a> .
+
+<http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a/threshold/Explosion> a ffonto:Threshold ;
+    ffonto:forClass ffv:Explosion ;
+    ffonto:thresholdValue 2e-01 .
+
+<http://purl.org/ffonto/data/site/demo-site-a> a ffonto:Site ;
+    ffonto:siteName "demo_site_A" .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081> a ffonto:AudioRecord ;
+    ffonto:aboutEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
+    ffonto:atSite <http://purl.org/ffonto/data/site/demo-site-a> ;
+    ffonto:captureTime "2012-08-28T14:05:30+00:00"^^xsd:dateTime ;
+    ffonto:deviceId "mic-01" ;
+    ffonto:durationMs 9.6e+03 ;
+    ffonto:fileURI "fixtures/forest_fire_081.wav" ;
+    ffonto:globalThreshold 2e-01 ;
+    ffonto:hasObservation <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/obs/0>,
+        <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/obs/1> ;
+    ffonto:recordUUID "00000000-0000-4000-8000-0000000a0081" ;
+    ffonto:schemaVersion "1.0.0" ;
+    ffonto:sourceName "fixture_microphone" .
+
+<http://purl.org/ffonto/data/model/google-yamnet/1> a ffonto:Model ;
+    ffonto:classMapSHA1 "39cf3cd50b11d36e1d91432d7d1c01249ef86695" ;
+    ffonto:frameStrideS 4.8e-01 ;
+    ffonto:modelName "google/yamnet" ;
+    ffonto:modelURL "https://tfhub.dev/google/yamnet/1"^^xsd:anyURI ;
+    ffonto:modelVersion "1" ;
+    ffonto:topK 8 .
+

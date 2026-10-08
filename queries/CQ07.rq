@@ -1,0 +1,32 @@
+# CQ07: Are the records of an event consistent across modalities and models?
+#
+# Example ForestFire-VQA questions answered by this query:
+#   - Is there any conflict between caption ('smoke') and model fire score (below threshold)?
+#   - Is there any modality conflict for this fire event (audio indicates escalation, image shows low severity)?
+#   - Is the caption consistent with the vision scores?
+#   - Does zero rain align with observed smoke in the image?
+#
+# Note: Alert readiness ('are all required fields present for automated alerting?') is checked by SHACL (AlertReadyShape).
+
+PREFIX ffonto:  <http://purl.org/ffonto#>
+PREFIX ffv:  <http://purl.org/ffonto/vocab#>
+PREFIX ffd:  <http://purl.org/ffonto/data/>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?conflictType ?eventCode ?record ?class ?confidence ?explanation
+WHERE {
+  ?x a ffonto:ModalityConflict ;
+     ffonto:conflictType ?ct ;
+     ffonto:involvesObservation ?o .
+  ?ct skos:prefLabel ?conflictType .
+  OPTIONAL { ?x ffonto:inEvent/ffonto:eventCode ?eventCode }
+  OPTIONAL { ?x rdfs:comment ?explanation }
+  ?record ffonto:hasObservation ?o .
+  ?o ffonto:predictedClass ?class ; ffonto:confidence ?confidence .
+}
+ORDER BY ?conflictType ?eventCode

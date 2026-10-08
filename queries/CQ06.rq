@@ -1,0 +1,35 @@
+# CQ06: What does the caption say, and which concepts does it mention?
+#
+# Example ForestFire-VQA questions answered by this query:
+#   - Extract the caption text shown for the image.
+#   - Does the auto-caption mention smoke?
+#   - Does the caption mention fire/flames?
+#   - Does the caption mention aircraft?
+#   - Does the caption mention water?
+#   - Does the caption mention terrain features?
+#
+# Note: Questions such as 'Does the caption imply daytime / windy conditions?' need language understanding; answer them from the scene attributes (CQ15) instead.
+
+PREFIX ffonto:  <http://purl.org/ffonto#>
+PREFIX ffv:  <http://purl.org/ffonto/vocab#>
+PREFIX ffd:  <http://purl.org/ffonto/data/>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?record ?captionText ?mentionsFire ?mentionsSmoke ?mentionsAircraft ?mentionsWater ?mentionsTerrain
+       (REPLACE(REPLACE(GROUP_CONCAT(DISTINCT COALESCE(?label, ""); separator=", "), "^(, )+|(, )+$", ""), "(, ){2,}", ", ") AS ?allMentionedConcepts)
+WHERE {
+  ?record ffonto:hasCaption ?cap .
+  ?cap ffonto:captionText ?captionText .
+  OPTIONAL { ?cap ffonto:mentionsConcept ?c . ?c skos:prefLabel ?label }
+  BIND(EXISTS { ?cap ffonto:mentionsConcept ?f . ?f skos:broader* ?fTop . VALUES ?fTop { ffv:Fire ffv:FirePhenomenonKind } } AS ?mentionsFire)
+  BIND(EXISTS { ?cap ffonto:mentionsConcept ffv:Smoke } AS ?mentionsSmoke)
+  BIND(EXISTS { ?cap ffonto:mentionsConcept ?a . ?a skos:broader* ffv:Aircraft } AS ?mentionsAircraft)
+  BIND(EXISTS { ?cap ffonto:mentionsConcept ?w . ?w skos:broader* ffv:WaterBody } AS ?mentionsWater)
+  BIND(EXISTS { ?cap ffonto:mentionsConcept ?t . ?t skos:broader* ffv:Terrain } AS ?mentionsTerrain)
+}
+GROUP BY ?record ?captionText ?mentionsFire ?mentionsSmoke ?mentionsAircraft ?mentionsWater ?mentionsTerrain

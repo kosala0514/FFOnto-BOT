@@ -1,0 +1,100 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix ffo:  <http://purl.org/ffonto#> .
+@prefix ffv:  <http://purl.org/ffonto/vocab#> .
+@prefix ffs:  <http://purl.org/ffonto/shapes#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+# =====================================================================
+#  SHACL shapes — data-quality and completeness checks
+#  Answers CQ02 ("which metadata fields are missing?") and the
+#  alert-readiness part of CQ07, plus the "missing PPE" part of CQ17.
+#  sh:Violation = must fix ; sh:Warning = report only.
+# =====================================================================
+
+ffs: sh:declare
+    [ sh:prefix "ffo" ; sh:namespace "http://purl.org/ffonto#"^^xsd:anyURI ] ,
+    [ sh:prefix "ffv" ; sh:namespace "http://purl.org/ffonto/vocab#"^^xsd:anyURI ] ,
+    [ sh:prefix "skos" ; sh:namespace "http://www.w3.org/2004/02/skos/core#"^^xsd:anyURI ] .
+
+# ---------------- every record ----------------
+ffs:DataRecordShape a sh:NodeShape ;
+    sh:targetClass ffo:ImageRecord , ffo:AudioRecord ;
+    sh:property [ sh:path ffo:recordUUID ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ;
+                  sh:message "Record has no record_uuid." ] ;
+    sh:property [ sh:path ffo:aboutEvent ; sh:minCount 1 ; sh:class ffo:FireEvent ;
+                  sh:message "Record is not linked to any fire event (event_id missing) – it cannot be fused with other modalities." ] ;
+    sh:property [ sh:path ffo:fileURI ; sh:minCount 1 ;
+                  sh:message "Record has no file path / URI." ] ;
+    sh:property [ sh:path ffo:captureTime ; sh:minCount 1 ; sh:severity sh:Warning ;
+                  sh:message "capture_time_utc missing – temporal pairing across modalities is impossible." ] ;
+    sh:property [ sh:path ffo:crs ; sh:minCount 1 ; sh:severity sh:Warning ;
+                  sh:message "CRS missing – record cannot be located on a map." ] .
+
+ffs:ImageRecordShape a sh:NodeShape ;
+    sh:targetClass ffo:ImageRecord ;
+    sh:property [ sh:path ffo:checksumSHA256 ; sh:minCount 1 ; sh:pattern "^[0-9a-f]{64}$" ;
+                  sh:message "Image checksum (SHA-256) missing or malformed." ] ;
+    sh:property [ sh:path <http://purl.org/dc/terms/license> ; sh:minCount 1 ; sh:severity sh:Warning ;
+                  sh:message "Image licence not recorded." ] ;
+    sh:property [ sh:path ffo:widthPx ; sh:minCount 1 ; sh:datatype xsd:integer ; sh:severity sh:Warning ] ;
+    sh:property [ sh:path ffo:heightPx ; sh:minCount 1 ; sh:datatype xsd:integer ; sh:severity sh:Warning ] ;
+    sh:property [ sh:path ffo:footprintWKT ; sh:minCount 1 ; sh:severity sh:Info ;
+                  sh:message "No spatial footprint stored." ] ;
+    sh:property [ sh:path ffo:resolutionM ; sh:minCount 1 ; sh:severity sh:Info ;
+                  sh:message "Ground resolution (resolution_m) not recorded." ] .
+
+# ---------------- model observations (alert readiness, CQ07) ----------------
+ffs:ObservationShape a sh:NodeShape ;
+    sh:targetClass ffo:ModelObservation ;
+    sh:property [ sh:path prov:wasAttributedTo ; sh:minCount 1 ; sh:class ffo:Model ;
+                  sh:message "Observation has no producing model – not auditable." ] ;
+    sh:or ( [ sh:path ffo:predictedClass ; sh:minCount 1 ]
+            [ sh:path ffo:hasValueConcept ; sh:minCount 1 ] ) .
+
+ffs:AlertReadyShape a sh:NodeShape ;
+    sh:targetClass ffo:ModelObservation ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:prefixes ffs: ;
+        sh:message "Classifier observation is not alert-ready: it needs a confidence and a threshold." ;
+        sh:select """
+            SELECT $this WHERE {
+              $this ffo:predictedClass ?c .
+              FILTER ( NOT EXISTS { $this ffo:confidence ?x } || NOT EXISTS { $this ffo:usedThreshold ?t } )
+            }""" ] .
+
+ffs:ModelShape a sh:NodeShape ;
+    sh:targetClass ffo:Model ;
+    sh:property [ sh:path ffo:modelName ; sh:minCount 1 ] ;
+    sh:property [ sh:path ffo:modelVersion ; sh:minCount 1 ; sh:severity sh:Warning ;
+                  sh:message "Model version not recorded – results are not reproducible." ] .
+
+# ---------------- weather rows ----------------
+ffs:WeatherRecordShape a sh:NodeShape ;
+    sh:targetClass ffo:WeatherRecord ;
+    sh:property [ sh:path ffo:observationDate ; sh:datatype xsd:dateTime ] ;
+    sh:property [ sh:path ffo:observationDate ; sh:minCount 1 ; sh:severity sh:Warning ;
+                  sh:message "Weather row has no complete date – it cannot be used for date-based questions (CQ08 'today', CQ09 trend)." ] ;
+    sh:property [ sh:path ffo:atSite ; sh:minCount 1 ] ;
+    sh:property [ sh:path ffo:relativeHumidityPct ; sh:minInclusive 0 ; sh:maxInclusive 100 ] ;
+    sh:property [ sh:path ffo:ffmc ; sh:minInclusive 0 ; sh:maxInclusive 101 ] ;
+    sh:property [ sh:path ffo:aboutEvent ; sh:minCount 1 ; sh:severity sh:Warning ;
+                  sh:message "Weather row not linked to a fire event – it cannot be compared with image/audio of that event." ] .
+
+# ---------------- firefighters must wear required PPE (CQ17) ----------------
+ffs:RequiredPPEShape a sh:NodeShape ;
+    sh:targetClass ffo:Agent ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:prefixes ffs: ;
+        sh:message "Person is not seen wearing required PPE: {?ppe}" ;
+        sh:select """
+            SELECT $this ?ppe WHERE {
+              $this ffo:hasKind ?kind .
+              ?kind ffo:requiredPPE ?ppe .
+              FILTER NOT EXISTS { $this ffo:wears ?ppe }
+            }""" ] .

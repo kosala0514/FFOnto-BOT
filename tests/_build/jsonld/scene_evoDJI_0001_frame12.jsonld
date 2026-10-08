@@ -1,0 +1,293 @@
+{
+  "@context": {
+    "ffo": "http://purl.org/ffonto#",
+    "ffv": "http://purl.org/ffonto/vocab#",
+    "ffd": "http://purl.org/ffonto/data/",
+    "sosa": "http://www.w3.org/ns/sosa/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema_version": "ffonto:schemaVersion",
+    "record_uuid": "ffonto:recordUUID",
+    "image_id": "ffonto:mediaId",
+    "event_id": {
+      "@id": "ffonto:aboutEvent",
+      "@type": "@id"
+    },
+    "event_code": "ffonto:eventCode",
+    "source": "ffonto:sourceName",
+    "device_id": "ffonto:deviceId",
+    "capture_time_utc": {
+      "@id": "ffonto:captureTime",
+      "@type": "xsd:dateTime"
+    },
+    "crs": "ffonto:crs",
+    "center": "ffonto:centerWKT",
+    "footprint": "ffonto:footprintWKT",
+    "resolution_m": "ffonto:resolutionM",
+    "bands": "ffonto:bands",
+    "georeferenced": "ffonto:georeferenced",
+    "cloud_cover": "ffonto:cloudCover",
+    "blur": "ffonto:blur",
+    "uri": "ffonto:fileURI",
+    "audio_file": "ffonto:fileURI",
+    "checksum_sha256": "ffonto:checksumSHA256",
+    "license": "dcterms:license",
+    "width": "ffonto:widthPx",
+    "height": "ffonto:heightPx",
+    "duration_ms": "ffonto:durationMs",
+    "global_threshold": "ffonto:globalThreshold",
+    "region": "ffonto:regionName",
+    "at_site": {
+      "@id": "ffonto:atSite",
+      "@type": "@id"
+    },
+    "site_name": "ffonto:siteName",
+    "country": "ffonto:country",
+    "grid_x": "ffonto:gridX",
+    "grid_y": "ffonto:gridY",
+    "caption": {
+      "@id": "ffonto:hasCaption",
+      "@type": "@id"
+    },
+    "caption_text": "ffonto:captionText",
+    "observations": {
+      "@id": "ffonto:hasObservation",
+      "@type": "@id"
+    },
+    "attributes": {
+      "@id": "ffonto:hasObservation",
+      "@type": "@id"
+    },
+    "feature_of_interest": {
+      "@id": "sosa:hasFeatureOfInterest",
+      "@type": "@id"
+    },
+    "predicted_class": {
+      "@id": "ffonto:predictedClass",
+      "@type": "@id"
+    },
+    "observed_property": {
+      "@id": "sosa:observedProperty",
+      "@type": "@id"
+    },
+    "value": {
+      "@id": "ffonto:hasValueConcept",
+      "@type": "@id"
+    },
+    "confidence": "ffonto:confidence",
+    "mean_confidence": "ffonto:meanConfidence",
+    "max_confidence": "ffonto:maxConfidence",
+    "top_k_labels": "ffonto:topKLabel",
+    "label_category": "ffonto:labelCategory",
+    "label_source": {
+      "@id": "ffonto:labelSource",
+      "@type": "@id"
+    },
+    "severity": {
+      "@id": "ffonto:severity",
+      "@type": "@id"
+    },
+    "used_threshold": {
+      "@id": "ffonto:usedThreshold",
+      "@type": "@id"
+    },
+    "for_class": {
+      "@id": "ffonto:forClass",
+      "@type": "@id"
+    },
+    "threshold_value": "ffonto:thresholdValue",
+    "human_validated": "ffonto:humanValidated",
+    "attributed_to": {
+      "@id": "prov:wasAttributedTo",
+      "@type": "@id"
+    },
+    "model_name": "ffonto:modelName",
+    "model_version": "ffonto:modelVersion",
+    "model_url": {
+      "@id": "ffonto:modelURL",
+      "@type": "xsd:anyURI"
+    },
+    "class_map_sha1": "ffonto:classMapSHA1",
+    "frame_stride_s": "ffonto:frameStrideS",
+    "top_k": "ffonto:topK",
+    "date": {
+      "@id": "ffonto:observationDate",
+      "@type": "xsd:dateTime"
+    },
+    "day_name": "ffonto:dayName",
+    "temp_c": "ffonto:airTemperatureC",
+    "rh_pct": "ffonto:relativeHumidityPct",
+    "wind_kmh": "ffonto:windSpeedKmh",
+    "rain_mm": "ffonto:rainMm",
+    "FFMC": "ffonto:ffmc",
+    "DMC": "ffonto:dmc",
+    "DC": "ffonto:dc",
+    "ISI": "ffonto:isi",
+    "BUI": "ffonto:bui",
+    "FWI": "ffonto:fwi",
+    "fire_occured": "ffonto:fireOccurred",
+    "area_ha": "ffonto:burnedAreaHa",
+    "describes_record": {
+      "@id": "ffonto:describesRecord",
+      "@type": "@id"
+    },
+    "entities": {
+      "@id": "ffonto:depicts",
+      "@type": "@id"
+    },
+    "kind": {
+      "@id": "ffonto:hasKind",
+      "@type": "@id"
+    },
+    "count": "ffonto:count",
+    "state": {
+      "@id": "ffonto:hasState",
+      "@type": "@id"
+    },
+    "activity": {
+      "@id": "ffonto:performs",
+      "@type": "@id"
+    },
+    "wears": {
+      "@id": "ffonto:wears",
+      "@type": "@id"
+    },
+    "position": {
+      "@id": "ffonto:relativePosition",
+      "@type": "@id"
+    },
+    "near": {
+      "@id": "ffonto:near",
+      "@type": "@id"
+    },
+    "advancing_toward": {
+      "@id": "ffonto:advancingToward",
+      "@type": "@id"
+    },
+    "reached": {
+      "@id": "ffonto:reached",
+      "@type": "@id"
+    },
+    "protects": {
+      "@id": "ffonto:protects",
+      "@type": "@id"
+    },
+    "blocks": {
+      "@id": "ffonto:blocks",
+      "@type": "@id"
+    }
+  },
+  "@id": "ffd:scene/scene-evodji-0001-frame12",
+  "@type": "ffonto:SceneDescription",
+  "describes_record": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823",
+  "attributed_to": {
+    "@id": "ffd:model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0",
+    "@type": "ffonto:Model",
+    "model_name": "EXAMPLE-VLM (hand-written fixture, replace with real VLM output)",
+    "model_version": "0"
+  },
+  "human_validated": false,
+  "entities": [
+    {
+      "@id": "ffd:scene/scene-evodji-0001-frame12/e1",
+      "kind": "ffv:FlameFront",
+      "count": 1,
+      "position": "ffv:HeadOfFire",
+      "near": [
+        "ffd:scene/scene-evodji-0001-frame12/e4"
+      ]
+    },
+    {
+      "@id": "ffd:scene/scene-evodji-0001-frame12/e2",
+      "kind": "ffv:SmokePlume",
+      "count": 1
+    },
+    {
+      "@id": "ffd:scene/scene-evodji-0001-frame12/e3",
+      "kind": "ffv:ConiferousForest",
+      "state": [
+        "ffv:Dense",
+        "ffv:Dry"
+      ]
+    },
+    {
+      "@id": "ffd:scene/scene-evodji-0001-frame12/e4",
+      "kind": "ffv:Lake"
+    }
+  ],
+  "attributes": [
+    {
+      "@id": "ffd:scene/scene-evodji-0001-frame12/attr/0",
+      "@type": "ffonto:ModelObservation",
+      "feature_of_interest": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823",
+      "observed_property": "ffv:SmokeColour",
+      "value": "ffv:Gray",
+      "label_source": "ffv:VLMSource",
+      "attributed_to": "ffd:model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0"
+    },
+    {
+      "@id": "ffd:scene/scene-evodji-0001-frame12/attr/1",
+      "@type": "ffonto:ModelObservation",
+      "feature_of_interest": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823",
+      "observed_property": "ffv:SmokeDensity",
+      "value": "ffv:High",
+      "label_source": "ffv:VLMSource",
+      "attributed_to": "ffd:model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0"
+    },
+    {
+      "@id": "ffd:scene/scene-evodji-0001-frame12/attr/2",
+      "@type": "ffonto:ModelObservation",
+      "feature_of_interest": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823",
+      "observed_property": "ffv:PlumeDirection",
+      "value": "ffv:Drifting",
+      "label_source": "ffv:VLMSource",
+      "attributed_to": "ffd:model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0"
+    },
+    {
+      "@id": "ffd:scene/scene-evodji-0001-frame12/attr/3",
+      "@type": "ffonto:ModelObservation",
+      "feature_of_interest": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823",
+      "observed_property": "ffv:VisibilityLevel",
+      "value": "ffv:Medium",
+      "label_source": "ffv:VLMSource",
+      "attributed_to": "ffd:model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0"
+    },
+    {
+      "@id": "ffd:scene/scene-evodji-0001-frame12/attr/4",
+      "@type": "ffonto:ModelObservation",
+      "feature_of_interest": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823",
+      "observed_property": "ffv:LightCondition",
+      "value": "ffv:Daytime",
+      "label_source": "ffv:VLMSource",
+      "attributed_to": "ffd:model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0"
+    },
+    {
+      "@id": "ffd:scene/scene-evodji-0001-frame12/attr/5",
+      "@type": "ffonto:ModelObservation",
+      "feature_of_interest": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823",
+      "observed_property": "ffv:FireType",
+      "value": "ffv:SurfaceFireType",
+      "label_source": "ffv:VLMSource",
+      "attributed_to": "ffd:model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0"
+    },
+    {
+      "@id": "ffd:scene/scene-evodji-0001-frame12/attr/6",
+      "@type": "ffonto:ModelObservation",
+      "feature_of_interest": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823",
+      "observed_property": "ffv:FireIntensity",
+      "value": "ffv:Medium",
+      "label_source": "ffv:VLMSource",
+      "attributed_to": "ffd:model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0"
+    },
+    {
+      "@id": "ffd:scene/scene-evodji-0001-frame12/attr/7",
+      "@type": "ffonto:ModelObservation",
+      "feature_of_interest": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823",
+      "observed_property": "ffv:ScenePurpose",
+      "value": "ffv:Wildfire",
+      "label_source": "ffv:VLMSource",
+      "attributed_to": "ffd:model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0"
+    }
+  ]
+}

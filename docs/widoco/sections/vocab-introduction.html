@@ -1,0 +1,17 @@
+<h2 id="intro" class="list">Introduction <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+<div class="ffo-section">
+<p>This is the controlled vocabulary of <a href="../index.html">FFOnto</a>. It holds the fine-grained kinds and values
+used in forest-fire knowledge graphs as <b>SKOS concepts</b>, organised in concept schemes and hierarchies
+(<code>skos:broader</code>). The core schema refers to them with generic properties such as <code>ffo:hasKind</code>,
+<code>ffo:wears</code>, <code>ffo:hasState</code> and <code>ffo:hasHazardType</code>, so new kinds can be added here without
+changing the schema.</p>
+<ul>
+<li><code>skos:prefLabel</code> is the display name; <code>skos:hiddenLabel</code> holds keywords used to tag captions and
+to constrain the vision-language model that extracts scene graphs.</li>
+<li>Some concepts carry background knowledge used by the competency questions, e.g. <code>ffo:mitigatedBy</code>
+(hazard → action), <code>ffo:requiredPPE</code>, <code>ffo:typicalFireImpact</code> and <code>ffo:suggestedRestoration</code>.</li>
+</ul>
+<p>The vocabulary has <b>{{N_CONCEPTS}} concepts</b> in <b>{{N_SCHEMES}} schemes</b>. The browsable hierarchy is in the
+Description section; every concept is documented in the cross-reference section (named individuals).
+Download: <a href="../resources/ffonto-vocab.ttl">ffonto-vocab.ttl</a>.</p>
+</div>

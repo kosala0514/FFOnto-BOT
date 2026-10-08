@@ -1,0 +1,33 @@
+<h2 id="intro" class="list">Introduction <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+<div class="ffo-section">
+<p>Forest-fire situational awareness depends on several kinds of evidence at once: camera and drone <b>images</b>,
+<b>audio</b> clips from the field, and <b>weather / Fire Weather Index (FWI)</b> records. Machine-learning models turn
+this evidence into labels, captions, scene descriptions and scores. Such outputs are uncertain, often disagree between
+modalities, and are hard to query together.</p>
+
+<p><b>FFOnto</b> (Forest Fire Ontology) is the schema of a knowledge graph that integrates these modalities and
+answers questions about them. Version 2 was rebuilt from scratch from <b>competency questions</b> (CQs): the
+{{N_CQ}} CQs listed below were derived from the questions of the
+<a href="https://www.kaggle.com/datasets/charunikosala/forestfire-vqa-dataset" target="_blank">ForestFire-VQA dataset</a>,
+and every term in the ontology is used by at least one CQ query.</p>
+
+<p>The ontology is published as three modules:</p>
+<table class="ffo-table">
+<tr><th>Module</th><th>Namespace</th><th>Content</th></tr>
+<tr><td><b>Core schema</b> (this document)</td><td><code>ffo:</code> http://purl.org/ffonto#</td>
+    <td>{{N_CLASSES}} classes, {{N_OBJ}} object properties, {{N_DATA}} datatype properties</td></tr>
+<tr><td><a href="vocab/index.html"><b>Controlled vocabulary</b></a></td><td><code>ffv:</code> http://purl.org/ffonto/vocab#</td>
+    <td>{{N_CONCEPTS}} SKOS concepts in {{N_SCHEMES}} concept schemes (entity kinds, states, PPE, hazards, actions, …)</td></tr>
+<tr><td><a href="rules/index.html"><b>Danger rules</b></a></td><td><code>ffr:</code> http://purl.org/ffonto/data/rule/</td>
+    <td>Weather / FWI threshold rules stored as data</td></tr>
+</table>
+
+<p>Additional resources: the
+<a href="resources/ffonto-shapes.ttl">SHACL shapes</a> (data-quality checks), the
+<a href="resources/ffonto.context.jsonld">JSON-LD context</a> (maps the raw image / audio JSON and the weather CSV fields to
+ontology terms), and the full module files
+(<a href="resources/ffonto-core.ttl">core</a>, <a href="resources/ffonto-vocab.ttl">vocabulary</a>,
+<a href="resources/danger-rules.ttl">rules</a>).</p>
+
+<p><b>Status:</b> draft (version {{VERSION}}). The danger-rule thresholds are placeholders and will be replaced with cited values.</p>
+</div>

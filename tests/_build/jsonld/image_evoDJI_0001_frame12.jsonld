@@ -1,0 +1,265 @@
+{
+  "@context": {
+    "ffo": "http://purl.org/ffonto#",
+    "ffv": "http://purl.org/ffonto/vocab#",
+    "ffd": "http://purl.org/ffonto/data/",
+    "sosa": "http://www.w3.org/ns/sosa/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema_version": "ffonto:schemaVersion",
+    "record_uuid": "ffonto:recordUUID",
+    "image_id": "ffonto:mediaId",
+    "event_id": {
+      "@id": "ffonto:aboutEvent",
+      "@type": "@id"
+    },
+    "event_code": "ffonto:eventCode",
+    "source": "ffonto:sourceName",
+    "device_id": "ffonto:deviceId",
+    "capture_time_utc": {
+      "@id": "ffonto:captureTime",
+      "@type": "xsd:dateTime"
+    },
+    "crs": "ffonto:crs",
+    "center": "ffonto:centerWKT",
+    "footprint": "ffonto:footprintWKT",
+    "resolution_m": "ffonto:resolutionM",
+    "bands": "ffonto:bands",
+    "georeferenced": "ffonto:georeferenced",
+    "cloud_cover": "ffonto:cloudCover",
+    "blur": "ffonto:blur",
+    "uri": "ffonto:fileURI",
+    "audio_file": "ffonto:fileURI",
+    "checksum_sha256": "ffonto:checksumSHA256",
+    "license": "dcterms:license",
+    "width": "ffonto:widthPx",
+    "height": "ffonto:heightPx",
+    "duration_ms": "ffonto:durationMs",
+    "global_threshold": "ffonto:globalThreshold",
+    "region": "ffonto:regionName",
+    "at_site": {
+      "@id": "ffonto:atSite",
+      "@type": "@id"
+    },
+    "site_name": "ffonto:siteName",
+    "country": "ffonto:country",
+    "grid_x": "ffonto:gridX",
+    "grid_y": "ffonto:gridY",
+    "caption": {
+      "@id": "ffonto:hasCaption",
+      "@type": "@id"
+    },
+    "caption_text": "ffonto:captionText",
+    "observations": {
+      "@id": "ffonto:hasObservation",
+      "@type": "@id"
+    },
+    "attributes": {
+      "@id": "ffonto:hasObservation",
+      "@type": "@id"
+    },
+    "feature_of_interest": {
+      "@id": "sosa:hasFeatureOfInterest",
+      "@type": "@id"
+    },
+    "predicted_class": {
+      "@id": "ffonto:predictedClass",
+      "@type": "@id"
+    },
+    "observed_property": {
+      "@id": "sosa:observedProperty",
+      "@type": "@id"
+    },
+    "value": {
+      "@id": "ffonto:hasValueConcept",
+      "@type": "@id"
+    },
+    "confidence": "ffonto:confidence",
+    "mean_confidence": "ffonto:meanConfidence",
+    "max_confidence": "ffonto:maxConfidence",
+    "top_k_labels": "ffonto:topKLabel",
+    "label_category": "ffonto:labelCategory",
+    "label_source": {
+      "@id": "ffonto:labelSource",
+      "@type": "@id"
+    },
+    "severity": {
+      "@id": "ffonto:severity",
+      "@type": "@id"
+    },
+    "used_threshold": {
+      "@id": "ffonto:usedThreshold",
+      "@type": "@id"
+    },
+    "for_class": {
+      "@id": "ffonto:forClass",
+      "@type": "@id"
+    },
+    "threshold_value": "ffonto:thresholdValue",
+    "human_validated": "ffonto:humanValidated",
+    "attributed_to": {
+      "@id": "prov:wasAttributedTo",
+      "@type": "@id"
+    },
+    "model_name": "ffonto:modelName",
+    "model_version": "ffonto:modelVersion",
+    "model_url": {
+      "@id": "ffonto:modelURL",
+      "@type": "xsd:anyURI"
+    },
+    "class_map_sha1": "ffonto:classMapSHA1",
+    "frame_stride_s": "ffonto:frameStrideS",
+    "top_k": "ffonto:topK",
+    "date": {
+      "@id": "ffonto:observationDate",
+      "@type": "xsd:dateTime"
+    },
+    "day_name": "ffonto:dayName",
+    "temp_c": "ffonto:airTemperatureC",
+    "rh_pct": "ffonto:relativeHumidityPct",
+    "wind_kmh": "ffonto:windSpeedKmh",
+    "rain_mm": "ffonto:rainMm",
+    "FFMC": "ffonto:ffmc",
+    "DMC": "ffonto:dmc",
+    "DC": "ffonto:dc",
+    "ISI": "ffonto:isi",
+    "BUI": "ffonto:bui",
+    "FWI": "ffonto:fwi",
+    "fire_occured": "ffonto:fireOccurred",
+    "area_ha": "ffonto:burnedAreaHa",
+    "describes_record": {
+      "@id": "ffonto:describesRecord",
+      "@type": "@id"
+    },
+    "entities": {
+      "@id": "ffonto:depicts",
+      "@type": "@id"
+    },
+    "kind": {
+      "@id": "ffonto:hasKind",
+      "@type": "@id"
+    },
+    "count": "ffonto:count",
+    "state": {
+      "@id": "ffonto:hasState",
+      "@type": "@id"
+    },
+    "activity": {
+      "@id": "ffonto:performs",
+      "@type": "@id"
+    },
+    "wears": {
+      "@id": "ffonto:wears",
+      "@type": "@id"
+    },
+    "position": {
+      "@id": "ffonto:relativePosition",
+      "@type": "@id"
+    },
+    "near": {
+      "@id": "ffonto:near",
+      "@type": "@id"
+    },
+    "advancing_toward": {
+      "@id": "ffonto:advancingToward",
+      "@type": "@id"
+    },
+    "reached": {
+      "@id": "ffonto:reached",
+      "@type": "@id"
+    },
+    "protects": {
+      "@id": "ffonto:protects",
+      "@type": "@id"
+    },
+    "blocks": {
+      "@id": "ffonto:blocks",
+      "@type": "@id"
+    }
+  },
+  "@id": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823",
+  "@type": "ffonto:ImageRecord",
+  "schema_version": "1.0.0",
+  "record_uuid": "3f6d562f-33d3-49ee-a40b-3a8b6cf07823",
+  "image_id": "evoDJI_0001_frame12_100788",
+  "event_id": {
+    "@id": "ffd:event/ev-bf59c56acb36",
+    "@type": "ffonto:FireEvent",
+    "event_code": "ev_bf59c56acb36"
+  },
+  "source": "unknown_camera",
+  "georeferenced": false,
+  "uri": "/home/cse/Documents/ImageToText/dataset_2/evoDJI_0001_frame12.jpg",
+  "checksum_sha256": "df5124ebe5531b3d7d9b1573e65ad2a354b523f0d35ec933dbdb3066d1161372",
+  "license": "CC-BY-4.0",
+  "width": 2048,
+  "height": 1080,
+  "caption": {
+    "@id": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/caption",
+    "@type": "ffonto:Caption",
+    "caption_text": "arafed forest fire in the middle of a forest with a lake",
+    "attributed_to": {
+      "@id": "ffd:model/salesforce-blip-image-captioning-large",
+      "@type": "ffonto:Model",
+      "model_name": "Salesforce/blip-image-captioning-large"
+    }
+  },
+  "observations": [
+    {
+      "@id": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/0",
+      "@type": "ffonto:ModelObservation",
+      "feature_of_interest": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823",
+      "predicted_class": "ffv:Fire",
+      "confidence": 0.1585,
+      "severity": "ffv:Low",
+      "label_source": "ffv:CaptionSource",
+      "attributed_to": {
+        "@id": "ffd:model/openai-clip-vit-large-patch14/hf",
+        "@type": "ffonto:Model",
+        "model_name": "openai/clip-vit-large-patch14",
+        "model_version": "hf"
+      },
+      "used_threshold": {
+        "@id": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/threshold/Fire",
+        "@type": "ffonto:Threshold",
+        "for_class": "ffv:Fire",
+        "threshold_value": 0.55
+      }
+    },
+    {
+      "@id": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/1",
+      "@type": "ffonto:ModelObservation",
+      "feature_of_interest": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823",
+      "predicted_class": "ffv:Smoke",
+      "confidence": 0.7291,
+      "label_source": "ffv:ZeroShotSource",
+      "attributed_to": {
+        "@id": "ffd:model/openai-clip-vit-large-patch14/hf",
+        "@type": "ffonto:Model",
+        "model_name": "openai/clip-vit-large-patch14",
+        "model_version": "hf"
+      },
+      "used_threshold": {
+        "@id": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/threshold/Smoke",
+        "@type": "ffonto:Threshold",
+        "for_class": "ffv:Smoke",
+        "threshold_value": 0.6
+      }
+    },
+    {
+      "@id": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/z2",
+      "@type": "ffonto:ModelObservation",
+      "feature_of_interest": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823",
+      "predicted_class": "ffv:NoFire",
+      "confidence": 0.11246011406183243,
+      "label_source": "ffv:ZeroShotSource",
+      "attributed_to": {
+        "@id": "ffd:model/openai-clip-vit-large-patch14/hf",
+        "@type": "ffonto:Model",
+        "model_name": "openai/clip-vit-large-patch14",
+        "model_version": "hf"
+      }
+    }
+  ]
+}

@@ -1,0 +1,4239 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ffonto: <http://purl.org/ffonto#> .
+@prefix ffr: <http://purl.org/ffonto/data/rule/> .
+@prefix ffv: <http://purl.org/ffonto/vocab#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+dcterms:contributor a owl:AnnotationProperty ;
+    rdfs:label "contributor"@en .
+
+dcterms:created a owl:AnnotationProperty ;
+    rdfs:label "created"@en .
+
+dcterms:creator a owl:AnnotationProperty ;
+    rdfs:label "creator"@en .
+
+dcterms:description a owl:AnnotationProperty ;
+    rdfs:label "description"@en .
+
+dcterms:license a owl:AnnotationProperty ;
+    rdfs:label "license"@en .
+
+dcterms:title a owl:AnnotationProperty ;
+    rdfs:label "title"@en .
+
+<http://purl.org/ffonto> a owl:Ontology ;
+    dcterms:contributor "Prof. Dulani Meedeniya" ;
+    dcterms:created "2026-10-07"^^xsd:date ;
+    dcterms:creator "Charuni Kosala Jayaweera" ;
+    dcterms:description "Minimal, competency-question-driven ontology for multimodal (image, audio, tabular) forest-fire knowledge graphs, aligned with the ForestFire-VQA dataset."@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:title "Forest Fire Ontology (FFOnto) – core"@en ;
+    vann:preferredNamespacePrefix "ffo" ;
+    vann:preferredNamespaceUri "http://purl.org/ffonto#" ;
+    rdfs:comment "SOSA, PROV-O, SKOS and Dublin Core terms are reused by IRI and declared below (no owl:imports), so the ontology loads offline and stays in OWL 2 DL. To import the full external ontologies, add owl:imports and a catalog entry."@en ;
+    owl:versionIRI <http://purl.org/ffonto/2.0.0> ;
+    owl:versionInfo "2.0.0" .
+
+ffonto:aboutEvent a owl:ObjectProperty ;
+    rdfs:label "about event"@en ;
+    rdfs:comment "Links a record to the fire event it documents (from event_id). This is the cross-modal join key."@en ;
+    rdfs:domain ffonto:DataRecord ;
+    rdfs:range ffonto:FireEvent .
+
+ffonto:aboveThreshold a owl:DatatypeProperty ;
+    rdfs:label "above threshold"@en ;
+    rdfs:comment "DERIVED (rule R01)."@en ;
+    rdfs:domain ffonto:ModelObservation ;
+    rdfs:range xsd:boolean .
+
+ffonto:advancingToward a owl:ObjectProperty ;
+    rdfs:label "advancing toward"@en ;
+    rdfs:comment "The subject (typically fire) is moving toward the object in the frame."@en ;
+    rdfs:domain ffonto:SceneEntity ;
+    rdfs:range ffonto:SceneEntity ;
+    rdfs:subPropertyOf ffonto:spatiallyRelated .
+
+ffonto:atSite a owl:ObjectProperty ;
+    rdfs:label "at site"@en ;
+    rdfs:comment "Links a record to the site or grid cell where it was captured."@en ;
+    rdfs:domain ffonto:DataRecord ;
+    rdfs:range ffonto:Site .
+
+ffonto:bands a owl:DatatypeProperty ;
+    rdfs:label "bands"@en ;
+    rdfs:comment "Spectral bands of the image (e.g. RGB, IR)."@en ;
+    rdfs:domain ffonto:ImageRecord ;
+    rdfs:range xsd:string .
+
+ffonto:blocks a owl:ObjectProperty ;
+    rdfs:label "blocks"@en ;
+    rdfs:comment "The subject obstructs the object (e.g. a fallen tree blocks a road)."@en ;
+    rdfs:domain ffonto:SceneEntity ;
+    rdfs:range ffonto:SceneEntity ;
+    rdfs:subPropertyOf ffonto:spatiallyRelated .
+
+ffonto:blur a owl:DatatypeProperty ;
+    rdfs:label "blur quality value"@en ;
+    rdfs:comment "Blur quality value recorded for the image."@en ;
+    rdfs:domain ffonto:ImageRecord ;
+    rdfs:range xsd:double .
+
+ffonto:bui a owl:DatatypeProperty ;
+    rdfs:label "BUI"@en ;
+    rdfs:comment "Buildup Index"@en ;
+    rdfs:domain ffonto:WeatherRecord ;
+    rdfs:range xsd:double .
+
+ffonto:burnedAreaHa a owl:DatatypeProperty ;
+    rdfs:label "burned area (ha)"@en ;
+    rdfs:comment "Burned area in hectares."@en ;
+    rdfs:domain ffonto:WeatherRecord ;
+    rdfs:range xsd:double .
+
+ffonto:captionText a owl:DatatypeProperty ;
+    rdfs:label "caption text"@en ;
+    rdfs:comment "Text of a generated caption."@en ;
+    rdfs:domain ffonto:Caption ;
+    rdfs:range xsd:string .
+
+ffonto:captureTime a owl:DatatypeProperty ;
+    rdfs:label "capture time (UTC)"@en ;
+    rdfs:comment "UTC time at which the record was captured."@en ;
+    rdfs:domain ffonto:DataRecord ;
+    rdfs:range xsd:dateTime .
+
+ffonto:capturedBy a owl:ObjectProperty ;
+    rdfs:label "captured by"@en ;
+    rdfs:comment "Links a record to the physical device (camera, microphone, station) that captured it."@en ;
+    rdfs:domain ffonto:DataRecord ;
+    rdfs:range ffonto:CaptureDevice .
+
+ffonto:centerWKT a owl:DatatypeProperty ;
+    rdfs:label "center (WKT)"@en ;
+    rdfs:comment "Centre point of the record as WKT text."@en ;
+    rdfs:domain ffonto:DataRecord ;
+    rdfs:range xsd:string .
+
+ffonto:checksumSHA256 a owl:DatatypeProperty ;
+    rdfs:label "checksum SHA-256"@en ;
+    rdfs:comment "SHA-256 checksum of the media file, for integrity and audit."@en ;
+    rdfs:domain ffonto:DataRecord ;
+    rdfs:range xsd:string .
+
+ffonto:classMapSHA1 a owl:DatatypeProperty ;
+    rdfs:label "class map SHA-1"@en ;
+    rdfs:comment "SHA-1 checksum of the model's class map, for audit."@en ;
+    rdfs:domain ffonto:Model ;
+    rdfs:range xsd:string .
+
+ffonto:cloudCover a owl:DatatypeProperty ;
+    rdfs:label "cloud cover quality value"@en ;
+    rdfs:comment "Cloud-cover quality value recorded for the image."@en ;
+    rdfs:domain ffonto:ImageRecord ;
+    rdfs:range xsd:double .
+
+ffonto:confidence a owl:DatatypeProperty ;
+    rdfs:label "confidence"@en ;
+    rdfs:comment "Confidence or score of an observation (for audio: mean confidence)."@en ;
+    rdfs:domain ffonto:ModelObservation ;
+    rdfs:range xsd:double .
+
+ffonto:conflictType a owl:ObjectProperty ;
+    rdfs:label "conflict type"@en ;
+    rdfs:comment "Type of a derived modality conflict (ffv:ConflictScheme)."@en ;
+    rdfs:domain ffonto:ModalityConflict ;
+    rdfs:range skos:Concept .
+
+ffonto:count a owl:DatatypeProperty ;
+    rdfs:label "count"@en ;
+    rdfs:comment "Number of instances represented by a scene entity (e.g. 3 firefighters)."@en ;
+    rdfs:domain ffonto:SceneEntity ;
+    rdfs:range xsd:integer .
+
+ffonto:country a owl:DatatypeProperty ;
+    rdfs:label "country"@en ;
+    rdfs:comment "Country of a site."@en ;
+    rdfs:domain ffonto:Site ;
+    rdfs:range xsd:string .
+
+ffonto:crs a owl:DatatypeProperty ;
+    rdfs:label "coordinate reference system"@en ;
+    rdfs:comment "Coordinate reference system of the record's geometry (e.g. EPSG:4326)."@en ;
+    rdfs:domain ffonto:DataRecord ;
+    rdfs:range xsd:string .
+
+ffonto:dayName a owl:DatatypeProperty ;
+    rdfs:label "day name"@en ;
+    rdfs:comment "Day-of-week name as given in the source table."@en ;
+    rdfs:domain ffonto:WeatherRecord ;
+    rdfs:range xsd:string .
+
+ffonto:depicts a owl:ObjectProperty ;
+    rdfs:label "depicts"@en ;
+    rdfs:comment "Links a scene description to an entity visible in the image."@en ;
+    rdfs:domain ffonto:SceneDescription ;
+    rdfs:range ffonto:SceneEntity .
+
+ffonto:describesRecord a owl:ObjectProperty ;
+    rdfs:label "describes record"@en ;
+    rdfs:comment "Links a scene description to the image record it describes."@en ;
+    rdfs:domain ffonto:SceneDescription ;
+    rdfs:range ffonto:ImageRecord .
+
+ffonto:detectedClass a owl:ObjectProperty ;
+    rdfs:label "detected class"@en ;
+    rdfs:comment "DERIVED (rule R02): a class whose observation confidence reached its threshold."@en ;
+    rdfs:domain ffonto:DataRecord ;
+    rdfs:range skos:Concept .
+
+ffonto:deviceId a owl:DatatypeProperty ;
+    rdfs:label "device id"@en ;
+    rdfs:comment "Identifier of the capture device."@en ;
+    rdfs:domain ffonto:DataRecord ;
+    rdfs:range xsd:string .
+
+ffonto:dmc a owl:DatatypeProperty ;
+    rdfs:label "DMC"@en ;
+    rdfs:comment "Duff Moisture Code"@en ;
+    rdfs:domain ffonto:WeatherRecord ;
+    rdfs:range xsd:double .
+
+ffonto:durationMs a owl:DatatypeProperty ;
+    rdfs:label "duration (ms)"@en ;
+    rdfs:comment "Duration of the audio clip in milliseconds."@en ;
+    rdfs:domain ffonto:AudioRecord ;
+    rdfs:range xsd:double .
+
+ffonto:eventCode a owl:DatatypeProperty ;
+    rdfs:label "event code"@en ;
+    rdfs:comment "Original event identifier string (event_id)."@en ;
+    rdfs:domain ffonto:FireEvent ;
+    rdfs:range xsd:string .
+
+ffonto:fileURI a owl:DatatypeProperty ;
+    rdfs:label "file URI / path"@en ;
+    rdfs:comment "Path or URI of the media file."@en ;
+    rdfs:domain ffonto:DataRecord ;
+    rdfs:range xsd:string .
+
+ffonto:fireOccurred a owl:DatatypeProperty ;
+    rdfs:label "fire occurred"@en ;
+    rdfs:comment "Whether a fire occurred on this date at this site (fire_occured)."@en ;
+    rdfs:domain ffonto:WeatherRecord ;
+    rdfs:range xsd:boolean .
+
+ffonto:footprintWKT a owl:DatatypeProperty ;
+    rdfs:label "footprint (WKT)"@en ;
+    rdfs:comment "Spatial footprint of the record as WKT text."@en ;
+    rdfs:domain ffonto:DataRecord ;
+    rdfs:range xsd:string .
+
+ffonto:forClass a owl:ObjectProperty ;
+    rdfs:label "for class"@en ;
+    rdfs:comment "The class a threshold applies to."@en ;
+    rdfs:domain ffonto:Threshold ;
+    rdfs:range skos:Concept .
+
+ffonto:frameStrideS a owl:DatatypeProperty ;
+    rdfs:label "frame stride (s)"@en ;
+    rdfs:comment "Frame stride of an audio model in seconds."@en ;
+    rdfs:domain ffonto:Model ;
+    rdfs:range xsd:double .
+
+ffonto:georeferenced a owl:DatatypeProperty ;
+    rdfs:label "georeferenced"@en ;
+    rdfs:comment "Whether the record carries georeference information."@en ;
+    rdfs:domain ffonto:DataRecord ;
+    rdfs:range xsd:boolean .
+
+ffonto:globalThreshold a owl:DatatypeProperty ;
+    rdfs:label "global detection threshold"@en ;
+    rdfs:comment "Global detection threshold configured for the audio tagger."@en ;
+    rdfs:domain ffonto:AudioRecord ;
+    rdfs:range xsd:double .
+
+ffonto:gridX a owl:DatatypeProperty ;
+    rdfs:label "grid x"@en ;
+    rdfs:comment "X coordinate of the site's grid cell."@en ;
+    rdfs:domain ffonto:Site ;
+    rdfs:range xsd:integer .
+
+ffonto:gridY a owl:DatatypeProperty ;
+    rdfs:label "grid y"@en ;
+    rdfs:comment "Y coordinate of the site's grid cell."@en ;
+    rdfs:domain ffonto:Site ;
+    rdfs:range xsd:integer .
+
+ffonto:hasCaption a owl:ObjectProperty ;
+    rdfs:label "has caption"@en ;
+    rdfs:comment "Links an image record to the caption generated for it."@en ;
+    rdfs:domain ffonto:ImageRecord ;
+    rdfs:range ffonto:Caption .
+
+ffonto:hasCondition a owl:ObjectProperty ;
+    rdfs:label "has condition"@en ;
+    rdfs:comment "DERIVED (rule R04): operational condition implied by a danger rule."@en ;
+    rdfs:domain ffonto:WeatherRecord ;
+    rdfs:range skos:Concept .
+
+ffonto:hasHazardType a owl:ObjectProperty ;
+    rdfs:label "has hazard type"@en ;
+    rdfs:comment "Type of a derived hazard (ffv:HazardScheme)."@en ;
+    rdfs:domain ffonto:Hazard ;
+    rdfs:range skos:Concept .
+
+ffonto:hasKind a owl:ObjectProperty ;
+    rdfs:label "has kind"@en ;
+    rdfs:comment "Fine-grained kind of a scene entity, from ffv:EntityKindScheme (e.g. ffv:Pulaski, ffv:Firefighter)."@en ;
+    rdfs:domain ffonto:SceneEntity ;
+    rdfs:range skos:Concept .
+
+ffonto:hasObservation a owl:ObjectProperty ;
+    rdfs:label "has observation"@en ;
+    rdfs:comment "Links a record or a scene description to the model observations made about it."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( ffonto:DataRecord ffonto:SceneDescription ) ] ;
+    rdfs:range ffonto:ModelObservation .
+
+ffonto:hasState a owl:ObjectProperty ;
+    rdfs:label "has state"@en ;
+    rdfs:comment "Visible state or condition of a scene entity (ffv:StateScheme), e.g. Scorched, Blocked, Dry."@en ;
+    rdfs:domain ffonto:SceneEntity ;
+    rdfs:range skos:Concept .
+
+ffonto:hasValueConcept a owl:ObjectProperty ;
+    rdfs:label "has value concept"@en ;
+    rdfs:comment "Categorical result of an observation (e.g. SmokeColour → Gray)."@en ;
+    rdfs:domain ffonto:ModelObservation ;
+    rdfs:range skos:Concept .
+
+ffonto:heightPx a owl:DatatypeProperty ;
+    rdfs:label "height (px)"@en ;
+    rdfs:comment "Image height in pixels."@en ;
+    rdfs:domain ffonto:ImageRecord ;
+    rdfs:range xsd:integer .
+
+ffonto:humanValidated a owl:DatatypeProperty ;
+    rdfs:label "human validated"@en ;
+    rdfs:comment "Whether a human has validated the output."@en ;
+    rdfs:domain ffonto:SceneDescription ;
+    rdfs:range xsd:boolean .
+
+ffonto:inEvent a owl:ObjectProperty ;
+    rdfs:label "in event"@en ;
+    rdfs:comment "Event context of a derived hazard or conflict."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( ffonto:Hazard ffonto:ModalityConflict ) ] ;
+    rdfs:range ffonto:FireEvent .
+
+ffonto:indicatesCondition a owl:ObjectProperty ;
+    rdfs:label "indicates condition"@en ;
+    rdfs:comment "The operational condition a danger rule indicates when it fires."@en ;
+    rdfs:domain ffonto:DangerRule ;
+    rdfs:range skos:Concept .
+
+ffonto:involvesObservation a owl:ObjectProperty ;
+    rdfs:label "involves observation"@en ;
+    rdfs:comment "An observation that takes part in a modality conflict."@en ;
+    rdfs:domain ffonto:ModalityConflict ;
+    rdfs:range ffonto:ModelObservation .
+
+ffonto:labelCategory a owl:DatatypeProperty ;
+    rdfs:label "label category"@en ;
+    rdfs:comment "Category of a raw label as given by the pipeline (e.g. fire_audio)."@en ;
+    rdfs:domain ffonto:ModelObservation ;
+    rdfs:range xsd:string .
+
+ffonto:labelSource a owl:ObjectProperty ;
+    rdfs:label "label source"@en ;
+    rdfs:comment "Where the label of an observation came from (caption, zero-shot, detector, audio tagger, VLM, human)."@en ;
+    rdfs:domain ffonto:ModelObservation ;
+    rdfs:range skos:Concept .
+
+ffonto:maxConfidence a owl:DatatypeProperty ;
+    rdfs:label "max confidence"@en ;
+    rdfs:comment "Maximum frame-level confidence of an audio event."@en ;
+    rdfs:domain ffonto:ModelObservation ;
+    rdfs:range xsd:double .
+
+ffonto:meanConfidence a owl:DatatypeProperty ;
+    rdfs:label "mean confidence"@en ;
+    rdfs:comment "Mean frame-level confidence of an audio event."@en ;
+    rdfs:domain ffonto:ModelObservation ;
+    rdfs:range xsd:double .
+
+ffonto:mediaId a owl:DatatypeProperty ;
+    rdfs:label "media id"@en ;
+    rdfs:comment "Identifier of the media item (image_id)."@en ;
+    rdfs:domain ffonto:DataRecord ;
+    rdfs:range xsd:string .
+
+ffonto:mentionsConcept a owl:ObjectProperty ;
+    rdfs:label "mentions concept"@en ;
+    rdfs:comment "DERIVED (rule R03): the caption text contains one of the concept's labels."@en ;
+    rdfs:domain ffonto:Caption ;
+    rdfs:range skos:Concept .
+
+ffonto:mitigatedBy a owl:ObjectProperty ;
+    rdfs:label "mitigated by"@en ;
+    rdfs:comment "Hazard concept → recommended action concept."@en ;
+    rdfs:domain skos:Concept ;
+    rdfs:range skos:Concept .
+
+ffonto:modelName a owl:DatatypeProperty ;
+    rdfs:label "model name"@en ;
+    rdfs:comment "Name or repository id of a model."@en ;
+    rdfs:domain ffonto:Model ;
+    rdfs:range xsd:string .
+
+ffonto:modelURL a owl:DatatypeProperty ;
+    rdfs:label "model provenance URL"@en ;
+    rdfs:comment "URL documenting the model's provenance (e.g. TF-Hub or Hugging Face page)."@en ;
+    rdfs:domain ffonto:Model ;
+    rdfs:range xsd:anyURI .
+
+ffonto:modelVersion a owl:DatatypeProperty ;
+    rdfs:label "model version"@en ;
+    rdfs:comment "Version of a model."@en ;
+    rdfs:domain ffonto:Model ;
+    rdfs:range xsd:string .
+
+ffonto:near a owl:ObjectProperty,
+        owl:SymmetricProperty ;
+    rdfs:label "near"@en ;
+    rdfs:comment "Frame-relative proximity between two scene entities."@en ;
+    rdfs:domain ffonto:SceneEntity ;
+    rdfs:range ffonto:SceneEntity ;
+    rdfs:subPropertyOf ffonto:spatiallyRelated .
+
+ffonto:observationDate a owl:DatatypeProperty ;
+    rdfs:label "observation date"@en ;
+    rdfs:comment "Date of a weather/FWI record (stored as xsd:dateTime at 00:00 UTC)."@en ;
+    rdfs:domain ffonto:WeatherRecord ;
+    rdfs:range xsd:dateTime .
+
+ffonto:onProperty a owl:ObjectProperty ;
+    rdfs:label "on property"@en ;
+    rdfs:comment "The weather/FWI datatype property the rule tests (e.g. ffonto:windSpeedKmh)."@en ;
+    rdfs:domain ffonto:DangerRule .
+
+ffonto:operator a owl:DatatypeProperty ;
+    rdfs:label "operator"@en ;
+    rdfs:comment "Comparison operator: \"gt\", \"ge\", \"lt\", \"le\"."@en ;
+    rdfs:domain ffonto:DangerRule ;
+    rdfs:range xsd:string .
+
+ffonto:performs a owl:ObjectProperty ;
+    rdfs:label "performs"@en ;
+    rdfs:comment "Activity being carried out by an agent or vehicle (ffv:ActivityScheme)."@en ;
+    rdfs:domain ffonto:SceneEntity ;
+    rdfs:range skos:Concept .
+
+ffonto:predictedClass a owl:ObjectProperty ;
+    rdfs:label "predicted class"@en ;
+    rdfs:comment "The class a classifier observation predicts (e.g. Fire, Smoke, Explosion)."@en ;
+    rdfs:domain ffonto:ModelObservation ;
+    rdfs:range skos:Concept .
+
+ffonto:previousRecord a owl:ObjectProperty ;
+    rdfs:label "previous record"@en ;
+    rdfs:comment "DERIVED (rule R08): the closest earlier dated weather record of the same site; used for trends (CQ09)."@en ;
+    rdfs:domain ffonto:WeatherRecord ;
+    rdfs:range ffonto:WeatherRecord .
+
+ffonto:protects a owl:ObjectProperty ;
+    rdfs:label "protects"@en ;
+    rdfs:comment "The subject (resource or crew) is protecting the object (e.g. a building)."@en ;
+    rdfs:domain ffonto:SceneEntity ;
+    rdfs:range ffonto:SceneEntity ;
+    rdfs:subPropertyOf ffonto:spatiallyRelated .
+
+ffonto:providesService a owl:ObjectProperty ;
+    rdfs:label "provides ecosystem service"@en ;
+    rdfs:comment "Ecosystem kind → ecosystem service it provides (and that fire may impair)."@en ;
+    rdfs:domain skos:Concept ;
+    rdfs:range skos:Concept .
+
+ffonto:reached a owl:ObjectProperty ;
+    rdfs:label "reached"@en ;
+    rdfs:comment "The subject (typically fire) has reached the object (e.g. a river edge or farmland)."@en ;
+    rdfs:domain ffonto:SceneEntity ;
+    rdfs:range ffonto:SceneEntity ;
+    rdfs:subPropertyOf ffonto:spatiallyRelated .
+
+ffonto:recordUUID a owl:DatatypeProperty ;
+    rdfs:label "record UUID"@en ;
+    rdfs:comment "Unique identifier of a record (record_uuid)."@en ;
+    rdfs:domain ffonto:DataRecord ;
+    rdfs:range xsd:string .
+
+ffonto:regionName a owl:DatatypeProperty ;
+    rdfs:label "region name"@en ;
+    rdfs:comment "Name of the region where the record was captured."@en ;
+    rdfs:domain ffonto:DataRecord ;
+    rdfs:range xsd:string .
+
+ffonto:relativePosition a owl:ObjectProperty ;
+    rdfs:label "relative position"@en ;
+    rdfs:comment "Frame-relative position with respect to the fire (ffv:PositionScheme: left flank, ahead of fire, ridge …)."@en ;
+    rdfs:domain ffonto:SceneEntity ;
+    rdfs:range skos:Concept .
+
+ffonto:requiredPPE a owl:ObjectProperty ;
+    rdfs:label "required PPE"@en ;
+    rdfs:comment "Person kind → PPE item that person must wear (used by SHACL and CQ17)."@en ;
+    rdfs:domain skos:Concept ;
+    rdfs:range skos:Concept .
+
+ffonto:resolutionM a owl:DatatypeProperty ;
+    rdfs:label "ground resolution (m)"@en ;
+    rdfs:comment "Ground sampling distance of the image in metres."@en ;
+    rdfs:domain ffonto:ImageRecord ;
+    rdfs:range xsd:double .
+
+ffonto:schemaVersion a owl:DatatypeProperty ;
+    rdfs:label "schema version"@en ;
+    rdfs:comment "Version of the record JSON schema."@en ;
+    rdfs:domain ffonto:DataRecord ;
+    rdfs:range xsd:string .
+
+ffonto:severity a owl:ObjectProperty ;
+    rdfs:label "severity"@en ;
+    rdfs:comment "Severity level assigned to an observation by the labelling pipeline."@en ;
+    rdfs:domain ffonto:ModelObservation ;
+    rdfs:range skos:Concept .
+
+ffonto:siteName a owl:DatatypeProperty ;
+    rdfs:label "site name"@en ;
+    rdfs:comment "Name of a site."@en ;
+    rdfs:domain ffonto:Site ;
+    rdfs:range xsd:string .
+
+ffonto:sourceName a owl:DatatypeProperty ;
+    rdfs:label "source name"@en ;
+    rdfs:comment "Name of the data source as recorded (e.g. unknown_camera)."@en ;
+    rdfs:domain ffonto:DataRecord ;
+    rdfs:range xsd:string .
+
+ffonto:suggestedRestoration a owl:ObjectProperty ;
+    rdfs:label "suggested restoration"@en ;
+    rdfs:comment "Ecosystem kind → restoration or recovery measure suggested after fire."@en ;
+    rdfs:domain skos:Concept ;
+    rdfs:range skos:Concept .
+
+ffonto:threatens a owl:ObjectProperty ;
+    rdfs:label "threatens"@en ;
+    rdfs:comment "What the hazard endangers: a scene entity or a concept (e.g. ffv:Firefighter as a group)."@en ;
+    rdfs:domain ffonto:Hazard .
+
+ffonto:thresholdValue a owl:DatatypeProperty ;
+    rdfs:label "threshold value"@en ;
+    rdfs:comment "Numeric value of a threshold."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( ffonto:Threshold ffonto:DangerRule ) ] ;
+    rdfs:range xsd:double .
+
+ffonto:topK a owl:DatatypeProperty ;
+    rdfs:label "top-k"@en ;
+    rdfs:comment "Number of top labels the model reports per frame."@en ;
+    rdfs:domain ffonto:Model ;
+    rdfs:range xsd:integer .
+
+ffonto:topKLabel a owl:DatatypeProperty ;
+    rdfs:label "top-k frame label"@en ;
+    rdfs:comment "One of the top-k frame labels reported by the audio tagger."@en ;
+    rdfs:domain ffonto:ModelObservation ;
+    rdfs:range xsd:string .
+
+ffonto:typicalFireImpact a owl:ObjectProperty ;
+    rdfs:label "typical fire impact"@en ;
+    rdfs:comment "Ecosystem / vegetation kind → typical ecological impact of fire."@en ;
+    rdfs:domain skos:Concept ;
+    rdfs:range skos:Concept .
+
+ffonto:usedThreshold a owl:ObjectProperty ;
+    rdfs:label "used threshold"@en ;
+    rdfs:comment "The decision threshold that applies to the observation's predicted class."@en ;
+    rdfs:domain ffonto:ModelObservation ;
+    rdfs:range ffonto:Threshold .
+
+ffonto:wears a owl:ObjectProperty ;
+    rdfs:label "wears"@en ;
+    rdfs:comment "Protective equipment worn by a person (ffv:PPEScheme)."@en ;
+    rdfs:domain ffonto:Agent ;
+    rdfs:range skos:Concept .
+
+ffonto:widthPx a owl:DatatypeProperty ;
+    rdfs:label "width (px)"@en ;
+    rdfs:comment "Image width in pixels."@en ;
+    rdfs:domain ffonto:ImageRecord ;
+    rdfs:range xsd:integer .
+
+<http://purl.org/ffonto/data/event/ev-demo-081/conflict/AudioImageConflict/6ada4bc88defafc432eb856e993ab54c> a ffonto:ModalityConflict ;
+    ffonto:conflictType ffv:AudioImageConflict ;
+    ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
+    ffonto:involvesObservation <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/0>,
+        <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/obs/0> ;
+    rdfs:comment "Audio detects an explosion above threshold, but the image fire score is below threshold." .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/conflict/CaptionScoreConflict/eab0fbf3795c0e02e6060973feec62dd> a ffonto:ModalityConflict ;
+    ffonto:conflictType ffv:CaptionScoreConflict ;
+    ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
+    ffonto:involvesObservation <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/0> ;
+    rdfs:comment "Caption mentions 'Fire' but the classifier score is below threshold." .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/hazard/ExplosionHazard> a ffonto:Hazard ;
+    ffonto:hasHazardType ffv:ExplosionHazard ;
+    ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
+    rdfs:comment "Explosion sound detected above threshold." ;
+    prov:wasDerivedFrom <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/obs/0> .
+
+<http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/conflict/CaptionScoreConflict/d14ddfc6e906275719be32c7650c42d9> a ffonto:ModalityConflict ;
+    ffonto:conflictType ffv:CaptionScoreConflict ;
+    ffonto:inEvent <http://purl.org/ffonto/data/event/ev-bf59c56acb36> ;
+    ffonto:involvesObservation <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/0> ;
+    rdfs:comment "Caption mentions 'Fire' but the classifier score is below threshold." .
+
+<http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a/hazard/ExplosionHazard> a ffonto:Hazard ;
+    ffonto:hasHazardType ffv:ExplosionHazard ;
+    ffonto:inEvent <http://purl.org/ffonto/data/event/ev-22e029d3b190> ;
+    rdfs:comment "Explosion sound detected above threshold." ;
+    prov:wasDerivedFrom <http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a/obs/0> .
+
+<http://purl.org/ffonto/data/record/weather/demo-site-a/grid-2-2/2012-08-28> a ffonto:WeatherRecord ;
+    ffonto:aboutEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
+    ffonto:airTemperatureC 1.74e+01 ;
+    ffonto:atSite <http://purl.org/ffonto/data/site/demo-site-a/grid-2-2> ;
+    ffonto:bui 1.504e+02 ;
+    ffonto:burnedAreaHa 1.07e+00 ;
+    ffonto:dayName "tue" ;
+    ffonto:dc 6.471e+02 ;
+    ffonto:dmc 1.083e+02 ;
+    ffonto:ffmc 9.48e+01 ;
+    ffonto:fireOccurred true ;
+    ffonto:fwi 3.31e+01 ;
+    ffonto:hasCondition ffv:ElevatedFireDanger,
+        ffv:FavourDirectAttack,
+        ffv:PersistentCombustion,
+        ffv:RapidFineFuelSpread ;
+    ffonto:isi 1.7e+01 ;
+    ffonto:observationDate "2012-08-28T00:00:00+00:00"^^xsd:dateTime ;
+    ffonto:previousRecord <http://purl.org/ffonto/data/record/weather/demo-site-a/grid-2-2/2012-08-27> ;
+    ffonto:rainMm 0e+00 ;
+    ffonto:relativeHumidityPct 4.3e+01 ;
+    ffonto:sourceName "weather_csv" ;
+    ffonto:windSpeedKmh 6.7e+00 .
+
+ffr:dc-persistent a ffonto:DangerRule ;
+    rdfs:label "High Drought Code indicates deep, persistent smouldering"@en ;
+    ffonto:indicatesCondition ffv:PersistentCombustion ;
+    ffonto:onProperty ffonto:dc ;
+    ffonto:operator "ge" ;
+    ffonto:thresholdValue 4e+02 ;
+    rdfs:comment "PLACEHOLDER threshold."@en .
+
+ffr:ffmc-spread a ffonto:DangerRule ;
+    rdfs:label "High FFMC indicates easily ignited fine fuels"@en ;
+    ffonto:indicatesCondition ffv:RapidFineFuelSpread ;
+    ffonto:onProperty ffonto:ffmc ;
+    ffonto:operator "ge" ;
+    ffonto:thresholdValue 9e+01 ;
+    rdfs:comment "PLACEHOLDER threshold."@en .
+
+ffr:fwi-danger a ffonto:DangerRule ;
+    rdfs:label "High FWI indicates elevated fire danger"@en ;
+    ffonto:indicatesCondition ffv:ElevatedFireDanger ;
+    ffonto:onProperty ffonto:fwi ;
+    ffonto:operator "ge" ;
+    ffonto:thresholdValue 3e+01 ;
+    rdfs:comment "PLACEHOLDER threshold."@en .
+
+ffr:isi-spread a ffonto:DangerRule ;
+    rdfs:label "High ISI indicates rapid fine-fuel spread"@en ;
+    ffonto:indicatesCondition ffv:RapidFineFuelSpread ;
+    ffonto:onProperty ffonto:isi ;
+    ffonto:operator "gt" ;
+    ffonto:thresholdValue 1e+01 ;
+    rdfs:comment "PLACEHOLDER threshold."@en .
+
+ffr:rain-mopup a ffonto:DangerRule ;
+    rdfs:label "Rain improves mop-up conditions"@en ;
+    ffonto:indicatesCondition ffv:ImprovedMopUpConditions ;
+    ffonto:onProperty ffonto:rainMm ;
+    ffonto:operator "gt" ;
+    ffonto:thresholdValue 2e+00 ;
+    rdfs:comment "PLACEHOLDER threshold."@en .
+
+ffr:rh-direct a ffonto:DangerRule ;
+    rdfs:label "Moderate/high RH favours direct attack with hand tools"@en ;
+    ffonto:indicatesCondition ffv:FavourDirectAttack ;
+    ffonto:onProperty ffonto:relativeHumidityPct ;
+    ffonto:operator "ge" ;
+    ffonto:thresholdValue 4e+01 ;
+    rdfs:comment "PLACEHOLDER threshold."@en .
+
+ffr:rh-drying a ffonto:DangerRule ;
+    rdfs:label "Low RH favours rapid fine-fuel drying"@en ;
+    ffonto:indicatesCondition ffv:RapidFineFuelDrying ;
+    ffonto:onProperty ffonto:relativeHumidityPct ;
+    ffonto:operator "lt" ;
+    ffonto:thresholdValue 3e+01 ;
+    rdfs:comment "PLACEHOLDER threshold."@en .
+
+ffr:temp-heat a ffonto:DangerRule ;
+    rdfs:label "High temperature indicates heat-stress risk"@en ;
+    ffonto:indicatesCondition ffv:HeatStressRisk ;
+    ffonto:onProperty ffonto:airTemperatureC ;
+    ffonto:operator "ge" ;
+    ffonto:thresholdValue 3.2e+01 ;
+    rdfs:comment "PLACEHOLDER threshold."@en .
+
+ffr:wind-aerial a ffonto:DangerRule ;
+    rdfs:label "Strong wind reduces aerial-drop effectiveness"@en ;
+    ffonto:indicatesCondition ffv:AerialDropCompromised ;
+    ffonto:onProperty ffonto:windSpeedKmh ;
+    ffonto:operator "gt" ;
+    ffonto:thresholdValue 3e+01 ;
+    rdfs:comment "PLACEHOLDER threshold."@en .
+
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12> a ffonto:SceneDescription ;
+    ffonto:depicts <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e1>,
+        <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e2>,
+        <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e3>,
+        <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e4> ;
+    ffonto:describesRecord <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
+    ffonto:hasObservation <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/0>,
+        <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/1>,
+        <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/2>,
+        <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/3>,
+        <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/4>,
+        <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/5>,
+        <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/6>,
+        <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/7> ;
+    ffonto:humanValidated false ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081> a ffonto:SceneDescription ;
+    ffonto:depicts <http://purl.org/ffonto/data/scene/scene-fixture-081/e1>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/e10>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/e11>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/e12>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/e2>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/e3>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/e4>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/e5>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/e6>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/e7>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/e8>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/e9> ;
+    ffonto:describesRecord <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
+    ffonto:hasObservation <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/0>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/1>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/2>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/3>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/4>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/5>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/6>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/7> ;
+    ffonto:humanValidated false ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/hazard/CrownFireTransition/2648fb341d5b5a9bdf11778052cb0f79> a ffonto:Hazard ;
+    ffonto:hasHazardType ffv:CrownFireTransition ;
+    ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
+    ffonto:threatens <http://purl.org/ffonto/data/scene/scene-fixture-081/e9> ;
+    rdfs:comment "High fire intensity next to conifers or ladder fuels." ;
+    prov:wasDerivedFrom <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/5> .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/hazard/ExplosionHazard/7f720711bb54be501e65ae405dc4adfb> a ffonto:Hazard ;
+    ffonto:hasHazardType ffv:ExplosionHazard ;
+    ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
+    ffonto:threatens <http://purl.org/ffonto/data/scene/scene-fixture-081/e6> ;
+    rdfs:comment "Pressurised tank near a fire phenomenon." ;
+    prov:wasDerivedFrom <http://purl.org/ffonto/data/scene/scene-fixture-081/e5> .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/hazard/FlameProximity/88ea7039c1c8044e169c8008018789fc> a ffonto:Hazard ;
+    ffonto:hasHazardType ffv:FlameProximity ;
+    ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
+    ffonto:threatens <http://purl.org/ffonto/data/scene/scene-fixture-081/e1> ;
+    rdfs:comment "Person depicted near a fire phenomenon." ;
+    prov:wasDerivedFrom <http://purl.org/ffonto/data/scene/scene-fixture-081/e5> .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/hazard/FlameProximity/98e65e115e35116740e427dc3391460c> a ffonto:Hazard ;
+    ffonto:hasHazardType ffv:FlameProximity ;
+    ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
+    ffonto:threatens <http://purl.org/ffonto/data/scene/scene-fixture-081/e2> ;
+    rdfs:comment "Person depicted near a fire phenomenon." ;
+    prov:wasDerivedFrom <http://purl.org/ffonto/data/scene/scene-fixture-081/e5> .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/hazard/MissingPPEHazard/98e65e115e35116740e427dc3391460c> a ffonto:Hazard ;
+    ffonto:hasHazardType ffv:MissingPPEHazard ;
+    ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
+    ffonto:threatens <http://purl.org/ffonto/data/scene/scene-fixture-081/e2> ;
+    rdfs:comment "Person not seen wearing an item of required PPE." ;
+    prov:wasDerivedFrom <http://purl.org/ffonto/data/scene/scene-fixture-081/e2> .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/hazard/RespiratoryHazard/88ea7039c1c8044e169c8008018789fc> a ffonto:Hazard ;
+    ffonto:hasHazardType ffv:RespiratoryHazard ;
+    ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
+    ffonto:threatens <http://purl.org/ffonto/data/scene/scene-fixture-081/e1> ;
+    rdfs:comment "Dense smoke with people present." ;
+    prov:wasDerivedFrom <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/1> .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/hazard/RespiratoryHazard/98e65e115e35116740e427dc3391460c> a ffonto:Hazard ;
+    ffonto:hasHazardType ffv:RespiratoryHazard ;
+    ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
+    ffonto:threatens <http://purl.org/ffonto/data/scene/scene-fixture-081/e2> ;
+    rdfs:comment "Dense smoke with people present." ;
+    prov:wasDerivedFrom <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/1> .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/hazard/SmokeVisibilityHazard/0823e4213ef85c1af8b04ea5fc0fb882> a ffonto:Hazard ;
+    ffonto:hasHazardType ffv:SmokeVisibilityHazard ;
+    ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
+    ffonto:threatens <http://purl.org/ffonto/data/scene/scene-fixture-081/e7> ;
+    rdfs:comment "Low visibility while a road, vehicle or aircraft is in the scene." ;
+    prov:wasDerivedFrom <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/2> .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/hazard/SmokeVisibilityHazard/0cf269879d1a704361952113e657cf7a> a ffonto:Hazard ;
+    ffonto:hasHazardType ffv:SmokeVisibilityHazard ;
+    ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
+    ffonto:threatens <http://purl.org/ffonto/data/scene/scene-fixture-081/e8> ;
+    rdfs:comment "Low visibility while a road, vehicle or aircraft is in the scene." ;
+    prov:wasDerivedFrom <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/2> .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/hazard/SmokeVisibilityHazard/1c96ae188d4ddec96847a4437a604657> a ffonto:Hazard ;
+    ffonto:hasHazardType ffv:SmokeVisibilityHazard ;
+    ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
+    ffonto:threatens <http://purl.org/ffonto/data/scene/scene-fixture-081/e10> ;
+    rdfs:comment "Low visibility while a road, vehicle or aircraft is in the scene." ;
+    prov:wasDerivedFrom <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/2> .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/hazard/SpottingHazard/9608b6b4c8fb28fc63db63b54ac92776> a ffonto:Hazard ;
+    ffonto:hasHazardType ffv:SpottingHazard ;
+    ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
+    rdfs:comment "Spot fires or embers visible." ;
+    prov:wasDerivedFrom <http://purl.org/ffonto/data/scene/scene-fixture-081/e11> .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/hazard/StructureIgnitionRisk/042fb895dfdc626d6763893dd71f902f> a ffonto:Hazard ;
+    ffonto:hasHazardType ffv:StructureIgnitionRisk ;
+    ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
+    ffonto:threatens <http://purl.org/ffonto/data/scene/scene-fixture-081/e4> ;
+    rdfs:comment "Building marked as threatened by the scene extractor.",
+        "Fire phenomenon near / advancing toward a building." ;
+    prov:wasDerivedFrom <http://purl.org/ffonto/data/scene/scene-fixture-081/e4>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/e5> .
+
+<http://purl.org/ffonto/rules> a owl:Ontology ;
+    dcterms:creator "Charuni Kosala Jayaweera" ;
+    dcterms:description "Threshold rules over weather and Fire Weather Index properties, stored as individuals of ffonto:DangerRule."@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:title "FFOnto weather / FWI danger rules"@en ;
+    owl:versionInfo "2.0.0" .
+
+<http://purl.org/ffonto/vocab> a owl:Ontology ;
+    dcterms:creator "Charuni Kosala Jayaweera" ;
+    dcterms:description "SKOS concept schemes for FFOnto: entity kinds, states, activities, PPE, observable properties, values, hazards, actions, conditions and ecological background knowledge."@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:title "FFOnto controlled vocabulary"@en ;
+    rdfs:comment "Load together with ffonto-core.ttl (see ffonto.ttl and catalog-v001.xml)."@en ;
+    owl:versionInfo "2.0.0" .
+
+ffv:Accessible a skos:Concept ;
+    rdfs:label "Accessible"@en ;
+    skos:broader ffv:AccessState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Accessible"@en .
+
+ffv:ActingAsLookout a skos:Concept ;
+    rdfs:label "Acting as lookout"@en ;
+    skos:broader ffv:ResponseActivity ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Acting as lookout"@en .
+
+ffv:AerialReconnaissance a skos:Concept ;
+    rdfs:label "Aerial reconnaissance"@en ;
+    skos:broader ffv:AerialSuppression ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Aerial reconnaissance"@en .
+
+ffv:AgriculturalLand a skos:Concept ;
+    rdfs:label "Agricultural land"@en ;
+    skos:broader ffv:EnvironmentFeatureKind ;
+    skos:hiddenLabel "crop"@en,
+        "farm"@en,
+        "farmland"@en,
+        "orchard"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Agricultural land"@en .
+
+ffv:AirPollution a skos:Concept ;
+    rdfs:label "Air pollution"@en ;
+    skos:broader ffv:EcologicalImpact ;
+    skos:inScheme ffv:EcologyScheme ;
+    skos:prefLabel "Air pollution"@en .
+
+ffv:AirQualityLevel a skos:Concept ;
+    rdfs:label "Air quality level"@en ;
+    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:prefLabel "Air quality level"@en ;
+    skos:topConceptOf ffv:ObservablePropertyScheme .
+
+ffv:AirTanker a skos:Concept ;
+    rdfs:label "Air tanker"@en ;
+    skos:broader ffv:Aircraft ;
+    skos:hiddenLabel "air tanker"@en,
+        "airtanker"@en,
+        "water bomber"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Air tanker"@en .
+
+ffv:Ambulance a skos:Concept ;
+    rdfs:label "Ambulance"@en ;
+    skos:broader ffv:GroundVehicle ;
+    skos:hiddenLabel "ambulance"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Ambulance"@en .
+
+ffv:AshColour a skos:Concept ;
+    rdfs:label "Ash colour"@en ;
+    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:prefLabel "Ash colour"@en ;
+    skos:topConceptOf ffv:ObservablePropertyScheme .
+
+ffv:AshDeposit a skos:Concept ;
+    rdfs:label "Ash deposit"@en ;
+    skos:broader ffv:BurnEvidenceKind ;
+    skos:hiddenLabel "ash"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Ash deposit"@en .
+
+ffv:AssistingCivilian a skos:Concept ;
+    rdfs:label "Assisting civilian"@en ;
+    skos:broader ffv:ResponseActivity ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Assisting civilian"@en .
+
+ffv:AssistingVulnerablePerson a skos:Concept ;
+    rdfs:label "Assisting children / elderly"@en ;
+    skos:broader ffv:CivilianActivity ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Assisting children / elderly"@en .
+
+ffv:Axe a skos:Concept ;
+    rdfs:label "Axe"@en ;
+    skos:broader ffv:HandTool ;
+    skos:hiddenLabel "axe"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Axe"@en .
+
+ffv:BareGround a skos:Concept ;
+    rdfs:label "Bare ground"@en ;
+    skos:broader ffv:EnvironmentFeatureKind ;
+    skos:hiddenLabel "bare"@en,
+        "barren"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Bare ground"@en .
+
+ffv:Barn a skos:Concept ;
+    rdfs:label "Barn"@en ;
+    skos:broader ffv:Building ;
+    skos:hiddenLabel "barn"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Barn"@en .
+
+ffv:Barricade a skos:Concept ;
+    rdfs:label "Barricade"@en ;
+    skos:broader ffv:TrafficControlDevice ;
+    skos:hiddenLabel "barricade"@en,
+        "road closure sign"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Barricade"@en .
+
+ffv:BeatingOutFlames a skos:Concept ;
+    rdfs:label "Beating out flames"@en ;
+    skos:broader ffv:DirectAttack ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Beating out flames"@en .
+
+ffv:Black a skos:Concept ;
+    rdfs:label "Black"@en ;
+    skos:broader ffv:Colour ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Black"@en .
+
+ffv:Blocked a skos:Concept ;
+    rdfs:label "Blocked"@en ;
+    skos:broader ffv:AccessState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Blocked"@en .
+
+ffv:Blue a skos:Concept ;
+    rdfs:label "Blue"@en ;
+    skos:broader ffv:Colour ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Blue"@en .
+
+ffv:Bridge a skos:Concept ;
+    rdfs:label "Bridge"@en ;
+    skos:broader ffv:BuiltAssetKind ;
+    skos:hiddenLabel "bridge"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Bridge"@en .
+
+ffv:Briefing a skos:Concept ;
+    rdfs:label "Briefing"@en ;
+    skos:broader ffv:ResponseActivity ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Briefing"@en .
+
+ffv:Brown a skos:Concept ;
+    rdfs:label "Brown"@en ;
+    skos:broader ffv:Colour ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Brown"@en .
+
+ffv:BrushEngine a skos:Concept ;
+    rdfs:label "Brush engine"@en ;
+    skos:broader ffv:FireEngine ;
+    skos:hiddenLabel "brush engine"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Brush engine"@en .
+
+ffv:BurnSeverity a skos:Concept ;
+    rdfs:label "Burn severity"@en ;
+    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:prefLabel "Burn severity"@en ;
+    skos:topConceptOf ffv:ObservablePropertyScheme .
+
+ffv:Burnout a skos:Concept ;
+    rdfs:label "Burnout / backburn"@en ;
+    skos:broader ffv:IndirectAttack ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Burnout / backburn"@en .
+
+ffv:Bus a skos:Concept ;
+    rdfs:label "Bus"@en ;
+    skos:broader ffv:GroundVehicle ;
+    skos:hiddenLabel "bus"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Bus"@en .
+
+ffv:Canyon a skos:Concept ;
+    rdfs:label "Canyon"@en ;
+    skos:broader ffv:Terrain ;
+    skos:hiddenLabel "canyon"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Canyon"@en .
+
+ffv:CautionTape a skos:Concept ;
+    rdfs:label "Caution tape"@en ;
+    skos:broader ffv:TrafficControlDevice ;
+    skos:hiddenLabel "caution tape"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Caution tape"@en .
+
+ffv:Chainsaw a skos:Concept ;
+    rdfs:label "Chainsaw"@en ;
+    skos:broader ffv:EquipmentKind ;
+    skos:hiddenLabel "chainsaw"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Chainsaw"@en .
+
+ffv:Charred a skos:Concept ;
+    rdfs:label "Charred"@en ;
+    skos:broader ffv:DamageState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Charred"@en .
+
+ffv:CharredTrunk a skos:Concept ;
+    rdfs:label "Charred trunk"@en ;
+    skos:broader ffv:BurnEvidenceKind ;
+    skos:hiddenLabel "char"@en,
+        "charred"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Charred trunk"@en .
+
+ffv:Civilian a skos:Concept ;
+    rdfs:label "Civilian"@en ;
+    skos:broader ffv:Person ;
+    skos:hiddenLabel "civilian"@en,
+        "people"@en,
+        "resident"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Civilian"@en .
+
+ffv:Clear a skos:Concept ;
+    rdfs:label "Clear sky"@en ;
+    skos:broader ffv:Sky ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Clear sky"@en .
+
+ffv:Cloudy a skos:Concept ;
+    rdfs:label "Cloudy"@en ;
+    skos:broader ffv:Sky ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Cloudy"@en .
+
+ffv:Collapsed a skos:Concept ;
+    rdfs:label "Collapsed"@en ;
+    skos:broader ffv:DamageState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Collapsed"@en .
+
+ffv:CommandPost a skos:Concept ;
+    rdfs:label "Incident command post"@en ;
+    skos:broader ffv:Building ;
+    skos:hiddenLabel "command post"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Incident command post"@en .
+
+ffv:Communicating a skos:Concept ;
+    rdfs:label "Communicating"@en ;
+    skos:broader ffv:ResponseActivity ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Communicating"@en .
+
+ffv:CommunicationTower a skos:Concept ;
+    rdfs:label "Communication tower"@en ;
+    skos:broader ffv:BuiltAssetKind ;
+    skos:hiddenLabel "antenna"@en,
+        "tower"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Communication tower"@en .
+
+ffv:Consumed a skos:Concept ;
+    rdfs:label "Consumed"@en ;
+    skos:broader ffv:VegetationState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Consumed"@en .
+
+ffv:Contained a skos:Concept ;
+    rdfs:label "Contained"@en ;
+    skos:broader ffv:SpreadStatus ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Contained"@en .
+
+ffv:Continuous a skos:Concept ;
+    rdfs:label "Continuous"@en ;
+    skos:broader ffv:VegetationState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Continuous"@en .
+
+ffv:ControlLine a skos:Concept ;
+    rdfs:label "Control line / dozer line"@en ;
+    skos:broader ffv:BurnEvidenceKind ;
+    skos:hiddenLabel "dozer line"@en,
+        "fire line"@en,
+        "hand line"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Control line / dozer line"@en .
+
+ffv:Crackling a skos:Concept ;
+    rdfs:label "Crackling"@en ;
+    skos:broader ffv:FireSound ;
+    skos:hiddenLabel "crackle"@en,
+        "crackling"@en ;
+    skos:inScheme ffv:SoundEventScheme ;
+    skos:prefLabel "Crackling"@en .
+
+ffv:CrownFire a skos:Concept ;
+    rdfs:label "Crown fire"@en ;
+    skos:broader ffv:FirePhenomenonKind ;
+    skos:hiddenLabel "crown fire"@en,
+        "crowning"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Crown fire"@en .
+
+ffv:CrownFireType a skos:Concept ;
+    rdfs:label "Crown fire (type)"@en ;
+    skos:broader ffv:FireTypeValue ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Crown fire (type)"@en .
+
+ffv:Culvert a skos:Concept ;
+    rdfs:label "Culvert"@en ;
+    skos:broader ffv:BuiltAssetKind ;
+    skos:hiddenLabel "culvert"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Culvert"@en .
+
+ffv:Cured a skos:Concept ;
+    rdfs:label "Cured"@en ;
+    skos:broader ffv:VegetationState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Cured"@en .
+
+ffv:CuttingControlLine a skos:Concept ;
+    rdfs:label "Cutting control line (dozer)"@en ;
+    skos:broader ffv:IndirectAttack ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Cutting control line (dozer)"@en .
+
+ffv:Damaged a skos:Concept ;
+    rdfs:label "Damaged"@en ;
+    skos:broader ffv:DamageState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Damaged"@en .
+
+ffv:Dead a skos:Concept ;
+    rdfs:label "Dead"@en ;
+    skos:broader ffv:VegetationState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Dead"@en .
+
+ffv:DeciduousForest a skos:Concept ;
+    rdfs:label "Deciduous forest"@en ;
+    ffonto:providesService ffv:CarbonStorage,
+        ffv:HabitatProvision ;
+    ffonto:suggestedRestoration ffv:NaturalRegenerationMonitoring,
+        ffv:Reforestation ;
+    ffonto:typicalFireImpact ffv:HabitatLoss,
+        ffv:SoilNutrientLoss,
+        ffv:TreeMortality ;
+    skos:broader ffv:Forest ;
+    skos:hiddenLabel "birch"@en,
+        "deciduous"@en,
+        "oak"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Deciduous forest"@en .
+
+ffv:Decreasing a skos:Concept ;
+    rdfs:label "Decreasing"@en ;
+    skos:broader ffv:SpreadStatus ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Decreasing"@en .
+
+ffv:Destroyed a skos:Concept ;
+    rdfs:label "Destroyed"@en ;
+    skos:broader ffv:DamageState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Destroyed"@en .
+
+ffv:DetectorSource a skos:Concept ;
+    rdfs:label "Object detector"@en ;
+    skos:hiddenLabel "detector"@en ;
+    skos:inScheme ffv:LabelSourceScheme ;
+    skos:prefLabel "Object detector"@en ;
+    skos:topConceptOf ffv:LabelSourceScheme .
+
+ffv:DiggingHandLine a skos:Concept ;
+    rdfs:label "Digging hand line"@en ;
+    skos:broader ffv:IndirectAttack ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Digging hand line"@en .
+
+ffv:DirectingTraffic a skos:Concept ;
+    rdfs:label "Directing traffic"@en ;
+    skos:broader ffv:ResponseActivity ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Directing traffic"@en .
+
+ffv:DominantAspect a skos:Concept ;
+    rdfs:label "Dominant aspect"@en ;
+    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:prefLabel "Dominant aspect"@en ;
+    skos:topConceptOf ffv:ObservablePropertyScheme .
+
+ffv:Down a skos:Concept ;
+    rdfs:label "Down / fallen"@en ;
+    skos:broader ffv:OperationalState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Down / fallen"@en .
+
+ffv:DownedLog a skos:Concept ;
+    rdfs:label "Downed log"@en ;
+    skos:broader ffv:Vegetation ;
+    skos:hiddenLabel "log"@en,
+        "logs"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Downed log"@en .
+
+ffv:DownedPowerLineHazard a skos:Concept ;
+    rdfs:label "Downed power line hazard"@en ;
+    ffonto:mitigatedBy ffv:CloseRoad,
+        ffv:DeEnergiseLines ;
+    skos:inScheme ffv:HazardScheme ;
+    skos:prefLabel "Downed power line hazard"@en ;
+    skos:topConceptOf ffv:HazardScheme .
+
+ffv:Dozer a skos:Concept ;
+    rdfs:label "Dozer"@en ;
+    skos:broader ffv:GroundVehicle ;
+    skos:hiddenLabel "bulldozer"@en,
+        "dozer"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Dozer"@en .
+
+ffv:Drafting a skos:Concept ;
+    rdfs:label "Drafting / dip site use"@en ;
+    skos:broader ffv:AerialSuppression ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Drafting / dip site use"@en .
+
+ffv:DripTorch a skos:Concept ;
+    rdfs:label "Drip torch"@en ;
+    skos:broader ffv:EquipmentKind ;
+    skos:hiddenLabel "drip torch"@en,
+        "driptorch"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Drip torch"@en .
+
+ffv:Drone a skos:Concept ;
+    rdfs:label "Drone"@en ;
+    skos:broader ffv:Aircraft ;
+    skos:hiddenLabel "drone"@en,
+        "uas"@en,
+        "uav"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Drone"@en .
+
+ffv:Dusk a skos:Concept ;
+    rdfs:label "Dusk"@en ;
+    skos:broader ffv:Light ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Dusk"@en .
+
+ffv:EMSWorker a skos:Concept ;
+    rdfs:label "EMS worker"@en ;
+    skos:broader ffv:Responder ;
+    skos:hiddenLabel "ems"@en,
+        "paramedic"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "EMS worker"@en .
+
+ffv:East a skos:Concept ;
+    rdfs:label "East"@en ;
+    skos:broader ffv:Direction ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "East"@en .
+
+ffv:Ember a skos:Concept ;
+    rdfs:label "Ember"@en ;
+    skos:broader ffv:FirePhenomenonKind ;
+    skos:hiddenLabel "ember"@en,
+        "embers"@en,
+        "firebrand"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Ember"@en .
+
+ffv:ErosionControlMeasure a skos:Concept ;
+    rdfs:label "Erosion control measure"@en ;
+    skos:broader ffv:BurnEvidenceKind ;
+    skos:hiddenLabel "erosion matting"@en,
+        "mulch"@en,
+        "sandbag"@en,
+        "wattle"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Erosion control measure"@en .
+
+ffv:ErosionRill a skos:Concept ;
+    rdfs:label "Erosion rill"@en ;
+    skos:broader ffv:BurnEvidenceKind ;
+    skos:hiddenLabel "erosion"@en,
+        "rill"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Erosion rill"@en .
+
+ffv:ErosionRisk a skos:Concept ;
+    rdfs:label "Post-fire erosion / debris-flow risk"@en ;
+    ffonto:mitigatedBy ffv:InstallErosionControl ;
+    skos:inScheme ffv:HazardScheme ;
+    skos:prefLabel "Post-fire erosion / debris-flow risk"@en ;
+    skos:topConceptOf ffv:HazardScheme .
+
+ffv:EstablishingPerimeter a skos:Concept ;
+    rdfs:label "Establishing perimeter"@en ;
+    skos:broader ffv:ResponseActivity ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Establishing perimeter"@en .
+
+ffv:Evacuating a skos:Concept ;
+    rdfs:label "Evacuating"@en ;
+    skos:broader ffv:CivilianActivity ;
+    skos:hiddenLabel "evacuating"@en ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Evacuating"@en .
+
+ffv:EvacuationRouteBlocked a skos:Concept ;
+    rdfs:label "Evacuation route blocked"@en ;
+    ffonto:mitigatedBy ffv:CloseRoad,
+        ffv:ShelterInPlace ;
+    skos:inScheme ffv:HazardScheme ;
+    skos:prefLabel "Evacuation route blocked"@en ;
+    skos:topConceptOf ffv:HazardScheme .
+
+ffv:Excavator a skos:Concept ;
+    rdfs:label "Excavator"@en ;
+    skos:broader ffv:GroundVehicle ;
+    skos:hiddenLabel "excavator"@en,
+        "grader"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Excavator"@en .
+
+ffv:ExposedMineralSoil a skos:Concept ;
+    rdfs:label "Exposed mineral soil"@en ;
+    skos:broader ffv:BurnEvidenceKind ;
+    skos:hiddenLabel "mineral soil"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Exposed mineral soil"@en .
+
+ffv:Extreme a skos:Concept ;
+    rdfs:label "Extreme"@en ;
+    skos:broader ffv:Level ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Extreme"@en .
+
+ffv:FallingTreeHazard a skos:Concept ;
+    rdfs:label "Falling tree hazard"@en ;
+    ffonto:mitigatedBy ffv:AvoidSnagAreas ;
+    skos:inScheme ffv:HazardScheme ;
+    skos:prefLabel "Falling tree hazard"@en ;
+    skos:topConceptOf ffv:HazardScheme .
+
+ffv:FellingTrees a skos:Concept ;
+    rdfs:label "Felling trees"@en ;
+    skos:broader ffv:SuppressionActivity ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Felling trees"@en .
+
+ffv:Fence a skos:Concept ;
+    rdfs:label "Fence"@en ;
+    skos:broader ffv:BuiltAssetKind ;
+    skos:hiddenLabel "fence"@en,
+        "gate"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Fence"@en .
+
+ffv:FireActivityTrend a skos:Concept ;
+    rdfs:label "Fire activity trend"@en ;
+    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:prefLabel "Fire activity trend"@en ;
+    skos:topConceptOf ffv:ObservablePropertyScheme .
+
+ffv:FireBeater a skos:Concept ;
+    rdfs:label "Fire beater"@en ;
+    skos:broader ffv:HandTool ;
+    skos:hiddenLabel "fire beater"@en,
+        "flapper"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Fire beater"@en .
+
+ffv:FireCluster a skos:Concept ;
+    rdfs:label "Fire cluster"@en ;
+    skos:broader ffv:FirePhenomenonKind ;
+    skos:hiddenLabel "fire cluster"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Fire cluster"@en .
+
+ffv:FireShelter a skos:Concept ;
+    rdfs:label "Fire shelter"@en ;
+    skos:hiddenLabel "fire shelter"@en ;
+    skos:inScheme ffv:PPEScheme ;
+    skos:prefLabel "Fire shelter"@en ;
+    skos:topConceptOf ffv:PPEScheme .
+
+ffv:FireShelterPack a skos:Concept ;
+    rdfs:label "Fire shelter (packed)"@en ;
+    skos:broader ffv:EquipmentKind ;
+    skos:hiddenLabel "fire shelter"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Fire shelter (packed)"@en .
+
+ffv:Foggy a skos:Concept ;
+    rdfs:label "Foggy"@en ;
+    skos:broader ffv:Sky ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Foggy"@en .
+
+ffv:Fragmented a skos:Concept ;
+    rdfs:label "Fragmented"@en ;
+    skos:broader ffv:Distribution ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Fragmented"@en .
+
+ffv:FuelCan a skos:Concept ;
+    rdfs:label "Fuel can"@en ;
+    skos:broader ffv:EquipmentKind ;
+    skos:hiddenLabel "fuel can"@en,
+        "jerry can"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Fuel can"@en .
+
+ffv:FuelCondition a skos:Concept ;
+    rdfs:label "Fuel condition"@en ;
+    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:prefLabel "Fuel condition"@en ;
+    skos:topConceptOf ffv:ObservablePropertyScheme .
+
+ffv:Fusee a skos:Concept ;
+    rdfs:label "Fusee"@en ;
+    skos:broader ffv:EquipmentKind ;
+    skos:hiddenLabel "fusee"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Fusee"@en .
+
+ffv:Garage a skos:Concept ;
+    rdfs:label "Garage"@en ;
+    skos:broader ffv:Building ;
+    skos:hiddenLabel "garage"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Garage"@en .
+
+ffv:Gathering a skos:Concept ;
+    rdfs:label "Gathering at assembly point"@en ;
+    skos:broader ffv:CivilianActivity ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Gathering at assembly point"@en .
+
+ffv:Generator a skos:Concept ;
+    rdfs:label "Generator"@en ;
+    skos:broader ffv:EquipmentKind ;
+    skos:hiddenLabel "generator"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Generator"@en .
+
+ffv:GrassFireType a skos:Concept ;
+    rdfs:label "Grass fire"@en ;
+    skos:broader ffv:FireTypeValue ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Grass fire"@en .
+
+ffv:Grassland a skos:Concept ;
+    rdfs:label "Grassland"@en ;
+    ffonto:providesService ffv:Grazing,
+        ffv:SoilProtection ;
+    ffonto:suggestedRestoration ffv:InvasiveSpeciesControl,
+        ffv:Reseeding ;
+    ffonto:typicalFireImpact ffv:InvasiveSpeciesSpread,
+        ffv:NutrientRecycling,
+        ffv:SoilErosion ;
+    skos:broader ffv:Vegetation ;
+    skos:hiddenLabel "field"@en,
+        "grass"@en,
+        "grassland"@en,
+        "meadow"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Grassland"@en .
+
+ffv:Green a skos:Concept ;
+    rdfs:label "Green"@en ;
+    skos:broader ffv:VegetationState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Green"@en .
+
+ffv:HandheldRadio a skos:Concept ;
+    rdfs:label "Handheld radio"@en ;
+    skos:broader ffv:EquipmentKind ;
+    skos:hiddenLabel "radio"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Handheld radio"@en .
+
+ffv:Hazy a skos:Concept ;
+    rdfs:label "Hazy"@en ;
+    skos:broader ffv:Sky ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Hazy"@en .
+
+ffv:Headlamp a skos:Concept ;
+    rdfs:label "Headlamp"@en ;
+    skos:hiddenLabel "headlamp"@en ;
+    skos:inScheme ffv:PPEScheme ;
+    skos:prefLabel "Headlamp"@en ;
+    skos:topConceptOf ffv:PPEScheme .
+
+ffv:HearingProtection a skos:Concept ;
+    rdfs:label "Hearing protection"@en ;
+    skos:hiddenLabel "ear protection"@en,
+        "headset"@en ;
+    skos:inScheme ffv:PPEScheme ;
+    skos:prefLabel "Hearing protection"@en ;
+    skos:topConceptOf ffv:PPEScheme .
+
+ffv:Helicopter a skos:Concept ;
+    rdfs:label "Helicopter"@en ;
+    skos:broader ffv:Aircraft ;
+    skos:hiddenLabel "helicopter"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Helicopter"@en .
+
+ffv:Helispot a skos:Concept ;
+    rdfs:label "Helispot"@en ;
+    skos:broader ffv:BuiltAssetKind ;
+    skos:hiddenLabel "helispot"@en,
+        "landing zone"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Helispot"@en .
+
+ffv:HighVisibilityVest a skos:Concept ;
+    rdfs:label "High visibility vest"@en ;
+    skos:hiddenLabel "hi-vis"@en,
+        "vest"@en ;
+    skos:inScheme ffv:PPEScheme ;
+    skos:prefLabel "High visibility vest"@en ;
+    skos:topConceptOf ffv:PPEScheme .
+
+ffv:Hotspot a skos:Concept ;
+    rdfs:label "Hotspot"@en ;
+    skos:broader ffv:FirePhenomenonKind ;
+    skos:hiddenLabel "hot spot"@en,
+        "hotspot"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Hotspot"@en .
+
+ffv:HumanSource a skos:Concept ;
+    rdfs:label "Human annotator"@en ;
+    skos:hiddenLabel "human"@en ;
+    skos:inScheme ffv:LabelSourceScheme ;
+    skos:prefLabel "Human annotator"@en ;
+    skos:topConceptOf ffv:LabelSourceScheme .
+
+ffv:Hydrant a skos:Concept ;
+    rdfs:label "Hydrant"@en ;
+    skos:broader ffv:BuiltAssetKind ;
+    skos:hiddenLabel "hydrant"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Hydrant"@en .
+
+ffv:Increasing a skos:Concept ;
+    rdfs:label "Increasing"@en ;
+    skos:broader ffv:SpreadStatus ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Increasing"@en .
+
+ffv:InsideBlack a skos:Concept ;
+    rdfs:label "Inside burned area"@en ;
+    skos:inScheme ffv:PositionScheme ;
+    skos:prefLabel "Inside burned area"@en ;
+    skos:topConceptOf ffv:PositionScheme .
+
+ffv:Intact a skos:Concept ;
+    rdfs:label "Intact"@en ;
+    skos:broader ffv:DamageState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Intact"@en .
+
+ffv:LadderFuel a skos:Concept ;
+    rdfs:label "Ladder fuel"@en ;
+    skos:broader ffv:Vegetation ;
+    skos:hiddenLabel "ladder fuel"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Ladder fuel"@en .
+
+ffv:LeafLitter a skos:Concept ;
+    rdfs:label "Leaf litter / duff"@en ;
+    skos:broader ffv:Vegetation ;
+    skos:hiddenLabel "duff"@en,
+        "litter"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Leaf litter / duff"@en .
+
+ffv:Leaning a skos:Concept ;
+    rdfs:label "Leaning"@en ;
+    skos:broader ffv:OperationalState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Leaning"@en .
+
+ffv:LeftFlank a skos:Concept ;
+    rdfs:label "Left flank"@en ;
+    skos:inScheme ffv:PositionScheme ;
+    skos:prefLabel "Left flank"@en ;
+    skos:topConceptOf ffv:PositionScheme .
+
+ffv:LightGray a skos:Concept ;
+    rdfs:label "Light gray"@en ;
+    skos:broader ffv:Colour ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Light gray"@en .
+
+ffv:Livestock a skos:Concept ;
+    rdfs:label "Livestock"@en ;
+    skos:broader ffv:Animal ;
+    skos:hiddenLabel "cattle"@en,
+        "horse"@en,
+        "livestock"@en,
+        "sheep"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Livestock"@en .
+
+ffv:LivestockTrailer a skos:Concept ;
+    rdfs:label "Livestock trailer"@en ;
+    skos:broader ffv:GroundVehicle ;
+    skos:hiddenLabel "trailer"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Livestock trailer"@en .
+
+ffv:LoadingAnimals a skos:Concept ;
+    rdfs:label "Loading animals"@en ;
+    skos:broader ffv:CivilianActivity ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Loading animals"@en .
+
+ffv:Lookout a skos:Concept ;
+    rdfs:label "Lookout"@en ;
+    skos:broader ffv:Person ;
+    skos:hiddenLabel "lookout"@en,
+        "spotter"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Lookout"@en .
+
+ffv:LoudActivity a skos:Concept ;
+    rdfs:label "Sustained loud activity"@en ;
+    skos:hiddenLabel "loud"@en,
+        "roar"@en ;
+    skos:inScheme ffv:SoundEventScheme ;
+    skos:prefLabel "Sustained loud activity"@en ;
+    skos:topConceptOf ffv:SoundEventScheme .
+
+ffv:MapBoard a skos:Concept ;
+    rdfs:label "Map board"@en ;
+    skos:broader ffv:EquipmentKind ;
+    skos:hiddenLabel "map board"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Map board"@en .
+
+ffv:McLeod a skos:Concept ;
+    rdfs:label "Mc leod"@en ;
+    skos:broader ffv:HandTool ;
+    skos:hiddenLabel "mcleod"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Mc leod"@en .
+
+ffv:MediaObserver a skos:Concept ;
+    rdfs:label "Media / observer"@en ;
+    skos:broader ffv:Person ;
+    skos:hiddenLabel "media"@en,
+        "observer"@en,
+        "reporter"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Media / observer"@en .
+
+ffv:Melted a skos:Concept ;
+    rdfs:label "Melted"@en ;
+    skos:broader ffv:DamageState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Melted"@en .
+
+ffv:MixedForest a skos:Concept ;
+    rdfs:label "Mixed forest"@en ;
+    ffonto:providesService ffv:CarbonStorage,
+        ffv:HabitatProvision ;
+    ffonto:suggestedRestoration ffv:NaturalRegenerationMonitoring,
+        ffv:Reforestation ;
+    ffonto:typicalFireImpact ffv:CarbonRelease,
+        ffv:HabitatLoss,
+        ffv:TreeMortality ;
+    skos:broader ffv:Forest ;
+    skos:hiddenLabel "mixed forest"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Mixed forest"@en .
+
+ffv:MopUp a skos:Concept ;
+    rdfs:label "Mop-up"@en ;
+    skos:broader ffv:SuppressionActivity ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Mop-up"@en .
+
+ffv:Mountain a skos:Concept ;
+    rdfs:label "Mountain"@en ;
+    skos:broader ffv:Terrain ;
+    skos:hiddenLabel "mountain"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Mountain"@en .
+
+ffv:Night a skos:Concept ;
+    rdfs:label "Night"@en ;
+    skos:broader ffv:Light ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Night"@en .
+
+ffv:North a skos:Concept ;
+    rdfs:label "North"@en ;
+    skos:broader ffv:Direction ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "North"@en .
+
+ffv:Nozzle a skos:Concept ;
+    rdfs:label "Nozzle"@en ;
+    skos:broader ffv:EquipmentKind ;
+    skos:hiddenLabel "nozzle"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Nozzle"@en .
+
+ffv:Official a skos:Concept ;
+    rdfs:label "Official"@en ;
+    skos:broader ffv:Person ;
+    skos:hiddenLabel "official"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Official"@en .
+
+ffv:OnFire a skos:Concept ;
+    rdfs:label "On fire"@en ;
+    skos:broader ffv:FireState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "On fire"@en .
+
+ffv:OnFireEdge a skos:Concept ;
+    rdfs:label "On fire edge"@en ;
+    skos:inScheme ffv:PositionScheme ;
+    skos:prefLabel "On fire edge"@en ;
+    skos:topConceptOf ffv:PositionScheme .
+
+ffv:Orange a skos:Concept ;
+    rdfs:label "Orange"@en ;
+    skos:broader ffv:Colour ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Orange"@en .
+
+ffv:Passable a skos:Concept ;
+    rdfs:label "Passable"@en ;
+    skos:broader ffv:AccessState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Passable"@en .
+
+ffv:Patchy a skos:Concept ;
+    rdfs:label "Patchy"@en ;
+    skos:broader ffv:VegetationState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Patchy"@en .
+
+ffv:PatchyDistribution a skos:Concept ;
+    rdfs:label "Patchy (distribution)"@en ;
+    skos:broader ffv:Distribution ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Patchy (distribution)"@en .
+
+ffv:Patrolling a skos:Concept ;
+    rdfs:label "Patrolling perimeter"@en ;
+    skos:broader ffv:ResponseActivity ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Patrolling perimeter"@en .
+
+ffv:Pet a skos:Concept ;
+    rdfs:label "Pet"@en ;
+    skos:broader ffv:Animal ;
+    skos:hiddenLabel "cat"@en,
+        "dog"@en,
+        "pet"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Pet"@en .
+
+ffv:PileBurn a skos:Concept ;
+    rdfs:label "Pile burn"@en ;
+    skos:broader ffv:FirePhenomenonKind ;
+    skos:hiddenLabel "burn pile"@en,
+        "pile burn"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Pile burn"@en .
+
+ffv:PileFireType a skos:Concept ;
+    rdfs:label "Pile burn (type)"@en ;
+    skos:broader ffv:FireTypeValue ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Pile burn (type)"@en .
+
+ffv:PlumeHeight a skos:Concept ;
+    rdfs:label "Plume height"@en ;
+    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:prefLabel "Plume height"@en ;
+    skos:topConceptOf ffv:ObservablePropertyScheme .
+
+ffv:PoliceCar a skos:Concept ;
+    rdfs:label "Police car"@en ;
+    skos:broader ffv:GroundVehicle ;
+    skos:hiddenLabel "police car"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Police car"@en .
+
+ffv:PoliceOfficer a skos:Concept ;
+    rdfs:label "Police officer"@en ;
+    skos:broader ffv:Responder ;
+    skos:hiddenLabel "police"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Police officer"@en .
+
+ffv:Pond a skos:Concept ;
+    rdfs:label "Pond"@en ;
+    skos:broader ffv:WaterBody ;
+    skos:hiddenLabel "pond"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Pond"@en .
+
+ffv:PortableLighting a skos:Concept ;
+    rdfs:label "Portable lighting"@en ;
+    skos:broader ffv:EquipmentKind ;
+    skos:hiddenLabel "light tower"@en,
+        "portable light"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Portable lighting"@en .
+
+ffv:PortablePump a skos:Concept ;
+    rdfs:label "Portable pump"@en ;
+    skos:broader ffv:EquipmentKind ;
+    skos:hiddenLabel "portable pump"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Portable pump"@en .
+
+ffv:PortableWaterTank a skos:Concept ;
+    rdfs:label "Portable water tank"@en ;
+    skos:broader ffv:EquipmentKind ;
+    skos:hiddenLabel "portable tank"@en,
+        "pumpkin"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Portable water tank"@en .
+
+ffv:PowerLine a skos:Concept ;
+    rdfs:label "Power line"@en ;
+    skos:broader ffv:BuiltAssetKind ;
+    skos:hiddenLabel "power line"@en,
+        "powerline"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Power line"@en .
+
+ffv:PowerPole a skos:Concept ;
+    rdfs:label "Power pole"@en ;
+    skos:broader ffv:BuiltAssetKind ;
+    skos:hiddenLabel "power pole"@en,
+        "utility pole"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Power pole"@en .
+
+ffv:PrescribedBurn a skos:Concept ;
+    rdfs:label "Prescribed / controlled burn"@en ;
+    ffonto:suggestedRestoration ffv:FuelManagement ;
+    ffonto:typicalFireImpact ffv:NutrientRecycling,
+        ffv:SeedReleaseAndRegeneration ;
+    skos:broader ffv:Purpose ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Prescribed / controlled burn"@en .
+
+ffv:Pulaski a skos:Concept ;
+    rdfs:label "Pulaski"@en ;
+    skos:broader ffv:HandTool ;
+    skos:hiddenLabel "pulaski"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Pulaski"@en .
+
+ffv:Pyrocumulus a skos:Concept ;
+    rdfs:label "Pyrocumulus"@en ;
+    skos:broader ffv:FirePhenomenonKind ;
+    skos:hiddenLabel "pyrocumulus"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Pyrocumulus"@en .
+
+ffv:RadioChestHarness a skos:Concept ;
+    rdfs:label "Radio chest harness"@en ;
+    skos:hiddenLabel "chest harness"@en ;
+    skos:inScheme ffv:PPEScheme ;
+    skos:prefLabel "Radio chest harness"@en ;
+    skos:topConceptOf ffv:PPEScheme .
+
+ffv:Recreation a skos:Concept ;
+    rdfs:label "Recreation"@en ;
+    skos:broader ffv:EcosystemService ;
+    skos:inScheme ffv:EcologyScheme ;
+    skos:prefLabel "Recreation"@en .
+
+ffv:Regrowth a skos:Concept ;
+    rdfs:label "Regrowth"@en ;
+    skos:broader ffv:BurnEvidenceKind ;
+    skos:hiddenLabel "regrowth"@en,
+        "seedling"@en,
+        "sprout"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Regrowth"@en .
+
+ffv:ReignitionHazard a skos:Concept ;
+    rdfs:label "Reignition hazard"@en ;
+    ffonto:mitigatedBy ffv:MopUpAndPatrol ;
+    skos:inScheme ffv:HazardScheme ;
+    skos:prefLabel "Reignition hazard"@en ;
+    skos:topConceptOf ffv:HazardScheme .
+
+ffv:Respirator a skos:Concept ;
+    rdfs:label "Respirator / mask"@en ;
+    skos:hiddenLabel "mask"@en,
+        "respirator"@en ;
+    skos:inScheme ffv:PPEScheme ;
+    skos:prefLabel "Respirator / mask"@en ;
+    skos:topConceptOf ffv:PPEScheme .
+
+ffv:RetardantDrop a skos:Concept ;
+    rdfs:label "Retardant drop"@en ;
+    skos:broader ffv:AerialSuppression ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Retardant drop"@en .
+
+ffv:RetardantLine a skos:Concept ;
+    rdfs:label "Retardant line"@en ;
+    skos:broader ffv:BurnEvidenceKind ;
+    skos:hiddenLabel "red stain"@en,
+        "retardant line"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Retardant line"@en .
+
+ffv:RetardantLineConstruction a skos:Concept ;
+    rdfs:label "Retardant line construction"@en ;
+    skos:broader ffv:IndirectAttack ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Retardant line construction"@en .
+
+ffv:Retreating a skos:Concept ;
+    rdfs:label "Retreating"@en ;
+    skos:broader ffv:ResponseActivity ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Retreating"@en .
+
+ffv:Ridge a skos:Concept ;
+    rdfs:label "Ridge"@en ;
+    skos:broader ffv:Terrain ;
+    skos:hiddenLabel "ridge"@en,
+        "ridgeline"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Ridge"@en .
+
+ffv:RidgeTop a skos:Concept ;
+    rdfs:label "Ridge top"@en ;
+    skos:inScheme ffv:PositionScheme ;
+    skos:prefLabel "Ridge top"@en ;
+    skos:topConceptOf ffv:PositionScheme .
+
+ffv:RightFlank a skos:Concept ;
+    rdfs:label "Right flank"@en ;
+    skos:inScheme ffv:PositionScheme ;
+    skos:prefLabel "Right flank"@en ;
+    skos:topConceptOf ffv:PositionScheme .
+
+ffv:River a skos:Concept ;
+    rdfs:label "River"@en ;
+    skos:broader ffv:WaterBody ;
+    skos:hiddenLabel "river"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "River"@en .
+
+ffv:RockyTerrain a skos:Concept ;
+    rdfs:label "Rocky terrain"@en ;
+    skos:broader ffv:Terrain ;
+    skos:hiddenLabel "rock"@en,
+        "rocky"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Rocky terrain"@en .
+
+ffv:ScorchedCrown a skos:Concept ;
+    rdfs:label "Scorched crown"@en ;
+    skos:broader ffv:BurnEvidenceKind ;
+    skos:hiddenLabel "scorched crown"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Scorched crown"@en .
+
+ffv:Sea a skos:Concept ;
+    rdfs:label "Sea"@en ;
+    skos:broader ffv:WaterBody ;
+    skos:hiddenLabel "ocean"@en,
+        "sea"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Sea"@en .
+
+ffv:Shed a skos:Concept ;
+    rdfs:label "Shed"@en ;
+    skos:broader ffv:Building ;
+    skos:hiddenLabel "greenhouse"@en,
+        "shed"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Shed"@en .
+
+ffv:ShelteringInPlace a skos:Concept ;
+    rdfs:label "Sheltering in place"@en ;
+    skos:broader ffv:CivilianActivity ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Sheltering in place"@en .
+
+ffv:Shovel a skos:Concept ;
+    rdfs:label "Shovel"@en ;
+    skos:broader ffv:HandTool ;
+    skos:hiddenLabel "shovel"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Shovel"@en .
+
+ffv:Shrubland a skos:Concept ;
+    rdfs:label "Shrubland"@en ;
+    ffonto:providesService ffv:HabitatProvision,
+        ffv:SoilProtection ;
+    ffonto:suggestedRestoration ffv:ErosionControl,
+        ffv:Reseeding ;
+    ffonto:typicalFireImpact ffv:HabitatLoss,
+        ffv:InvasiveSpeciesSpread,
+        ffv:SoilErosion ;
+    skos:broader ffv:Vegetation ;
+    skos:hiddenLabel "brush"@en,
+        "bush"@en,
+        "chaparral"@en,
+        "shrub"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Shrubland"@en .
+
+ffv:Sign a skos:Concept ;
+    rdfs:label "Sign"@en ;
+    skos:broader ffv:BuiltAssetKind ;
+    skos:hiddenLabel "sign"@en,
+        "signpost"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Sign"@en .
+
+ffv:SkyCondition a skos:Concept ;
+    rdfs:label "Sky condition"@en ;
+    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:prefLabel "Sky condition"@en ;
+    skos:topConceptOf ffv:ObservablePropertyScheme .
+
+ffv:Slope a skos:Concept ;
+    rdfs:label "Slope"@en ;
+    skos:broader ffv:Terrain ;
+    skos:hiddenLabel "hill"@en,
+        "hillside"@en,
+        "slope"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Slope"@en .
+
+ffv:SmokeLayering a skos:Concept ;
+    rdfs:label "Smoke layering"@en ;
+    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:prefLabel "Smoke layering"@en ;
+    skos:topConceptOf ffv:ObservablePropertyScheme .
+
+ffv:Smouldering a skos:Concept ;
+    rdfs:label "Smouldering"@en ;
+    skos:broader ffv:FirePhenomenonKind ;
+    skos:hiddenLabel "smolder"@en,
+        "smoldering"@en,
+        "smoulder"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Smouldering"@en .
+
+ffv:SmoulderingState a skos:Concept ;
+    rdfs:label "Smouldering (state)"@en ;
+    skos:broader ffv:FireState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Smouldering (state)"@en .
+
+ffv:Snag a skos:Concept ;
+    rdfs:label "Snag"@en ;
+    skos:broader ffv:BurnEvidenceKind ;
+    skos:hiddenLabel "dead standing tree"@en,
+        "snag"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Snag"@en .
+
+ffv:SnowCover a skos:Concept ;
+    rdfs:label "Snow cover"@en ;
+    skos:broader ffv:EnvironmentFeatureKind ;
+    skos:hiddenLabel "ice"@en,
+        "snow"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Snow cover"@en .
+
+ffv:SolarPanel a skos:Concept ;
+    rdfs:label "Solar panel"@en ;
+    skos:broader ffv:BuiltAssetKind ;
+    skos:hiddenLabel "solar panel"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Solar panel"@en .
+
+ffv:South a skos:Concept ;
+    rdfs:label "South"@en ;
+    skos:broader ffv:Direction ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "South"@en .
+
+ffv:Sparse a skos:Concept ;
+    rdfs:label "Sparse"@en ;
+    skos:broader ffv:VegetationState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Sparse"@en .
+
+ffv:Speech a skos:Concept ;
+    rdfs:label "Speech"@en ;
+    skos:hiddenLabel "speech"@en ;
+    skos:inScheme ffv:SoundEventScheme ;
+    skos:prefLabel "Speech"@en ;
+    skos:topConceptOf ffv:SoundEventScheme .
+
+ffv:SpotFireTriage a skos:Concept ;
+    rdfs:label "Spot fire triage"@en ;
+    skos:broader ffv:DirectAttack ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Spot fire triage"@en .
+
+ffv:Sprinkler a skos:Concept ;
+    rdfs:label "Sprinkler"@en ;
+    skos:broader ffv:EquipmentKind ;
+    skos:hiddenLabel "mister"@en,
+        "sprinkler"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Sprinkler"@en .
+
+ffv:Stable a skos:Concept ;
+    rdfs:label "Stable"@en ;
+    skos:broader ffv:SpreadStatus ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Stable"@en .
+
+ffv:Staged a skos:Concept ;
+    rdfs:label "Staged"@en ;
+    skos:broader ffv:OperationalState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Staged"@en .
+
+ffv:StandingBy a skos:Concept ;
+    rdfs:label "Standing by"@en ;
+    skos:broader ffv:ResponseActivity ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Standing by"@en .
+
+ffv:Stream a skos:Concept ;
+    rdfs:label "Stream"@en ;
+    skos:broader ffv:WaterBody ;
+    skos:hiddenLabel "creek"@en,
+        "stream"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Stream"@en .
+
+ffv:SunVisibleThroughSmoke a skos:Concept ;
+    rdfs:label "Sun visible through smoke"@en ;
+    skos:broader ffv:Sky ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Sun visible through smoke"@en .
+
+ffv:SurfaceFire a skos:Concept ;
+    rdfs:label "Surface fire"@en ;
+    skos:broader ffv:FirePhenomenonKind ;
+    skos:hiddenLabel "ground fire"@en,
+        "surface fire"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Surface fire"@en .
+
+ffv:TakingCover a skos:Concept ;
+    rdfs:label "Taking cover"@en ;
+    skos:broader ffv:ResponseActivity ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Taking cover"@en .
+
+ffv:Torching a skos:Concept ;
+    rdfs:label "Torching"@en ;
+    skos:broader ffv:FirePhenomenonKind ;
+    skos:hiddenLabel "torching"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Torching"@en .
+
+ffv:TrafficCone a skos:Concept ;
+    rdfs:label "Traffic cone"@en ;
+    skos:broader ffv:TrafficControlDevice ;
+    skos:hiddenLabel "cone"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Traffic cone"@en .
+
+ffv:Transformer a skos:Concept ;
+    rdfs:label "Transformer"@en ;
+    skos:broader ffv:BuiltAssetKind ;
+    skos:hiddenLabel "transformer"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Transformer"@en .
+
+ffv:Tree a skos:Concept ;
+    rdfs:label "Tree"@en ;
+    skos:broader ffv:Vegetation ;
+    skos:hiddenLabel "tree"@en,
+        "trees"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Tree"@en .
+
+ffv:UnburnedPatch a skos:Concept ;
+    rdfs:label "Unburned patch"@en ;
+    skos:broader ffv:BurnEvidenceKind ;
+    skos:hiddenLabel "green patch"@en,
+        "unburned patch"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Unburned patch"@en .
+
+ffv:Uniform a skos:Concept ;
+    rdfs:label "Uniform"@en ;
+    skos:broader ffv:Distribution ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Uniform"@en .
+
+ffv:UrbanArea a skos:Concept ;
+    rdfs:label "Urban / WUI area"@en ;
+    skos:broader ffv:EnvironmentFeatureKind ;
+    skos:hiddenLabel "city"@en,
+        "neighborhood"@en,
+        "town"@en,
+        "village"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Urban / WUI area"@en .
+
+ffv:UtilityWorker a skos:Concept ;
+    rdfs:label "Utility worker"@en ;
+    skos:broader ffv:Responder ;
+    skos:hiddenLabel "lineman"@en,
+        "utility crew"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Utility worker"@en .
+
+ffv:Valley a skos:Concept ;
+    rdfs:label "Valley"@en ;
+    skos:broader ffv:Terrain ;
+    skos:hiddenLabel "valley"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Valley"@en .
+
+ffv:ValleyBottom a skos:Concept ;
+    rdfs:label "Valley bottom"@en ;
+    skos:inScheme ffv:PositionScheme ;
+    skos:prefLabel "Valley bottom"@en ;
+    skos:topConceptOf ffv:PositionScheme .
+
+ffv:VegetationDensity a skos:Concept ;
+    rdfs:label "Vegetation density"@en ;
+    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:prefLabel "Vegetation density"@en ;
+    skos:topConceptOf ffv:ObservablePropertyScheme .
+
+ffv:VegetationDistribution a skos:Concept ;
+    rdfs:label "Vegetation distribution"@en ;
+    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:prefLabel "Vegetation distribution"@en ;
+    skos:topConceptOf ffv:ObservablePropertyScheme .
+
+ffv:VehicleSound a skos:Concept ;
+    rdfs:label "Vehicle sound"@en ;
+    skos:hiddenLabel "engine"@en,
+        "vehicle"@en ;
+    skos:inScheme ffv:SoundEventScheme ;
+    skos:prefLabel "Vehicle sound"@en ;
+    skos:topConceptOf ffv:SoundEventScheme .
+
+ffv:Vertical a skos:Concept ;
+    rdfs:label "Rising vertically"@en ;
+    skos:broader ffv:Direction ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Rising vertically"@en .
+
+ffv:WaterDrop a skos:Concept ;
+    rdfs:label "Water drop"@en ;
+    skos:broader ffv:AerialSuppression ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Water drop"@en .
+
+ffv:WaterTender a skos:Concept ;
+    rdfs:label "Water tender"@en ;
+    skos:broader ffv:GroundVehicle ;
+    skos:hiddenLabel "tanker truck"@en,
+        "water tender"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Water tender"@en .
+
+ffv:WeatherSmokeConflict a skos:Concept ;
+    rdfs:label "Heavy rain recorded while smoke detected"@en ;
+    skos:inScheme ffv:ConflictScheme ;
+    skos:prefLabel "Heavy rain recorded while smoke detected"@en ;
+    skos:topConceptOf ffv:ConflictScheme .
+
+ffv:West a skos:Concept ;
+    rdfs:label "West"@en ;
+    skos:broader ffv:Direction ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "West"@en .
+
+ffv:White a skos:Concept ;
+    rdfs:label "White"@en ;
+    skos:broader ffv:Colour ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "White"@en .
+
+ffv:Wildlife a skos:Concept ;
+    rdfs:label "Wildlife"@en ;
+    skos:broader ffv:Animal ;
+    skos:hiddenLabel "bird"@en,
+        "deer"@en,
+        "wildlife"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Wildlife"@en .
+
+ffv:WildlifeThreat a skos:Concept ;
+    rdfs:label "Wildlife threat"@en ;
+    ffonto:mitigatedBy ffv:EvacuateImmediately ;
+    skos:inScheme ffv:HazardScheme ;
+    skos:prefLabel "Wildlife threat"@en ;
+    skos:topConceptOf ffv:HazardScheme .
+
+vann:preferredNamespacePrefix a owl:AnnotationProperty ;
+    rdfs:label "preferred namespace prefix"@en .
+
+vann:preferredNamespaceUri a owl:AnnotationProperty ;
+    rdfs:label "preferred namespace URI"@en .
+
+skos:broader a owl:AnnotationProperty ;
+    rdfs:label "has broader"@en .
+
+skos:definition a owl:AnnotationProperty ;
+    rdfs:label "definition"@en .
+
+skos:hiddenLabel a owl:AnnotationProperty ;
+    rdfs:label "hidden label"@en .
+
+skos:inScheme a owl:AnnotationProperty ;
+    rdfs:label "is in scheme"@en .
+
+skos:prefLabel a owl:AnnotationProperty ;
+    rdfs:label "preferred label"@en .
+
+skos:topConceptOf a owl:AnnotationProperty ;
+    rdfs:label "is top concept in scheme"@en .
+
+prov:wasAttributedTo a owl:ObjectProperty ;
+    rdfs:label "was attributed to"@en ;
+    rdfs:comment "Ascribes an entity to the agent responsible for it (PROV-O)."@en ;
+    rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> .
+
+prov:wasDerivedFrom a owl:ObjectProperty ;
+    rdfs:label "was derived from"@en ;
+    rdfs:comment "States that an entity was transformed from, or constructed from, another entity (PROV-O)."@en ;
+    rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> .
+
+sosa:hasFeatureOfInterest a owl:ObjectProperty ;
+    rdfs:label "has feature of interest"@en ;
+    rdfs:comment "Relates an observation to the entity whose property was observed (SOSA)."@en ;
+    rdfs:isDefinedBy sosa: .
+
+sosa:observedProperty a owl:ObjectProperty ;
+    rdfs:label "observed property"@en ;
+    rdfs:comment "Relates an observation to the property that was observed (SOSA)."@en ;
+    rdfs:isDefinedBy sosa: .
+
+ffonto:CaptureDevice a owl:Class ;
+    rdfs:label "Capture device"@en ;
+    rdfs:comment "Physical camera, microphone or weather station that captured a record."@en ;
+    rdfs:subClassOf sosa:Sensor .
+
+ffonto:airTemperatureC a owl:DatatypeProperty ;
+    rdfs:label "air temperature (°C)"@en ;
+    rdfs:comment "Air temperature in degrees Celsius."@en ;
+    rdfs:domain ffonto:WeatherRecord ;
+    rdfs:range xsd:double .
+
+ffonto:dc a owl:DatatypeProperty ;
+    rdfs:label "DC"@en ;
+    rdfs:comment "Drought Code"@en ;
+    rdfs:domain ffonto:WeatherRecord ;
+    rdfs:range xsd:double .
+
+ffonto:ffmc a owl:DatatypeProperty ;
+    rdfs:label "FFMC"@en ;
+    rdfs:comment "Fine Fuel Moisture Code"@en ;
+    rdfs:domain ffonto:WeatherRecord ;
+    rdfs:range xsd:double .
+
+ffonto:fwi a owl:DatatypeProperty ;
+    rdfs:label "FWI"@en ;
+    rdfs:comment "Fire Weather Index"@en ;
+    rdfs:domain ffonto:WeatherRecord ;
+    rdfs:range xsd:double .
+
+ffonto:isi a owl:DatatypeProperty ;
+    rdfs:label "ISI"@en ;
+    rdfs:comment "Initial Spread Index"@en ;
+    rdfs:domain ffonto:WeatherRecord ;
+    rdfs:range xsd:double .
+
+ffonto:rainMm a owl:DatatypeProperty ;
+    rdfs:label "rain (mm)"@en ;
+    rdfs:comment "Rainfall in millimetres."@en ;
+    rdfs:domain ffonto:WeatherRecord ;
+    rdfs:range xsd:double .
+
+ffonto:windSpeedKmh a owl:DatatypeProperty ;
+    rdfs:label "wind speed (km/h)"@en ;
+    rdfs:comment "Wind speed in km/h."@en ;
+    rdfs:domain ffonto:WeatherRecord ;
+    rdfs:range xsd:double .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/caption> a ffonto:Caption ;
+    ffonto:captionText "firefighters spraying water on a burning house next to a pine forest" ;
+    ffonto:mentionsConcept ffv:ConiferousForest,
+        ffv:Fire,
+        ffv:Firefighter,
+        ffv:Forest,
+        ffv:House,
+        ffv:WaterBody ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/salesforce-blip-image-captioning-large> .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/1> a ffonto:ModelObservation ;
+    ffonto:aboveThreshold true ;
+    ffonto:confidence 7e-01 ;
+    ffonto:labelSource ffv:ZeroShotSource ;
+    ffonto:predictedClass ffv:Smoke ;
+    ffonto:usedThreshold <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/threshold/Smoke> ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/z2> a ffonto:ModelObservation ;
+    ffonto:confidence 9e-02 ;
+    ffonto:labelSource ffv:ZeroShotSource ;
+    ffonto:predictedClass ffv:NoFire ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/threshold/Fire> a ffonto:Threshold ;
+    ffonto:forClass ffv:Fire ;
+    ffonto:thresholdValue 5.5e-01 .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/threshold/Smoke> a ffonto:Threshold ;
+    ffonto:forClass ffv:Smoke ;
+    ffonto:thresholdValue 6e-01 .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/obs/1> a ffonto:ModelObservation ;
+    ffonto:aboveThreshold true ;
+    ffonto:confidence 3.5e-01 ;
+    ffonto:labelCategory "fire_audio" ;
+    ffonto:labelSource ffv:AudioTaggerSource ;
+    ffonto:maxConfidence 5.2e-01 ;
+    ffonto:meanConfidence 3.5e-01 ;
+    ffonto:predictedClass ffv:Siren ;
+    ffonto:topKLabel "siren" ;
+    ffonto:usedThreshold <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/threshold/Siren> ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/google-yamnet/1> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081> .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/threshold/Explosion> a ffonto:Threshold ;
+    ffonto:forClass ffv:Explosion ;
+    ffonto:thresholdValue 2e-01 .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/threshold/Siren> a ffonto:Threshold ;
+    ffonto:forClass ffv:Siren ;
+    ffonto:thresholdValue 2e-01 .
+
+<http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/caption> a ffonto:Caption ;
+    ffonto:captionText "arafed forest fire in the middle of a forest with a lake" ;
+    ffonto:mentionsConcept ffv:Fire,
+        ffv:Forest,
+        ffv:Lake ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/salesforce-blip-image-captioning-large> .
+
+<http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/1> a ffonto:ModelObservation ;
+    ffonto:aboveThreshold true ;
+    ffonto:confidence 7.291e-01 ;
+    ffonto:labelSource ffv:ZeroShotSource ;
+    ffonto:predictedClass ffv:Smoke ;
+    ffonto:usedThreshold <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/threshold/Smoke> ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> .
+
+<http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/z2> a ffonto:ModelObservation ;
+    ffonto:confidence 1.124601e-01 ;
+    ffonto:labelSource ffv:ZeroShotSource ;
+    ffonto:predictedClass ffv:NoFire ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> .
+
+<http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/threshold/Fire> a ffonto:Threshold ;
+    ffonto:forClass ffv:Fire ;
+    ffonto:thresholdValue 5.5e-01 .
+
+<http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/threshold/Smoke> a ffonto:Threshold ;
+    ffonto:forClass ffv:Smoke ;
+    ffonto:thresholdValue 6e-01 .
+
+<http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a> a ffonto:AudioRecord ;
+    ffonto:aboutEvent <http://purl.org/ffonto/data/event/ev-22e029d3b190> ;
+    ffonto:detectedClass ffv:Explosion ;
+    ffonto:durationMs 4.8e+02 ;
+    ffonto:fileURI "/home/cse/Documents/AudioToText/dataset/videoplayback_14.wav" ;
+    ffonto:globalThreshold 2e-01 ;
+    ffonto:hasObservation <http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a/obs/0> ;
+    ffonto:recordUUID "7cd6773c-c37e-4acc-a594-20a8d0a5c74a" ;
+    ffonto:schemaVersion "1.0.0" ;
+    ffonto:sourceName "unknown_microphone" .
+
+<http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a/threshold/Explosion> a ffonto:Threshold ;
+    ffonto:forClass ffv:Explosion ;
+    ffonto:thresholdValue 2e-01 .
+
+<http://purl.org/ffonto/data/record/weather/demo-site-a/grid-2-2/2012-08-27> a ffonto:WeatherRecord ;
+    ffonto:airTemperatureC 1.59e+01 ;
+    ffonto:atSite <http://purl.org/ffonto/data/site/demo-site-a/grid-2-2> ;
+    ffonto:bui 1.408e+02 ;
+    ffonto:burnedAreaHa 0e+00 ;
+    ffonto:dayName "mon" ;
+    ffonto:dc 6.105e+02 ;
+    ffonto:dmc 9.9e+01 ;
+    ffonto:ffmc 9.21e+01 ;
+    ffonto:fireOccurred false ;
+    ffonto:fwi 2.13e+01 ;
+    ffonto:hasCondition ffv:FavourDirectAttack,
+        ffv:PersistentCombustion,
+        ffv:RapidFineFuelSpread ;
+    ffonto:isi 9.2e+00 ;
+    ffonto:observationDate "2012-08-27T00:00:00+00:00"^^xsd:dateTime ;
+    ffonto:rainMm 0e+00 ;
+    ffonto:relativeHumidityPct 5.1e+01 ;
+    ffonto:sourceName "weather_csv" ;
+    ffonto:windSpeedKmh 4.5e+00 .
+
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/0> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:Gray ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
+    sosa:observedProperty ffv:SmokeColour .
+
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/1> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:High ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
+    sosa:observedProperty ffv:SmokeDensity .
+
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/2> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:Drifting ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
+    sosa:observedProperty ffv:PlumeDirection .
+
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/3> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:Medium ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
+    sosa:observedProperty ffv:VisibilityLevel .
+
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/4> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:Daytime ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
+    sosa:observedProperty ffv:LightCondition .
+
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/5> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:SurfaceFireType ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
+    sosa:observedProperty ffv:FireType .
+
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/6> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:Medium ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
+    sosa:observedProperty ffv:FireIntensity .
+
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/7> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:Wildfire ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
+    sosa:observedProperty ffv:ScenePurpose .
+
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e1> a ffonto:FirePhenomenon ;
+    ffonto:count 1 ;
+    ffonto:hasKind ffv:FlameFront ;
+    ffonto:near <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e4> ;
+    ffonto:relativePosition ffv:HeadOfFire .
+
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e2> a ffonto:FirePhenomenon ;
+    ffonto:count 1 ;
+    ffonto:hasKind ffv:SmokePlume .
+
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e3> a ffonto:EnvironmentFeature ;
+    ffonto:hasKind ffv:ConiferousForest ;
+    ffonto:hasState ffv:Dense,
+        ffv:Dry .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/attr/0> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:DarkGray ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
+    sosa:observedProperty ffv:SmokeColour .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/attr/3> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:Daytime ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
+    sosa:observedProperty ffv:LightCondition .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/attr/4> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:StructureFireType ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
+    sosa:observedProperty ffv:FireType .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/attr/6> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:Expanding ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
+    sosa:observedProperty ffv:FireSpreadStatus .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/attr/7> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:Wildfire ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
+    sosa:observedProperty ffv:ScenePurpose .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/e12> a ffonto:BurnEvidence ;
+    ffonto:count 1 ;
+    ffonto:hasKind ffv:Foam ;
+    ffonto:hasState ffv:Deployed .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/e3> a ffonto:Equipment ;
+    ffonto:count 2 ;
+    ffonto:hasKind ffv:HoseLine ;
+    ffonto:hasState ffv:Charged,
+        ffv:Flowing .
+
+<http://purl.org/ffonto/data/site/demo-site-a> a ffonto:Site ;
+    ffonto:siteName "demo_site_A" .
+
+ffv:AdvancingHoseLine a skos:Concept ;
+    rdfs:label "Advancing hose line"@en ;
+    skos:broader ffv:DirectAttack ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Advancing hose line"@en .
+
+ffv:AerialDropCompromised a skos:Concept ;
+    rdfs:label "Aerial drop effectiveness reduced"@en ;
+    skos:inScheme ffv:ConditionScheme ;
+    skos:prefLabel "Aerial drop effectiveness reduced"@en ;
+    skos:topConceptOf ffv:ConditionScheme .
+
+ffv:AheadOfFire a skos:Concept ;
+    rdfs:label "Ahead of fire"@en ;
+    skos:inScheme ffv:PositionScheme ;
+    skos:prefLabel "Ahead of fire"@en ;
+    skos:topConceptOf ffv:PositionScheme .
+
+ffv:ApplyingWater a skos:Concept ;
+    rdfs:label "Applying water / foam to flames"@en ;
+    skos:broader ffv:DirectAttack ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Applying water / foam to flames"@en .
+
+ffv:AudioImageConflict a skos:Concept ;
+    rdfs:label "Audio indicates escalation but image shows no fire"@en ;
+    skos:inScheme ffv:ConflictScheme ;
+    skos:prefLabel "Audio indicates escalation but image shows no fire"@en ;
+    skos:topConceptOf ffv:ConflictScheme .
+
+ffv:AvoidSnagAreas a skos:Concept ;
+    rdfs:label "Avoid snag / hazard-tree areas"@en ;
+    skos:inScheme ffv:ActionScheme ;
+    skos:prefLabel "Avoid snag / hazard-tree areas"@en ;
+    skos:topConceptOf ffv:ActionScheme .
+
+ffv:CaptionSource a skos:Concept ;
+    rdfs:label "Caption (label source)"@en ;
+    skos:hiddenLabel "caption"@en ;
+    skos:inScheme ffv:LabelSourceScheme ;
+    skos:prefLabel "Caption (label source)"@en ;
+    skos:topConceptOf ffv:LabelSourceScheme .
+
+ffv:Charged a skos:Concept ;
+    rdfs:label "Charged (hose)"@en ;
+    skos:broader ffv:OperationalState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Charged (hose)"@en .
+
+ffv:CoolAndIsolateTank a skos:Concept ;
+    rdfs:label "Cool and isolate pressurised tank"@en ;
+    skos:inScheme ffv:ActionScheme ;
+    skos:prefLabel "Cool and isolate pressurised tank"@en ;
+    skos:topConceptOf ffv:ActionScheme .
+
+ffv:CrownFireTransition a skos:Concept ;
+    rdfs:label "Surface-to-crown transition risk"@en ;
+    ffonto:mitigatedBy ffv:RequestAerialSupport,
+        ffv:WithdrawToSafetyZone ;
+    skos:inScheme ffv:HazardScheme ;
+    skos:prefLabel "Surface-to-crown transition risk"@en ;
+    skos:topConceptOf ffv:HazardScheme .
+
+ffv:DarkGray a skos:Concept ;
+    rdfs:label "Dark gray"@en ;
+    skos:broader ffv:Colour ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Dark gray"@en .
+
+ffv:DeEnergiseLines a skos:Concept ;
+    rdfs:label "De-energise power lines"@en ;
+    skos:inScheme ffv:ActionScheme ;
+    skos:prefLabel "De-energise power lines"@en ;
+    skos:topConceptOf ffv:ActionScheme .
+
+ffv:DefensiveStrategy a skos:Concept ;
+    rdfs:label "Adopt defensive strategy"@en ;
+    skos:inScheme ffv:ActionScheme ;
+    skos:prefLabel "Adopt defensive strategy"@en ;
+    skos:topConceptOf ffv:ActionScheme .
+
+ffv:Dense a skos:Concept ;
+    rdfs:label "Dense (vegetation)"@en ;
+    skos:broader ffv:VegetationState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Dense (vegetation)"@en .
+
+ffv:Deployed a skos:Concept ;
+    rdfs:label "Deployed"@en ;
+    skos:broader ffv:OperationalState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Deployed"@en .
+
+ffv:Drifting a skos:Concept ;
+    rdfs:label "Drifting horizontally"@en ;
+    skos:broader ffv:Direction ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Drifting horizontally"@en .
+
+ffv:Expanding a skos:Concept ;
+    rdfs:label "Expanding"@en ;
+    skos:broader ffv:SpreadStatus ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Expanding"@en .
+
+ffv:FireSpreadStatus a skos:Concept ;
+    rdfs:label "Fire spread status"@en ;
+    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:prefLabel "Fire spread status"@en ;
+    skos:topConceptOf ffv:ObservablePropertyScheme .
+
+ffv:Flowing a skos:Concept ;
+    rdfs:label "Flowing water/foam"@en ;
+    skos:broader ffv:OperationalState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Flowing water/foam"@en .
+
+ffv:Foam a skos:Concept ;
+    rdfs:label "Foam"@en ;
+    skos:broader ffv:BurnEvidenceKind ;
+    skos:hiddenLabel "foam"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Foam"@en .
+
+ffv:FuelManagement a skos:Concept ;
+    rdfs:label "Fuel management / prescribed burning"@en ;
+    skos:broader ffv:RestorationMeasure ;
+    skos:inScheme ffv:EcologyScheme ;
+    skos:prefLabel "Fuel management / prescribed burning"@en .
+
+ffv:Gray a skos:Concept ;
+    rdfs:label "Gray"@en ;
+    skos:broader ffv:Colour ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Gray"@en .
+
+ffv:Grazing a skos:Concept ;
+    rdfs:label "Grazing / forage"@en ;
+    skos:broader ffv:EcosystemService ;
+    skos:inScheme ffv:EcologyScheme ;
+    skos:prefLabel "Grazing / forage"@en .
+
+ffv:HeadOfFire a skos:Concept ;
+    rdfs:label "Head of fire"@en ;
+    skos:inScheme ffv:PositionScheme ;
+    skos:prefLabel "Head of fire"@en ;
+    skos:topConceptOf ffv:PositionScheme .
+
+ffv:HeatStressRisk a skos:Concept ;
+    rdfs:label "Heat stress risk"@en ;
+    skos:inScheme ffv:ConditionScheme ;
+    skos:prefLabel "Heat stress risk"@en ;
+    skos:topConceptOf ffv:ConditionScheme .
+
+ffv:HoseLine a skos:Concept ;
+    rdfs:label "Hose line"@en ;
+    skos:broader ffv:EquipmentKind ;
+    skos:hiddenLabel "hose"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Hose line"@en .
+
+ffv:ImprovedMopUpConditions a skos:Concept ;
+    rdfs:label "Improved mop up conditions"@en ;
+    skos:inScheme ffv:ConditionScheme ;
+    skos:prefLabel "Improved mop up conditions"@en ;
+    skos:topConceptOf ffv:ConditionScheme .
+
+ffv:InstallErosionControl a skos:Concept ;
+    rdfs:label "Install erosion control"@en ;
+    skos:inScheme ffv:ActionScheme ;
+    skos:prefLabel "Install erosion control"@en ;
+    skos:topConceptOf ffv:ActionScheme .
+
+ffv:InvasiveSpeciesControl a skos:Concept ;
+    rdfs:label "Invasive species control"@en ;
+    skos:broader ffv:RestorationMeasure ;
+    skos:inScheme ffv:EcologyScheme ;
+    skos:prefLabel "Invasive species control"@en .
+
+ffv:LightsOn a skos:Concept ;
+    rdfs:label "Emergency lights on"@en ;
+    skos:broader ffv:OperationalState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Emergency lights on"@en .
+
+ffv:MissingPPEHazard a skos:Concept ;
+    rdfs:label "Missing PPE"@en ;
+    ffonto:mitigatedBy ffv:WearFullPPE ;
+    skos:inScheme ffv:HazardScheme ;
+    skos:prefLabel "Missing PPE"@en ;
+    skos:topConceptOf ffv:HazardScheme .
+
+ffv:Open a skos:Concept ;
+    rdfs:label "Open"@en ;
+    skos:broader ffv:AccessState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Open"@en .
+
+ffv:PlumeDirection a skos:Concept ;
+    rdfs:label "Plume direction"@en ;
+    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:prefLabel "Plume direction"@en ;
+    skos:topConceptOf ffv:ObservablePropertyScheme .
+
+ffv:PrivateCar a skos:Concept ;
+    rdfs:label "Private car"@en ;
+    skos:broader ffv:GroundVehicle ;
+    skos:hiddenLabel "car"@en,
+        "pickup"@en,
+        "suv"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Private car"@en .
+
+ffv:PropaneTank a skos:Concept ;
+    rdfs:label "Propane tank"@en ;
+    skos:broader ffv:BuiltAssetKind ;
+    skos:hiddenLabel "gas cylinder"@en,
+        "gas tank"@en,
+        "propane"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Propane tank"@en .
+
+ffv:Pumping a skos:Concept ;
+    rdfs:label "Pumping water"@en ;
+    skos:broader ffv:SuppressionActivity ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Pumping water"@en .
+
+ffv:RapidFineFuelDrying a skos:Concept ;
+    rdfs:label "Rapid fine fuel drying"@en ;
+    skos:inScheme ffv:ConditionScheme ;
+    skos:prefLabel "Rapid fine fuel drying"@en ;
+    skos:topConceptOf ffv:ConditionScheme .
+
+ffv:RequestAerialSupport a skos:Concept ;
+    rdfs:label "Request aerial support"@en ;
+    skos:inScheme ffv:ActionScheme ;
+    skos:prefLabel "Request aerial support"@en ;
+    skos:topConceptOf ffv:ActionScheme .
+
+ffv:RiparianRestoration a skos:Concept ;
+    rdfs:label "Riparian restoration"@en ;
+    skos:broader ffv:RestorationMeasure ;
+    skos:inScheme ffv:EcologyScheme ;
+    skos:prefLabel "Riparian restoration"@en .
+
+ffv:Road a skos:Concept ;
+    rdfs:label "Road"@en ;
+    skos:broader ffv:BuiltAssetKind ;
+    skos:hiddenLabel "highway"@en,
+        "road"@en,
+        "street"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Road"@en .
+
+ffv:Scorched a skos:Concept ;
+    rdfs:label "Scorched"@en ;
+    skos:broader ffv:DamageState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Scorched"@en .
+
+ffv:SmokePlume a skos:Concept ;
+    rdfs:label "Smoke plume"@en ;
+    skos:broader ffv:FirePhenomenonKind ;
+    skos:hiddenLabel "billowing"@en,
+        "plume"@en,
+        "smoke column"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Smoke plume"@en .
+
+ffv:SoilNutrientLoss a skos:Concept ;
+    rdfs:label "Soil nutrient loss"@en ;
+    skos:broader ffv:EcologicalImpact ;
+    skos:inScheme ffv:EcologyScheme ;
+    skos:prefLabel "Soil nutrient loss"@en .
+
+ffv:SpotFire a skos:Concept ;
+    rdfs:label "Spot fire"@en ;
+    skos:broader ffv:FirePhenomenonKind ;
+    skos:hiddenLabel "spot fire"@en,
+        "spot fires"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Spot fire"@en .
+
+ffv:SpottingHazard a skos:Concept ;
+    rdfs:label "Spotting / ember cast"@en ;
+    ffonto:mitigatedBy ffv:MopUpAndPatrol,
+        ffv:PostLookouts ;
+    skos:inScheme ffv:HazardScheme ;
+    skos:prefLabel "Spotting / ember cast"@en ;
+    skos:topConceptOf ffv:HazardScheme .
+
+ffv:StructureFireType a skos:Concept ;
+    rdfs:label "Structure fire"@en ;
+    skos:broader ffv:FireTypeValue ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Structure fire"@en .
+
+ffv:StructureIgnitionRisk a skos:Concept ;
+    rdfs:label "Structure ignition risk"@en ;
+    ffonto:mitigatedBy ffv:DefensiveStrategy,
+        ffv:EvacuateImmediately ;
+    skos:inScheme ffv:HazardScheme ;
+    skos:prefLabel "Structure ignition risk"@en ;
+    skos:topConceptOf ffv:HazardScheme .
+
+ffv:StructureProtection a skos:Concept ;
+    rdfs:label "Structure protection"@en ;
+    skos:broader ffv:SuppressionActivity ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Structure protection"@en .
+
+ffv:SurfaceFireType a skos:Concept ;
+    rdfs:label "Surface/ground fire"@en ;
+    skos:broader ffv:FireTypeValue ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Surface/ground fire"@en .
+
+ffv:Threatened a skos:Concept ;
+    rdfs:label "Threatened"@en ;
+    skos:broader ffv:FireState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Threatened"@en .
+
+ffv:UseHeadlightsAndSlowDown a skos:Concept ;
+    rdfs:label "Use headlights and slow down"@en ;
+    skos:inScheme ffv:ActionScheme ;
+    skos:prefLabel "Use headlights and slow down"@en ;
+    skos:topConceptOf ffv:ActionScheme .
+
+ffv:WaterQualityDegradation a skos:Concept ;
+    rdfs:label "Water quality degradation"@en ;
+    skos:broader ffv:EcologicalImpact ;
+    skos:inScheme ffv:EcologyScheme ;
+    skos:prefLabel "Water quality degradation"@en .
+
+ffv:WearRespirator a skos:Concept ;
+    rdfs:label "Wear respirator / N95"@en ;
+    skos:inScheme ffv:ActionScheme ;
+    skos:prefLabel "Wear respirator / N95"@en ;
+    skos:topConceptOf ffv:ActionScheme .
+
+prov:Agent a owl:Class ;
+    rdfs:label "Agent (PROV)"@en ;
+    rdfs:comment "Something that bears responsibility for an activity, an entity or another agent (PROV-O)."@en ;
+    rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> .
+
+prov:SoftwareAgent a owl:Class ;
+    rdfs:label "Software agent"@en ;
+    rdfs:comment "Running software that is responsible for something (PROV-O)."@en ;
+    rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> ;
+    rdfs:subClassOf prov:Agent .
+
+sosa:Observation a owl:Class ;
+    rdfs:label "Observation"@en ;
+    rdfs:comment "An act of estimating or calculating the value of a property of a feature of interest (SOSA)."@en ;
+    rdfs:isDefinedBy sosa: .
+
+ffonto:relativeHumidityPct a owl:DatatypeProperty ;
+    rdfs:label "relative humidity (%)"@en ;
+    rdfs:comment "Relative humidity in percent."@en ;
+    rdfs:domain ffonto:WeatherRecord ;
+    rdfs:range xsd:double .
+
+<http://purl.org/ffonto/data/event/ev-22e029d3b190> a ffonto:FireEvent ;
+    ffonto:eventCode "ev_22e029d3b190" .
+
+<http://purl.org/ffonto/data/event/ev-bf59c56acb36> a ffonto:FireEvent ;
+    ffonto:eventCode "ev_bf59c56acb36" .
+
+<http://purl.org/ffonto/data/model/salesforce-blip-image-captioning-large> a ffonto:Model ;
+    ffonto:modelName "Salesforce/blip-image-captioning-large" .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081> a ffonto:AudioRecord ;
+    ffonto:aboutEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
+    ffonto:atSite <http://purl.org/ffonto/data/site/demo-site-a> ;
+    ffonto:captureTime "2012-08-28T14:05:30+00:00"^^xsd:dateTime ;
+    ffonto:detectedClass ffv:Explosion,
+        ffv:Siren ;
+    ffonto:deviceId "mic-01" ;
+    ffonto:durationMs 9.6e+03 ;
+    ffonto:fileURI "fixtures/forest_fire_081.wav" ;
+    ffonto:globalThreshold 2e-01 ;
+    ffonto:hasObservation <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/obs/0>,
+        <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/obs/1> ;
+    ffonto:recordUUID "00000000-0000-4000-8000-0000000a0081" ;
+    ffonto:schemaVersion "1.0.0" ;
+    ffonto:sourceName "fixture_microphone" .
+
+<http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/0> a ffonto:ModelObservation ;
+    ffonto:aboveThreshold false ;
+    ffonto:confidence 1.585e-01 ;
+    ffonto:labelSource ffv:CaptionSource ;
+    ffonto:predictedClass ffv:Fire ;
+    ffonto:severity ffv:Low ;
+    ffonto:usedThreshold <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/threshold/Fire> ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> .
+
+<http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a/obs/0> a ffonto:ModelObservation ;
+    ffonto:aboveThreshold true ;
+    ffonto:confidence 7.337e-01 ;
+    ffonto:labelCategory "fire_audio" ;
+    ffonto:labelSource ffv:AudioTaggerSource ;
+    ffonto:maxConfidence 7.337e-01 ;
+    ffonto:meanConfidence 7.337e-01 ;
+    ffonto:predictedClass ffv:Explosion ;
+    ffonto:topKLabel "explosion" ;
+    ffonto:usedThreshold <http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a/threshold/Explosion> ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/google-yamnet/1> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a> .
+
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e4> a ffonto:EnvironmentFeature ;
+    ffonto:hasKind ffv:Lake .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/attr/5> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:High ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
+    sosa:observedProperty ffv:FireIntensity .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/e10> a ffonto:Vehicle ;
+    ffonto:count 1 ;
+    ffonto:hasKind ffv:FireEngine ;
+    ffonto:hasState ffv:LightsOn ;
+    ffonto:performs ffv:Pumping ;
+    ffonto:protects <http://purl.org/ffonto/data/scene/scene-fixture-081/e4> ;
+    ffonto:relativePosition ffv:BetweenFireAndAsset .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/e11> a ffonto:FirePhenomenon ;
+    ffonto:count 1 ;
+    ffonto:hasKind ffv:SpotFire ;
+    ffonto:relativePosition ffv:AheadOfFire .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/e6> a ffonto:BuiltAsset ;
+    ffonto:count 1 ;
+    ffonto:hasKind ffv:PropaneTank ;
+    ffonto:near <http://purl.org/ffonto/data/scene/scene-fixture-081/e5> .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/e7> a ffonto:BuiltAsset ;
+    ffonto:hasKind ffv:Road ;
+    ffonto:hasState ffv:Open .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/e8> a ffonto:Vehicle ;
+    ffonto:count 1 ;
+    ffonto:hasKind ffv:PrivateCar ;
+    ffonto:near <http://purl.org/ffonto/data/scene/scene-fixture-081/e5> .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/e9> a ffonto:EnvironmentFeature ;
+    ffonto:hasKind ffv:ConiferousForest ;
+    ffonto:hasState ffv:Dry .
+
+<http://purl.org/ffonto/data/site/demo-site-a/grid-2-2> a ffonto:Site ;
+    ffonto:gridX 2 ;
+    ffonto:gridY 2 ;
+    ffonto:siteName "demo_site_A (grid 2,2)" .
+
+ffv:AgentKind a skos:Concept ;
+    rdfs:label "Agent (kind)"@en ;
+    rdfs:seeAlso ffonto:Agent ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Agent (kind)"@en ;
+    skos:topConceptOf ffv:EntityKindScheme .
+
+ffv:BetweenFireAndAsset a skos:Concept ;
+    rdfs:label "Between fire and asset"@en ;
+    skos:inScheme ffv:PositionScheme ;
+    skos:prefLabel "Between fire and asset"@en ;
+    skos:topConceptOf ffv:PositionScheme .
+
+ffv:CaptionScoreConflict a skos:Concept ;
+    rdfs:label "Caption mentions a class the classifier scored below threshold"@en ;
+    skos:inScheme ffv:ConflictScheme ;
+    skos:prefLabel "Caption mentions a class the classifier scored below threshold"@en ;
+    skos:topConceptOf ffv:ConflictScheme .
+
+ffv:CarbonRelease a skos:Concept ;
+    rdfs:label "Carbon release"@en ;
+    skos:broader ffv:EcologicalImpact ;
+    skos:inScheme ffv:EcologyScheme ;
+    skos:prefLabel "Carbon release"@en .
+
+ffv:Daytime a skos:Concept ;
+    rdfs:label "Daytime"@en ;
+    skos:broader ffv:Light ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Daytime"@en .
+
+ffv:Dry a skos:Concept ;
+    rdfs:label "Dry"@en ;
+    skos:broader ffv:VegetationState ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Dry"@en .
+
+ffv:ElevatedFireDanger a skos:Concept ;
+    rdfs:label "Elevated fire danger"@en ;
+    skos:inScheme ffv:ConditionScheme ;
+    skos:prefLabel "Elevated fire danger"@en ;
+    skos:topConceptOf ffv:ConditionScheme .
+
+ffv:ErosionControl a skos:Concept ;
+    rdfs:label "Erosion control (mulch, wattles)"@en ;
+    skos:broader ffv:RestorationMeasure ;
+    skos:inScheme ffv:EcologyScheme ;
+    skos:prefLabel "Erosion control (mulch, wattles)"@en .
+
+ffv:EvacuateImmediately a skos:Concept ;
+    rdfs:label "Evacuate immediately"@en ;
+    skos:inScheme ffv:ActionScheme ;
+    skos:prefLabel "Evacuate immediately"@en ;
+    skos:topConceptOf ffv:ActionScheme .
+
+ffv:EyeProtection a skos:Concept ;
+    rdfs:label "Goggles / face shield"@en ;
+    skos:hiddenLabel "face shield"@en,
+        "goggles"@en ;
+    skos:inScheme ffv:PPEScheme ;
+    skos:prefLabel "Goggles / face shield"@en ;
+    skos:topConceptOf ffv:PPEScheme .
+
+ffv:FireEngine a skos:Concept ;
+    rdfs:label "Fire engine"@en ;
+    skos:broader ffv:GroundVehicle ;
+    skos:hiddenLabel "fire engine"@en,
+        "fire truck"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Fire engine"@en .
+
+ffv:FireIntensity a skos:Concept ;
+    rdfs:label "Fire intensity"@en ;
+    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:prefLabel "Fire intensity"@en ;
+    skos:topConceptOf ffv:ObservablePropertyScheme .
+
+ffv:FireSound a skos:Concept ;
+    rdfs:label "Fire-related sound"@en ;
+    skos:inScheme ffv:SoundEventScheme ;
+    skos:prefLabel "Fire-related sound"@en ;
+    skos:topConceptOf ffv:SoundEventScheme .
+
+ffv:FireType a skos:Concept ;
+    rdfs:label "Fire type"@en ;
+    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:prefLabel "Fire type"@en ;
+    skos:topConceptOf ffv:ObservablePropertyScheme .
+
+ffv:FlameFront a skos:Concept ;
+    rdfs:label "Flame front"@en ;
+    skos:broader ffv:FirePhenomenonKind ;
+    skos:hiddenLabel "fire front"@en,
+        "fire line"@en,
+        "flame front"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Flame front"@en .
+
+ffv:FlameProximity a skos:Concept ;
+    rdfs:label "Flame proximity to people"@en ;
+    ffonto:mitigatedBy ffv:PostLookouts,
+        ffv:WearFullPPE,
+        ffv:WithdrawToSafetyZone ;
+    skos:inScheme ffv:HazardScheme ;
+    skos:prefLabel "Flame proximity to people"@en ;
+    skos:topConceptOf ffv:HazardScheme .
+
+ffv:Gloves a skos:Concept ;
+    rdfs:label "Gloves"@en ;
+    skos:hiddenLabel "gloves"@en ;
+    skos:inScheme ffv:PPEScheme ;
+    skos:prefLabel "Gloves"@en ;
+    skos:topConceptOf ffv:PPEScheme .
+
+ffv:House a skos:Concept ;
+    rdfs:label "House"@en ;
+    skos:broader ffv:Building ;
+    skos:hiddenLabel "home"@en,
+        "house"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "House"@en .
+
+ffv:InvasiveSpeciesSpread a skos:Concept ;
+    rdfs:label "Invasive species spread"@en ;
+    skos:broader ffv:EcologicalImpact ;
+    skos:inScheme ffv:EcologyScheme ;
+    skos:prefLabel "Invasive species spread"@en .
+
+ffv:Lake a skos:Concept ;
+    rdfs:label "Lake"@en ;
+    skos:broader ffv:WaterBody ;
+    skos:hiddenLabel "lake"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Lake"@en .
+
+ffv:LightCondition a skos:Concept ;
+    rdfs:label "Light condition"@en ;
+    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:prefLabel "Light condition"@en ;
+    skos:topConceptOf ffv:ObservablePropertyScheme .
+
+ffv:Low a skos:Concept ;
+    rdfs:label "Low"@en ;
+    skos:broader ffv:Level ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Low"@en .
+
+ffv:MopUpAndPatrol a skos:Concept ;
+    rdfs:label "Mop up and patrol"@en ;
+    skos:inScheme ffv:ActionScheme ;
+    skos:prefLabel "Mop up and patrol"@en ;
+    skos:topConceptOf ffv:ActionScheme .
+
+ffv:NoFire a skos:Concept ;
+    rdfs:label "No fire"@en ;
+    skos:hiddenLabel "no fire"@en ;
+    skos:inScheme ffv:DetectionClassScheme ;
+    skos:prefLabel "No fire"@en ;
+    skos:topConceptOf ffv:DetectionClassScheme .
+
+ffv:NutrientRecycling a skos:Concept ;
+    rdfs:label "Nutrient recycling (beneficial)"@en ;
+    skos:broader ffv:EcologicalImpact ;
+    skos:inScheme ffv:EcologyScheme ;
+    skos:prefLabel "Nutrient recycling (beneficial)"@en .
+
+ffv:PostLookouts a skos:Concept ;
+    rdfs:label "Post lookouts (LCES)"@en ;
+    skos:inScheme ffv:ActionScheme ;
+    skos:prefLabel "Post lookouts (LCES)"@en ;
+    skos:topConceptOf ffv:ActionScheme .
+
+ffv:Purpose a skos:Concept ;
+    rdfs:label "Purpose"@en ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Purpose"@en ;
+    skos:topConceptOf ffv:ValueScheme .
+
+ffv:Reseeding a skos:Concept ;
+    rdfs:label "Native grass reseeding"@en ;
+    skos:broader ffv:RestorationMeasure ;
+    skos:inScheme ffv:EcologyScheme ;
+    skos:prefLabel "Native grass reseeding"@en .
+
+ffv:RespiratoryHazard a skos:Concept ;
+    rdfs:label "Respiratory hazard"@en ;
+    ffonto:mitigatedBy ffv:ShelterInPlace,
+        ffv:WearRespirator ;
+    skos:inScheme ffv:HazardScheme ;
+    skos:prefLabel "Respiratory hazard"@en ;
+    skos:topConceptOf ffv:HazardScheme .
+
+ffv:ScenePurpose a skos:Concept ;
+    rdfs:label "Fire purpose (wildfire vs prescribed)"@en ;
+    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:prefLabel "Fire purpose (wildfire vs prescribed)"@en ;
+    skos:topConceptOf ffv:ObservablePropertyScheme .
+
+ffv:SeedReleaseAndRegeneration a skos:Concept ;
+    rdfs:label "Seed release / regeneration (beneficial)"@en ;
+    skos:broader ffv:EcologicalImpact ;
+    skos:inScheme ffv:EcologyScheme ;
+    skos:prefLabel "Seed release / regeneration (beneficial)"@en .
+
+ffv:ShelterInPlace a skos:Concept ;
+    rdfs:label "Shelter in place"@en ;
+    skos:inScheme ffv:ActionScheme ;
+    skos:prefLabel "Shelter in place"@en ;
+    skos:topConceptOf ffv:ActionScheme .
+
+ffv:SmokeColour a skos:Concept ;
+    rdfs:label "Smoke colour"@en ;
+    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:prefLabel "Smoke colour"@en ;
+    skos:topConceptOf ffv:ObservablePropertyScheme .
+
+ffv:SmokeDensity a skos:Concept ;
+    rdfs:label "Smoke density"@en ;
+    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:prefLabel "Smoke density"@en ;
+    skos:topConceptOf ffv:ObservablePropertyScheme .
+
+ffv:SoilProtection a skos:Concept ;
+    rdfs:label "Soil protection"@en ;
+    skos:broader ffv:EcosystemService ;
+    skos:inScheme ffv:EcologyScheme ;
+    skos:prefLabel "Soil protection"@en .
+
+ffv:VehicleKind a skos:Concept ;
+    rdfs:label "Vehicle (kind)"@en ;
+    rdfs:seeAlso ffonto:Vehicle ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Vehicle (kind)"@en ;
+    skos:topConceptOf ffv:EntityKindScheme .
+
+ffv:VisibilityLevel a skos:Concept ;
+    rdfs:label "Visibility level"@en ;
+    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:prefLabel "Visibility level"@en ;
+    skos:topConceptOf ffv:ObservablePropertyScheme .
+
+ffv:WaterRegulation a skos:Concept ;
+    rdfs:label "Water regulation"@en ;
+    skos:broader ffv:EcosystemService ;
+    skos:inScheme ffv:EcologyScheme ;
+    skos:prefLabel "Water regulation"@en .
+
+ffv:WearFullPPE a skos:Concept ;
+    rdfs:label "Wear full PPE"@en ;
+    skos:inScheme ffv:ActionScheme ;
+    skos:prefLabel "Wear full PPE"@en ;
+    skos:topConceptOf ffv:ActionScheme .
+
+ffv:Wildfire a skos:Concept ;
+    rdfs:label "Wildfire"@en ;
+    skos:broader ffv:Purpose ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Wildfire"@en .
+
+sosa:Sensor a owl:Class ;
+    rdfs:label "Sensor"@en ;
+    rdfs:comment "A device, agent or software that observes (SOSA)."@en ;
+    rdfs:isDefinedBy sosa: .
+
+ffonto:BurnEvidence a owl:Class ;
+    rdfs:label "Burn evidence"@en ;
+    rdfs:comment "Post-fire trace visible in a scene: ash, char, exposed mineral soil, snags, regrowth, erosion rills …"@en ;
+    rdfs:subClassOf ffonto:SceneEntity .
+
+ffonto:Equipment a owl:Class ;
+    rdfs:label "Equipment"@en ;
+    rdfs:comment "Tools, hoses, pumps, radios and other portable gear depicted in a scene."@en ;
+    rdfs:subClassOf ffonto:SceneEntity .
+
+<http://purl.org/ffonto/data/model/google-yamnet/1> a ffonto:Model ;
+    ffonto:classMapSHA1 "39cf3cd50b11d36e1d91432d7d1c01249ef86695" ;
+    ffonto:frameStrideS 4.8e-01 ;
+    ffonto:modelName "google/yamnet" ;
+    ffonto:modelURL "https://tfhub.dev/google/yamnet/1"^^xsd:anyURI ;
+    ffonto:modelVersion "1" ;
+    ffonto:topK 8 .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/0> a ffonto:ModelObservation ;
+    ffonto:aboveThreshold false ;
+    ffonto:confidence 4.1e-01 ;
+    ffonto:labelSource ffv:ZeroShotSource ;
+    ffonto:predictedClass ffv:Fire ;
+    ffonto:severity ffv:Medium ;
+    ffonto:usedThreshold <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/threshold/Fire> ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/obs/0> a ffonto:ModelObservation ;
+    ffonto:aboveThreshold true ;
+    ffonto:confidence 8.1e-01 ;
+    ffonto:labelCategory "fire_audio" ;
+    ffonto:labelSource ffv:AudioTaggerSource ;
+    ffonto:maxConfidence 8.8e-01 ;
+    ffonto:meanConfidence 8.1e-01 ;
+    ffonto:predictedClass ffv:Explosion ;
+    ffonto:topKLabel "crackle",
+        "explosion" ;
+    ffonto:usedThreshold <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/threshold/Explosion> ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/google-yamnet/1> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081> .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/attr/1> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:High ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
+    sosa:observedProperty ffv:SmokeDensity .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/e1> a ffonto:Agent ;
+    ffonto:count 2 ;
+    ffonto:hasKind ffv:Firefighter ;
+    ffonto:near <http://purl.org/ffonto/data/scene/scene-fixture-081/e5> ;
+    ffonto:performs ffv:ApplyingWater,
+        ffv:StructureProtection ;
+    ffonto:relativePosition ffv:BetweenFireAndAsset ;
+    ffonto:wears ffv:EyeProtection,
+        ffv:FireResistantClothing,
+        ffv:Gloves,
+        ffv:Helmet .
+
+ffv:Aircraft a skos:Concept ;
+    rdfs:label "Aircraft"@en ;
+    skos:broader ffv:VehicleKind ;
+    skos:hiddenLabel "aircraft"@en,
+        "plane"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Aircraft"@en .
+
+ffv:Animal a skos:Concept ;
+    rdfs:label "Animal"@en ;
+    skos:broader ffv:AgentKind ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Animal"@en .
+
+ffv:AudioTaggerSource a skos:Concept ;
+    rdfs:label "Audio tagger"@en ;
+    skos:hiddenLabel "audio"@en ;
+    skos:inScheme ffv:LabelSourceScheme ;
+    skos:prefLabel "Audio tagger"@en ;
+    skos:topConceptOf ffv:LabelSourceScheme .
+
+ffv:CarbonStorage a skos:Concept ;
+    rdfs:label "Carbon storage"@en ;
+    skos:broader ffv:EcosystemService ;
+    skos:inScheme ffv:EcologyScheme ;
+    skos:prefLabel "Carbon storage"@en .
+
+ffv:CloseRoad a skos:Concept ;
+    rdfs:label "Close road / control traffic"@en ;
+    skos:inScheme ffv:ActionScheme ;
+    skos:prefLabel "Close road / control traffic"@en ;
+    skos:topConceptOf ffv:ActionScheme .
+
+ffv:ConiferousForest a skos:Concept ;
+    rdfs:label "Coniferous forest"@en ;
+    ffonto:providesService ffv:CarbonStorage,
+        ffv:HabitatProvision,
+        ffv:WaterRegulation ;
+    ffonto:suggestedRestoration ffv:ErosionControl,
+        ffv:NaturalRegenerationMonitoring,
+        ffv:Reforestation ;
+    ffonto:typicalFireImpact ffv:CarbonRelease,
+        ffv:HabitatLoss,
+        ffv:SeedReleaseAndRegeneration,
+        ffv:SoilErosion,
+        ffv:TreeMortality ;
+    skos:broader ffv:Forest ;
+    skos:hiddenLabel "conifer"@en,
+        "fir"@en,
+        "pine"@en,
+        "spruce"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Coniferous forest"@en .
+
+ffv:Distribution a skos:Concept ;
+    rdfs:label "Distribution"@en ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Distribution"@en ;
+    skos:topConceptOf ffv:ValueScheme .
+
+ffv:ExplosionHazard a skos:Concept ;
+    rdfs:label "Explosion hazard"@en ;
+    ffonto:mitigatedBy ffv:CoolAndIsolateTank,
+        ffv:WithdrawToSafetyZone ;
+    skos:inScheme ffv:HazardScheme ;
+    skos:prefLabel "Explosion hazard"@en ;
+    skos:topConceptOf ffv:HazardScheme .
+
+ffv:FavourDirectAttack a skos:Concept ;
+    rdfs:label "Favour direct attack"@en ;
+    skos:inScheme ffv:ConditionScheme ;
+    skos:prefLabel "Favour direct attack"@en ;
+    skos:topConceptOf ffv:ConditionScheme .
+
+ffv:FireResistantClothing a skos:Concept ;
+    rdfs:label "Fire-resistant clothing (Nomex)"@en ;
+    skos:hiddenLabel "fire-resistant"@en,
+        "nomex"@en,
+        "turnout"@en ;
+    skos:inScheme ffv:PPEScheme ;
+    skos:prefLabel "Fire-resistant clothing (Nomex)"@en ;
+    skos:topConceptOf ffv:PPEScheme .
+
+ffv:FireState a skos:Concept ;
+    rdfs:label "Fire involvement"@en ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Fire involvement"@en ;
+    skos:topConceptOf ffv:StateScheme .
+
+ffv:Firefighter a skos:Concept ;
+    rdfs:label "Firefighter"@en ;
+    ffonto:requiredPPE ffv:EyeProtection,
+        ffv:FireResistantClothing,
+        ffv:Gloves,
+        ffv:Helmet ;
+    skos:broader ffv:Person ;
+    skos:hiddenLabel "crew"@en,
+        "firefighter"@en,
+        "firefighters"@en,
+        "fireman"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Firefighter"@en .
+
+ffv:Helmet a skos:Concept ;
+    rdfs:label "Helmet"@en ;
+    skos:hiddenLabel "hard hat"@en,
+        "helmet"@en ;
+    skos:inScheme ffv:PPEScheme ;
+    skos:prefLabel "Helmet"@en ;
+    skos:topConceptOf ffv:PPEScheme .
+
+ffv:High a skos:Concept ;
+    rdfs:label "High"@en ;
+    skos:broader ffv:Level ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "High"@en .
+
+ffv:Light a skos:Concept ;
+    rdfs:label "Light"@en ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Light"@en ;
+    skos:topConceptOf ffv:ValueScheme .
+
+ffv:Medium a skos:Concept ;
+    rdfs:label "Medium"@en ;
+    skos:broader ffv:Level ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Medium"@en .
+
+ffv:NaturalRegenerationMonitoring a skos:Concept ;
+    rdfs:label "Natural regeneration monitoring"@en ;
+    skos:broader ffv:RestorationMeasure ;
+    skos:inScheme ffv:EcologyScheme ;
+    skos:prefLabel "Natural regeneration monitoring"@en .
+
+ffv:PersistentCombustion a skos:Concept ;
+    rdfs:label "Persistent smouldering likely"@en ;
+    skos:inScheme ffv:ConditionScheme ;
+    skos:prefLabel "Persistent smouldering likely"@en ;
+    skos:topConceptOf ffv:ConditionScheme .
+
+ffv:Reforestation a skos:Concept ;
+    rdfs:label "Replanting / reforestation"@en ;
+    skos:broader ffv:RestorationMeasure ;
+    skos:inScheme ffv:EcologyScheme ;
+    skos:prefLabel "Replanting / reforestation"@en .
+
+ffv:Responder a skos:Concept ;
+    rdfs:label "Responder"@en ;
+    skos:broader ffv:Person ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Responder"@en .
+
+ffv:Siren a skos:Concept ;
+    rdfs:label "Siren"@en ;
+    skos:hiddenLabel "emergency vehicle"@en,
+        "fire engine, fire truck (siren)"@en,
+        "siren"@en ;
+    skos:inScheme ffv:SoundEventScheme ;
+    skos:prefLabel "Siren"@en ;
+    skos:topConceptOf ffv:SoundEventScheme .
+
+ffv:SmokeVisibilityHazard a skos:Concept ;
+    rdfs:label "Smoke visibility hazard (roads/aviation)"@en ;
+    ffonto:mitigatedBy ffv:CloseRoad,
+        ffv:UseHeadlightsAndSlowDown ;
+    skos:inScheme ffv:HazardScheme ;
+    skos:prefLabel "Smoke visibility hazard (roads/aviation)"@en ;
+    skos:topConceptOf ffv:HazardScheme .
+
+ffv:SoilErosion a skos:Concept ;
+    rdfs:label "Soil erosion"@en ;
+    skos:broader ffv:EcologicalImpact ;
+    skos:inScheme ffv:EcologyScheme ;
+    skos:prefLabel "Soil erosion"@en .
+
+ffv:TrafficControlDevice a skos:Concept ;
+    rdfs:label "Traffic control device"@en ;
+    skos:broader ffv:EquipmentKind ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Traffic control device"@en .
+
+ffv:TreeMortality a skos:Concept ;
+    rdfs:label "Tree mortality"@en ;
+    skos:broader ffv:EcologicalImpact ;
+    skos:inScheme ffv:EcologyScheme ;
+    skos:prefLabel "Tree mortality"@en .
+
+ffv:WithdrawToSafetyZone a skos:Concept ;
+    rdfs:label "Withdraw to safety zone"@en ;
+    skos:inScheme ffv:ActionScheme ;
+    skos:prefLabel "Withdraw to safety zone"@en ;
+    skos:topConceptOf ffv:ActionScheme .
+
+sosa:FeatureOfInterest a owl:Class ;
+    rdfs:label "Feature of interest"@en ;
+    rdfs:comment "The thing whose property is being estimated or calculated by an observation (SOSA)."@en ;
+    rdfs:isDefinedBy sosa: .
+
+ffonto:Vehicle a owl:Class ;
+    rdfs:label "Vehicle"@en ;
+    rdfs:comment "Ground vehicle or aircraft depicted in a scene."@en ;
+    rdfs:subClassOf ffonto:SceneEntity .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/attr/2> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:Low ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
+    sosa:observedProperty ffv:VisibilityLevel .
+
+ffv:AccessState a skos:Concept ;
+    rdfs:label "Access state"@en ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Access state"@en ;
+    skos:topConceptOf ffv:StateScheme .
+
+ffv:AerialSuppression a skos:Concept ;
+    rdfs:label "Aerial suppression"@en ;
+    skos:broader ffv:SuppressionActivity ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Aerial suppression"@en .
+
+ffv:DirectAttack a skos:Concept ;
+    rdfs:label "Direct attack"@en ;
+    skos:broader ffv:SuppressionActivity ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Direct attack"@en .
+
+ffv:HabitatLoss a skos:Concept ;
+    rdfs:label "Habitat loss"@en ;
+    skos:broader ffv:EcologicalImpact ;
+    skos:inScheme ffv:EcologyScheme ;
+    skos:prefLabel "Habitat loss"@en .
+
+ffv:HabitatProvision a skos:Concept ;
+    rdfs:label "Habitat provision"@en ;
+    skos:broader ffv:EcosystemService ;
+    skos:inScheme ffv:EcologyScheme ;
+    skos:prefLabel "Habitat provision"@en .
+
+ffv:IndirectAttack a skos:Concept ;
+    rdfs:label "Indirect attack"@en ;
+    skos:broader ffv:SuppressionActivity ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Indirect attack"@en .
+
+ffv:Level a skos:Concept ;
+    rdfs:label "Level"@en ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Level"@en ;
+    skos:topConceptOf ffv:ValueScheme .
+
+ffv:RapidFineFuelSpread a skos:Concept ;
+    rdfs:label "Rapid fine-fuel spread (favour indirect attack)"@en ;
+    skos:inScheme ffv:ConditionScheme ;
+    skos:prefLabel "Rapid fine-fuel spread (favour indirect attack)"@en ;
+    skos:topConceptOf ffv:ConditionScheme .
+
+ffonto:Agent a owl:Class ;
+    rdfs:label "Agent (person or animal)"@en ;
+    rdfs:comment "A person or animal depicted in a scene."@en ;
+    rdfs:subClassOf ffonto:SceneEntity .
+
+ffonto:AudioRecord a owl:Class ;
+    rdfs:label "Audio record"@en ;
+    rdfs:comment "An audio clip record with its file, duration and capture metadata."@en ;
+    rdfs:subClassOf ffonto:DataRecord ;
+    owl:disjointWith ffonto:WeatherRecord .
+
+ffonto:BuiltAsset a owl:Class ;
+    rdfs:label "Built asset"@en ;
+    rdfs:comment "Building or infrastructure element depicted in a scene (house, road, bridge, power line, hydrant, tank, sign …)."@en ;
+    rdfs:subClassOf ffonto:SceneEntity .
+
+ffonto:Caption a owl:Class ;
+    rdfs:label "Caption"@en ;
+    rdfs:comment "Text produced by an image-captioning model for an image record."@en ;
+    rdfs:subClassOf prov:Entity .
+
+ffonto:EnvironmentFeature a owl:Class ;
+    rdfs:label "Environment feature"@en ;
+    rdfs:comment "Vegetation, terrain, water body or land-cover element depicted in a scene."@en ;
+    rdfs:subClassOf ffonto:SceneEntity .
+
+ffonto:spatiallyRelated a owl:ObjectProperty ;
+    rdfs:label "spatially related"@en ;
+    rdfs:comment "Super-property of all frame-relative spatial relations between scene entities."@en ;
+    rdfs:domain ffonto:SceneEntity ;
+    rdfs:range ffonto:SceneEntity .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/e2> a ffonto:Agent ;
+    ffonto:count 1 ;
+    ffonto:hasKind ffv:Firefighter ;
+    ffonto:near <http://purl.org/ffonto/data/scene/scene-fixture-081/e5> ;
+    ffonto:performs ffv:AdvancingHoseLine ;
+    ffonto:wears ffv:FireResistantClothing,
+        ffv:Helmet .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/e4> a ffonto:BuiltAsset ;
+    ffonto:count 1 ;
+    ffonto:hasKind ffv:House ;
+    ffonto:hasState ffv:Scorched,
+        ffv:Threatened .
+
+ffv:Building a skos:Concept ;
+    rdfs:label "Building"@en ;
+    skos:broader ffv:BuiltAssetKind ;
+    skos:hiddenLabel "building"@en,
+        "structure"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Building"@en .
+
+ffv:CivilianActivity a skos:Concept ;
+    rdfs:label "Civilian activity"@en ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Civilian activity"@en ;
+    skos:topConceptOf ffv:ActivityScheme .
+
+ffv:FireTypeValue a skos:Concept ;
+    rdfs:label "Fire type value"@en ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Fire type value"@en ;
+    skos:topConceptOf ffv:ValueScheme .
+
+ffv:Forest a skos:Concept ;
+    rdfs:label "Forest"@en ;
+    skos:broader ffv:Vegetation ;
+    skos:hiddenLabel "forest"@en,
+        "woodland"@en,
+        "woods"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Forest"@en .
+
+ffv:HandTool a skos:Concept ;
+    rdfs:label "Hand tool"@en ;
+    skos:broader ffv:EquipmentKind ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Hand tool"@en .
+
+ffv:Sky a skos:Concept ;
+    rdfs:label "Sky"@en ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Sky"@en ;
+    skos:topConceptOf ffv:ValueScheme .
+
+ffv:SpreadStatus a skos:Concept ;
+    rdfs:label "Spread status"@en ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Spread status"@en ;
+    skos:topConceptOf ffv:ValueScheme .
+
+ffv:ZeroShotSource a skos:Concept ;
+    rdfs:label "Zero-shot classifier"@en ;
+    skos:hiddenLabel "zero-shot"@en,
+        "zshot"@en ;
+    skos:inScheme ffv:LabelSourceScheme ;
+    skos:prefLabel "Zero-shot classifier"@en ;
+    skos:topConceptOf ffv:LabelSourceScheme .
+
+ffonto:FireEvent a owl:Class ;
+    rdfs:label "Fire event"@en ;
+    rdfs:comment "A single fire incident that one or more data records are about. Identified in the data by event_id."@en ;
+    rdfs:subClassOf sosa:FeatureOfInterest .
+
+ffonto:FirePhenomenon a owl:Class ;
+    rdfs:label "Fire phenomenon"@en ;
+    rdfs:comment "Visible fire or smoke phenomenon: flame front, spot fire, crown fire, smoke plume, hotspot …"@en ;
+    rdfs:subClassOf ffonto:SceneEntity .
+
+ffonto:ModalityConflict a owl:Class ;
+    rdfs:label "Modality conflict"@en ;
+    rdfs:comment "A derived finding that two observations about the same event or record disagree (e.g. audio explosion vs. no fire in image)."@en ;
+    rdfs:subClassOf prov:Entity .
+
+ffonto:SceneDescription a owl:Class ;
+    rdfs:label "Scene description"@en ;
+    rdfs:comment "Structured output of a scene-graph extractor (vision-language model or detector) for one image record: the entities it depicts, their states, activities and relations, plus scene-level attribute observations."@en ;
+    rdfs:subClassOf prov:Entity .
+
+<http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> a ffonto:Model ;
+    ffonto:modelName "openai/clip-vit-large-patch14" ;
+    ffonto:modelVersion "hf" .
+
+ffv:ConflictScheme a skos:ConceptScheme ;
+    rdfs:label "Conflict types (scheme)"@en ;
+    skos:definition "Types of cross-modal / internal inconsistencies."@en ;
+    skos:prefLabel "Conflict types"@en .
+
+ffv:DetectionClassScheme a skos:ConceptScheme ;
+    rdfs:label "Detection classes (scheme)"@en ;
+    skos:definition "Classes predicted by image fire/smoke classifiers."@en ;
+    skos:prefLabel "Detection classes"@en .
+
+ffv:Direction a skos:Concept ;
+    rdfs:label "Direction"@en ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Direction"@en ;
+    skos:topConceptOf ffv:ValueScheme .
+
+ffv:EcosystemService a skos:Concept ;
+    rdfs:label "Ecosystem service"@en ;
+    skos:inScheme ffv:EcologyScheme ;
+    skos:prefLabel "Ecosystem service"@en ;
+    skos:topConceptOf ffv:EcologyScheme .
+
+ffv:Explosion a skos:Concept ;
+    rdfs:label "Explosion"@en ;
+    skos:broader ffv:FireSound ;
+    skos:hiddenLabel "boom"@en,
+        "burst"@en,
+        "explosion"@en ;
+    skos:inScheme ffv:SoundEventScheme ;
+    skos:prefLabel "Explosion"@en .
+
+ffv:Fire a skos:Concept ;
+    rdfs:label "Fire"@en ;
+    skos:hiddenLabel "blaze"@en,
+        "burning"@en,
+        "fire"@en,
+        "flame"@en,
+        "flames"@en ;
+    skos:inScheme ffv:DetectionClassScheme ;
+    skos:prefLabel "Fire"@en ;
+    skos:topConceptOf ffv:DetectionClassScheme .
+
+ffv:Person a skos:Concept ;
+    rdfs:label "Person"@en ;
+    skos:broader ffv:AgentKind ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Person"@en .
+
+ffv:Smoke a skos:Concept ;
+    rdfs:label "Smoke"@en ;
+    skos:hiddenLabel "haze"@en,
+        "smoke"@en,
+        "smoky"@en ;
+    skos:inScheme ffv:DetectionClassScheme ;
+    skos:prefLabel "Smoke"@en ;
+    skos:topConceptOf ffv:DetectionClassScheme .
+
+ffv:Terrain a skos:Concept ;
+    rdfs:label "Terrain"@en ;
+    skos:broader ffv:EnvironmentFeatureKind ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Terrain"@en .
+
+ffv:WaterBody a skos:Concept ;
+    rdfs:label "Water body"@en ;
+    ffonto:providesService ffv:WaterRegulation ;
+    ffonto:suggestedRestoration ffv:RiparianRestoration ;
+    ffonto:typicalFireImpact ffv:WaterQualityDegradation ;
+    skos:broader ffv:EnvironmentFeatureKind ;
+    skos:hiddenLabel "water"@en ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Water body"@en .
+
+ffonto:Site a owl:Class ;
+    rdfs:label "Site"@en ;
+    rdfs:comment "A named place or grid cell where data were recorded (weather station, camera site, grid cell)."@en ;
+    rdfs:subClassOf sosa:FeatureOfInterest .
+
+ffv:DamageState a skos:Concept ;
+    rdfs:label "Damage state"@en ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Damage state"@en ;
+    skos:topConceptOf ffv:StateScheme .
+
+ffv:EnvironmentFeatureKind a skos:Concept ;
+    rdfs:label "Environment feature (kind)"@en ;
+    rdfs:seeAlso ffonto:EnvironmentFeature ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Environment feature (kind)"@en ;
+    skos:topConceptOf ffv:EntityKindScheme .
+
+ffv:OperationalState a skos:Concept ;
+    rdfs:label "Operational state"@en ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Operational state"@en ;
+    skos:topConceptOf ffv:StateScheme .
+
+ffv:RestorationMeasure a skos:Concept ;
+    rdfs:label "Restoration measure"@en ;
+    skos:inScheme ffv:EcologyScheme ;
+    skos:prefLabel "Restoration measure"@en ;
+    skos:topConceptOf ffv:EcologyScheme .
+
+ffv:SuppressionActivity a skos:Concept ;
+    rdfs:label "Suppression activity"@en ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Suppression activity"@en ;
+    skos:topConceptOf ffv:ActivityScheme .
+
+ffv:Vegetation a skos:Concept ;
+    rdfs:label "Vegetation"@en ;
+    skos:broader ffv:EnvironmentFeatureKind ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Vegetation"@en .
+
+prov:Entity a owl:Class ;
+    rdfs:label "Entity"@en ;
+    rdfs:comment "A physical, digital or conceptual thing with some fixed aspects (PROV-O)."@en ;
+    rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> .
+
+ffv:Colour a skos:Concept ;
+    rdfs:label "Colour"@en ;
+    skos:inScheme ffv:ValueScheme ;
+    skos:prefLabel "Colour"@en ;
+    skos:topConceptOf ffv:ValueScheme .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/e5> a ffonto:FirePhenomenon ;
+    ffonto:advancingToward <http://purl.org/ffonto/data/scene/scene-fixture-081/e4> ;
+    ffonto:count 2 ;
+    ffonto:hasKind ffv:FlameFront .
+
+ffv:GroundVehicle a skos:Concept ;
+    rdfs:label "Ground vehicle"@en ;
+    skos:broader ffv:VehicleKind ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Ground vehicle"@en .
+
+ffv:VegetationState a skos:Concept ;
+    rdfs:label "Vegetation state"@en ;
+    skos:inScheme ffv:StateScheme ;
+    skos:prefLabel "Vegetation state"@en ;
+    skos:topConceptOf ffv:StateScheme .
+
+ffonto:ImageRecord a owl:Class ;
+    rdfs:label "Image record"@en ;
+    rdfs:comment "A still image or video frame record with its file, quality and geo metadata."@en ;
+    rdfs:subClassOf ffonto:DataRecord ;
+    owl:disjointWith ffonto:AudioRecord,
+        ffonto:WeatherRecord .
+
+ffonto:Model a owl:Class ;
+    rdfs:label "Model"@en ;
+    rdfs:comment "A machine-learning model (classifier, captioner, audio tagger, vision-language model) that produces observations, captions or scene descriptions."@en ;
+    rdfs:subClassOf prov:SoftwareAgent,
+        sosa:Sensor .
+
+ffonto:Threshold a owl:Class ;
+    rdfs:label "Threshold"@en ;
+    rdfs:comment "A configured decision threshold for one class (e.g. fire_threshold = 0.55)."@en ;
+    rdfs:subClassOf prov:Entity .
+
+ffv:EcologicalImpact a skos:Concept ;
+    rdfs:label "Ecological impact"@en ;
+    skos:inScheme ffv:EcologyScheme ;
+    skos:prefLabel "Ecological impact"@en ;
+    skos:topConceptOf ffv:EcologyScheme .
+
+ffv:ResponseActivity a skos:Concept ;
+    rdfs:label "Response activity"@en ;
+    skos:inScheme ffv:ActivityScheme ;
+    skos:prefLabel "Response activity"@en ;
+    skos:topConceptOf ffv:ActivityScheme .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> a ffonto:ImageRecord ;
+    dcterms:license "CC-BY-4.0" ;
+    ffonto:aboutEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
+    ffonto:bands "RGB" ;
+    ffonto:blur 8e-02 ;
+    ffonto:captureTime "2012-08-28T14:05:00+00:00"^^xsd:dateTime ;
+    ffonto:centerWKT "POINT(-6.85 41.8)" ;
+    ffonto:checksumSHA256 "0000000000000000000000000000000000000000000000000000000000000000" ;
+    ffonto:crs "EPSG:4326" ;
+    ffonto:detectedClass ffv:Smoke ;
+    ffonto:fileURI "fixtures/forest_fire_081.jpg" ;
+    ffonto:georeferenced true ;
+    ffonto:hasCaption <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/caption> ;
+    ffonto:hasObservation <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/0>,
+        <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/1>,
+        <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/z2> ;
+    ffonto:heightPx 1080 ;
+    ffonto:mediaId "forest_fire_081" ;
+    ffonto:recordUUID "00000000-0000-4000-8000-000000000081" ;
+    ffonto:schemaVersion "1.0.0" ;
+    ffonto:sourceName "fixture_camera" ;
+    ffonto:widthPx 1920 .
+
+<http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> a ffonto:ImageRecord ;
+    dcterms:license "CC-BY-4.0" ;
+    ffonto:aboutEvent <http://purl.org/ffonto/data/event/ev-bf59c56acb36> ;
+    ffonto:checksumSHA256 "df5124ebe5531b3d7d9b1573e65ad2a354b523f0d35ec933dbdb3066d1161372" ;
+    ffonto:detectedClass ffv:Smoke ;
+    ffonto:fileURI "/home/cse/Documents/ImageToText/dataset_2/evoDJI_0001_frame12.jpg" ;
+    ffonto:georeferenced false ;
+    ffonto:hasCaption <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/caption> ;
+    ffonto:hasObservation <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/0>,
+        <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/1>,
+        <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/z2> ;
+    ffonto:heightPx 1080 ;
+    ffonto:mediaId "evoDJI_0001_frame12_100788" ;
+    ffonto:recordUUID "3f6d562f-33d3-49ee-a40b-3a8b6cf07823" ;
+    ffonto:schemaVersion "1.0.0" ;
+    ffonto:sourceName "unknown_camera" ;
+    ffonto:widthPx 2048 .
+
+ffv:BurnEvidenceKind a skos:Concept ;
+    rdfs:label "Burn evidence (kind)"@en ;
+    rdfs:seeAlso ffonto:BurnEvidence ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Burn evidence (kind)"@en ;
+    skos:topConceptOf ffv:EntityKindScheme .
+
+ffv:FirePhenomenonKind a skos:Concept ;
+    rdfs:label "Fire phenomenon (kind)"@en ;
+    rdfs:seeAlso ffonto:FirePhenomenon ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Fire phenomenon (kind)"@en ;
+    skos:topConceptOf ffv:EntityKindScheme .
+
+ffv:LabelSourceScheme a skos:ConceptScheme ;
+    rdfs:label "Label sources (scheme)"@en ;
+    skos:definition "Where a label came from."@en ;
+    skos:prefLabel "Label sources"@en .
+
+ffv:SoundEventScheme a skos:ConceptScheme ;
+    rdfs:label "Sound events (scheme)"@en ;
+    skos:definition "Audio event classes (aligned with AudioSet/YAMNet labels where possible)."@en ;
+    skos:prefLabel "Sound events"@en .
+
+ffonto:DangerRule a owl:Class ;
+    rdfs:label "Danger rule"@en ;
+    rdfs:comment "A threshold rule over a weather/FWI property (property, operator, value) that indicates an operational condition. Stored as data so experts can edit it."@en ;
+    rdfs:subClassOf prov:Entity .
+
+ffv:BuiltAssetKind a skos:Concept ;
+    rdfs:label "Built asset (kind)"@en ;
+    rdfs:seeAlso ffonto:BuiltAsset ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Built asset (kind)"@en ;
+    skos:topConceptOf ffv:EntityKindScheme .
+
+skos:ConceptScheme a owl:Class ;
+    rdfs:label "Concept scheme"@en ;
+    rdfs:comment "A set of concepts forming one controlled vocabulary (SKOS)."@en ;
+    rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> .
+
+ffv:ConditionScheme a skos:ConceptScheme ;
+    rdfs:label "Operational conditions (scheme)"@en ;
+    skos:definition "Conditions implied by weather/FWI danger rules."@en ;
+    skos:prefLabel "Operational conditions"@en .
+
+ffv:EquipmentKind a skos:Concept ;
+    rdfs:label "Equipment (kind)"@en ;
+    rdfs:seeAlso ffonto:Equipment ;
+    skos:inScheme ffv:EntityKindScheme ;
+    skos:prefLabel "Equipment (kind)"@en ;
+    skos:topConceptOf ffv:EntityKindScheme .
+
+ffv:VLMSource a skos:Concept ;
+    rdfs:label "Vision-language model"@en ;
+    skos:hiddenLabel "vlm"@en ;
+    skos:inScheme ffv:LabelSourceScheme ;
+    skos:prefLabel "Vision-language model"@en ;
+    skos:topConceptOf ffv:LabelSourceScheme .
+
+ffonto:Hazard a owl:Class ;
+    rdfs:label "Hazard"@en ;
+    rdfs:comment "A risk DERIVED by a rule from observations; typed by ffonto:hasHazardType → ffv:HazardScheme concept and linked to what it threatens."@en ;
+    rdfs:subClassOf prov:Entity .
+
+<http://purl.org/ffonto/data/event/ev-demo-081> a ffonto:FireEvent ;
+    ffonto:eventCode "ev_demo_081" .
+
+<http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> a ffonto:Model ;
+    ffonto:modelName "EXAMPLE-VLM (hand-written fixture, replace with real VLM output)" ;
+    ffonto:modelVersion "0" .
+
+ffv:PositionScheme a skos:ConceptScheme ;
+    rdfs:label "Frame-relative positions (scheme)"@en ;
+    skos:definition "Position of an entity relative to the fire in the frame."@en ;
+    skos:prefLabel "Frame-relative positions"@en .
+
+ffv:PPEScheme a skos:ConceptScheme ;
+    rdfs:label "Personal protective equipment (scheme)"@en ;
+    skos:definition "Items a person can be seen wearing."@en ;
+    skos:prefLabel "Personal protective equipment"@en .
+
+ffonto:DataRecord a owl:Class ;
+    rdfs:label "Data record"@en ;
+    rdfs:comment "One captured data item (an image, an audio clip, a weather row) together with its metadata."@en ;
+    rdfs:subClassOf prov:Entity .
+
+ffonto:WeatherRecord a owl:Class ;
+    rdfs:label "Weather / FWI record"@en ;
+    rdfs:comment "One row of the tabular weather and Fire Weather Index dataset."@en ;
+    rdfs:subClassOf ffonto:DataRecord .
+
+ffonto:SceneEntity a owl:Class ;
+    rdfs:label "Scene entity"@en ;
+    rdfs:comment "Something depicted in an image according to a scene description (a fire front, a firefighter, a building …). Its fine-grained kind is given by ffonto:hasKind → a concept in ffv:EntityKindScheme."@en ;
+    rdfs:subClassOf sosa:FeatureOfInterest .
+
+ffv:HazardScheme a skos:ConceptScheme ;
+    rdfs:label "Hazard types (scheme)"@en ;
+    skos:definition "Types of hazards derived by rules."@en ;
+    skos:prefLabel "Hazard types"@en .
+
+ffv:EcologyScheme a skos:ConceptScheme ;
+    rdfs:label "Ecological impacts, services and restoration (scheme)"@en ;
+    skos:definition "Background ecological knowledge for CQ26."@en ;
+    skos:prefLabel "Ecological impacts, services and restoration"@en .
+
+ffv:ActionScheme a skos:ConceptScheme ;
+    rdfs:label "Recommended actions (scheme)"@en ;
+    skos:definition "Protective / operational actions recommended for hazards."@en ;
+    skos:prefLabel "Recommended actions"@en .
+
+ffonto:ModelObservation a owl:Class ;
+    rdfs:label "Model observation"@en ;
+    rdfs:comment "A claim made by a model about a data record: either a predicted class with a confidence (ffonto:predictedClass) or a categorical value for an observable property (sosa:observedProperty + ffonto:hasValueConcept)."@en ;
+    rdfs:subClassOf sosa:Observation .
+
+ffv:ActivityScheme a skos:ConceptScheme ;
+    rdfs:label "Activities (scheme)"@en ;
+    skos:definition "What agents or vehicles are doing."@en ;
+    skos:prefLabel "Activities"@en .
+
+ffv:ObservablePropertyScheme a skos:ConceptScheme ;
+    rdfs:label "Observable scene properties (scheme)"@en ;
+    skos:definition "Scene-level properties a model can report a categorical value for."@en ;
+    skos:prefLabel "Observable scene properties"@en .
+
+ffv:StateScheme a skos:ConceptScheme ;
+    rdfs:label "Entity states (scheme)"@en ;
+    skos:definition "States / conditions of scene entities."@en ;
+    skos:prefLabel "Entity states"@en .
+
+ffv:ValueScheme a skos:ConceptScheme ;
+    rdfs:label "Categorical values (scheme)"@en ;
+    skos:definition "Shared value concepts used as observation results."@en ;
+    skos:prefLabel "Categorical values"@en .
+
+ffv:EntityKindScheme a skos:ConceptScheme ;
+    rdfs:label "Scene entity kinds (scheme)"@en ;
+    skos:definition "Fine-grained kinds of things that can be depicted in a fire scene. The top concepts correspond to the core classes."@en ;
+    skos:prefLabel "Scene entity kinds"@en .
+
+skos:Concept a owl:Class ;
+    rdfs:label "Concept"@en ;
+    rdfs:comment "A unit of thought in a controlled vocabulary (SKOS)."@en ;
+    rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( ffonto:FirePhenomenon ffonto:Agent ffonto:Equipment ffonto:Vehicle ffonto:BuiltAsset ffonto:EnvironmentFeature ffonto:BurnEvidence ) .
+

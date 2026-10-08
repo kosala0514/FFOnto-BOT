@@ -1,0 +1,56 @@
+# CQ02: What metadata is recorded for each image / audio record, and which fields are missing?
+#
+# Example ForestFire-VQA questions answered by this query:
+#   - What is the image's image_id?
+#   - What is the image file checksum (SHA-256)?
+#   - Is a crs recorded for the image?
+#   - Is the capture_time_utc present?
+#   - What is the image resolution in pixels?
+#   - What is the image aspect ratio?
+#   - Is the image georeferenced?
+#   - Is the image license recorded?
+#   - What is the audio record_uuid?
+#
+# Note: Full rule-based completeness checking is done by SHACL (ontology/ffonto-shapes.ttl).
+
+PREFIX ffonto:  <http://purl.org/ffonto#>
+PREFIX ffv:  <http://purl.org/ffonto/vocab#>
+PREFIX ffd:  <http://purl.org/ffonto/data/>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?record ?modality ?uuid ?mediaId ?file ?checksum ?license ?source ?device
+       ?width ?height ?aspectRatio ?georeferenced ?captureTime ?crs ?missingFields
+WHERE {
+  VALUES ?type { ffonto:ImageRecord ffonto:AudioRecord }
+  ?record a ?type .
+  BIND(STRAFTER(STR(?type), "#") AS ?modality)
+  OPTIONAL { ?record ffonto:recordUUID ?uuid }
+  OPTIONAL { ?record ffonto:mediaId ?mediaId }
+  OPTIONAL { ?record ffonto:fileURI ?file }
+  OPTIONAL { ?record ffonto:checksumSHA256 ?checksum }
+  OPTIONAL { ?record dcterms:license ?license }
+  OPTIONAL { ?record ffonto:sourceName ?source }
+  OPTIONAL { ?record ffonto:deviceId ?device }
+  OPTIONAL { ?record ffonto:widthPx ?width }
+  OPTIONAL { ?record ffonto:heightPx ?height }
+  OPTIONAL { ?record ffonto:georeferenced ?georeferenced }
+  OPTIONAL { ?record ffonto:captureTime ?captureTime }
+  OPTIONAL { ?record ffonto:crs ?crs }
+  OPTIONAL { ?record ffonto:footprintWKT ?footprint }
+  OPTIONAL { ?record ffonto:centerWKT ?center }
+  BIND(IF(BOUND(?width) && BOUND(?height), ROUND(100 * ?width / ?height) / 100, ?unbound) AS ?aspectRatio)
+  BIND(CONCAT(
+         IF(BOUND(?captureTime), "", "capture_time "),
+         IF(BOUND(?crs), "", "crs "),
+         IF(BOUND(?center), "", "center "),
+         IF(BOUND(?footprint) || ?type = ffonto:AudioRecord, "", "footprint "),
+         IF(BOUND(?checksum) || ?type = ffonto:AudioRecord, "", "checksum "),
+         IF(BOUND(?license) || ?type = ffonto:AudioRecord, "", "license "),
+         IF(BOUND(?device), "", "device_id ")) AS ?missingFields)
+}
+ORDER BY ?modality ?record

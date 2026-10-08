@@ -1,0 +1,131 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ffonto: <http://purl.org/ffonto#> .
+@prefix ffv: <http://purl.org/ffonto/vocab#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://purl.org/ffonto/data/event/ev-bf59c56acb36> a ffonto:FireEvent ;
+    ffonto:eventCode "ev_bf59c56acb36" .
+
+<http://purl.org/ffonto/data/event/ev-demo-081> a ffonto:FireEvent ;
+    ffonto:eventCode "ev_demo_081" .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/caption> a ffonto:Caption ;
+    ffonto:captionText "firefighters spraying water on a burning house next to a pine forest" ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/salesforce-blip-image-captioning-large> .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/0> a ffonto:ModelObservation ;
+    ffonto:confidence 4.1e-01 ;
+    ffonto:labelSource ffv:ZeroShotSource ;
+    ffonto:predictedClass ffv:Fire ;
+    ffonto:severity ffv:Medium ;
+    ffonto:usedThreshold <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/threshold/Fire> ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/1> a ffonto:ModelObservation ;
+    ffonto:confidence 7e-01 ;
+    ffonto:labelSource ffv:ZeroShotSource ;
+    ffonto:predictedClass ffv:Smoke ;
+    ffonto:usedThreshold <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/threshold/Smoke> ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/z2> a ffonto:ModelObservation ;
+    ffonto:confidence 9e-02 ;
+    ffonto:labelSource ffv:ZeroShotSource ;
+    ffonto:predictedClass ffv:NoFire ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/threshold/Fire> a ffonto:Threshold ;
+    ffonto:forClass ffv:Fire ;
+    ffonto:thresholdValue 5.5e-01 .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/threshold/Smoke> a ffonto:Threshold ;
+    ffonto:forClass ffv:Smoke ;
+    ffonto:thresholdValue 6e-01 .
+
+<http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/caption> a ffonto:Caption ;
+    ffonto:captionText "arafed forest fire in the middle of a forest with a lake" ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/salesforce-blip-image-captioning-large> .
+
+<http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/0> a ffonto:ModelObservation ;
+    ffonto:confidence 1.585e-01 ;
+    ffonto:labelSource ffv:CaptionSource ;
+    ffonto:predictedClass ffv:Fire ;
+    ffonto:severity ffv:Low ;
+    ffonto:usedThreshold <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/threshold/Fire> ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> .
+
+<http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/1> a ffonto:ModelObservation ;
+    ffonto:confidence 7.291e-01 ;
+    ffonto:labelSource ffv:ZeroShotSource ;
+    ffonto:predictedClass ffv:Smoke ;
+    ffonto:usedThreshold <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/threshold/Smoke> ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> .
+
+<http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/z2> a ffonto:ModelObservation ;
+    ffonto:confidence 1.124601e-01 ;
+    ffonto:labelSource ffv:ZeroShotSource ;
+    ffonto:predictedClass ffv:NoFire ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> .
+
+<http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/threshold/Fire> a ffonto:Threshold ;
+    ffonto:forClass ffv:Fire ;
+    ffonto:thresholdValue 5.5e-01 .
+
+<http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/threshold/Smoke> a ffonto:Threshold ;
+    ffonto:forClass ffv:Smoke ;
+    ffonto:thresholdValue 6e-01 .
+
+<http://purl.org/ffonto/data/model/salesforce-blip-image-captioning-large> a ffonto:Model ;
+    ffonto:modelName "Salesforce/blip-image-captioning-large" .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> a ffonto:ImageRecord ;
+    dcterms:license "CC-BY-4.0" ;
+    ffonto:aboutEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
+    ffonto:bands "RGB" ;
+    ffonto:blur 8e-02 ;
+    ffonto:captureTime "2012-08-28T14:05:00+00:00"^^xsd:dateTime ;
+    ffonto:centerWKT "POINT(-6.85 41.8)" ;
+    ffonto:checksumSHA256 "0000000000000000000000000000000000000000000000000000000000000000" ;
+    ffonto:crs "EPSG:4326" ;
+    ffonto:fileURI "fixtures/forest_fire_081.jpg" ;
+    ffonto:georeferenced true ;
+    ffonto:hasCaption <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/caption> ;
+    ffonto:hasObservation <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/0>,
+        <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/1>,
+        <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/z2> ;
+    ffonto:heightPx 1080 ;
+    ffonto:mediaId "forest_fire_081" ;
+    ffonto:recordUUID "00000000-0000-4000-8000-000000000081" ;
+    ffonto:schemaVersion "1.0.0" ;
+    ffonto:sourceName "fixture_camera" ;
+    ffonto:widthPx 1920 .
+
+<http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> a ffonto:ImageRecord ;
+    dcterms:license "CC-BY-4.0" ;
+    ffonto:aboutEvent <http://purl.org/ffonto/data/event/ev-bf59c56acb36> ;
+    ffonto:checksumSHA256 "df5124ebe5531b3d7d9b1573e65ad2a354b523f0d35ec933dbdb3066d1161372" ;
+    ffonto:fileURI "/home/cse/Documents/ImageToText/dataset_2/evoDJI_0001_frame12.jpg" ;
+    ffonto:georeferenced false ;
+    ffonto:hasCaption <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/caption> ;
+    ffonto:hasObservation <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/0>,
+        <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/1>,
+        <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/z2> ;
+    ffonto:heightPx 1080 ;
+    ffonto:mediaId "evoDJI_0001_frame12_100788" ;
+    ffonto:recordUUID "3f6d562f-33d3-49ee-a40b-3a8b6cf07823" ;
+    ffonto:schemaVersion "1.0.0" ;
+    ffonto:sourceName "unknown_camera" ;
+    ffonto:widthPx 2048 .
+
+<http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> a ffonto:Model ;
+    ffonto:modelName "openai/clip-vit-large-patch14" ;
+    ffonto:modelVersion "hf" .
+

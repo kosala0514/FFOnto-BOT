@@ -1,0 +1,48 @@
+@prefix ffonto: <http://purl.org/ffonto#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://purl.org/ffonto/data/record/weather/demo-site-a/grid-2-2/2012-08-27> a ffonto:WeatherRecord ;
+    ffonto:airTemperatureC 1.59e+01 ;
+    ffonto:atSite <http://purl.org/ffonto/data/site/demo-site-a/grid-2-2> ;
+    ffonto:bui 1.408e+02 ;
+    ffonto:burnedAreaHa 0e+00 ;
+    ffonto:dayName "mon" ;
+    ffonto:dc 6.105e+02 ;
+    ffonto:dmc 9.9e+01 ;
+    ffonto:ffmc 9.21e+01 ;
+    ffonto:fireOccurred false ;
+    ffonto:fwi 2.13e+01 ;
+    ffonto:isi 9.2e+00 ;
+    ffonto:observationDate "2012-08-27T00:00:00+00:00"^^xsd:dateTime ;
+    ffonto:rainMm 0e+00 ;
+    ffonto:relativeHumidityPct 5.1e+01 ;
+    ffonto:sourceName "weather_csv" ;
+    ffonto:windSpeedKmh 4.5e+00 .
+
+<http://purl.org/ffonto/data/record/weather/demo-site-a/grid-2-2/2012-08-28> a ffonto:WeatherRecord ;
+    ffonto:aboutEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
+    ffonto:airTemperatureC 1.74e+01 ;
+    ffonto:atSite <http://purl.org/ffonto/data/site/demo-site-a/grid-2-2> ;
+    ffonto:bui 1.504e+02 ;
+    ffonto:burnedAreaHa 1.07e+00 ;
+    ffonto:dayName "tue" ;
+    ffonto:dc 6.471e+02 ;
+    ffonto:dmc 1.083e+02 ;
+    ffonto:ffmc 9.48e+01 ;
+    ffonto:fireOccurred true ;
+    ffonto:fwi 3.31e+01 ;
+    ffonto:isi 1.7e+01 ;
+    ffonto:observationDate "2012-08-28T00:00:00+00:00"^^xsd:dateTime ;
+    ffonto:rainMm 0e+00 ;
+    ffonto:relativeHumidityPct 4.3e+01 ;
+    ffonto:sourceName "weather_csv" ;
+    ffonto:windSpeedKmh 6.7e+00 .
+
+<http://purl.org/ffonto/data/event/ev-demo-081> a ffonto:FireEvent ;
+    ffonto:eventCode "ev_demo_081" .
+
+<http://purl.org/ffonto/data/site/demo-site-a/grid-2-2> a ffonto:Site ;
+    ffonto:gridX 2 ;
+    ffonto:gridY 2 ;
+    ffonto:siteName "demo_site_A (grid 2,2)" .
+

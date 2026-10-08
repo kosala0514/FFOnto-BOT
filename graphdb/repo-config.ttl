@@ -1,0 +1,27 @@
+# GraphDB repository configuration for FFOnto (GraphDB 10.x / 11.x)
+# Create with:  curl -X POST http://localhost:7200/rest/repositories -F "config=@graphdb/repo-config.ttl"
+# or let graphdb/load_graphdb.py create it.
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rep:     <http://www.openrdf.org/config/repository#> .
+@prefix sr:      <http://www.openrdf.org/config/repository/sail#> .
+@prefix sail:    <http://www.openrdf.org/config/sail#> .
+@prefix graphdb: <http://www.ontotext.com/config/graphdb#> .
+
+[] a rep:Repository ;
+    rep:repositoryID "ffonto" ;
+    rdfs:label "FFOnto multimodal forest-fire knowledge graph" ;
+    rep:repositoryImpl [
+        rep:repositoryType "graphdb:SailRepository" ;
+        sr:sailImpl [
+            sail:sailType "graphdb:Sail" ;
+            # RDFS-Plus: subClassOf, subPropertyOf, domain/range, symmetric/inverse/transitive.
+            # Enough for FFOnto; OWL consistency checking is done offline with HermiT.
+            # The ruleset cannot be changed after the repository is created.
+            graphdb:ruleset "rdfsplus-optimized" ;
+            graphdb:disable-sameAs "true" ;
+            graphdb:enable-context-index "true" ;
+            graphdb:enablePredicateList "true" ;
+            graphdb:base-URL "http://purl.org/ffonto/data/" ;
+            graphdb:entity-index-size "10000000"
+        ]
+    ] .

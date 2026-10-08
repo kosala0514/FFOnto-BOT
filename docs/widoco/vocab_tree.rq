@@ -1,0 +1,14 @@
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+# One row per concept (and per broader concept): used by make_sections.py to draw the concept hierarchy.
+SELECT ?scheme ?schemeLabel ?concept ?label ?broader ?definition
+       (GROUP_CONCAT(DISTINCT STR(?kw); separator=", ") AS ?keywords)
+WHERE {
+  ?concept skos:inScheme ?scheme ;
+           skos:prefLabel ?label .
+  OPTIONAL { ?scheme skos:prefLabel ?schemeLabel }
+  OPTIONAL { ?concept skos:broader ?broader }
+  OPTIONAL { ?concept skos:definition ?definition }
+  OPTIONAL { ?concept skos:hiddenLabel ?kw }
+}
+GROUP BY ?scheme ?schemeLabel ?concept ?label ?broader ?definition
+ORDER BY ?scheme ?label

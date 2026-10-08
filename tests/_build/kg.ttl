@@ -1,0 +1,493 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ffonto: <http://purl.org/ffonto#> .
+@prefix ffv: <http://purl.org/ffonto/vocab#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://purl.org/ffonto/data/record/weather/demo-site-a/grid-2-2/2012-08-27> a ffonto:WeatherRecord ;
+    ffonto:airTemperatureC 1.59e+01 ;
+    ffonto:atSite <http://purl.org/ffonto/data/site/demo-site-a/grid-2-2> ;
+    ffonto:bui 1.408e+02 ;
+    ffonto:burnedAreaHa 0e+00 ;
+    ffonto:dayName "mon" ;
+    ffonto:dc 6.105e+02 ;
+    ffonto:dmc 9.9e+01 ;
+    ffonto:ffmc 9.21e+01 ;
+    ffonto:fireOccurred false ;
+    ffonto:fwi 2.13e+01 ;
+    ffonto:isi 9.2e+00 ;
+    ffonto:observationDate "2012-08-27T00:00:00+00:00"^^xsd:dateTime ;
+    ffonto:rainMm 0e+00 ;
+    ffonto:relativeHumidityPct 5.1e+01 ;
+    ffonto:sourceName "weather_csv" ;
+    ffonto:windSpeedKmh 4.5e+00 .
+
+<http://purl.org/ffonto/data/record/weather/demo-site-a/grid-2-2/2012-08-28> a ffonto:WeatherRecord ;
+    ffonto:aboutEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
+    ffonto:airTemperatureC 1.74e+01 ;
+    ffonto:atSite <http://purl.org/ffonto/data/site/demo-site-a/grid-2-2> ;
+    ffonto:bui 1.504e+02 ;
+    ffonto:burnedAreaHa 1.07e+00 ;
+    ffonto:dayName "tue" ;
+    ffonto:dc 6.471e+02 ;
+    ffonto:dmc 1.083e+02 ;
+    ffonto:ffmc 9.48e+01 ;
+    ffonto:fireOccurred true ;
+    ffonto:fwi 3.31e+01 ;
+    ffonto:isi 1.7e+01 ;
+    ffonto:observationDate "2012-08-28T00:00:00+00:00"^^xsd:dateTime ;
+    ffonto:rainMm 0e+00 ;
+    ffonto:relativeHumidityPct 4.3e+01 ;
+    ffonto:sourceName "weather_csv" ;
+    ffonto:windSpeedKmh 6.7e+00 .
+
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12> a ffonto:SceneDescription ;
+    ffonto:depicts <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e1>,
+        <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e2>,
+        <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e3>,
+        <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e4> ;
+    ffonto:describesRecord <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
+    ffonto:hasObservation <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/0>,
+        <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/1>,
+        <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/2>,
+        <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/3>,
+        <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/4>,
+        <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/5>,
+        <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/6>,
+        <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/7> ;
+    ffonto:humanValidated false ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081> a ffonto:SceneDescription ;
+    ffonto:depicts <http://purl.org/ffonto/data/scene/scene-fixture-081/e1>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/e10>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/e11>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/e12>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/e2>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/e3>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/e4>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/e5>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/e6>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/e7>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/e8>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/e9> ;
+    ffonto:describesRecord <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
+    ffonto:hasObservation <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/0>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/1>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/2>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/3>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/4>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/5>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/6>,
+        <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/7> ;
+    ffonto:humanValidated false ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> .
+
+<http://purl.org/ffonto/data/event/ev-22e029d3b190> a ffonto:FireEvent ;
+    ffonto:eventCode "ev_22e029d3b190" .
+
+<http://purl.org/ffonto/data/event/ev-bf59c56acb36> a ffonto:FireEvent ;
+    ffonto:eventCode "ev_bf59c56acb36" .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/caption> a ffonto:Caption ;
+    ffonto:captionText "firefighters spraying water on a burning house next to a pine forest" ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/salesforce-blip-image-captioning-large> .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/0> a ffonto:ModelObservation ;
+    ffonto:confidence 4.1e-01 ;
+    ffonto:labelSource ffv:ZeroShotSource ;
+    ffonto:predictedClass ffv:Fire ;
+    ffonto:severity ffv:Medium ;
+    ffonto:usedThreshold <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/threshold/Fire> ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/1> a ffonto:ModelObservation ;
+    ffonto:confidence 7e-01 ;
+    ffonto:labelSource ffv:ZeroShotSource ;
+    ffonto:predictedClass ffv:Smoke ;
+    ffonto:usedThreshold <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/threshold/Smoke> ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/z2> a ffonto:ModelObservation ;
+    ffonto:confidence 9e-02 ;
+    ffonto:labelSource ffv:ZeroShotSource ;
+    ffonto:predictedClass ffv:NoFire ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/threshold/Fire> a ffonto:Threshold ;
+    ffonto:forClass ffv:Fire ;
+    ffonto:thresholdValue 5.5e-01 .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/threshold/Smoke> a ffonto:Threshold ;
+    ffonto:forClass ffv:Smoke ;
+    ffonto:thresholdValue 6e-01 .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/obs/0> a ffonto:ModelObservation ;
+    ffonto:confidence 8.1e-01 ;
+    ffonto:labelCategory "fire_audio" ;
+    ffonto:labelSource ffv:AudioTaggerSource ;
+    ffonto:maxConfidence 8.8e-01 ;
+    ffonto:meanConfidence 8.1e-01 ;
+    ffonto:predictedClass ffv:Explosion ;
+    ffonto:topKLabel "crackle",
+        "explosion" ;
+    ffonto:usedThreshold <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/threshold/Explosion> ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/google-yamnet/1> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081> .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/obs/1> a ffonto:ModelObservation ;
+    ffonto:confidence 3.5e-01 ;
+    ffonto:labelCategory "fire_audio" ;
+    ffonto:labelSource ffv:AudioTaggerSource ;
+    ffonto:maxConfidence 5.2e-01 ;
+    ffonto:meanConfidence 3.5e-01 ;
+    ffonto:predictedClass ffv:Siren ;
+    ffonto:topKLabel "siren" ;
+    ffonto:usedThreshold <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/threshold/Siren> ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/google-yamnet/1> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081> .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/threshold/Explosion> a ffonto:Threshold ;
+    ffonto:forClass ffv:Explosion ;
+    ffonto:thresholdValue 2e-01 .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/threshold/Siren> a ffonto:Threshold ;
+    ffonto:forClass ffv:Siren ;
+    ffonto:thresholdValue 2e-01 .
+
+<http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/caption> a ffonto:Caption ;
+    ffonto:captionText "arafed forest fire in the middle of a forest with a lake" ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/salesforce-blip-image-captioning-large> .
+
+<http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/0> a ffonto:ModelObservation ;
+    ffonto:confidence 1.585e-01 ;
+    ffonto:labelSource ffv:CaptionSource ;
+    ffonto:predictedClass ffv:Fire ;
+    ffonto:severity ffv:Low ;
+    ffonto:usedThreshold <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/threshold/Fire> ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> .
+
+<http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/1> a ffonto:ModelObservation ;
+    ffonto:confidence 7.291e-01 ;
+    ffonto:labelSource ffv:ZeroShotSource ;
+    ffonto:predictedClass ffv:Smoke ;
+    ffonto:usedThreshold <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/threshold/Smoke> ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> .
+
+<http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/z2> a ffonto:ModelObservation ;
+    ffonto:confidence 1.124601e-01 ;
+    ffonto:labelSource ffv:ZeroShotSource ;
+    ffonto:predictedClass ffv:NoFire ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> .
+
+<http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/threshold/Fire> a ffonto:Threshold ;
+    ffonto:forClass ffv:Fire ;
+    ffonto:thresholdValue 5.5e-01 .
+
+<http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/threshold/Smoke> a ffonto:Threshold ;
+    ffonto:forClass ffv:Smoke ;
+    ffonto:thresholdValue 6e-01 .
+
+<http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a> a ffonto:AudioRecord ;
+    ffonto:aboutEvent <http://purl.org/ffonto/data/event/ev-22e029d3b190> ;
+    ffonto:durationMs 4.8e+02 ;
+    ffonto:fileURI "/home/cse/Documents/AudioToText/dataset/videoplayback_14.wav" ;
+    ffonto:globalThreshold 2e-01 ;
+    ffonto:hasObservation <http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a/obs/0> ;
+    ffonto:recordUUID "7cd6773c-c37e-4acc-a594-20a8d0a5c74a" ;
+    ffonto:schemaVersion "1.0.0" ;
+    ffonto:sourceName "unknown_microphone" .
+
+<http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a/obs/0> a ffonto:ModelObservation ;
+    ffonto:confidence 7.337e-01 ;
+    ffonto:labelCategory "fire_audio" ;
+    ffonto:labelSource ffv:AudioTaggerSource ;
+    ffonto:maxConfidence 7.337e-01 ;
+    ffonto:meanConfidence 7.337e-01 ;
+    ffonto:predictedClass ffv:Explosion ;
+    ffonto:topKLabel "explosion" ;
+    ffonto:usedThreshold <http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a/threshold/Explosion> ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/google-yamnet/1> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a> .
+
+<http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a/threshold/Explosion> a ffonto:Threshold ;
+    ffonto:forClass ffv:Explosion ;
+    ffonto:thresholdValue 2e-01 .
+
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/0> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:Gray ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
+    sosa:observedProperty ffv:SmokeColour .
+
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/1> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:High ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
+    sosa:observedProperty ffv:SmokeDensity .
+
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/2> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:Drifting ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
+    sosa:observedProperty ffv:PlumeDirection .
+
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/3> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:Medium ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
+    sosa:observedProperty ffv:VisibilityLevel .
+
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/4> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:Daytime ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
+    sosa:observedProperty ffv:LightCondition .
+
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/5> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:SurfaceFireType ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
+    sosa:observedProperty ffv:FireType .
+
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/6> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:Medium ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
+    sosa:observedProperty ffv:FireIntensity .
+
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/7> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:Wildfire ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
+    sosa:observedProperty ffv:ScenePurpose .
+
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e1> ffonto:count 1 ;
+    ffonto:hasKind ffv:FlameFront ;
+    ffonto:near <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e4> ;
+    ffonto:relativePosition ffv:HeadOfFire .
+
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e2> ffonto:count 1 ;
+    ffonto:hasKind ffv:SmokePlume .
+
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e3> ffonto:hasKind ffv:ConiferousForest ;
+    ffonto:hasState ffv:Dense,
+        ffv:Dry .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/attr/0> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:DarkGray ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
+    sosa:observedProperty ffv:SmokeColour .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/attr/1> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:High ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
+    sosa:observedProperty ffv:SmokeDensity .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/attr/2> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:Low ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
+    sosa:observedProperty ffv:VisibilityLevel .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/attr/3> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:Daytime ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
+    sosa:observedProperty ffv:LightCondition .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/attr/4> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:StructureFireType ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
+    sosa:observedProperty ffv:FireType .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/attr/5> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:High ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
+    sosa:observedProperty ffv:FireIntensity .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/attr/6> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:Expanding ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
+    sosa:observedProperty ffv:FireSpreadStatus .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/attr/7> a ffonto:ModelObservation ;
+    ffonto:hasValueConcept ffv:Wildfire ;
+    ffonto:labelSource ffv:VLMSource ;
+    prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
+    sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
+    sosa:observedProperty ffv:ScenePurpose .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/e1> ffonto:count 2 ;
+    ffonto:hasKind ffv:Firefighter ;
+    ffonto:near <http://purl.org/ffonto/data/scene/scene-fixture-081/e5> ;
+    ffonto:performs ffv:ApplyingWater,
+        ffv:StructureProtection ;
+    ffonto:relativePosition ffv:BetweenFireAndAsset ;
+    ffonto:wears ffv:EyeProtection,
+        ffv:FireResistantClothing,
+        ffv:Gloves,
+        ffv:Helmet .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/e10> ffonto:count 1 ;
+    ffonto:hasKind ffv:FireEngine ;
+    ffonto:hasState ffv:LightsOn ;
+    ffonto:performs ffv:Pumping ;
+    ffonto:protects <http://purl.org/ffonto/data/scene/scene-fixture-081/e4> ;
+    ffonto:relativePosition ffv:BetweenFireAndAsset .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/e11> ffonto:count 1 ;
+    ffonto:hasKind ffv:SpotFire ;
+    ffonto:relativePosition ffv:AheadOfFire .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/e12> ffonto:count 1 ;
+    ffonto:hasKind ffv:Foam ;
+    ffonto:hasState ffv:Deployed .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/e2> ffonto:count 1 ;
+    ffonto:hasKind ffv:Firefighter ;
+    ffonto:near <http://purl.org/ffonto/data/scene/scene-fixture-081/e5> ;
+    ffonto:performs ffv:AdvancingHoseLine ;
+    ffonto:wears ffv:FireResistantClothing,
+        ffv:Helmet .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/e3> ffonto:count 2 ;
+    ffonto:hasKind ffv:HoseLine ;
+    ffonto:hasState ffv:Charged,
+        ffv:Flowing .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/e6> ffonto:count 1 ;
+    ffonto:hasKind ffv:PropaneTank ;
+    ffonto:near <http://purl.org/ffonto/data/scene/scene-fixture-081/e5> .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/e7> ffonto:hasKind ffv:Road ;
+    ffonto:hasState ffv:Open .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/e8> ffonto:count 1 ;
+    ffonto:hasKind ffv:PrivateCar ;
+    ffonto:near <http://purl.org/ffonto/data/scene/scene-fixture-081/e5> .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/e9> ffonto:hasKind ffv:ConiferousForest ;
+    ffonto:hasState ffv:Dry .
+
+<http://purl.org/ffonto/data/site/demo-site-a> a ffonto:Site ;
+    ffonto:siteName "demo_site_A" .
+
+<http://purl.org/ffonto/data/model/salesforce-blip-image-captioning-large> a ffonto:Model ;
+    ffonto:modelName "Salesforce/blip-image-captioning-large" .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081> a ffonto:AudioRecord ;
+    ffonto:aboutEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
+    ffonto:atSite <http://purl.org/ffonto/data/site/demo-site-a> ;
+    ffonto:captureTime "2012-08-28T14:05:30+00:00"^^xsd:dateTime ;
+    ffonto:deviceId "mic-01" ;
+    ffonto:durationMs 9.6e+03 ;
+    ffonto:fileURI "fixtures/forest_fire_081.wav" ;
+    ffonto:globalThreshold 2e-01 ;
+    ffonto:hasObservation <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/obs/0>,
+        <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/obs/1> ;
+    ffonto:recordUUID "00000000-0000-4000-8000-0000000a0081" ;
+    ffonto:schemaVersion "1.0.0" ;
+    ffonto:sourceName "fixture_microphone" .
+
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e4> ffonto:hasKind ffv:Lake .
+
+<http://purl.org/ffonto/data/site/demo-site-a/grid-2-2> a ffonto:Site ;
+    ffonto:gridX 2 ;
+    ffonto:gridY 2 ;
+    ffonto:siteName "demo_site_A (grid 2,2)" .
+
+<http://purl.org/ffonto/data/event/ev-demo-081> a ffonto:FireEvent ;
+    ffonto:eventCode "ev_demo_081" .
+
+<http://purl.org/ffonto/data/model/google-yamnet/1> a ffonto:Model ;
+    ffonto:classMapSHA1 "39cf3cd50b11d36e1d91432d7d1c01249ef86695" ;
+    ffonto:frameStrideS 4.8e-01 ;
+    ffonto:modelName "google/yamnet" ;
+    ffonto:modelURL "https://tfhub.dev/google/yamnet/1"^^xsd:anyURI ;
+    ffonto:modelVersion "1" ;
+    ffonto:topK 8 .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/e4> ffonto:count 1 ;
+    ffonto:hasKind ffv:House ;
+    ffonto:hasState ffv:Scorched,
+        ffv:Threatened .
+
+<http://purl.org/ffonto/data/scene/scene-fixture-081/e5> ffonto:advancingToward <http://purl.org/ffonto/data/scene/scene-fixture-081/e4> ;
+    ffonto:count 2 ;
+    ffonto:hasKind ffv:FlameFront .
+
+<http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> a ffonto:Model ;
+    ffonto:modelName "openai/clip-vit-large-patch14" ;
+    ffonto:modelVersion "hf" .
+
+<http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> a ffonto:ImageRecord ;
+    dcterms:license "CC-BY-4.0" ;
+    ffonto:aboutEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
+    ffonto:bands "RGB" ;
+    ffonto:blur 8e-02 ;
+    ffonto:captureTime "2012-08-28T14:05:00+00:00"^^xsd:dateTime ;
+    ffonto:centerWKT "POINT(-6.85 41.8)" ;
+    ffonto:checksumSHA256 "0000000000000000000000000000000000000000000000000000000000000000" ;
+    ffonto:crs "EPSG:4326" ;
+    ffonto:fileURI "fixtures/forest_fire_081.jpg" ;
+    ffonto:georeferenced true ;
+    ffonto:hasCaption <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/caption> ;
+    ffonto:hasObservation <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/0>,
+        <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/1>,
+        <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/z2> ;
+    ffonto:heightPx 1080 ;
+    ffonto:mediaId "forest_fire_081" ;
+    ffonto:recordUUID "00000000-0000-4000-8000-000000000081" ;
+    ffonto:schemaVersion "1.0.0" ;
+    ffonto:sourceName "fixture_camera" ;
+    ffonto:widthPx 1920 .
+
+<http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> a ffonto:ImageRecord ;
+    dcterms:license "CC-BY-4.0" ;
+    ffonto:aboutEvent <http://purl.org/ffonto/data/event/ev-bf59c56acb36> ;
+    ffonto:checksumSHA256 "df5124ebe5531b3d7d9b1573e65ad2a354b523f0d35ec933dbdb3066d1161372" ;
+    ffonto:fileURI "/home/cse/Documents/ImageToText/dataset_2/evoDJI_0001_frame12.jpg" ;
+    ffonto:georeferenced false ;
+    ffonto:hasCaption <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/caption> ;
+    ffonto:hasObservation <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/0>,
+        <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/1>,
+        <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/z2> ;
+    ffonto:heightPx 1080 ;
+    ffonto:mediaId "evoDJI_0001_frame12_100788" ;
+    ffonto:recordUUID "3f6d562f-33d3-49ee-a40b-3a8b6cf07823" ;
+    ffonto:schemaVersion "1.0.0" ;
+    ffonto:sourceName "unknown_camera" ;
+    ffonto:widthPx 2048 .
+
+<http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> a ffonto:Model ;
+    ffonto:modelName "EXAMPLE-VLM (hand-written fixture, replace with real VLM output)" ;
+    ffonto:modelVersion "0" .
+

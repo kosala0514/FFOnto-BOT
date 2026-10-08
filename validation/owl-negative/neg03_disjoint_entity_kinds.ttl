@@ -1,0 +1,4 @@
+# NEGATIVE TEST – must make the ontology INCONSISTENT.
+# Scene-entity top classes are pairwise disjoint (owl:AllDisjointClasses).
+@prefix ffonto: <http://purl.org/ffonto#> .
+<http://purl.org/ffonto/data/test/e1> a ffonto:Vehicle , ffonto:BuiltAsset .

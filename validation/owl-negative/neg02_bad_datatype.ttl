@@ -1,0 +1,5 @@
+# NEGATIVE TEST – must make the ontology INCONSISTENT.
+# ffonto:confidence has range xsd:double; a string value violates it.
+@prefix ffonto: <http://purl.org/ffonto#> .
+<http://purl.org/ffonto/data/test/obs1> a ffonto:ModelObservation ;
+    ffonto:confidence "high" .

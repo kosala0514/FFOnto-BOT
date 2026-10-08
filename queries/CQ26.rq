@@ -1,0 +1,38 @@
+# CQ26: Which ecological impacts, ecosystem services and restoration measures apply to the ecosystem seen?
+#
+# Example ForestFire-VQA questions answered by this query:
+#   - What immediate environmental impacts can the fire cause to this forest ecosystem?
+#   - What ecosystem services may be most impacted?
+#   - What restoration strategies could be applied here?
+#   - How might this activity benefit the forest ecosystem?
+#
+# Note: This uses background knowledge in ontology/ffonto-vocab.ttl. An LLM can phrase the explanation, but the facts come from the graph.
+
+PREFIX ffonto:  <http://purl.org/ffonto#>
+PREFIX ffv:  <http://purl.org/ffonto/vocab#>
+PREFIX ffd:  <http://purl.org/ffonto/data/>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?record ?ecosystem
+       (REPLACE(REPLACE(GROUP_CONCAT(DISTINCT COALESCE(?impactL, ""); separator=", "), "^(, )+|(, )+$", ""), "(, ){2,}", ", ") AS ?typicalImpacts)
+       (REPLACE(REPLACE(GROUP_CONCAT(DISTINCT COALESCE(?serviceL, ""); separator=", "), "^(, )+|(, )+$", ""), "(, ){2,}", ", ") AS ?servicesAtRisk)
+       (REPLACE(REPLACE(GROUP_CONCAT(DISTINCT COALESCE(?restL, ""); separator=", "), "^(, )+|(, )+$", ""), "(, ){2,}", ", ") AS ?restorationOptions)
+WHERE {
+  ?sd ffonto:describesRecord ?record .
+  { ?sd ffonto:depicts/ffonto:hasKind ?k }
+  UNION
+  { ?sd ffonto:hasObservation ?o . ?o sosa:observedProperty ffv:ScenePurpose ; ffonto:hasValueConcept ?k }
+  ?k skos:prefLabel ?ecosystem ;
+     skos:broader* ?kk .
+  FILTER EXISTS { ?kk ffonto:typicalFireImpact|ffonto:providesService|ffonto:suggestedRestoration ?any }
+  OPTIONAL { ?kk ffonto:typicalFireImpact/skos:prefLabel ?impactL }
+  OPTIONAL { ?kk ffonto:providesService/skos:prefLabel ?serviceL }
+  OPTIONAL { ?kk ffonto:suggestedRestoration/skos:prefLabel ?restL }
+}
+GROUP BY ?record ?ecosystem
+ORDER BY ?record ?ecosystem

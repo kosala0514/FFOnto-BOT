@@ -1,0 +1,35 @@
+# CQ01: Which records (image, audio, weather) exist for each fire event, in which modalities?
+#
+# Example ForestFire-VQA questions answered by this query:
+#   - Is there an image available for this fire event?
+#   - Do the image and audio share this fire event?
+#   - Do multiple images share this fire event?
+#   - Is there more than one audio clip for this fire event?
+
+PREFIX ffonto:  <http://purl.org/ffonto#>
+PREFIX ffv:  <http://purl.org/ffonto/vocab#>
+PREFIX ffd:  <http://purl.org/ffonto/data/>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?eventCode
+       (COUNT(DISTINCT ?record) AS ?nRecords)
+       (COUNT(DISTINCT ?img) AS ?nImages)
+       (COUNT(DISTINCT ?aud) AS ?nAudio)
+       (COUNT(DISTINCT ?wx)  AS ?nWeatherRows)
+       (GROUP_CONCAT(DISTINCT ?modality; separator=", ") AS ?modalities)
+WHERE {
+  ?record ffonto:aboutEvent ?event ; a ?type .
+  ?event ffonto:eventCode ?eventCode .
+  VALUES ?type { ffonto:ImageRecord ffonto:AudioRecord ffonto:WeatherRecord }
+  BIND(STRAFTER(STR(?type), "#") AS ?modality)
+  BIND(IF(?type = ffonto:ImageRecord,   ?record, ?unbound) AS ?img)
+  BIND(IF(?type = ffonto:AudioRecord,   ?record, ?unbound) AS ?aud)
+  BIND(IF(?type = ffonto:WeatherRecord, ?record, ?unbound) AS ?wx)
+}
+GROUP BY ?eventCode
+ORDER BY DESC(?nRecords)

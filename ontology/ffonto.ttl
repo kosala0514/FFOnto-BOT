@@ -1,0 +1,16 @@
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Hub ontology: open THIS file in Protégé / give it to ROBOT.
+# catalog-v001.xml (same folder) maps the imported IRIs to the local files.
+
+<http://purl.org/ffonto/all>
+    a owl:Ontology ;
+    owl:versionInfo "2.0.0" ;
+    dcterms:title "FFOnto (all modules)"@en ;
+    dcterms:description "Imports the FFOnto core schema, SKOS vocabulary and danger rules."@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    owl:imports <http://purl.org/ffonto> ,
+                <http://purl.org/ffonto/vocab> ,
+                <http://purl.org/ffonto/rules> .

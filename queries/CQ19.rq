@@ -1,0 +1,32 @@
+# CQ19: Which suppression activities / tactics are under way, by whom, and where relative to the fire?
+#
+# Example ForestFire-VQA questions answered by this query:
+#   - Is active fire suppression taking place?
+#   - Are firefighters digging a hand line?
+#   - Is the drop ahead of the flames (indirect) or on flame (direct)?
+#   - Are resources operating on the fire's right or left flank?
+#   - Are resources positioned between the fire and nearby structures?
+#   - Is a hose line protecting a structure?
+
+PREFIX ffonto:  <http://purl.org/ffonto#>
+PREFIX ffv:  <http://purl.org/ffonto/vocab#>
+PREFIX ffd:  <http://purl.org/ffonto/data/>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?record ?actorKind ?activity ?tactic ?position (REPLACE(REPLACE(GROUP_CONCAT(DISTINCT COALESCE(?protectedL, ""); separator=", "), "^(, )+|(, )+$", ""), "(, ){2,}", ", ") AS ?protecting)
+WHERE {
+  ?sd ffonto:describesRecord ?record ; ffonto:depicts ?actor .
+  ?actor ffonto:performs ?act ; ffonto:hasKind/skos:prefLabel ?actorKind .
+  ?act skos:broader* ffv:SuppressionActivity ; skos:prefLabel ?activity .
+  OPTIONAL { VALUES ?tg { ffv:DirectAttack ffv:IndirectAttack ffv:AerialSuppression }
+             ?act skos:broader* ?tg . ?tg skos:prefLabel ?tactic }
+  OPTIONAL { ?actor ffonto:relativePosition/skos:prefLabel ?position }
+  OPTIONAL { ?actor ffonto:protects/ffonto:hasKind/skos:prefLabel ?protectedL }
+}
+GROUP BY ?record ?actorKind ?activity ?tactic ?position
+ORDER BY ?record ?actorKind

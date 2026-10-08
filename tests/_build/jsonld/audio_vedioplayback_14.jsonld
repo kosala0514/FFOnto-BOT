@@ -1,0 +1,226 @@
+{
+  "@context": {
+    "ffo": "http://purl.org/ffonto#",
+    "ffv": "http://purl.org/ffonto/vocab#",
+    "ffd": "http://purl.org/ffonto/data/",
+    "sosa": "http://www.w3.org/ns/sosa/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema_version": "ffonto:schemaVersion",
+    "record_uuid": "ffonto:recordUUID",
+    "image_id": "ffonto:mediaId",
+    "event_id": {
+      "@id": "ffonto:aboutEvent",
+      "@type": "@id"
+    },
+    "event_code": "ffonto:eventCode",
+    "source": "ffonto:sourceName",
+    "device_id": "ffonto:deviceId",
+    "capture_time_utc": {
+      "@id": "ffonto:captureTime",
+      "@type": "xsd:dateTime"
+    },
+    "crs": "ffonto:crs",
+    "center": "ffonto:centerWKT",
+    "footprint": "ffonto:footprintWKT",
+    "resolution_m": "ffonto:resolutionM",
+    "bands": "ffonto:bands",
+    "georeferenced": "ffonto:georeferenced",
+    "cloud_cover": "ffonto:cloudCover",
+    "blur": "ffonto:blur",
+    "uri": "ffonto:fileURI",
+    "audio_file": "ffonto:fileURI",
+    "checksum_sha256": "ffonto:checksumSHA256",
+    "license": "dcterms:license",
+    "width": "ffonto:widthPx",
+    "height": "ffonto:heightPx",
+    "duration_ms": "ffonto:durationMs",
+    "global_threshold": "ffonto:globalThreshold",
+    "region": "ffonto:regionName",
+    "at_site": {
+      "@id": "ffonto:atSite",
+      "@type": "@id"
+    },
+    "site_name": "ffonto:siteName",
+    "country": "ffonto:country",
+    "grid_x": "ffonto:gridX",
+    "grid_y": "ffonto:gridY",
+    "caption": {
+      "@id": "ffonto:hasCaption",
+      "@type": "@id"
+    },
+    "caption_text": "ffonto:captionText",
+    "observations": {
+      "@id": "ffonto:hasObservation",
+      "@type": "@id"
+    },
+    "attributes": {
+      "@id": "ffonto:hasObservation",
+      "@type": "@id"
+    },
+    "feature_of_interest": {
+      "@id": "sosa:hasFeatureOfInterest",
+      "@type": "@id"
+    },
+    "predicted_class": {
+      "@id": "ffonto:predictedClass",
+      "@type": "@id"
+    },
+    "observed_property": {
+      "@id": "sosa:observedProperty",
+      "@type": "@id"
+    },
+    "value": {
+      "@id": "ffonto:hasValueConcept",
+      "@type": "@id"
+    },
+    "confidence": "ffonto:confidence",
+    "mean_confidence": "ffonto:meanConfidence",
+    "max_confidence": "ffonto:maxConfidence",
+    "top_k_labels": "ffonto:topKLabel",
+    "label_category": "ffonto:labelCategory",
+    "label_source": {
+      "@id": "ffonto:labelSource",
+      "@type": "@id"
+    },
+    "severity": {
+      "@id": "ffonto:severity",
+      "@type": "@id"
+    },
+    "used_threshold": {
+      "@id": "ffonto:usedThreshold",
+      "@type": "@id"
+    },
+    "for_class": {
+      "@id": "ffonto:forClass",
+      "@type": "@id"
+    },
+    "threshold_value": "ffonto:thresholdValue",
+    "human_validated": "ffonto:humanValidated",
+    "attributed_to": {
+      "@id": "prov:wasAttributedTo",
+      "@type": "@id"
+    },
+    "model_name": "ffonto:modelName",
+    "model_version": "ffonto:modelVersion",
+    "model_url": {
+      "@id": "ffonto:modelURL",
+      "@type": "xsd:anyURI"
+    },
+    "class_map_sha1": "ffonto:classMapSHA1",
+    "frame_stride_s": "ffonto:frameStrideS",
+    "top_k": "ffonto:topK",
+    "date": {
+      "@id": "ffonto:observationDate",
+      "@type": "xsd:dateTime"
+    },
+    "day_name": "ffonto:dayName",
+    "temp_c": "ffonto:airTemperatureC",
+    "rh_pct": "ffonto:relativeHumidityPct",
+    "wind_kmh": "ffonto:windSpeedKmh",
+    "rain_mm": "ffonto:rainMm",
+    "FFMC": "ffonto:ffmc",
+    "DMC": "ffonto:dmc",
+    "DC": "ffonto:dc",
+    "ISI": "ffonto:isi",
+    "BUI": "ffonto:bui",
+    "FWI": "ffonto:fwi",
+    "fire_occured": "ffonto:fireOccurred",
+    "area_ha": "ffonto:burnedAreaHa",
+    "describes_record": {
+      "@id": "ffonto:describesRecord",
+      "@type": "@id"
+    },
+    "entities": {
+      "@id": "ffonto:depicts",
+      "@type": "@id"
+    },
+    "kind": {
+      "@id": "ffonto:hasKind",
+      "@type": "@id"
+    },
+    "count": "ffonto:count",
+    "state": {
+      "@id": "ffonto:hasState",
+      "@type": "@id"
+    },
+    "activity": {
+      "@id": "ffonto:performs",
+      "@type": "@id"
+    },
+    "wears": {
+      "@id": "ffonto:wears",
+      "@type": "@id"
+    },
+    "position": {
+      "@id": "ffonto:relativePosition",
+      "@type": "@id"
+    },
+    "near": {
+      "@id": "ffonto:near",
+      "@type": "@id"
+    },
+    "advancing_toward": {
+      "@id": "ffonto:advancingToward",
+      "@type": "@id"
+    },
+    "reached": {
+      "@id": "ffonto:reached",
+      "@type": "@id"
+    },
+    "protects": {
+      "@id": "ffonto:protects",
+      "@type": "@id"
+    },
+    "blocks": {
+      "@id": "ffonto:blocks",
+      "@type": "@id"
+    }
+  },
+  "@id": "ffd:record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a",
+  "@type": "ffonto:AudioRecord",
+  "schema_version": "1.0.0",
+  "record_uuid": "7cd6773c-c37e-4acc-a594-20a8d0a5c74a",
+  "event_id": {
+    "@id": "ffd:event/ev-22e029d3b190",
+    "@type": "ffonto:FireEvent",
+    "event_code": "ev_22e029d3b190"
+  },
+  "audio_file": "/home/cse/Documents/AudioToText/dataset/videoplayback_14.wav",
+  "source": "unknown_microphone",
+  "duration_ms": 480.0,
+  "global_threshold": 0.2,
+  "observations": [
+    {
+      "@id": "ffd:record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a/obs/0",
+      "@type": "ffonto:ModelObservation",
+      "feature_of_interest": "ffd:record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a",
+      "predicted_class": "ffv:Explosion",
+      "label_category": "fire_audio",
+      "confidence": 0.7337,
+      "mean_confidence": 0.7337,
+      "max_confidence": 0.7337,
+      "top_k_labels": [
+        "explosion"
+      ],
+      "label_source": "ffv:AudioTaggerSource",
+      "attributed_to": {
+        "@id": "ffd:model/google-yamnet/1",
+        "@type": "ffonto:Model",
+        "model_name": "google/yamnet",
+        "model_version": "1",
+        "model_url": "https://tfhub.dev/google/yamnet/1",
+        "class_map_sha1": "39cf3cd50b11d36e1d91432d7d1c01249ef86695",
+        "frame_stride_s": 0.48,
+        "top_k": 8
+      },
+      "used_threshold": {
+        "@id": "ffd:record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a/threshold/Explosion",
+        "@type": "ffonto:Threshold",
+        "for_class": "ffv:Explosion",
+        "threshold_value": 0.2
+      }
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+# NEGATIVE TEST – must make the ontology INCONSISTENT.
+# A record cannot be both an image and an audio record (owl:disjointWith).
+@prefix ffonto: <http://purl.org/ffonto#> .
+<http://purl.org/ffonto/data/test/rec1> a ffonto:ImageRecord , ffonto:AudioRecord .

@@ -1,0 +1,37 @@
+# CQ08: What weather values were observed at a site on a date?
+#
+# Example ForestFire-VQA questions answered by this query:
+#   - What is the current air temperature (°C)?
+#   - What is the current relative humidity (%)?
+#   - What is the wind speed (km/h)?
+#   - How much rain (mm) is recorded today?
+#   - What is the site/region/country for the weather record?
+
+PREFIX ffonto:  <http://purl.org/ffonto#>
+PREFIX ffv:  <http://purl.org/ffonto/vocab#>
+PREFIX ffd:  <http://purl.org/ffonto/data/>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?w ?site ?country ?gridX ?gridY ?date ?dayName ?tempC ?rhPct ?windKmh ?rainMm
+WHERE {
+  ?w a ffonto:WeatherRecord ;
+     ffonto:atSite ?s .
+  ?s ffonto:siteName ?site .
+  OPTIONAL { ?w ffonto:observationDate ?date }      # rows without a complete date are still listed
+  OPTIONAL { ?s ffonto:country ?country }
+  OPTIONAL { ?s ffonto:gridX ?gridX }
+  OPTIONAL { ?s ffonto:gridY ?gridY }
+  OPTIONAL { ?w ffonto:dayName ?dayName }
+  OPTIONAL { ?w ffonto:airTemperatureC ?tempC }
+  OPTIONAL { ?w ffonto:relativeHumidityPct ?rhPct }
+  OPTIONAL { ?w ffonto:windSpeedKmh ?windKmh }
+  OPTIONAL { ?w ffonto:rainMm ?rainMm }
+  # To ask about one day only, uncomment:
+  # FILTER(?date = "2012-08-28T00:00:00Z"^^xsd:dateTime)
+}
+ORDER BY ?site ?date

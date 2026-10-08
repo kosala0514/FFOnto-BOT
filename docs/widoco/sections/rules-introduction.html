@@ -1,0 +1,11 @@
+<h2 id="intro" class="list">Introduction <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+<div class="ffo-section">
+<p>The danger rules of <a href="../index.html">FFOnto</a> are stored as <b>data</b>: each rule is an individual of
+<code>ffo:DangerRule</code> with an observed property, an operator, a threshold value and the condition it indicates
+(a concept in the <a href="../vocab/index.html">vocabulary</a>). A SPARQL rule compares every weather / FWI record with
+these thresholds and derives <code>ffo:hasCondition</code>, so a threshold can be changed and cited in one place without
+editing any query.</p>
+<p><b>Note:</b> the threshold values in version {{VERSION}} are <b>placeholders</b> for testing. They will be replaced by
+values from published fire-danger classifications, each with its source.</p>
+<p>Download: <a href="../resources/danger-rules.ttl">danger-rules.ttl</a>.</p>
+</div>

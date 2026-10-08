@@ -1,0 +1,11 @@
+# FFOnto custom check: every ffo class/property needs a definition in rdfs:comment
+# (replaces ROBOT's OBO-specific missing_definition, which looks for IAO:0000115)
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT DISTINCT ?entity ?property ?value WHERE {
+  VALUES ?type { owl:Class owl:ObjectProperty owl:DatatypeProperty }
+  ?entity a ?type .
+  FILTER(STRSTARTS(STR(?entity), "http://purl.org/ffonto#"))
+  FILTER NOT EXISTS { ?entity rdfs:comment ?c }
+  BIND(rdfs:comment AS ?property)
+}

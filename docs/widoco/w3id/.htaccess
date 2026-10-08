@@ -1,0 +1,39 @@
+# =====================================================================
+#  w3id.org/ffonto  ->  FFOnto documentation on GitHub Pages
+#  Submit this file as  ffonto/.htaccess  in a pull request to https://github.com/perma-id/w3id.org
+#  ONLY useful if the ontology IRIs are https://w3id.org/ffonto… (see docs/widoco/README.md, step 4).
+#  Change BASE if your GitHub Pages URL is different.
+# =====================================================================
+Options +FollowSymLinks
+RewriteEngine on
+
+# ---------- vocabulary   https://w3id.org/ffonto/vocab#Helmet
+RewriteCond %{HTTP_ACCEPT} text/turtle
+RewriteRule ^vocab/?$ https://kosala0514.github.io/ffonto_html/vocab/ontology.ttl [R=303,L]
+RewriteCond %{HTTP_ACCEPT} application/rdf\+xml
+RewriteRule ^vocab/?$ https://kosala0514.github.io/ffonto_html/vocab/ontology.owl [R=303,L]
+RewriteCond %{HTTP_ACCEPT} application/ld\+json
+RewriteRule ^vocab/?$ https://kosala0514.github.io/ffonto_html/vocab/ontology.jsonld [R=303,L]
+RewriteRule ^vocab/?$ https://kosala0514.github.io/ffonto_html/vocab/index.html [R=303,L]
+
+# ---------- danger rules   https://w3id.org/ffonto/rules  and  https://w3id.org/ffonto/data/rule/<id>
+RewriteCond %{HTTP_ACCEPT} text/turtle
+RewriteRule ^rules/?$ https://kosala0514.github.io/ffonto_html/rules/ontology.ttl [R=303,L]
+RewriteRule ^rules/?$ https://kosala0514.github.io/ffonto_html/rules/index.html [R=303,L]
+RewriteRule ^data/rule/(.+)$ https://kosala0514.github.io/ffonto_html/rules/index.html#$1 [R=303,NE,L]
+
+# ---------- JSON-LD context and SHACL shapes
+RewriteRule ^context(\.jsonld)?$ https://kosala0514.github.io/ffonto_html/resources/ffonto.context.jsonld [R=302,L]
+RewriteRule ^shapes(\.ttl)?$ https://kosala0514.github.io/ffonto_html/resources/ffonto-shapes.ttl [R=302,L]
+
+# ---------- versions   https://w3id.org/ffonto/2.0.0
+RewriteRule ^([0-9]+\.[0-9]+\.[0-9]+)/?$ https://kosala0514.github.io/ffonto_html/ [R=302,L]
+
+# ---------- core schema   https://w3id.org/ffonto#FireEvent  (the #fragment never reaches the server)
+RewriteCond %{HTTP_ACCEPT} text/turtle
+RewriteRule ^$ https://kosala0514.github.io/ffonto_html/ontology.ttl [R=303,L]
+RewriteCond %{HTTP_ACCEPT} application/rdf\+xml
+RewriteRule ^$ https://kosala0514.github.io/ffonto_html/ontology.owl [R=303,L]
+RewriteCond %{HTTP_ACCEPT} application/ld\+json
+RewriteRule ^$ https://kosala0514.github.io/ffonto_html/ontology.jsonld [R=303,L]
+RewriteRule ^$ https://kosala0514.github.io/ffonto_html/ [R=303,L]

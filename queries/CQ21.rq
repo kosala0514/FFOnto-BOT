@@ -1,0 +1,37 @@
+# CQ21: What spatial relations hold between the fire and the other things in the scene?
+#
+# Example ForestFire-VQA questions answered by this query:
+#   - How close is the fire front to residential structures?
+#   - Are flames advancing toward populated areas?
+#   - Has the fire reached the river/creek edge?
+#   - Are firefighters in close proximity to the flames?
+#   - Are vehicles parked a safe distance from flames?
+
+PREFIX ffonto:  <http://purl.org/ffonto#>
+PREFIX ffv:  <http://purl.org/ffonto/vocab#>
+PREFIX ffd:  <http://purl.org/ffonto/data/>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+SELECT ?record ?subject ?relation ?object
+WHERE {
+  ?sd ffonto:describesRecord ?record ; ffonto:depicts ?s .
+  ?s ffonto:hasKind/skos:prefLabel ?subject .
+  {
+    ?s ?rel ?o .
+    ?rel rdfs:subPropertyOf ffonto:spatiallyRelated ; rdfs:label ?relation .
+    FILTER(?rel != ffonto:spatiallyRelated)   # needed when a triplestore applies RDFS inference
+    ?o ffonto:hasKind/skos:prefLabel ?object .
+  }
+  UNION
+  {
+    ?s ffonto:relativePosition ?pos .
+    ?pos skos:prefLabel ?object .
+    BIND("relative position" AS ?relation)
+  }
+}
+ORDER BY ?record ?subject
