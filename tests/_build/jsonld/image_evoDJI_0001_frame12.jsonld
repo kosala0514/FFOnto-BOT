@@ -1,7 +1,7 @@
 {
   "@context": {
-    "ffo": "http://purl.org/ffonto#",
-    "ffv": "http://purl.org/ffonto/vocab#",
+    "ffonto": "http://purl.org/ffonto#",
+    "ffontov": "http://purl.org/ffonto/vocab#",
     "ffd": "http://purl.org/ffonto/data/",
     "sosa": "http://www.w3.org/ns/sosa/",
     "prov": "http://www.w3.org/ns/prov#",
@@ -210,10 +210,10 @@
       "@id": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/0",
       "@type": "ffonto:ModelObservation",
       "feature_of_interest": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823",
-      "predicted_class": "ffv:Fire",
+      "predicted_class": "ffontov:Fire",
       "confidence": 0.1585,
-      "severity": "ffv:Low",
-      "label_source": "ffv:CaptionSource",
+      "severity": "ffontov:Low",
+      "label_source": "ffontov:CaptionSource",
       "attributed_to": {
         "@id": "ffd:model/openai-clip-vit-large-patch14/hf",
         "@type": "ffonto:Model",
@@ -223,7 +223,7 @@
       "used_threshold": {
         "@id": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/threshold/Fire",
         "@type": "ffonto:Threshold",
-        "for_class": "ffv:Fire",
+        "for_class": "ffontov:Fire",
         "threshold_value": 0.55
       }
     },
@@ -231,9 +231,9 @@
       "@id": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/1",
       "@type": "ffonto:ModelObservation",
       "feature_of_interest": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823",
-      "predicted_class": "ffv:Smoke",
+      "predicted_class": "ffontov:Smoke",
       "confidence": 0.7291,
-      "label_source": "ffv:ZeroShotSource",
+      "label_source": "ffontov:ZeroShotSource",
       "attributed_to": {
         "@id": "ffd:model/openai-clip-vit-large-patch14/hf",
         "@type": "ffonto:Model",
@@ -243,7 +243,7 @@
       "used_threshold": {
         "@id": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/threshold/Smoke",
         "@type": "ffonto:Threshold",
-        "for_class": "ffv:Smoke",
+        "for_class": "ffontov:Smoke",
         "threshold_value": 0.6
       }
     },
@@ -251,9 +251,9 @@
       "@id": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/z2",
       "@type": "ffonto:ModelObservation",
       "feature_of_interest": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823",
-      "predicted_class": "ffv:NoFire",
+      "predicted_class": "ffontov:NoFire",
       "confidence": 0.11246011406183243,
-      "label_source": "ffv:ZeroShotSource",
+      "label_source": "ffontov:ZeroShotSource",
       "attributed_to": {
         "@id": "ffd:model/openai-clip-vit-large-patch14/hf",
         "@type": "ffonto:Model",

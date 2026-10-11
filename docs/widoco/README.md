@@ -4,9 +4,9 @@ The result is three linked pages with a shared download folder:
 
 | Page | Documents | Extras |
 |---|---|---|
-| `site/index.html` | core schema, `ffo:` (classes and properties) | 3-layer diagram, design principles, CQ table generated from `queries/*.rq`, example, WebVOWL diagram |
-| `site/vocab/index.html` | vocabulary, `ffv:` (374 SKOS concepts) | collapsible concept hierarchy per scheme, keywords |
-| `site/rules/index.html` | danger rules, `ffr:` | — |
+| `site/index.html` | core schema, `ffonto:` (classes and properties) | 3-layer diagram, design principles, CQ table generated from `queries/*.rq`, example, WebVOWL diagram |
+| `site/vocab/index.html` | vocabulary, `ffontov:` (374 SKOS concepts) | collapsible concept hierarchy per scheme, keywords |
+| `site/rules/index.html` | danger rules, `ffontor:` | — |
 | `site/resources/` | `.ttl` modules, SHACL shapes, JSON-LD context | downloads |
 
 The introduction, description and references sections are written in `docs/widoco/sections/*.html`. WIDOCO
@@ -63,7 +63,7 @@ To update later: re-run step 1, copy `site/.` into the repository again, then co
 
 ## 4. Make the ontology IRIs resolvable (recommended before the paper)
 
-The IRIs are currently `http://purl.org/ffonto#…`. Until something redirects them, clicking `ffo:FireEvent` leads
+The IRIs are currently `http://purl.org/ffonto#…`. Until something redirects them, clicking `ffonto:FireEvent` leads
 nowhere, and FOOPS! reports that the IRIs do not resolve. There are two ways to fix this:
 
 | Option | What to do | Content negotiation (HTML for people, Turtle for machines) |

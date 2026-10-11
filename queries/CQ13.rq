@@ -8,7 +8,7 @@
 #   - Is this incident under control or still a spreading threat?
 
 PREFIX ffonto:  <http://purl.org/ffonto#>
-PREFIX ffv:  <http://purl.org/ffonto/vocab#>
+PREFIX ffontov:  <http://purl.org/ffonto/vocab#>
 PREFIX ffd:  <http://purl.org/ffonto/data/>
 PREFIX sosa: <http://www.w3.org/ns/sosa/>
 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -20,7 +20,7 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
 SELECT ?record ?property ?value ?producedBy
 WHERE {
   ?sd ffonto:describesRecord ?record ; ffonto:hasObservation ?o .
-  VALUES ?p { ffv:FireType ffv:FireIntensity ffv:FireSpreadStatus ffv:FireActivityTrend ffv:ScenePurpose }
+  VALUES ?p { ffontov:FireType ffontov:FireIntensity ffontov:FireSpreadStatus ffontov:FireActivityTrend ffontov:ScenePurpose }
   ?o sosa:observedProperty ?p ; ffonto:hasValueConcept ?v .
   ?p skos:prefLabel ?property .
   ?v skos:prefLabel ?value .

@@ -1,8 +1,0 @@
-# FFOnto custom check: every SKOS concept needs exactly one English skos:prefLabel
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-SELECT DISTINCT ?entity ?property ?value WHERE {
-  ?entity a skos:Concept .
-  BIND(skos:prefLabel AS ?property)
-  OPTIONAL { ?entity skos:prefLabel ?value }
-  FILTER(!BOUND(?value))
-}

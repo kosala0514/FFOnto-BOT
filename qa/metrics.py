@@ -33,6 +33,19 @@ def exact_match(pred, ref):
     return float(normalize(pred) == normalize(ref))
 
 
+def token_prf(pred, ref):
+    """Token-level precision, recall, F1 (SQuAD style): overlap of answer words with reference words."""
+    p, r = tokens(pred), tokens(ref)
+    if not p or not r:
+        v = float(p == r)
+        return v, v, v
+    same = sum((Counter(p) & Counter(r)).values())
+    if same == 0:
+        return 0.0, 0.0, 0.0
+    prec, rec = same / len(p), same / len(r)
+    return prec, rec, 2 * prec * rec / (prec + rec)
+
+
 def token_f1(pred, ref):
     p, r = tokens(pred), tokens(ref)
     if not p or not r:
@@ -87,25 +100,50 @@ def rouge_l(pred, ref):
 _NEG = re.compile(r"\b(no|not|none|never|absent|without)\b")
 
 
+_ABSTAIN = re.compile(
+    r"^(sorry |i (do not|don t|cannot|can t) |"
+    r"(knowledge graph|kg|data|available data|result|rows?) (has|have|contains?|provides?|includes?|gives?) no |"
+    r"(knowledge graph|kg|data|available data|result|rows?) (does|do) not (contain|provide|include|specify|mention|indicate|show|say|give|have)|"
+    r"there is no (information|evidence|data)|no (information|evidence|data) |"
+    r"(it is|it s) (not possible|unclear|unknown)|cannot be determined|not enough information)")
+
+
 def polarity(text):
-    """'yes' / 'no' for yes-no style answers, else None."""
+    """'yes' / 'no' / 'abstain' (the answer declines: "the knowledge graph has no information about …"), else None.
+    An abstention is neither yes nor no; counting it as "no" hides why the system failed."""
     t = normalize(text)
+    if _ABSTAIN.match(t):
+        return "abstain"
     if t.startswith("yes"):
         return "yes"
     if t.startswith("no ") or t == "no":
         return "no"
-    if re.match(r"^(there (is|are) no|not |none|no evidence|knowledge graph has no)", t):
+    if re.match(r"^(there (is|are) no|not |none)", t):
         return "no"
     return None
 
 
+def answer_polarity(pred):
+    """Polarity of a system answer: yes / no / abstain / error (never None)."""
+    if str(pred).startswith("Sorry – I could not answer"):
+        return "error"
+    p = polarity(pred)
+    if p:
+        return p
+    t = normalize(pred)
+    if re.search(r"\b(no information|no evidence)\b", t):
+        return "abstain"
+    # "a fire engine is visible; its type is not recorded" is a yes: a missing detail is not a negation
+    t = re.sub(r"\b(is |are )?not (recorded|specified|mentioned|indicated|provided|available|known|stated)\b", " ", t)
+    return "no" if _NEG.search(t) else "yes"
+
+
 def yes_no_agreement(pred, ref):
-    """1/0 if the reference is a yes/no answer, else None (not applicable)."""
+    """1/0 if the reference is a yes/no answer, else None (not applicable). Abstentions and errors count as wrong."""
     pr = polarity(ref)
-    if pr is None:
+    if pr not in ("yes", "no"):
         return None
-    pp = polarity(pred) or ("no" if _NEG.search(normalize(pred)) else "yes")
-    return float(pp == pr)
+    return float(answer_polarity(pred) == pr)
 
 
 def cosine(u, v):
@@ -124,6 +162,18 @@ def _cells(rows, skip_ids=True):
                 continue
             out.add(normalize(v))
     return out
+
+
+def result_set_counts(pred_rows, gold_rows):
+    """(TP, FP, FN) over the non-identifier values of the result rows - for micro-averaged P/R/F1."""
+    p, g = _cells(pred_rows), _cells(gold_rows)
+    return len(p & g), len(p - g), len(g - p)
+
+
+def prf_from_counts(tp, fp, fn):
+    prec = tp / (tp + fp) if tp + fp else 0.0
+    rec = tp / (tp + fn) if tp + fn else 0.0
+    return prec, rec, (2 * prec * rec / (prec + rec) if prec + rec else 0.0)
 
 
 def result_set_prf(pred_rows, gold_rows):

@@ -8,7 +8,7 @@ Each CQ maps to a dict:
 
 A row pattern is {column: expected}. Expected values are compared with the
 displayed value (as in results/report.md):
-    "ffv:Smoke"   exact match
+    "ffontov:Smoke"   exact match
     "~3f6d562f"   '~' = substring match
     "True"/"False" for booleans
 
@@ -28,11 +28,11 @@ EXPECT = {
                       {"record": REAL_IMAGE, "checksum": "~df5124eb", "width": "2048", "height": "1080"}]},
     "CQ03": {"rows": [{"record": REAL_IMAGE, "output": "caption", "modelName": "Salesforce/blip-image-captioning-large"},
                       {"record": REAL_AUDIO, "modelName": "google/yamnet", "modelVersion": "1"}]},
-    "CQ04": {"rows": [{"record": REAL_IMAGE, "class": "ffv:NoFire"},
-                      {"record": REAL_IMAGE, "class": "ffv:Fire", "severity": "ffv:Low"}]},
-    "CQ05": {"rows": [{"record": REAL_IMAGE, "class": "ffv:Smoke", "aboveThreshold": "True", "systemLabel": "Smoke"},
-                      {"record": REAL_IMAGE, "class": "ffv:Fire", "aboveThreshold": "False"},
-                      {"record": REAL_AUDIO, "class": "ffv:Explosion", "aboveThreshold": "True"}]},
+    "CQ04": {"rows": [{"record": REAL_IMAGE, "class": "ffontov:NoFire"},
+                      {"record": REAL_IMAGE, "class": "ffontov:Fire", "severity": "ffontov:Low"}]},
+    "CQ05": {"rows": [{"record": REAL_IMAGE, "class": "ffontov:Smoke", "aboveThreshold": "True", "systemLabel": "Smoke"},
+                      {"record": REAL_IMAGE, "class": "ffontov:Fire", "aboveThreshold": "False"},
+                      {"record": REAL_AUDIO, "class": "ffontov:Explosion", "aboveThreshold": "True"}]},
     "CQ06": {"rows": [{"record": REAL_IMAGE, "mentionsFire": "True", "mentionsWater": "True", "mentionsSmoke": "False"}]},
     "CQ07": {"rows": [{"conflictType": "~Caption mentions", "record": REAL_IMAGE},
                       {"conflictType": "~Audio indicates", "eventCode": "ev_demo_081"}]},

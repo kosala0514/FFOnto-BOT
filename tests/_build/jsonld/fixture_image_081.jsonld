@@ -1,7 +1,7 @@
 {
   "@context": {
-    "ffo": "http://purl.org/ffonto#",
-    "ffv": "http://purl.org/ffonto/vocab#",
+    "ffonto": "http://purl.org/ffonto#",
+    "ffontov": "http://purl.org/ffonto/vocab#",
     "ffd": "http://purl.org/ffonto/data/",
     "sosa": "http://www.w3.org/ns/sosa/",
     "prov": "http://www.w3.org/ns/prov#",
@@ -215,10 +215,10 @@
       "@id": "ffd:record/00000000-0000-4000-8000-000000000081/obs/0",
       "@type": "ffonto:ModelObservation",
       "feature_of_interest": "ffd:record/00000000-0000-4000-8000-000000000081",
-      "predicted_class": "ffv:Fire",
+      "predicted_class": "ffontov:Fire",
       "confidence": 0.41,
-      "severity": "ffv:Medium",
-      "label_source": "ffv:ZeroShotSource",
+      "severity": "ffontov:Medium",
+      "label_source": "ffontov:ZeroShotSource",
       "attributed_to": {
         "@id": "ffd:model/openai-clip-vit-large-patch14/hf",
         "@type": "ffonto:Model",
@@ -228,7 +228,7 @@
       "used_threshold": {
         "@id": "ffd:record/00000000-0000-4000-8000-000000000081/threshold/Fire",
         "@type": "ffonto:Threshold",
-        "for_class": "ffv:Fire",
+        "for_class": "ffontov:Fire",
         "threshold_value": 0.55
       }
     },
@@ -236,9 +236,9 @@
       "@id": "ffd:record/00000000-0000-4000-8000-000000000081/obs/1",
       "@type": "ffonto:ModelObservation",
       "feature_of_interest": "ffd:record/00000000-0000-4000-8000-000000000081",
-      "predicted_class": "ffv:Smoke",
+      "predicted_class": "ffontov:Smoke",
       "confidence": 0.7,
-      "label_source": "ffv:ZeroShotSource",
+      "label_source": "ffontov:ZeroShotSource",
       "attributed_to": {
         "@id": "ffd:model/openai-clip-vit-large-patch14/hf",
         "@type": "ffonto:Model",
@@ -248,7 +248,7 @@
       "used_threshold": {
         "@id": "ffd:record/00000000-0000-4000-8000-000000000081/threshold/Smoke",
         "@type": "ffonto:Threshold",
-        "for_class": "ffv:Smoke",
+        "for_class": "ffontov:Smoke",
         "threshold_value": 0.6
       }
     },
@@ -256,9 +256,9 @@
       "@id": "ffd:record/00000000-0000-4000-8000-000000000081/obs/z2",
       "@type": "ffonto:ModelObservation",
       "feature_of_interest": "ffd:record/00000000-0000-4000-8000-000000000081",
-      "predicted_class": "ffv:NoFire",
+      "predicted_class": "ffontov:NoFire",
       "confidence": 0.09,
-      "label_source": "ffv:ZeroShotSource",
+      "label_source": "ffontov:ZeroShotSource",
       "attributed_to": {
         "@id": "ffd:model/openai-clip-vit-large-patch14/hf",
         "@type": "ffonto:Model",

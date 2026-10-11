@@ -9,7 +9,7 @@
 # Note: This uses background knowledge in ontology/ffonto-vocab.ttl. An LLM can phrase the explanation, but the facts come from the graph.
 
 PREFIX ffonto:  <http://purl.org/ffonto#>
-PREFIX ffv:  <http://purl.org/ffonto/vocab#>
+PREFIX ffontov:  <http://purl.org/ffonto/vocab#>
 PREFIX ffd:  <http://purl.org/ffonto/data/>
 PREFIX sosa: <http://www.w3.org/ns/sosa/>
 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -26,7 +26,7 @@ WHERE {
   ?sd ffonto:describesRecord ?record .
   { ?sd ffonto:depicts/ffonto:hasKind ?k }
   UNION
-  { ?sd ffonto:hasObservation ?o . ?o sosa:observedProperty ffv:ScenePurpose ; ffonto:hasValueConcept ?k }
+  { ?sd ffonto:hasObservation ?o . ?o sosa:observedProperty ffontov:ScenePurpose ; ffonto:hasValueConcept ?k }
   ?k skos:prefLabel ?ecosystem ;
      skos:broader* ?kk .
   FILTER EXISTS { ?kk ffonto:typicalFireImpact|ffonto:providesService|ffonto:suggestedRestoration ?any }

@@ -21,7 +21,7 @@ INDEX TIME (python -m qa.build_index --docs-only)
                               qwen2.5vl:7b ─────┘  JSON: figure_type, title, description,
                               (cached by image hash) key_findings, data_table (chart values), visible_text
                                                 │
-                              ontology concept tagging (ffv: labels/keywords) ─► data/graphs/documents.ttl
+                              ontology concept tagging (ffontov:labels/keywords) ─► data/graphs/documents.ttl
                                                 │
                     all items as text ─► bge-m3 ─► ONE vector index (qa/index/rag_chunks.*)
 
@@ -45,16 +45,16 @@ included. Tables found by `find_tables()` are excluded from the figure search be
 which is more accurate than reading them from pixels.
 
 **Link to the ontology.** Every figure is tagged with the FFOnto concepts its description mentions (`dcterms:subject
-ffv:CrownFire`, …). These tags go to `data/graphs/documents.ttl`, so figures are also queryable in GraphDB:
+ffontov:CrownFire`, …). These tags go to `data/graphs/documents.ttl`, so figures are also queryable in GraphDB:
 
 ```sparql
-PREFIX dcterms: <http://purl.org/dc/terms/>  PREFIX ffv: <http://purl.org/ffonto/vocab#>
+PREFIX dcterms: <http://purl.org/dc/terms/>  PREFIX ffontov:<http://purl.org/ffonto/vocab#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 SELECT ?figure ?label ?type ?hazard WHERE {
   ?figure dcterms:subject ?c ; rdfs:label ?label ; dcterms:type ?type .
-  ?c skos:inScheme ffv:HazardScheme ; skos:prefLabel ?hazard .      # figures about any hazard
+  ?c skos:inScheme ffontov:HazardScheme ; skos:prefLabel ?hazard .      # figures about any hazard
 }
-# figures about any kind of vegetation:  ?figure dcterms:subject/skos:broader* ffv:Vegetation
+# figures about any kind of vegetation:  ?figure dcterms:subject/skos:broader* ffontov:Vegetation
 ```
 
 ## Setup

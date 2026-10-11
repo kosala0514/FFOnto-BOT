@@ -8,7 +8,7 @@
 #   - Is the detection above the configured threshold?
 
 PREFIX ffonto:  <http://purl.org/ffonto#>
-PREFIX ffv:  <http://purl.org/ffonto/vocab#>
+PREFIX ffontov:  <http://purl.org/ffonto/vocab#>
 PREFIX ffd:  <http://purl.org/ffonto/data/>
 PREFIX sosa: <http://www.w3.org/ns/sosa/>
 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -17,18 +17,19 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 
-SELECT ?record ?class ?confidence ?threshold ?aboveThreshold ?systemLabel
+# The system label is aggregated in the same query (no sub-query inside OPTIONAL), so the result is the same
+# on every SPARQL engine (rdflib versions differ in how they join an OPTIONAL sub-select).
+SELECT ?record ?class ?confidence ?threshold ?aboveThreshold
+       (IF(COUNT(?d) > 0,
+           GROUP_CONCAT(DISTINCT STRAFTER(STR(?d), "#"); separator=" + "),
+           "NoFire (nothing above threshold)") AS ?systemLabel)
 WHERE {
   ?record ffonto:hasObservation ?o .
   ?o ffonto:predictedClass ?class ;
      ffonto:confidence ?confidence ;
      ffonto:usedThreshold/ffonto:thresholdValue ?threshold .
   OPTIONAL { ?o ffonto:aboveThreshold ?aboveThreshold }
-  OPTIONAL {
-    SELECT ?record (GROUP_CONCAT(DISTINCT STRAFTER(STR(?d), "#"); separator=" + ") AS ?detected)
-    WHERE { ?record ffonto:detectedClass ?d }
-    GROUP BY ?record
-  }
-  BIND(COALESCE(?detected, "NoFire (nothing above threshold)") AS ?systemLabel)
+  OPTIONAL { ?record ffonto:detectedClass ?d }
 }
+GROUP BY ?record ?class ?confidence ?threshold ?aboveThreshold
 ORDER BY ?record ?class

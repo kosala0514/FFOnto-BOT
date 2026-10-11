@@ -40,12 +40,12 @@ EXTRA_CSS = """
 def ttl_stats():
     core = (ROOT / "ontology/ffonto-core.ttl").read_text(encoding="utf-8")
     vocab = (ROOT / "ontology/ffonto-vocab.ttl").read_text(encoding="utf-8")
-    count = lambda t: len(re.findall(rf"^ffo:\w+\s+a\s+owl:{t}\b", core, re.M))
+    count = lambda t: len(re.findall(rf"^ffonto:\w+\s+a\s+owl:{t}\b", core, re.M))
     version = re.search(r'owl:versionInfo\s+"([^"]+)"', core)
     return {
         "N_CLASSES": count("Class"), "N_OBJ": count("ObjectProperty"), "N_DATA": count("DatatypeProperty"),
-        "N_CONCEPTS": len(re.findall(r"^ffv:\w+\s+a\s+skos:Concept\b", vocab, re.M)),
-        "N_SCHEMES": len(re.findall(r"^ffv:\w+\s+a\s+skos:ConceptScheme\b", vocab, re.M)),
+        "N_CONCEPTS": len(re.findall(r"^ffontov:\w+\s+a\s+skos:Concept\b", vocab, re.M)),
+        "N_SCHEMES": len(re.findall(r"^ffontov:\w+\s+a\s+skos:ConceptScheme\b", vocab, re.M)),
         "VERSION": version.group(1) if version else "",
     }
 

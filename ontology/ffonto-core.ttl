@@ -1,5 +1,5 @@
-@prefix ffo:     <http://purl.org/ffonto#> .
-@prefix ffv:     <http://purl.org/ffonto/vocab#> .
+@prefix ffonto:     <http://purl.org/ffonto#> .
+@prefix ffontov:     <http://purl.org/ffonto/vocab#> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
@@ -43,7 +43,7 @@
     dcterms:modified "2026-10-09"^^xsd:date ;
     bibo:status "Draft"@en ;
     dcterms:bibliographicCitation "Jayaweera, C. K. and Meedeniya, D. (2026). FFOnto: Forest Fire Ontology, version 2.0.0. http://purl.org/ffonto"@en ;
-    vann:preferredNamespacePrefix "ffo" ;
+    vann:preferredNamespacePrefix "ffonto" ;
     vann:preferredNamespaceUri "http://purl.org/ffonto#" .
 
 # ---------------------------------------------------------------------
@@ -98,64 +98,64 @@ vann:preferredNamespaceUri    a owl:AnnotationProperty ; rdfs:label "preferred n
 #  WORLD LAYER
 # ---------------------------------------------------------------------
 
-ffo:FireEvent a owl:Class ;
+ffonto:FireEvent a owl:Class ;
     rdfs:label "Fire event"@en ;
     rdfs:comment "A single fire incident that one or more data records are about. Identified in the data by event_id."@en ;
     rdfs:subClassOf sosa:FeatureOfInterest .
 
-ffo:Site a owl:Class ;
+ffonto:Site a owl:Class ;
     rdfs:subClassOf sosa:FeatureOfInterest ;
     rdfs:label "Site"@en ;
     rdfs:comment "A named place or grid cell where data were recorded (weather station, camera site, grid cell)."@en .
 
-ffo:SceneEntity a owl:Class ;
+ffonto:SceneEntity a owl:Class ;
     rdfs:subClassOf sosa:FeatureOfInterest ;
     rdfs:label "Scene entity"@en ;
-    rdfs:comment "Something depicted in an image according to a scene description (a fire front, a firefighter, a building …). Its fine-grained kind is given by ffo:hasKind → a concept in ffv:EntityKindScheme."@en .
+    rdfs:comment "Something depicted in an image according to a scene description (a fire front, a firefighter, a building …). Its fine-grained kind is given by ffonto:hasKind → a concept in ffontov:EntityKindScheme."@en .
 
-ffo:FirePhenomenon   a owl:Class ; rdfs:subClassOf ffo:SceneEntity ; rdfs:label "Fire phenomenon"@en ;
+ffonto:FirePhenomenon   a owl:Class ; rdfs:subClassOf ffonto:SceneEntity ; rdfs:label "Fire phenomenon"@en ;
     rdfs:comment "Visible fire or smoke phenomenon: flame front, spot fire, crown fire, smoke plume, hotspot …"@en .
-ffo:Agent            a owl:Class ; rdfs:subClassOf ffo:SceneEntity ; rdfs:label "Agent (person or animal)"@en ;
+ffonto:Agent            a owl:Class ; rdfs:subClassOf ffonto:SceneEntity ; rdfs:label "Agent (person or animal)"@en ;
     rdfs:comment "A person or animal depicted in a scene."@en .
-ffo:Equipment        a owl:Class ; rdfs:subClassOf ffo:SceneEntity ; rdfs:label "Equipment"@en ;
+ffonto:Equipment        a owl:Class ; rdfs:subClassOf ffonto:SceneEntity ; rdfs:label "Equipment"@en ;
     rdfs:comment "Tools, hoses, pumps, radios and other portable gear depicted in a scene."@en .
-ffo:Vehicle          a owl:Class ; rdfs:subClassOf ffo:SceneEntity ; rdfs:label "Vehicle"@en ;
+ffonto:Vehicle          a owl:Class ; rdfs:subClassOf ffonto:SceneEntity ; rdfs:label "Vehicle"@en ;
     rdfs:comment "Ground vehicle or aircraft depicted in a scene."@en .
-ffo:BuiltAsset       a owl:Class ; rdfs:subClassOf ffo:SceneEntity ; rdfs:label "Built asset"@en ;
+ffonto:BuiltAsset       a owl:Class ; rdfs:subClassOf ffonto:SceneEntity ; rdfs:label "Built asset"@en ;
     rdfs:comment "Building or infrastructure element depicted in a scene (house, road, bridge, power line, hydrant, tank, sign …)."@en .
-ffo:EnvironmentFeature a owl:Class ; rdfs:subClassOf ffo:SceneEntity ; rdfs:label "Environment feature"@en ;
+ffonto:EnvironmentFeature a owl:Class ; rdfs:subClassOf ffonto:SceneEntity ; rdfs:label "Environment feature"@en ;
     rdfs:comment "Vegetation, terrain, water body or land-cover element depicted in a scene."@en .
-ffo:BurnEvidence     a owl:Class ; rdfs:subClassOf ffo:SceneEntity ; rdfs:label "Burn evidence"@en ;
+ffonto:BurnEvidence     a owl:Class ; rdfs:subClassOf ffonto:SceneEntity ; rdfs:label "Burn evidence"@en ;
     rdfs:comment "Post-fire trace visible in a scene: ash, char, exposed mineral soil, snags, regrowth, erosion rills …"@en .
 
 [] a owl:AllDisjointClasses ;
-   owl:members ( ffo:FirePhenomenon ffo:Agent ffo:Equipment ffo:Vehicle ffo:BuiltAsset ffo:EnvironmentFeature ffo:BurnEvidence ) .
+   owl:members ( ffonto:FirePhenomenon ffonto:Agent ffonto:Equipment ffonto:Vehicle ffonto:BuiltAsset ffonto:EnvironmentFeature ffonto:BurnEvidence ) .
 
 # ---------------------------------------------------------------------
 #  DATA LAYER (multimodal records)
 # ---------------------------------------------------------------------
 
-ffo:DataRecord a owl:Class ;
+ffonto:DataRecord a owl:Class ;
     rdfs:subClassOf prov:Entity ;
     rdfs:label "Data record"@en ;
     rdfs:comment "One captured data item (an image, an audio clip, a weather row) together with its metadata."@en .
 
-ffo:ImageRecord   a owl:Class ; rdfs:subClassOf ffo:DataRecord ; rdfs:label "Image record"@en ;
+ffonto:ImageRecord   a owl:Class ; rdfs:subClassOf ffonto:DataRecord ; rdfs:label "Image record"@en ;
     rdfs:comment "A still image or video frame record with its file, quality and geo metadata."@en .
-ffo:AudioRecord   a owl:Class ; rdfs:subClassOf ffo:DataRecord ; rdfs:label "Audio record"@en ;
+ffonto:AudioRecord   a owl:Class ; rdfs:subClassOf ffonto:DataRecord ; rdfs:label "Audio record"@en ;
     rdfs:comment "An audio clip record with its file, duration and capture metadata."@en .
-ffo:WeatherRecord a owl:Class ; rdfs:subClassOf ffo:DataRecord ; rdfs:label "Weather / FWI record"@en ;
+ffonto:WeatherRecord a owl:Class ; rdfs:subClassOf ffonto:DataRecord ; rdfs:label "Weather / FWI record"@en ;
     rdfs:comment "One row of the tabular weather and Fire Weather Index dataset."@en .
 
-ffo:ImageRecord   owl:disjointWith ffo:AudioRecord , ffo:WeatherRecord .
-ffo:AudioRecord   owl:disjointWith ffo:WeatherRecord .
+ffonto:ImageRecord   owl:disjointWith ffonto:AudioRecord , ffonto:WeatherRecord .
+ffonto:AudioRecord   owl:disjointWith ffonto:WeatherRecord .
 
-ffo:Caption a owl:Class ;
+ffonto:Caption a owl:Class ;
     rdfs:subClassOf prov:Entity ;
     rdfs:label "Caption"@en ;
     rdfs:comment "Text produced by an image-captioning model for an image record."@en .
 
-ffo:SceneDescription a owl:Class ;
+ffonto:SceneDescription a owl:Class ;
     rdfs:subClassOf prov:Entity ;
     rdfs:label "Scene description"@en ;
     rdfs:comment "Structured output of a scene-graph extractor (vision-language model or detector) for one image record: the entities it depicts, their states, activities and relations, plus scene-level attribute observations."@en .
@@ -164,37 +164,37 @@ ffo:SceneDescription a owl:Class ;
 #  CLAIM LAYER (models, observations, thresholds)
 # ---------------------------------------------------------------------
 
-ffo:Model a owl:Class ;
+ffonto:Model a owl:Class ;
     rdfs:subClassOf prov:SoftwareAgent , sosa:Sensor ;
     rdfs:label "Model"@en ;
     rdfs:comment "A machine-learning model (classifier, captioner, audio tagger, vision-language model) that produces observations, captions or scene descriptions."@en .
 
-ffo:CaptureDevice a owl:Class ;
+ffonto:CaptureDevice a owl:Class ;
     rdfs:subClassOf sosa:Sensor ;
     rdfs:label "Capture device"@en ;
     rdfs:comment "Physical camera, microphone or weather station that captured a record."@en .
 
-ffo:ModelObservation a owl:Class ;
+ffonto:ModelObservation a owl:Class ;
     rdfs:subClassOf sosa:Observation ;
     rdfs:label "Model observation"@en ;
-    rdfs:comment "A claim made by a model about a data record: either a predicted class with a confidence (ffo:predictedClass) or a categorical value for an observable property (sosa:observedProperty + ffo:hasValueConcept)."@en .
+    rdfs:comment "A claim made by a model about a data record: either a predicted class with a confidence (ffonto:predictedClass) or a categorical value for an observable property (sosa:observedProperty + ffonto:hasValueConcept)."@en .
 
-ffo:Threshold a owl:Class ;
+ffonto:Threshold a owl:Class ;
     rdfs:subClassOf prov:Entity ;
     rdfs:label "Threshold"@en ;
     rdfs:comment "A configured decision threshold for one class (e.g. fire_threshold = 0.55)."@en .
 
-ffo:Hazard a owl:Class ;
+ffonto:Hazard a owl:Class ;
     rdfs:subClassOf prov:Entity ;
     rdfs:label "Hazard"@en ;
-    rdfs:comment "A risk DERIVED by a rule from observations; typed by ffo:hasHazardType → ffv:HazardScheme concept and linked to what it threatens."@en .
+    rdfs:comment "A risk DERIVED by a rule from observations; typed by ffonto:hasHazardType → ffontov:HazardScheme concept and linked to what it threatens."@en .
 
-ffo:ModalityConflict a owl:Class ;
+ffonto:ModalityConflict a owl:Class ;
     rdfs:subClassOf prov:Entity ;
     rdfs:label "Modality conflict"@en ;
     rdfs:comment "A derived finding that two observations about the same event or record disagree (e.g. audio explosion vs. no fire in image)."@en .
 
-ffo:DangerRule a owl:Class ;
+ffonto:DangerRule a owl:Class ;
     rdfs:subClassOf prov:Entity ;
     rdfs:label "Danger rule"@en ;
     rdfs:comment "A threshold rule over a weather/FWI property (property, operator, value) that indicates an operational condition. Stored as data so experts can edit it."@en .
@@ -203,155 +203,155 @@ ffo:DangerRule a owl:Class ;
 #  OBJECT PROPERTIES
 # ---------------------------------------------------------------------
 
-ffo:aboutEvent a owl:ObjectProperty ;
+ffonto:aboutEvent a owl:ObjectProperty ;
     rdfs:label "about event"@en ;
-    rdfs:domain ffo:DataRecord ; rdfs:range ffo:FireEvent ;
+    rdfs:domain ffonto:DataRecord ; rdfs:range ffonto:FireEvent ;
     rdfs:comment "Links a record to the fire event it documents (from event_id). This is the cross-modal join key."@en .
 
-ffo:atSite a owl:ObjectProperty ;
-    rdfs:label "at site"@en ; rdfs:domain ffo:DataRecord ; rdfs:range ffo:Site ;
+ffonto:atSite a owl:ObjectProperty ;
+    rdfs:label "at site"@en ; rdfs:domain ffonto:DataRecord ; rdfs:range ffonto:Site ;
     rdfs:comment "Links a record to the site or grid cell where it was captured."@en .
 
-ffo:capturedBy a owl:ObjectProperty ;
-    rdfs:label "captured by"@en ; rdfs:domain ffo:DataRecord ; rdfs:range ffo:CaptureDevice ;
+ffonto:capturedBy a owl:ObjectProperty ;
+    rdfs:label "captured by"@en ; rdfs:domain ffonto:DataRecord ; rdfs:range ffonto:CaptureDevice ;
     rdfs:comment "Links a record to the physical device (camera, microphone, station) that captured it."@en .
 
-ffo:hasObservation a owl:ObjectProperty ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( ffo:DataRecord ffo:SceneDescription ) ] ;
+ffonto:hasObservation a owl:ObjectProperty ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( ffonto:DataRecord ffonto:SceneDescription ) ] ;
     rdfs:label "has observation"@en ;
-    rdfs:range ffo:ModelObservation ;
+    rdfs:range ffonto:ModelObservation ;
     rdfs:comment "Links a record or a scene description to the model observations made about it."@en .
 
-ffo:predictedClass a owl:ObjectProperty ;
-    rdfs:label "predicted class"@en ; rdfs:domain ffo:ModelObservation ; rdfs:range skos:Concept ;
+ffonto:predictedClass a owl:ObjectProperty ;
+    rdfs:label "predicted class"@en ; rdfs:domain ffonto:ModelObservation ; rdfs:range skos:Concept ;
     rdfs:comment "The class a classifier observation predicts (e.g. Fire, Smoke, Explosion)."@en .
 
-ffo:hasValueConcept a owl:ObjectProperty ;
-    rdfs:label "has value concept"@en ; rdfs:domain ffo:ModelObservation ; rdfs:range skos:Concept ;
+ffonto:hasValueConcept a owl:ObjectProperty ;
+    rdfs:label "has value concept"@en ; rdfs:domain ffonto:ModelObservation ; rdfs:range skos:Concept ;
     rdfs:comment "Categorical result of an observation (e.g. SmokeColour → Gray)."@en .
 
-ffo:labelSource a owl:ObjectProperty ;
-    rdfs:label "label source"@en ; rdfs:domain ffo:ModelObservation ; rdfs:range skos:Concept ;
+ffonto:labelSource a owl:ObjectProperty ;
+    rdfs:label "label source"@en ; rdfs:domain ffonto:ModelObservation ; rdfs:range skos:Concept ;
     rdfs:comment "Where the label of an observation came from (caption, zero-shot, detector, audio tagger, VLM, human)."@en .
 
-ffo:severity a owl:ObjectProperty ;
-    rdfs:label "severity"@en ; rdfs:domain ffo:ModelObservation ; rdfs:range skos:Concept ;
+ffonto:severity a owl:ObjectProperty ;
+    rdfs:label "severity"@en ; rdfs:domain ffonto:ModelObservation ; rdfs:range skos:Concept ;
     rdfs:comment "Severity level assigned to an observation by the labelling pipeline."@en .
 
-ffo:usedThreshold a owl:ObjectProperty ;
-    rdfs:label "used threshold"@en ; rdfs:domain ffo:ModelObservation ; rdfs:range ffo:Threshold ;
+ffonto:usedThreshold a owl:ObjectProperty ;
+    rdfs:label "used threshold"@en ; rdfs:domain ffonto:ModelObservation ; rdfs:range ffonto:Threshold ;
     rdfs:comment "The decision threshold that applies to the observation's predicted class."@en .
 
-ffo:forClass a owl:ObjectProperty ;
-    rdfs:label "for class"@en ; rdfs:domain ffo:Threshold ; rdfs:range skos:Concept ;
+ffonto:forClass a owl:ObjectProperty ;
+    rdfs:label "for class"@en ; rdfs:domain ffonto:Threshold ; rdfs:range skos:Concept ;
     rdfs:comment "The class a threshold applies to."@en .
 
-ffo:detectedClass a owl:ObjectProperty ;
-    rdfs:label "detected class"@en ; rdfs:domain ffo:DataRecord ; rdfs:range skos:Concept ;
+ffonto:detectedClass a owl:ObjectProperty ;
+    rdfs:label "detected class"@en ; rdfs:domain ffonto:DataRecord ; rdfs:range skos:Concept ;
     rdfs:comment "DERIVED (rule R02): a class whose observation confidence reached its threshold."@en .
 
-ffo:hasCaption a owl:ObjectProperty ;
-    rdfs:label "has caption"@en ; rdfs:domain ffo:ImageRecord ; rdfs:range ffo:Caption ;
+ffonto:hasCaption a owl:ObjectProperty ;
+    rdfs:label "has caption"@en ; rdfs:domain ffonto:ImageRecord ; rdfs:range ffonto:Caption ;
     rdfs:comment "Links an image record to the caption generated for it."@en .
 
-ffo:mentionsConcept a owl:ObjectProperty ;
-    rdfs:label "mentions concept"@en ; rdfs:domain ffo:Caption ; rdfs:range skos:Concept ;
+ffonto:mentionsConcept a owl:ObjectProperty ;
+    rdfs:label "mentions concept"@en ; rdfs:domain ffonto:Caption ; rdfs:range skos:Concept ;
     rdfs:comment "DERIVED (rule R03): the caption text contains one of the concept's labels."@en .
 
-ffo:describesRecord a owl:ObjectProperty ;
-    rdfs:label "describes record"@en ; rdfs:domain ffo:SceneDescription ; rdfs:range ffo:ImageRecord ;
+ffonto:describesRecord a owl:ObjectProperty ;
+    rdfs:label "describes record"@en ; rdfs:domain ffonto:SceneDescription ; rdfs:range ffonto:ImageRecord ;
     rdfs:comment "Links a scene description to the image record it describes."@en .
 
-ffo:depicts a owl:ObjectProperty ;
-    rdfs:label "depicts"@en ; rdfs:domain ffo:SceneDescription ; rdfs:range ffo:SceneEntity ;
+ffonto:depicts a owl:ObjectProperty ;
+    rdfs:label "depicts"@en ; rdfs:domain ffonto:SceneDescription ; rdfs:range ffonto:SceneEntity ;
     rdfs:comment "Links a scene description to an entity visible in the image."@en .
 
-ffo:hasKind a owl:ObjectProperty ;
-    rdfs:label "has kind"@en ; rdfs:domain ffo:SceneEntity ; rdfs:range skos:Concept ;
-    rdfs:comment "Fine-grained kind of a scene entity, from ffv:EntityKindScheme (e.g. ffv:Pulaski, ffv:Firefighter)."@en .
+ffonto:hasKind a owl:ObjectProperty ;
+    rdfs:label "has kind"@en ; rdfs:domain ffonto:SceneEntity ; rdfs:range skos:Concept ;
+    rdfs:comment "Fine-grained kind of a scene entity, from ffontov:EntityKindScheme (e.g. ffontov:Pulaski, ffontov:Firefighter)."@en .
 
-ffo:hasState a owl:ObjectProperty ;
-    rdfs:label "has state"@en ; rdfs:domain ffo:SceneEntity ; rdfs:range skos:Concept ;
-    rdfs:comment "Visible state or condition of a scene entity (ffv:StateScheme), e.g. Scorched, Blocked, Dry."@en .
+ffonto:hasState a owl:ObjectProperty ;
+    rdfs:label "has state"@en ; rdfs:domain ffonto:SceneEntity ; rdfs:range skos:Concept ;
+    rdfs:comment "Visible state or condition of a scene entity (ffontov:StateScheme), e.g. Scorched, Blocked, Dry."@en .
 
-ffo:performs a owl:ObjectProperty ;
-    rdfs:label "performs"@en ; rdfs:domain ffo:SceneEntity ; rdfs:range skos:Concept ;
-    rdfs:comment "Activity being carried out by an agent or vehicle (ffv:ActivityScheme)."@en .
+ffonto:performs a owl:ObjectProperty ;
+    rdfs:label "performs"@en ; rdfs:domain ffonto:SceneEntity ; rdfs:range skos:Concept ;
+    rdfs:comment "Activity being carried out by an agent or vehicle (ffontov:ActivityScheme)."@en .
 
-ffo:wears a owl:ObjectProperty ;
-    rdfs:label "wears"@en ; rdfs:domain ffo:Agent ; rdfs:range skos:Concept ;
-    rdfs:comment "Protective equipment worn by a person (ffv:PPEScheme)."@en .
+ffonto:wears a owl:ObjectProperty ;
+    rdfs:label "wears"@en ; rdfs:domain ffonto:Agent ; rdfs:range skos:Concept ;
+    rdfs:comment "Protective equipment worn by a person (ffontov:PPEScheme)."@en .
 
-ffo:relativePosition a owl:ObjectProperty ;
-    rdfs:label "relative position"@en ; rdfs:domain ffo:SceneEntity ; rdfs:range skos:Concept ;
-    rdfs:comment "Frame-relative position with respect to the fire (ffv:PositionScheme: left flank, ahead of fire, ridge …)."@en .
+ffonto:relativePosition a owl:ObjectProperty ;
+    rdfs:label "relative position"@en ; rdfs:domain ffonto:SceneEntity ; rdfs:range skos:Concept ;
+    rdfs:comment "Frame-relative position with respect to the fire (ffontov:PositionScheme: left flank, ahead of fire, ridge …)."@en .
 
-ffo:spatiallyRelated a owl:ObjectProperty ;
-    rdfs:label "spatially related"@en ; rdfs:domain ffo:SceneEntity ; rdfs:range ffo:SceneEntity ;
+ffonto:spatiallyRelated a owl:ObjectProperty ;
+    rdfs:label "spatially related"@en ; rdfs:domain ffonto:SceneEntity ; rdfs:range ffonto:SceneEntity ;
     rdfs:comment "Super-property of all frame-relative spatial relations between scene entities."@en .
-ffo:near            a owl:ObjectProperty , owl:SymmetricProperty ; rdfs:domain ffo:SceneEntity ; rdfs:range ffo:SceneEntity ; rdfs:subPropertyOf ffo:spatiallyRelated ; rdfs:label "near"@en ;
+ffonto:near            a owl:ObjectProperty , owl:SymmetricProperty ; rdfs:domain ffonto:SceneEntity ; rdfs:range ffonto:SceneEntity ; rdfs:subPropertyOf ffonto:spatiallyRelated ; rdfs:label "near"@en ;
     rdfs:comment "Frame-relative proximity between two scene entities."@en .
-ffo:advancingToward a owl:ObjectProperty ; rdfs:domain ffo:SceneEntity ; rdfs:range ffo:SceneEntity ; rdfs:subPropertyOf ffo:spatiallyRelated ; rdfs:label "advancing toward"@en ;
+ffonto:advancingToward a owl:ObjectProperty ; rdfs:domain ffonto:SceneEntity ; rdfs:range ffonto:SceneEntity ; rdfs:subPropertyOf ffonto:spatiallyRelated ; rdfs:label "advancing toward"@en ;
     rdfs:comment "The subject (typically fire) is moving toward the object in the frame."@en .
-ffo:reached         a owl:ObjectProperty ; rdfs:domain ffo:SceneEntity ; rdfs:range ffo:SceneEntity ; rdfs:subPropertyOf ffo:spatiallyRelated ; rdfs:label "reached"@en ;
+ffonto:reached         a owl:ObjectProperty ; rdfs:domain ffonto:SceneEntity ; rdfs:range ffonto:SceneEntity ; rdfs:subPropertyOf ffonto:spatiallyRelated ; rdfs:label "reached"@en ;
     rdfs:comment "The subject (typically fire) has reached the object (e.g. a river edge or farmland)."@en .
-ffo:protects        a owl:ObjectProperty ; rdfs:domain ffo:SceneEntity ; rdfs:range ffo:SceneEntity ; rdfs:subPropertyOf ffo:spatiallyRelated ; rdfs:label "protects"@en ;
+ffonto:protects        a owl:ObjectProperty ; rdfs:domain ffonto:SceneEntity ; rdfs:range ffonto:SceneEntity ; rdfs:subPropertyOf ffonto:spatiallyRelated ; rdfs:label "protects"@en ;
     rdfs:comment "The subject (resource or crew) is protecting the object (e.g. a building)."@en .
-ffo:blocks          a owl:ObjectProperty ; rdfs:domain ffo:SceneEntity ; rdfs:range ffo:SceneEntity ; rdfs:subPropertyOf ffo:spatiallyRelated ; rdfs:label "blocks"@en ;
+ffonto:blocks          a owl:ObjectProperty ; rdfs:domain ffonto:SceneEntity ; rdfs:range ffonto:SceneEntity ; rdfs:subPropertyOf ffonto:spatiallyRelated ; rdfs:label "blocks"@en ;
     rdfs:comment "The subject obstructs the object (e.g. a fallen tree blocks a road)."@en .
 
-ffo:hasHazardType a owl:ObjectProperty ;
-    rdfs:label "has hazard type"@en ; rdfs:domain ffo:Hazard ; rdfs:range skos:Concept ;
-    rdfs:comment "Type of a derived hazard (ffv:HazardScheme)."@en .
+ffonto:hasHazardType a owl:ObjectProperty ;
+    rdfs:label "has hazard type"@en ; rdfs:domain ffonto:Hazard ; rdfs:range skos:Concept ;
+    rdfs:comment "Type of a derived hazard (ffontov:HazardScheme)."@en .
 
-ffo:threatens a owl:ObjectProperty ;
-    rdfs:label "threatens"@en ; rdfs:domain ffo:Hazard ;
-    rdfs:comment "What the hazard endangers: a scene entity or a concept (e.g. ffv:Firefighter as a group)."@en .
+ffonto:threatens a owl:ObjectProperty ;
+    rdfs:label "threatens"@en ; rdfs:domain ffonto:Hazard ;
+    rdfs:comment "What the hazard endangers: a scene entity or a concept (e.g. ffontov:Firefighter as a group)."@en .
 
-ffo:inEvent a owl:ObjectProperty ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( ffo:Hazard ffo:ModalityConflict ) ] ;
-    rdfs:label "in event"@en ; rdfs:range ffo:FireEvent ;
+ffonto:inEvent a owl:ObjectProperty ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( ffonto:Hazard ffonto:ModalityConflict ) ] ;
+    rdfs:label "in event"@en ; rdfs:range ffonto:FireEvent ;
     rdfs:comment "Event context of a derived hazard or conflict."@en .
 
-ffo:conflictType a owl:ObjectProperty ;
-    rdfs:label "conflict type"@en ; rdfs:domain ffo:ModalityConflict ; rdfs:range skos:Concept ;
-    rdfs:comment "Type of a derived modality conflict (ffv:ConflictScheme)."@en .
+ffonto:conflictType a owl:ObjectProperty ;
+    rdfs:label "conflict type"@en ; rdfs:domain ffonto:ModalityConflict ; rdfs:range skos:Concept ;
+    rdfs:comment "Type of a derived modality conflict (ffontov:ConflictScheme)."@en .
 
-ffo:involvesObservation a owl:ObjectProperty ;
-    rdfs:label "involves observation"@en ; rdfs:domain ffo:ModalityConflict ; rdfs:range ffo:ModelObservation ;
+ffonto:involvesObservation a owl:ObjectProperty ;
+    rdfs:label "involves observation"@en ; rdfs:domain ffonto:ModalityConflict ; rdfs:range ffonto:ModelObservation ;
     rdfs:comment "An observation that takes part in a modality conflict."@en .
 
-ffo:onProperty a owl:ObjectProperty ;
-    rdfs:label "on property"@en ; rdfs:domain ffo:DangerRule ;
-    rdfs:comment "The weather/FWI datatype property the rule tests (e.g. ffo:windSpeedKmh)."@en .
+ffonto:onProperty a owl:ObjectProperty ;
+    rdfs:label "on property"@en ; rdfs:domain ffonto:DangerRule ;
+    rdfs:comment "The weather/FWI datatype property the rule tests (e.g. ffonto:windSpeedKmh)."@en .
 
-ffo:indicatesCondition a owl:ObjectProperty ;
-    rdfs:label "indicates condition"@en ; rdfs:domain ffo:DangerRule ; rdfs:range skos:Concept ;
+ffonto:indicatesCondition a owl:ObjectProperty ;
+    rdfs:label "indicates condition"@en ; rdfs:domain ffonto:DangerRule ; rdfs:range skos:Concept ;
     rdfs:comment "The operational condition a danger rule indicates when it fires."@en .
 
-ffo:previousRecord a owl:ObjectProperty ;
+ffonto:previousRecord a owl:ObjectProperty ;
     rdfs:label "previous record"@en ;
-    rdfs:domain ffo:WeatherRecord ; rdfs:range ffo:WeatherRecord ;
+    rdfs:domain ffonto:WeatherRecord ; rdfs:range ffonto:WeatherRecord ;
     rdfs:comment "DERIVED (rule R08): the closest earlier dated weather record of the same site; used for trends (CQ09)."@en .
 
-ffo:hasCondition a owl:ObjectProperty ;
-    rdfs:label "has condition"@en ; rdfs:domain ffo:WeatherRecord ; rdfs:range skos:Concept ;
+ffonto:hasCondition a owl:ObjectProperty ;
+    rdfs:label "has condition"@en ; rdfs:domain ffonto:WeatherRecord ; rdfs:range skos:Concept ;
     rdfs:comment "DERIVED (rule R04): operational condition implied by a danger rule."@en .
 
 # --- background knowledge links between concepts (used by CQ25, CQ26) ---
-ffo:mitigatedBy a owl:ObjectProperty ;
+ffonto:mitigatedBy a owl:ObjectProperty ;
     rdfs:label "mitigated by"@en ; rdfs:domain skos:Concept ; rdfs:range skos:Concept ;
     rdfs:comment "Hazard concept → recommended action concept."@en .
-ffo:typicalFireImpact a owl:ObjectProperty ;
+ffonto:typicalFireImpact a owl:ObjectProperty ;
     rdfs:label "typical fire impact"@en ; rdfs:domain skos:Concept ; rdfs:range skos:Concept ;
     rdfs:comment "Ecosystem / vegetation kind → typical ecological impact of fire."@en .
-ffo:suggestedRestoration a owl:ObjectProperty ;
+ffonto:suggestedRestoration a owl:ObjectProperty ;
     rdfs:label "suggested restoration"@en ; rdfs:domain skos:Concept ; rdfs:range skos:Concept ;
     rdfs:comment "Ecosystem kind → restoration or recovery measure suggested after fire."@en .
-ffo:providesService a owl:ObjectProperty ;
+ffonto:providesService a owl:ObjectProperty ;
     rdfs:label "provides ecosystem service"@en ; rdfs:domain skos:Concept ; rdfs:range skos:Concept ;
     rdfs:comment "Ecosystem kind → ecosystem service it provides (and that fire may impair)."@en .
-ffo:requiredPPE a owl:ObjectProperty ;
+ffonto:requiredPPE a owl:ObjectProperty ;
     rdfs:label "required PPE"@en ; rdfs:domain skos:Concept ; rdfs:range skos:Concept ;
     rdfs:comment "Person kind → PPE item that person must wear (used by SHACL and CQ17)."@en .
 
@@ -360,117 +360,117 @@ ffo:requiredPPE a owl:ObjectProperty ;
 # ---------------------------------------------------------------------
 
 # --- record metadata (CQ02) ---
-ffo:recordUUID     a owl:DatatypeProperty ; rdfs:label "record UUID"@en ;       rdfs:domain ffo:DataRecord ; rdfs:range xsd:string ;
+ffonto:recordUUID     a owl:DatatypeProperty ; rdfs:label "record UUID"@en ;       rdfs:domain ffonto:DataRecord ; rdfs:range xsd:string ;
     rdfs:comment "Unique identifier of a record (record_uuid)."@en .
-ffo:schemaVersion  a owl:DatatypeProperty ; rdfs:label "schema version"@en ;    rdfs:domain ffo:DataRecord ; rdfs:range xsd:string ;
+ffonto:schemaVersion  a owl:DatatypeProperty ; rdfs:label "schema version"@en ;    rdfs:domain ffonto:DataRecord ; rdfs:range xsd:string ;
     rdfs:comment "Version of the record JSON schema."@en .
-ffo:mediaId        a owl:DatatypeProperty ; rdfs:label "media id"@en ;          rdfs:domain ffo:DataRecord ; rdfs:range xsd:string ;
+ffonto:mediaId        a owl:DatatypeProperty ; rdfs:label "media id"@en ;          rdfs:domain ffonto:DataRecord ; rdfs:range xsd:string ;
     rdfs:comment "Identifier of the media item (image_id)."@en .
-ffo:fileURI        a owl:DatatypeProperty ; rdfs:label "file URI / path"@en ;   rdfs:domain ffo:DataRecord ; rdfs:range xsd:string ;
+ffonto:fileURI        a owl:DatatypeProperty ; rdfs:label "file URI / path"@en ;   rdfs:domain ffonto:DataRecord ; rdfs:range xsd:string ;
     rdfs:comment "Path or URI of the media file."@en .
-ffo:checksumSHA256 a owl:DatatypeProperty ; rdfs:label "checksum SHA-256"@en ;  rdfs:domain ffo:DataRecord ; rdfs:range xsd:string ;
+ffonto:checksumSHA256 a owl:DatatypeProperty ; rdfs:label "checksum SHA-256"@en ;  rdfs:domain ffonto:DataRecord ; rdfs:range xsd:string ;
     rdfs:comment "SHA-256 checksum of the media file, for integrity and audit."@en .
-ffo:sourceName     a owl:DatatypeProperty ; rdfs:label "source name"@en ;       rdfs:domain ffo:DataRecord ; rdfs:range xsd:string ;
+ffonto:sourceName     a owl:DatatypeProperty ; rdfs:label "source name"@en ;       rdfs:domain ffonto:DataRecord ; rdfs:range xsd:string ;
     rdfs:comment "Name of the data source as recorded (e.g. unknown_camera)."@en .
-ffo:deviceId       a owl:DatatypeProperty ; rdfs:label "device id"@en ;         rdfs:domain ffo:DataRecord ; rdfs:range xsd:string ;
+ffonto:deviceId       a owl:DatatypeProperty ; rdfs:label "device id"@en ;         rdfs:domain ffonto:DataRecord ; rdfs:range xsd:string ;
     rdfs:comment "Identifier of the capture device."@en .
-ffo:captureTime    a owl:DatatypeProperty ; rdfs:label "capture time (UTC)"@en ; rdfs:domain ffo:DataRecord ; rdfs:range xsd:dateTime ;
+ffonto:captureTime    a owl:DatatypeProperty ; rdfs:label "capture time (UTC)"@en ; rdfs:domain ffonto:DataRecord ; rdfs:range xsd:dateTime ;
     rdfs:comment "UTC time at which the record was captured."@en .
-ffo:crs            a owl:DatatypeProperty ; rdfs:label "coordinate reference system"@en ; rdfs:domain ffo:DataRecord ; rdfs:range xsd:string ;
+ffonto:crs            a owl:DatatypeProperty ; rdfs:label "coordinate reference system"@en ; rdfs:domain ffonto:DataRecord ; rdfs:range xsd:string ;
     rdfs:comment "Coordinate reference system of the record's geometry (e.g. EPSG:4326)."@en .
-ffo:centerWKT      a owl:DatatypeProperty ; rdfs:label "center (WKT)"@en ;      rdfs:domain ffo:DataRecord ; rdfs:range xsd:string ;
+ffonto:centerWKT      a owl:DatatypeProperty ; rdfs:label "center (WKT)"@en ;      rdfs:domain ffonto:DataRecord ; rdfs:range xsd:string ;
     rdfs:comment "Centre point of the record as WKT text."@en .
-ffo:footprintWKT   a owl:DatatypeProperty ; rdfs:label "footprint (WKT)"@en ;   rdfs:domain ffo:DataRecord ; rdfs:range xsd:string ;
+ffonto:footprintWKT   a owl:DatatypeProperty ; rdfs:label "footprint (WKT)"@en ;   rdfs:domain ffonto:DataRecord ; rdfs:range xsd:string ;
     rdfs:comment "Spatial footprint of the record as WKT text."@en .
-ffo:georeferenced  a owl:DatatypeProperty ; rdfs:label "georeferenced"@en ;     rdfs:domain ffo:DataRecord ; rdfs:range xsd:boolean ;
+ffonto:georeferenced  a owl:DatatypeProperty ; rdfs:label "georeferenced"@en ;     rdfs:domain ffonto:DataRecord ; rdfs:range xsd:boolean ;
     rdfs:comment "Whether the record carries georeference information."@en .
-ffo:widthPx        a owl:DatatypeProperty ; rdfs:label "width (px)"@en ;        rdfs:domain ffo:ImageRecord ; rdfs:range xsd:integer ;
+ffonto:widthPx        a owl:DatatypeProperty ; rdfs:label "width (px)"@en ;        rdfs:domain ffonto:ImageRecord ; rdfs:range xsd:integer ;
     rdfs:comment "Image width in pixels."@en .
-ffo:heightPx       a owl:DatatypeProperty ; rdfs:label "height (px)"@en ;       rdfs:domain ffo:ImageRecord ; rdfs:range xsd:integer ;
+ffonto:heightPx       a owl:DatatypeProperty ; rdfs:label "height (px)"@en ;       rdfs:domain ffonto:ImageRecord ; rdfs:range xsd:integer ;
     rdfs:comment "Image height in pixels."@en .
-ffo:resolutionM    a owl:DatatypeProperty ; rdfs:label "ground resolution (m)"@en ; rdfs:domain ffo:ImageRecord ; rdfs:range xsd:double ;
+ffonto:resolutionM    a owl:DatatypeProperty ; rdfs:label "ground resolution (m)"@en ; rdfs:domain ffonto:ImageRecord ; rdfs:range xsd:double ;
     rdfs:comment "Ground sampling distance of the image in metres."@en .
-ffo:bands          a owl:DatatypeProperty ; rdfs:label "bands"@en ;             rdfs:domain ffo:ImageRecord ; rdfs:range xsd:string ;
+ffonto:bands          a owl:DatatypeProperty ; rdfs:label "bands"@en ;             rdfs:domain ffonto:ImageRecord ; rdfs:range xsd:string ;
     rdfs:comment "Spectral bands of the image (e.g. RGB, IR)."@en .
-ffo:cloudCover     a owl:DatatypeProperty ; rdfs:label "cloud cover quality value"@en ; rdfs:domain ffo:ImageRecord ; rdfs:range xsd:double ;
+ffonto:cloudCover     a owl:DatatypeProperty ; rdfs:label "cloud cover quality value"@en ; rdfs:domain ffonto:ImageRecord ; rdfs:range xsd:double ;
     rdfs:comment "Cloud-cover quality value recorded for the image."@en .
-ffo:blur           a owl:DatatypeProperty ; rdfs:label "blur quality value"@en ; rdfs:domain ffo:ImageRecord ; rdfs:range xsd:double ;
+ffonto:blur           a owl:DatatypeProperty ; rdfs:label "blur quality value"@en ; rdfs:domain ffonto:ImageRecord ; rdfs:range xsd:double ;
     rdfs:comment "Blur quality value recorded for the image."@en .
-ffo:durationMs     a owl:DatatypeProperty ; rdfs:label "duration (ms)"@en ;     rdfs:domain ffo:AudioRecord ; rdfs:range xsd:double ;
+ffonto:durationMs     a owl:DatatypeProperty ; rdfs:label "duration (ms)"@en ;     rdfs:domain ffonto:AudioRecord ; rdfs:range xsd:double ;
     rdfs:comment "Duration of the audio clip in milliseconds."@en .
-ffo:globalThreshold a owl:DatatypeProperty ; rdfs:label "global detection threshold"@en ; rdfs:domain ffo:AudioRecord ; rdfs:range xsd:double ;
+ffonto:globalThreshold a owl:DatatypeProperty ; rdfs:label "global detection threshold"@en ; rdfs:domain ffonto:AudioRecord ; rdfs:range xsd:double ;
     rdfs:comment "Global detection threshold configured for the audio tagger."@en .
-ffo:regionName     a owl:DatatypeProperty ; rdfs:label "region name"@en ; rdfs:domain ffo:DataRecord ;       rdfs:range xsd:string ;
+ffonto:regionName     a owl:DatatypeProperty ; rdfs:label "region name"@en ; rdfs:domain ffonto:DataRecord ;       rdfs:range xsd:string ;
     rdfs:comment "Name of the region where the record was captured."@en .
-ffo:eventCode      a owl:DatatypeProperty ; rdfs:label "event code"@en ;        rdfs:domain ffo:FireEvent ; rdfs:range xsd:string ;
+ffonto:eventCode      a owl:DatatypeProperty ; rdfs:label "event code"@en ;        rdfs:domain ffonto:FireEvent ; rdfs:range xsd:string ;
     rdfs:comment "Original event identifier string (event_id)."@en .
 
 # --- observations & models (CQ03–CQ06, CQ23) ---
-ffo:confidence      a owl:DatatypeProperty ; rdfs:label "confidence"@en ;       rdfs:domain ffo:ModelObservation ; rdfs:range xsd:double ;
+ffonto:confidence      a owl:DatatypeProperty ; rdfs:label "confidence"@en ;       rdfs:domain ffonto:ModelObservation ; rdfs:range xsd:double ;
     rdfs:comment "Confidence or score of an observation (for audio: mean confidence)."@en .
-ffo:meanConfidence  a owl:DatatypeProperty ; rdfs:label "mean confidence"@en ;  rdfs:domain ffo:ModelObservation ; rdfs:range xsd:double ;
+ffonto:meanConfidence  a owl:DatatypeProperty ; rdfs:label "mean confidence"@en ;  rdfs:domain ffonto:ModelObservation ; rdfs:range xsd:double ;
     rdfs:comment "Mean frame-level confidence of an audio event."@en .
-ffo:maxConfidence   a owl:DatatypeProperty ; rdfs:label "max confidence"@en ;   rdfs:domain ffo:ModelObservation ; rdfs:range xsd:double ;
+ffonto:maxConfidence   a owl:DatatypeProperty ; rdfs:label "max confidence"@en ;   rdfs:domain ffonto:ModelObservation ; rdfs:range xsd:double ;
     rdfs:comment "Maximum frame-level confidence of an audio event."@en .
-ffo:topKLabel       a owl:DatatypeProperty ; rdfs:label "top-k frame label"@en ; rdfs:domain ffo:ModelObservation ; rdfs:range xsd:string ;
+ffonto:topKLabel       a owl:DatatypeProperty ; rdfs:label "top-k frame label"@en ; rdfs:domain ffonto:ModelObservation ; rdfs:range xsd:string ;
     rdfs:comment "One of the top-k frame labels reported by the audio tagger."@en .
-ffo:labelCategory   a owl:DatatypeProperty ; rdfs:label "label category"@en ;   rdfs:domain ffo:ModelObservation ; rdfs:range xsd:string ;
+ffonto:labelCategory   a owl:DatatypeProperty ; rdfs:label "label category"@en ;   rdfs:domain ffonto:ModelObservation ; rdfs:range xsd:string ;
     rdfs:comment "Category of a raw label as given by the pipeline (e.g. fire_audio)."@en .
-ffo:count           a owl:DatatypeProperty ; rdfs:label "count"@en ; rdfs:domain ffo:SceneEntity ;            rdfs:range xsd:integer ;
+ffonto:count           a owl:DatatypeProperty ; rdfs:label "count"@en ; rdfs:domain ffonto:SceneEntity ;            rdfs:range xsd:integer ;
     rdfs:comment "Number of instances represented by a scene entity (e.g. 3 firefighters)."@en .
-ffo:aboveThreshold  a owl:DatatypeProperty ; rdfs:label "above threshold"@en ;  rdfs:domain ffo:ModelObservation ; rdfs:range xsd:boolean ;
+ffonto:aboveThreshold  a owl:DatatypeProperty ; rdfs:label "above threshold"@en ;  rdfs:domain ffonto:ModelObservation ; rdfs:range xsd:boolean ;
     rdfs:comment "DERIVED (rule R01)."@en .
-ffo:humanValidated  a owl:DatatypeProperty ; rdfs:label "human validated"@en ; rdfs:domain ffo:SceneDescription ;  rdfs:range xsd:boolean ;
+ffonto:humanValidated  a owl:DatatypeProperty ; rdfs:label "human validated"@en ; rdfs:domain ffonto:SceneDescription ;  rdfs:range xsd:boolean ;
     rdfs:comment "Whether a human has validated the output."@en .
-ffo:thresholdValue  a owl:DatatypeProperty ; rdfs:label "threshold value"@en ; rdfs:domain [ a owl:Class ; owl:unionOf ( ffo:Threshold ffo:DangerRule ) ] ;  rdfs:range xsd:double ;
+ffonto:thresholdValue  a owl:DatatypeProperty ; rdfs:label "threshold value"@en ; rdfs:domain [ a owl:Class ; owl:unionOf ( ffonto:Threshold ffonto:DangerRule ) ] ;  rdfs:range xsd:double ;
     rdfs:comment "Numeric value of a threshold."@en .
-ffo:operator        a owl:DatatypeProperty ; rdfs:label "operator"@en ;         rdfs:domain ffo:DangerRule ; rdfs:range xsd:string ;
+ffonto:operator        a owl:DatatypeProperty ; rdfs:label "operator"@en ;         rdfs:domain ffonto:DangerRule ; rdfs:range xsd:string ;
     rdfs:comment "Comparison operator: \"gt\", \"ge\", \"lt\", \"le\"."@en .
-ffo:captionText     a owl:DatatypeProperty ; rdfs:label "caption text"@en ;     rdfs:domain ffo:Caption ; rdfs:range xsd:string ;
+ffonto:captionText     a owl:DatatypeProperty ; rdfs:label "caption text"@en ;     rdfs:domain ffonto:Caption ; rdfs:range xsd:string ;
     rdfs:comment "Text of a generated caption."@en .
-ffo:modelName       a owl:DatatypeProperty ; rdfs:label "model name"@en ;       rdfs:domain ffo:Model ; rdfs:range xsd:string ;
+ffonto:modelName       a owl:DatatypeProperty ; rdfs:label "model name"@en ;       rdfs:domain ffonto:Model ; rdfs:range xsd:string ;
     rdfs:comment "Name or repository id of a model."@en .
-ffo:modelVersion    a owl:DatatypeProperty ; rdfs:label "model version"@en ;    rdfs:domain ffo:Model ; rdfs:range xsd:string ;
+ffonto:modelVersion    a owl:DatatypeProperty ; rdfs:label "model version"@en ;    rdfs:domain ffonto:Model ; rdfs:range xsd:string ;
     rdfs:comment "Version of a model."@en .
-ffo:modelURL        a owl:DatatypeProperty ; rdfs:label "model provenance URL"@en ; rdfs:domain ffo:Model ; rdfs:range xsd:anyURI ;
+ffonto:modelURL        a owl:DatatypeProperty ; rdfs:label "model provenance URL"@en ; rdfs:domain ffonto:Model ; rdfs:range xsd:anyURI ;
     rdfs:comment "URL documenting the model's provenance (e.g. TF-Hub or Hugging Face page)."@en .
-ffo:classMapSHA1    a owl:DatatypeProperty ; rdfs:label "class map SHA-1"@en ;  rdfs:domain ffo:Model ; rdfs:range xsd:string ;
+ffonto:classMapSHA1    a owl:DatatypeProperty ; rdfs:label "class map SHA-1"@en ;  rdfs:domain ffonto:Model ; rdfs:range xsd:string ;
     rdfs:comment "SHA-1 checksum of the model's class map, for audit."@en .
-ffo:frameStrideS    a owl:DatatypeProperty ; rdfs:label "frame stride (s)"@en ; rdfs:domain ffo:Model ; rdfs:range xsd:double ;
+ffonto:frameStrideS    a owl:DatatypeProperty ; rdfs:label "frame stride (s)"@en ; rdfs:domain ffonto:Model ; rdfs:range xsd:double ;
     rdfs:comment "Frame stride of an audio model in seconds."@en .
-ffo:topK            a owl:DatatypeProperty ; rdfs:label "top-k"@en ;            rdfs:domain ffo:Model ; rdfs:range xsd:integer ;
+ffonto:topK            a owl:DatatypeProperty ; rdfs:label "top-k"@en ;            rdfs:domain ffonto:Model ; rdfs:range xsd:integer ;
     rdfs:comment "Number of top labels the model reports per frame."@en .
 
 # --- weather & FWI (CQ08–CQ10) ---
-ffo:observationDate  a owl:DatatypeProperty ; rdfs:label "observation date"@en ; rdfs:domain ffo:WeatherRecord ; rdfs:range xsd:dateTime ;
+ffonto:observationDate  a owl:DatatypeProperty ; rdfs:label "observation date"@en ; rdfs:domain ffonto:WeatherRecord ; rdfs:range xsd:dateTime ;
     rdfs:comment "Date of a weather/FWI record (stored as xsd:dateTime at 00:00 UTC)."@en .
-ffo:dayName          a owl:DatatypeProperty ; rdfs:label "day name"@en ;          rdfs:domain ffo:WeatherRecord ; rdfs:range xsd:string ;
+ffonto:dayName          a owl:DatatypeProperty ; rdfs:label "day name"@en ;          rdfs:domain ffonto:WeatherRecord ; rdfs:range xsd:string ;
     rdfs:comment "Day-of-week name as given in the source table."@en .
-ffo:airTemperatureC  a owl:DatatypeProperty ; rdfs:label "air temperature (°C)"@en ; rdfs:domain ffo:WeatherRecord ; rdfs:range xsd:double ;
+ffonto:airTemperatureC  a owl:DatatypeProperty ; rdfs:label "air temperature (°C)"@en ; rdfs:domain ffonto:WeatherRecord ; rdfs:range xsd:double ;
     rdfs:comment "Air temperature in degrees Celsius."@en .
-ffo:relativeHumidityPct a owl:DatatypeProperty ; rdfs:label "relative humidity (%)"@en ; rdfs:domain ffo:WeatherRecord ; rdfs:range xsd:double ;
+ffonto:relativeHumidityPct a owl:DatatypeProperty ; rdfs:label "relative humidity (%)"@en ; rdfs:domain ffonto:WeatherRecord ; rdfs:range xsd:double ;
     rdfs:comment "Relative humidity in percent."@en .
-ffo:windSpeedKmh     a owl:DatatypeProperty ; rdfs:label "wind speed (km/h)"@en ;  rdfs:domain ffo:WeatherRecord ; rdfs:range xsd:double ;
+ffonto:windSpeedKmh     a owl:DatatypeProperty ; rdfs:label "wind speed (km/h)"@en ;  rdfs:domain ffonto:WeatherRecord ; rdfs:range xsd:double ;
     rdfs:comment "Wind speed in km/h."@en .
-ffo:rainMm           a owl:DatatypeProperty ; rdfs:label "rain (mm)"@en ;          rdfs:domain ffo:WeatherRecord ; rdfs:range xsd:double ;
+ffonto:rainMm           a owl:DatatypeProperty ; rdfs:label "rain (mm)"@en ;          rdfs:domain ffonto:WeatherRecord ; rdfs:range xsd:double ;
     rdfs:comment "Rainfall in millimetres."@en .
-ffo:ffmc             a owl:DatatypeProperty ; rdfs:label "FFMC"@en ; rdfs:comment "Fine Fuel Moisture Code"@en ;   rdfs:domain ffo:WeatherRecord ; rdfs:range xsd:double .
-ffo:dmc              a owl:DatatypeProperty ; rdfs:label "DMC"@en ;  rdfs:comment "Duff Moisture Code"@en ;        rdfs:domain ffo:WeatherRecord ; rdfs:range xsd:double .
-ffo:dc               a owl:DatatypeProperty ; rdfs:label "DC"@en ;   rdfs:comment "Drought Code"@en ;              rdfs:domain ffo:WeatherRecord ; rdfs:range xsd:double .
-ffo:isi              a owl:DatatypeProperty ; rdfs:label "ISI"@en ;  rdfs:comment "Initial Spread Index"@en ;      rdfs:domain ffo:WeatherRecord ; rdfs:range xsd:double .
-ffo:bui              a owl:DatatypeProperty ; rdfs:label "BUI"@en ;  rdfs:comment "Buildup Index"@en ;             rdfs:domain ffo:WeatherRecord ; rdfs:range xsd:double .
-ffo:fwi              a owl:DatatypeProperty ; rdfs:label "FWI"@en ;  rdfs:comment "Fire Weather Index"@en ;        rdfs:domain ffo:WeatherRecord ; rdfs:range xsd:double .
-ffo:fireOccurred     a owl:DatatypeProperty ; rdfs:label "fire occurred"@en ;      rdfs:domain ffo:WeatherRecord ; rdfs:range xsd:boolean ;
+ffonto:ffmc             a owl:DatatypeProperty ; rdfs:label "FFMC"@en ; rdfs:comment "Fine Fuel Moisture Code"@en ;   rdfs:domain ffonto:WeatherRecord ; rdfs:range xsd:double .
+ffonto:dmc              a owl:DatatypeProperty ; rdfs:label "DMC"@en ;  rdfs:comment "Duff Moisture Code"@en ;        rdfs:domain ffonto:WeatherRecord ; rdfs:range xsd:double .
+ffonto:dc               a owl:DatatypeProperty ; rdfs:label "DC"@en ;   rdfs:comment "Drought Code"@en ;              rdfs:domain ffonto:WeatherRecord ; rdfs:range xsd:double .
+ffonto:isi              a owl:DatatypeProperty ; rdfs:label "ISI"@en ;  rdfs:comment "Initial Spread Index"@en ;      rdfs:domain ffonto:WeatherRecord ; rdfs:range xsd:double .
+ffonto:bui              a owl:DatatypeProperty ; rdfs:label "BUI"@en ;  rdfs:comment "Buildup Index"@en ;             rdfs:domain ffonto:WeatherRecord ; rdfs:range xsd:double .
+ffonto:fwi              a owl:DatatypeProperty ; rdfs:label "FWI"@en ;  rdfs:comment "Fire Weather Index"@en ;        rdfs:domain ffonto:WeatherRecord ; rdfs:range xsd:double .
+ffonto:fireOccurred     a owl:DatatypeProperty ; rdfs:label "fire occurred"@en ;      rdfs:domain ffonto:WeatherRecord ; rdfs:range xsd:boolean ;
     rdfs:comment "Whether a fire occurred on this date at this site (fire_occured)."@en .
-ffo:burnedAreaHa     a owl:DatatypeProperty ; rdfs:label "burned area (ha)"@en ;   rdfs:domain ffo:WeatherRecord ; rdfs:range xsd:double ;
+ffonto:burnedAreaHa     a owl:DatatypeProperty ; rdfs:label "burned area (ha)"@en ;   rdfs:domain ffonto:WeatherRecord ; rdfs:range xsd:double ;
     rdfs:comment "Burned area in hectares."@en .
 
 # --- site ---
-ffo:siteName  a owl:DatatypeProperty ; rdfs:label "site name"@en ; rdfs:domain ffo:Site ; rdfs:range xsd:string ;
+ffonto:siteName  a owl:DatatypeProperty ; rdfs:label "site name"@en ; rdfs:domain ffonto:Site ; rdfs:range xsd:string ;
     rdfs:comment "Name of a site."@en .
-ffo:country   a owl:DatatypeProperty ; rdfs:label "country"@en ;   rdfs:domain ffo:Site ; rdfs:range xsd:string ;
+ffonto:country   a owl:DatatypeProperty ; rdfs:label "country"@en ;   rdfs:domain ffonto:Site ; rdfs:range xsd:string ;
     rdfs:comment "Country of a site."@en .
-ffo:gridX     a owl:DatatypeProperty ; rdfs:label "grid x"@en ;    rdfs:domain ffo:Site ; rdfs:range xsd:integer ;
+ffonto:gridX     a owl:DatatypeProperty ; rdfs:label "grid x"@en ;    rdfs:domain ffonto:Site ; rdfs:range xsd:integer ;
     rdfs:comment "X coordinate of the site's grid cell."@en .
-ffo:gridY     a owl:DatatypeProperty ; rdfs:label "grid y"@en ;    rdfs:domain ffo:Site ; rdfs:range xsd:integer ;
+ffonto:gridY     a owl:DatatypeProperty ; rdfs:label "grid y"@en ;    rdfs:domain ffonto:Site ; rdfs:range xsd:integer ;
     rdfs:comment "Y coordinate of the site's grid cell."@en .

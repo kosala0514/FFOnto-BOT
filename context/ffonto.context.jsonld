@@ -1,7 +1,7 @@
 {
   "@context": {
-    "ffo": "http://purl.org/ffonto#",
-    "ffv": "http://purl.org/ffonto/vocab#",
+    "ffonto": "http://purl.org/ffonto#",
+    "ffontov": "http://purl.org/ffonto/vocab#",
     "ffd": "http://purl.org/ffonto/data/",
     "sosa": "http://www.w3.org/ns/sosa/",
     "prov": "http://www.w3.org/ns/prov#",

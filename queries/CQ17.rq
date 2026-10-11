@@ -8,7 +8,7 @@
 #   - Are respirators or masks visible?
 
 PREFIX ffonto:  <http://purl.org/ffonto#>
-PREFIX ffv:  <http://purl.org/ffonto/vocab#>
+PREFIX ffontov:  <http://purl.org/ffonto/vocab#>
 PREFIX ffd:  <http://purl.org/ffonto/data/>
 PREFIX sosa: <http://www.w3.org/ns/sosa/>
 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -23,7 +23,7 @@ SELECT ?record ?person ?kind ?count
 WHERE {
   ?sd ffonto:describesRecord ?record ; ffonto:depicts ?person .
   ?person ffonto:hasKind ?k .
-  ?k skos:broader* ffv:Person ; skos:prefLabel ?kind .
+  ?k skos:broader* ffontov:Person ; skos:prefLabel ?kind .
   OPTIONAL { ?person ffonto:count ?count }
   OPTIONAL { ?person ffonto:wears ?w . ?w skos:prefLabel ?wornL }
   OPTIONAL { ?k ffonto:requiredPPE ?req .

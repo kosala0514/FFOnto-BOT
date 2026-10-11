@@ -11,7 +11,7 @@
 # Note: Questions such as 'Does the caption imply daytime / windy conditions?' need language understanding; answer them from the scene attributes (CQ15) instead.
 
 PREFIX ffonto:  <http://purl.org/ffonto#>
-PREFIX ffv:  <http://purl.org/ffonto/vocab#>
+PREFIX ffontov:  <http://purl.org/ffonto/vocab#>
 PREFIX ffd:  <http://purl.org/ffonto/data/>
 PREFIX sosa: <http://www.w3.org/ns/sosa/>
 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -26,10 +26,10 @@ WHERE {
   ?record ffonto:hasCaption ?cap .
   ?cap ffonto:captionText ?captionText .
   OPTIONAL { ?cap ffonto:mentionsConcept ?c . ?c skos:prefLabel ?label }
-  BIND(EXISTS { ?cap ffonto:mentionsConcept ?f . ?f skos:broader* ?fTop . VALUES ?fTop { ffv:Fire ffv:FirePhenomenonKind } } AS ?mentionsFire)
-  BIND(EXISTS { ?cap ffonto:mentionsConcept ffv:Smoke } AS ?mentionsSmoke)
-  BIND(EXISTS { ?cap ffonto:mentionsConcept ?a . ?a skos:broader* ffv:Aircraft } AS ?mentionsAircraft)
-  BIND(EXISTS { ?cap ffonto:mentionsConcept ?w . ?w skos:broader* ffv:WaterBody } AS ?mentionsWater)
-  BIND(EXISTS { ?cap ffonto:mentionsConcept ?t . ?t skos:broader* ffv:Terrain } AS ?mentionsTerrain)
+  BIND(EXISTS { ?cap ffonto:mentionsConcept ?f . ?f skos:broader* ?fTop . VALUES ?fTop { ffontov:Fire ffontov:FirePhenomenonKind } } AS ?mentionsFire)
+  BIND(EXISTS { ?cap ffonto:mentionsConcept ffontov:Smoke } AS ?mentionsSmoke)
+  BIND(EXISTS { ?cap ffonto:mentionsConcept ?a . ?a skos:broader* ffontov:Aircraft } AS ?mentionsAircraft)
+  BIND(EXISTS { ?cap ffonto:mentionsConcept ?w . ?w skos:broader* ffontov:WaterBody } AS ?mentionsWater)
+  BIND(EXISTS { ?cap ffonto:mentionsConcept ?t . ?t skos:broader* ffontov:Terrain } AS ?mentionsTerrain)
 }
 GROUP BY ?record ?captionText ?mentionsFire ?mentionsSmoke ?mentionsAircraft ?mentionsWater ?mentionsTerrain

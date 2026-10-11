@@ -1,6 +1,6 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ffonto: <http://purl.org/ffonto#> .
-@prefix ffv: <http://purl.org/ffonto/vocab#> .
+@prefix ffontov: <http://purl.org/ffonto/vocab#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix sosa: <http://www.w3.org/ns/sosa/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -17,34 +17,34 @@
 
 <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/0> a ffonto:ModelObservation ;
     ffonto:confidence 4.1e-01 ;
-    ffonto:labelSource ffv:ZeroShotSource ;
-    ffonto:predictedClass ffv:Fire ;
-    ffonto:severity ffv:Medium ;
+    ffonto:labelSource ffontov:ZeroShotSource ;
+    ffonto:predictedClass ffontov:Fire ;
+    ffonto:severity ffontov:Medium ;
     ffonto:usedThreshold <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/threshold/Fire> ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> .
 
 <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/1> a ffonto:ModelObservation ;
     ffonto:confidence 7e-01 ;
-    ffonto:labelSource ffv:ZeroShotSource ;
-    ffonto:predictedClass ffv:Smoke ;
+    ffonto:labelSource ffontov:ZeroShotSource ;
+    ffonto:predictedClass ffontov:Smoke ;
     ffonto:usedThreshold <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/threshold/Smoke> ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> .
 
 <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/z2> a ffonto:ModelObservation ;
     ffonto:confidence 9e-02 ;
-    ffonto:labelSource ffv:ZeroShotSource ;
-    ffonto:predictedClass ffv:NoFire ;
+    ffonto:labelSource ffontov:ZeroShotSource ;
+    ffonto:predictedClass ffontov:NoFire ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> .
 
 <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/threshold/Fire> a ffonto:Threshold ;
-    ffonto:forClass ffv:Fire ;
+    ffonto:forClass ffontov:Fire ;
     ffonto:thresholdValue 5.5e-01 .
 
 <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/threshold/Smoke> a ffonto:Threshold ;
-    ffonto:forClass ffv:Smoke ;
+    ffonto:forClass ffontov:Smoke ;
     ffonto:thresholdValue 6e-01 .
 
 <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/caption> a ffonto:Caption ;
@@ -53,34 +53,34 @@
 
 <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/0> a ffonto:ModelObservation ;
     ffonto:confidence 1.585e-01 ;
-    ffonto:labelSource ffv:CaptionSource ;
-    ffonto:predictedClass ffv:Fire ;
-    ffonto:severity ffv:Low ;
+    ffonto:labelSource ffontov:CaptionSource ;
+    ffonto:predictedClass ffontov:Fire ;
+    ffonto:severity ffontov:Low ;
     ffonto:usedThreshold <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/threshold/Fire> ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> .
 
 <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/1> a ffonto:ModelObservation ;
     ffonto:confidence 7.291e-01 ;
-    ffonto:labelSource ffv:ZeroShotSource ;
-    ffonto:predictedClass ffv:Smoke ;
+    ffonto:labelSource ffontov:ZeroShotSource ;
+    ffonto:predictedClass ffontov:Smoke ;
     ffonto:usedThreshold <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/threshold/Smoke> ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> .
 
 <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/z2> a ffonto:ModelObservation ;
     ffonto:confidence 1.124601e-01 ;
-    ffonto:labelSource ffv:ZeroShotSource ;
-    ffonto:predictedClass ffv:NoFire ;
+    ffonto:labelSource ffontov:ZeroShotSource ;
+    ffonto:predictedClass ffontov:NoFire ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> .
 
 <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/threshold/Fire> a ffonto:Threshold ;
-    ffonto:forClass ffv:Fire ;
+    ffonto:forClass ffontov:Fire ;
     ffonto:thresholdValue 5.5e-01 .
 
 <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/threshold/Smoke> a ffonto:Threshold ;
-    ffonto:forClass ffv:Smoke ;
+    ffonto:forClass ffontov:Smoke ;
     ffonto:thresholdValue 6e-01 .
 
 <http://purl.org/ffonto/data/model/salesforce-blip-image-captioning-large> a ffonto:Model ;

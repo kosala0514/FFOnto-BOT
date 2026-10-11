@@ -27,7 +27,7 @@ def num(v):
 
 
 def label(v):
-    """'ffv:CrownFire' -> 'CrownFire'; long IRIs -> local name."""
+    """'ffontov:CrownFire' -> 'CrownFire'; long IRIs -> local name."""
     v = str(v or "")
     v = re.sub(r"^[A-Za-z]+:", "", v) if not v.startswith("http") else re.split(r"[#/]", v)[-1]
     return v

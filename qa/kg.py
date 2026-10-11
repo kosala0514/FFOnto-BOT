@@ -53,11 +53,11 @@ def select(query, timeout=60):
 # ----------------------------------------------------------------------------- records (for the UI)
 RECORDS_QUERY = config.PREFIX_BLOCK + """
 SELECT ?record ?type ?label ?event ?file WHERE {
-  VALUES ?type { ffo:ImageRecord ffo:AudioRecord }
+  VALUES ?type { ffonto:ImageRecord ffonto:AudioRecord }
   ?record a ?type .
-  OPTIONAL { ?record ffo:mediaId ?m }
-  OPTIONAL { ?record ffo:fileURI ?file }
-  OPTIONAL { ?record ffo:aboutEvent/ffo:eventCode ?event }
+  OPTIONAL { ?record ffonto:mediaId ?m }
+  OPTIONAL { ?record ffonto:fileURI ?file }
+  OPTIONAL { ?record ffonto:aboutEvent/ffonto:eventCode ?event }
   BIND(COALESCE(?m, REPLACE(STR(?file), "^.*/", ""), STR(?record)) AS ?label)
 } ORDER BY ?type ?label
 """
@@ -79,7 +79,7 @@ def list_records():
 
 
 def event_of(record_iri):
-    q = config.PREFIX_BLOCK + f"\nSELECT ?e WHERE {{ <{record_iri}> ffo:aboutEvent/ffo:eventCode ?e }} LIMIT 1"
+    q = config.PREFIX_BLOCK + f"\nSELECT ?e WHERE {{ <{record_iri}> ffonto:aboutEvent/ffonto:eventCode ?e }} LIMIT 1"
     _, rows = select(q)
     return rows[0]["e"] if rows else None
 

@@ -1,7 +1,0 @@
-# FFOnto custom check: every SKOS concept must belong to a concept scheme
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-SELECT DISTINCT ?entity ?property ?value WHERE {
-  ?entity a skos:Concept .
-  FILTER NOT EXISTS { ?entity skos:inScheme ?s }
-  BIND(skos:inScheme AS ?property)
-}

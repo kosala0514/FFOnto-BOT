@@ -1,5 +1,5 @@
 @prefix ffonto: <http://purl.org/ffonto#> .
-@prefix ffv: <http://purl.org/ffonto/vocab#> .
+@prefix ffontov: <http://purl.org/ffonto/vocab#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix sosa: <http://www.w3.org/ns/sosa/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -47,191 +47,191 @@
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> .
 
 <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/0> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:Gray ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:Gray ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
-    sosa:observedProperty ffv:SmokeColour .
+    sosa:observedProperty ffontov:SmokeColour .
 
 <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/1> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:High ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:High ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
-    sosa:observedProperty ffv:SmokeDensity .
+    sosa:observedProperty ffontov:SmokeDensity .
 
 <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/2> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:Drifting ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:Drifting ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
-    sosa:observedProperty ffv:PlumeDirection .
+    sosa:observedProperty ffontov:PlumeDirection .
 
 <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/3> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:Medium ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:Medium ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
-    sosa:observedProperty ffv:VisibilityLevel .
+    sosa:observedProperty ffontov:VisibilityLevel .
 
 <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/4> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:Daytime ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:Daytime ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
-    sosa:observedProperty ffv:LightCondition .
+    sosa:observedProperty ffontov:LightCondition .
 
 <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/5> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:SurfaceFireType ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:SurfaceFireType ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
-    sosa:observedProperty ffv:FireType .
+    sosa:observedProperty ffontov:FireType .
 
 <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/6> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:Medium ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:Medium ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
-    sosa:observedProperty ffv:FireIntensity .
+    sosa:observedProperty ffontov:FireIntensity .
 
 <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/7> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:Wildfire ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:Wildfire ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
-    sosa:observedProperty ffv:ScenePurpose .
+    sosa:observedProperty ffontov:ScenePurpose .
 
 <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e1> ffonto:count 1 ;
-    ffonto:hasKind ffv:FlameFront ;
+    ffonto:hasKind ffontov:FlameFront ;
     ffonto:near <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e4> ;
-    ffonto:relativePosition ffv:HeadOfFire .
+    ffonto:relativePosition ffontov:HeadOfFire .
 
 <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e2> ffonto:count 1 ;
-    ffonto:hasKind ffv:SmokePlume .
+    ffonto:hasKind ffontov:SmokePlume .
 
-<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e3> ffonto:hasKind ffv:ConiferousForest ;
-    ffonto:hasState ffv:Dense,
-        ffv:Dry .
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e3> ffonto:hasKind ffontov:ConiferousForest ;
+    ffonto:hasState ffontov:Dense,
+        ffontov:Dry .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/0> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:DarkGray ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:DarkGray ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
-    sosa:observedProperty ffv:SmokeColour .
+    sosa:observedProperty ffontov:SmokeColour .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/1> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:High ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:High ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
-    sosa:observedProperty ffv:SmokeDensity .
+    sosa:observedProperty ffontov:SmokeDensity .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/2> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:Low ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:Low ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
-    sosa:observedProperty ffv:VisibilityLevel .
+    sosa:observedProperty ffontov:VisibilityLevel .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/3> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:Daytime ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:Daytime ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
-    sosa:observedProperty ffv:LightCondition .
+    sosa:observedProperty ffontov:LightCondition .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/4> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:StructureFireType ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:StructureFireType ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
-    sosa:observedProperty ffv:FireType .
+    sosa:observedProperty ffontov:FireType .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/5> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:High ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:High ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
-    sosa:observedProperty ffv:FireIntensity .
+    sosa:observedProperty ffontov:FireIntensity .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/6> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:Expanding ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:Expanding ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
-    sosa:observedProperty ffv:FireSpreadStatus .
+    sosa:observedProperty ffontov:FireSpreadStatus .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/7> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:Wildfire ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:Wildfire ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
-    sosa:observedProperty ffv:ScenePurpose .
+    sosa:observedProperty ffontov:ScenePurpose .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/e1> ffonto:count 2 ;
-    ffonto:hasKind ffv:Firefighter ;
+    ffonto:hasKind ffontov:Firefighter ;
     ffonto:near <http://purl.org/ffonto/data/scene/scene-fixture-081/e5> ;
-    ffonto:performs ffv:ApplyingWater,
-        ffv:StructureProtection ;
-    ffonto:relativePosition ffv:BetweenFireAndAsset ;
-    ffonto:wears ffv:EyeProtection,
-        ffv:FireResistantClothing,
-        ffv:Gloves,
-        ffv:Helmet .
+    ffonto:performs ffontov:ApplyingWater,
+        ffontov:StructureProtection ;
+    ffonto:relativePosition ffontov:BetweenFireAndAsset ;
+    ffonto:wears ffontov:EyeProtection,
+        ffontov:FireResistantClothing,
+        ffontov:Gloves,
+        ffontov:Helmet .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/e10> ffonto:count 1 ;
-    ffonto:hasKind ffv:FireEngine ;
-    ffonto:hasState ffv:LightsOn ;
-    ffonto:performs ffv:Pumping ;
+    ffonto:hasKind ffontov:FireEngine ;
+    ffonto:hasState ffontov:LightsOn ;
+    ffonto:performs ffontov:Pumping ;
     ffonto:protects <http://purl.org/ffonto/data/scene/scene-fixture-081/e4> ;
-    ffonto:relativePosition ffv:BetweenFireAndAsset .
+    ffonto:relativePosition ffontov:BetweenFireAndAsset .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/e11> ffonto:count 1 ;
-    ffonto:hasKind ffv:SpotFire ;
-    ffonto:relativePosition ffv:AheadOfFire .
+    ffonto:hasKind ffontov:SpotFire ;
+    ffonto:relativePosition ffontov:AheadOfFire .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/e12> ffonto:count 1 ;
-    ffonto:hasKind ffv:Foam ;
-    ffonto:hasState ffv:Deployed .
+    ffonto:hasKind ffontov:Foam ;
+    ffonto:hasState ffontov:Deployed .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/e2> ffonto:count 1 ;
-    ffonto:hasKind ffv:Firefighter ;
+    ffonto:hasKind ffontov:Firefighter ;
     ffonto:near <http://purl.org/ffonto/data/scene/scene-fixture-081/e5> ;
-    ffonto:performs ffv:AdvancingHoseLine ;
-    ffonto:wears ffv:FireResistantClothing,
-        ffv:Helmet .
+    ffonto:performs ffontov:AdvancingHoseLine ;
+    ffonto:wears ffontov:FireResistantClothing,
+        ffontov:Helmet .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/e3> ffonto:count 2 ;
-    ffonto:hasKind ffv:HoseLine ;
-    ffonto:hasState ffv:Charged,
-        ffv:Flowing .
+    ffonto:hasKind ffontov:HoseLine ;
+    ffonto:hasState ffontov:Charged,
+        ffontov:Flowing .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/e6> ffonto:count 1 ;
-    ffonto:hasKind ffv:PropaneTank ;
+    ffonto:hasKind ffontov:PropaneTank ;
     ffonto:near <http://purl.org/ffonto/data/scene/scene-fixture-081/e5> .
 
-<http://purl.org/ffonto/data/scene/scene-fixture-081/e7> ffonto:hasKind ffv:Road ;
-    ffonto:hasState ffv:Open .
+<http://purl.org/ffonto/data/scene/scene-fixture-081/e7> ffonto:hasKind ffontov:Road ;
+    ffonto:hasState ffontov:Open .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/e8> ffonto:count 1 ;
-    ffonto:hasKind ffv:PrivateCar ;
+    ffonto:hasKind ffontov:PrivateCar ;
     ffonto:near <http://purl.org/ffonto/data/scene/scene-fixture-081/e5> .
 
-<http://purl.org/ffonto/data/scene/scene-fixture-081/e9> ffonto:hasKind ffv:ConiferousForest ;
-    ffonto:hasState ffv:Dry .
+<http://purl.org/ffonto/data/scene/scene-fixture-081/e9> ffonto:hasKind ffontov:ConiferousForest ;
+    ffonto:hasState ffontov:Dry .
 
-<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e4> ffonto:hasKind ffv:Lake .
+<http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e4> ffonto:hasKind ffontov:Lake .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/e4> ffonto:count 1 ;
-    ffonto:hasKind ffv:House ;
-    ffonto:hasState ffv:Scorched,
-        ffv:Threatened .
+    ffonto:hasKind ffontov:House ;
+    ffonto:hasState ffontov:Scorched,
+        ffontov:Threatened .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/e5> ffonto:advancingToward <http://purl.org/ffonto/data/scene/scene-fixture-081/e4> ;
     ffonto:count 2 ;
-    ffonto:hasKind ffv:FlameFront .
+    ffonto:hasKind ffontov:FlameFront .
 
 <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> a ffonto:Model ;
     ffonto:modelName "EXAMPLE-VLM (hand-written fixture, replace with real VLM output)" ;

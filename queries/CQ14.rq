@@ -12,7 +12,7 @@
 # Note: Vegetation-level attributes (FuelCondition, VegetationDensity, DominantAspect …) can be added to the scene 'attributes' and queried like CQ12.
 
 PREFIX ffonto:  <http://purl.org/ffonto#>
-PREFIX ffv:  <http://purl.org/ffonto/vocab#>
+PREFIX ffontov:  <http://purl.org/ffonto/vocab#>
 PREFIX ffd:  <http://purl.org/ffonto/data/>
 PREFIX sosa: <http://www.w3.org/ns/sosa/>
 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -26,11 +26,11 @@ SELECT ?record ?entity ?kind ?count
 WHERE {
   ?sd ffonto:describesRecord ?record ; ffonto:depicts ?entity .
   ?entity ffonto:hasKind ?k .
-  VALUES ?top { ffv:EnvironmentFeatureKind }
+  VALUES ?top { ffontov:EnvironmentFeatureKind }
   ?k skos:broader* ?top ; skos:prefLabel ?kind .
   OPTIONAL { ?entity ffonto:count ?count }
   OPTIONAL { ?entity ffonto:hasState ?st . ?st skos:prefLabel ?stateL }
-  OPTIONAL { ?k skos:broader* ?g . ?g skos:broader ffv:EnvironmentFeatureKind ; skos:prefLabel ?group }
+  OPTIONAL { ?k skos:broader* ?g . ?g skos:broader ffontov:EnvironmentFeatureKind ; skos:prefLabel ?group }
 }
 GROUP BY ?record ?entity ?kind ?count ?group
 ORDER BY ?record ?kind

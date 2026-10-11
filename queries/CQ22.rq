@@ -11,7 +11,7 @@
 # Note: Burn-severity level and ash colour can be reported as scene attributes (BurnSeverity, AshColour) and queried like CQ12.
 
 PREFIX ffonto:  <http://purl.org/ffonto#>
-PREFIX ffv:  <http://purl.org/ffonto/vocab#>
+PREFIX ffontov:  <http://purl.org/ffonto/vocab#>
 PREFIX ffd:  <http://purl.org/ffonto/data/>
 PREFIX sosa: <http://www.w3.org/ns/sosa/>
 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -25,7 +25,7 @@ SELECT ?record ?entity ?kind ?count
 WHERE {
   ?sd ffonto:describesRecord ?record ; ffonto:depicts ?entity .
   ?entity ffonto:hasKind ?k .
-  VALUES ?top { ffv:BurnEvidenceKind }
+  VALUES ?top { ffontov:BurnEvidenceKind }
   ?k skos:broader* ?top ; skos:prefLabel ?kind .
   OPTIONAL { ?entity ffonto:count ?count }
   OPTIONAL { ?entity ffonto:hasState ?st . ?st skos:prefLabel ?stateL }

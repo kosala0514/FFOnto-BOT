@@ -15,6 +15,7 @@ Named graphs (all queried together, because GraphDB's default graph is the union
     <http://purl.org/ffonto/graph/audio>      audio records and sound-event observations
     <http://purl.org/ffonto/graph/weather>    weather / FWI rows
     <http://purl.org/ffonto/graph/scene>      VLM scene descriptions
+    <http://purl.org/ffonto/graph/documents>  figures from the RAG documents, tagged with ontology concepts (optional)
     <http://purl.org/ffonto/graph/inferred>   output of rules/R00–R07 (rebuilt on every load)
 """
 import argparse, re, sys, time
@@ -34,6 +35,7 @@ SOURCES = {
     "audio":    [ROOT / "data/graphs/audio.ttl"],
     "weather":  [ROOT / "data/graphs/weather.ttl"],
     "scene":    [ROOT / "data/graphs/scene.ttl"],
+    "documents": [ROOT / "data/graphs/documents.ttl"],   # figures of the RAG PDFs tagged with ontology concepts (qa.build_index)
 }
 
 
@@ -129,7 +131,7 @@ def run_cqs(db):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--url", default="http://localhost:7200")
-    ap.add_argument("--repo", default="ffonto-kg")
+    ap.add_argument("--repo", default="ffonto")
     ap.add_argument("--config", default=str(ROOT / "graphdb" / "repo-config.ttl"))
     ap.add_argument("--recreate", action="store_true", help="delete and recreate the repository")
     ap.add_argument("--only", nargs="*", choices=list(SOURCES), help="(re)load only these graphs")

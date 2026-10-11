@@ -1,7 +1,7 @@
 {
   "@context": {
-    "ffo": "http://purl.org/ffonto#",
-    "ffv": "http://purl.org/ffonto/vocab#",
+    "ffonto": "http://purl.org/ffonto#",
+    "ffontov": "http://purl.org/ffonto/vocab#",
     "ffd": "http://purl.org/ffonto/data/",
     "sosa": "http://www.w3.org/ns/sosa/",
     "prov": "http://www.w3.org/ns/prov#",
@@ -203,7 +203,7 @@
       "@id": "ffd:record/00000000-0000-4000-8000-0000000a0081/obs/0",
       "@type": "ffonto:ModelObservation",
       "feature_of_interest": "ffd:record/00000000-0000-4000-8000-0000000a0081",
-      "predicted_class": "ffv:Explosion",
+      "predicted_class": "ffontov:Explosion",
       "label_category": "fire_audio",
       "confidence": 0.81,
       "mean_confidence": 0.81,
@@ -212,7 +212,7 @@
         "explosion",
         "crackle"
       ],
-      "label_source": "ffv:AudioTaggerSource",
+      "label_source": "ffontov:AudioTaggerSource",
       "attributed_to": {
         "@id": "ffd:model/google-yamnet/1",
         "@type": "ffonto:Model",
@@ -226,7 +226,7 @@
       "used_threshold": {
         "@id": "ffd:record/00000000-0000-4000-8000-0000000a0081/threshold/Explosion",
         "@type": "ffonto:Threshold",
-        "for_class": "ffv:Explosion",
+        "for_class": "ffontov:Explosion",
         "threshold_value": 0.2
       }
     },
@@ -234,7 +234,7 @@
       "@id": "ffd:record/00000000-0000-4000-8000-0000000a0081/obs/1",
       "@type": "ffonto:ModelObservation",
       "feature_of_interest": "ffd:record/00000000-0000-4000-8000-0000000a0081",
-      "predicted_class": "ffv:Siren",
+      "predicted_class": "ffontov:Siren",
       "label_category": "fire_audio",
       "confidence": 0.35,
       "mean_confidence": 0.35,
@@ -242,7 +242,7 @@
       "top_k_labels": [
         "siren"
       ],
-      "label_source": "ffv:AudioTaggerSource",
+      "label_source": "ffontov:AudioTaggerSource",
       "attributed_to": {
         "@id": "ffd:model/google-yamnet/1",
         "@type": "ffonto:Model",
@@ -256,7 +256,7 @@
       "used_threshold": {
         "@id": "ffd:record/00000000-0000-4000-8000-0000000a0081/threshold/Siren",
         "@type": "ffonto:Threshold",
-        "for_class": "ffv:Siren",
+        "for_class": "ffontov:Siren",
         "threshold_value": 0.2
       }
     }

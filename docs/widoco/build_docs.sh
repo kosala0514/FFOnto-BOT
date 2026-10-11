@@ -8,9 +8,9 @@
 #        bash docs/widoco/build_docs.sh ~/WIDOCO/widoco-1.4.25-jar-with-dependencies_JDK-17.jar site --oops
 #
 #  Result:
-#    site/index.html          core schema   (ffo:)   + WebVOWL diagram
-#    site/vocab/index.html    vocabulary    (ffv:)   + concept hierarchy
-#    site/rules/index.html    danger rules  (ffr:)
+#    site/index.html          core schema   (ffonto:)   + WebVOWL diagram
+#    site/vocab/index.html    vocabulary    (ffontov:)   + concept hierarchy
+#    site/rules/index.html    danger rules  (ffontor:)
 #    site/resources/          .ttl modules, SHACL shapes, JSON-LD context
 #  Preview:  python3 -m http.server -d site 8080   ->  http://localhost:8080
 #  (opening index.html directly from disk shows empty sections: WIDOCO loads them with JavaScript)

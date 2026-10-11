@@ -45,7 +45,7 @@ def test_every_concept_in_a_scheme_and_connected():
 
 
 def test_core_terms_are_used():
-    """Every ffo term should be used by a query, rule, shape, context or the lifter (CQ traceability)."""
+    """Every ffonto term should be used by a query, rule, shape, context or the lifter (CQ traceability)."""
     used_text = "\n".join(p.read_text(encoding="utf-8") for p in
                           list((ROOT / "queries").glob("*.rq")) + list((ROOT / "rules").glob("*.rq")) +
                           [ROOT / "ontology" / "ffonto-shapes.ttl", ROOT / "context" / "ffonto.context.jsonld",
@@ -60,4 +60,4 @@ def test_core_terms_are_used():
                 if not re.search(rf"ffonto:{local}\b", used_text):
                     unused.append(local)
     if unused:
-        warnings.warn(f"ffo terms not used by any CQ query/rule/mapping: {sorted(unused)}")
+        warnings.warn(f"ffonto terms not used by any CQ query/rule/mapping: {sorted(unused)}")

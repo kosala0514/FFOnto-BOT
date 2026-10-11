@@ -9,7 +9,7 @@
 #   - Is a hose line protecting a structure?
 
 PREFIX ffonto:  <http://purl.org/ffonto#>
-PREFIX ffv:  <http://purl.org/ffonto/vocab#>
+PREFIX ffontov:  <http://purl.org/ffonto/vocab#>
 PREFIX ffd:  <http://purl.org/ffonto/data/>
 PREFIX sosa: <http://www.w3.org/ns/sosa/>
 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -22,8 +22,8 @@ SELECT ?record ?actorKind ?activity ?tactic ?position (REPLACE(REPLACE(GROUP_CON
 WHERE {
   ?sd ffonto:describesRecord ?record ; ffonto:depicts ?actor .
   ?actor ffonto:performs ?act ; ffonto:hasKind/skos:prefLabel ?actorKind .
-  ?act skos:broader* ffv:SuppressionActivity ; skos:prefLabel ?activity .
-  OPTIONAL { VALUES ?tg { ffv:DirectAttack ffv:IndirectAttack ffv:AerialSuppression }
+  ?act skos:broader* ffontov:SuppressionActivity ; skos:prefLabel ?activity .
+  OPTIONAL { VALUES ?tg { ffontov:DirectAttack ffontov:IndirectAttack ffontov:AerialSuppression }
              ?act skos:broader* ?tg . ?tg skos:prefLabel ?tactic }
   OPTIONAL { ?actor ffonto:relativePosition/skos:prefLabel ?position }
   OPTIONAL { ?actor ffonto:protects/ffonto:hasKind/skos:prefLabel ?protectedL }

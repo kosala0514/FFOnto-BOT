@@ -9,7 +9,7 @@
 #   - Are multiple fire clusters detected?
 
 PREFIX ffonto:  <http://purl.org/ffonto#>
-PREFIX ffv:  <http://purl.org/ffonto/vocab#>
+PREFIX ffontov:  <http://purl.org/ffonto/vocab#>
 PREFIX ffd:  <http://purl.org/ffonto/data/>
 PREFIX sosa: <http://www.w3.org/ns/sosa/>
 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -22,7 +22,7 @@ SELECT ?record ?phenomenon (SUM(COALESCE(?n, 1)) AS ?count) (REPLACE(REPLACE(GRO
 WHERE {
   ?sd ffonto:describesRecord ?record ; ffonto:depicts ?e .
   ?e ffonto:hasKind ?k .
-  ?k skos:broader* ffv:FirePhenomenonKind ; skos:prefLabel ?phenomenon .
+  ?k skos:broader* ffontov:FirePhenomenonKind ; skos:prefLabel ?phenomenon .
   OPTIONAL { ?e ffonto:count ?n }
   OPTIONAL { ?e ffonto:relativePosition ?pos . ?pos skos:prefLabel ?posL }
 }

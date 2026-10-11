@@ -61,27 +61,27 @@ You can open it in Protégé or load it into GraphDB or Apache Jena Fuseki toget
 
 ```
             WORLD                         DATA                               CLAIMS (model outputs)
-   ffo:FireEvent ◄──ffo:aboutEvent── ffo:ImageRecord ──ffo:hasObservation──► ffo:ModelObservation
-                                     ffo:AudioRecord                           ├ ffo:predictedClass  ffv:Smoke
-                                     ffo:WeatherRecord (direct values)         ├ ffo:confidence      0.73
-                                          │                                    ├ ffo:usedThreshold → 0.60
-                                          │ ffo:hasCaption → ffo:Caption       └ prov:wasAttributedTo → ffo:Model
+   ffonto:FireEvent ◄──ffonto:aboutEvent── ffonto:ImageRecord ──ffonto:hasObservation──► ffonto:ModelObservation
+                                     ffonto:AudioRecord                           ├ ffonto:predictedClass  ffontov:Smoke
+                                     ffonto:WeatherRecord (direct values)         ├ ffonto:confidence      0.73
+                                          │                                    ├ ffonto:usedThreshold → 0.60
+                                          │ ffonto:hasCaption → ffonto:Caption       └ prov:wasAttributedTo → ffonto:Model
                                           ▲
-                         ffo:describesRecord
+                         ffonto:describesRecord
                                           │
-                               ffo:SceneDescription ──ffo:depicts──► ffo:SceneEntity
-                               (VLM output)                           ├ ffo:hasKind   ffv:Firefighter   (SKOS)
-                                                                      ├ ffo:wears     ffv:Helmet
-                                                                      ├ ffo:performs  ffv:ApplyingWater
-                                                                      ├ ffo:hasState  ffv:Scorched
-                                                                      └ ffo:near / advancingToward / protects …
-   DERIVED by rules:  ffo:detectedClass · ffo:mentionsConcept · ffo:hasCondition · ffo:ModalityConflict · ffo:Hazard
+                               ffonto:SceneDescription ──ffonto:depicts──► ffonto:SceneEntity
+                               (VLM output)                           ├ ffonto:hasKind   ffontov:Firefighter   (SKOS)
+                                                                      ├ ffonto:wears     ffontov:Helmet
+                                                                      ├ ffonto:performs  ffontov:ApplyingWater
+                                                                      ├ ffonto:hasState  ffontov:Scorched
+                                                                      └ ffonto:near / advancingToward / protects …
+   DERIVED by rules:  ffonto:detectedClass · ffonto:mentionsConcept · ffonto:hasCondition · ffonto:ModalityConflict · ffonto:Hazard
 ```
 
 Five rules keep the ontology small:
 
 1. **Separate the world, the data and the claims.** A model saying "smoke 0.73" is an *observation* with confidence, provenance and a threshold, not a fact about the world.
-2. **The fine-grained vocabulary is SKOS, not schema.** "Is a Pulaski in use?" uses the generic `ffo:hasKind` + `ffv:Pulaski` (a narrower concept of `ffv:HandTool`). Adding a new tool means adding one concept, with no new class or property.
+2. **The fine-grained vocabulary is SKOS, not schema.** "Is a Pulaski in use?" uses the generic `ffonto:hasKind` + `ffontov:Pulaski` (a narrower concept of `ffontov:HandTool`). Adding a new tool means adding one concept, with no new class or property.
 3. **Derived knowledge comes from rules.** Hazards, detections, conflicts and weather conditions are computed (`rules/`), so changing a threshold or rule never means editing data.
 4. **Reuse standards.** The ontology builds on SOSA (observations), PROV-O (provenance) and Dublin Core (licence).
 5. **Every term must be used by a CQ query.** If no query needs a term, it does not belong in the core.

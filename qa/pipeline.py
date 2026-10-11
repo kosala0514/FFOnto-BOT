@@ -61,6 +61,96 @@ def answer_from_rows(question, title, filters, cols, rows):
     return llm.chat_text(prompts.ANSWER_KG_SYSTEM, user)
 
 
+def is_abstention(text):
+    from .metrics import answer_polarity
+    return answer_polarity(text) == "abstain"
+
+
+_YN_Q = re.compile(r"^\s*(is|are|was|were|does|do|did|has|have|had|can|could|will|would|should|may|might|must)\b", re.I)
+
+
+def is_yes_no_question(question):
+    return bool(_YN_Q.match(question or ""))
+
+
+def _no_positive_evidence(text):
+    from .metrics import answer_polarity
+    return answer_polarity(text) in ("no", "abstain")
+
+
+def fuse_answer(question, title, cols, rows):
+    """Second answer when the KG-only answer abstained: interpret the rows with ontology facts + document passages.
+    Returns (answer, sources). Record-specific facts must still come from the rows (see ANSWER_FUSION_SYSTEM)."""
+    facts = rag.ontology_facts(question)
+    try:
+        passages = rag.retrieve(question, k=3)
+    except Exception:                               # no document index built: ontology facts only
+        passages = []
+    n = len(rows)
+    user = fill(prompts.ANSWER_FUSION_USER, question=question, title=title, n=n,
+                truncated=f", first {config.MAX_ROWS_TO_LLM} shown" if n > config.MAX_ROWS_TO_LLM else "",
+                table=_table(cols, rows, config.MAX_ROWS_TO_LLM),
+                facts="\n".join(f"- {f}" for f in facts) or "(none)",
+                passages="\n\n".join(f"[{i + 1}] ({p['source']}) {p['text'][:700]}" for i, p in enumerate(passages)) or "(none)")
+    ans = llm.chat_text(prompts.ANSWER_FUSION_SYSTEM, user)
+    sources = [{"type": "ontology", "text": f} for f in facts] + \
+              [{"type": "document", "source": p["source"], "text": p["text"][:300]} for p in passages]
+    return ans, sources
+
+
+# ------------------------------------------------------------------ direct vision-model answers
+_image_index = None
+
+
+def record_image_path(record_iri):
+    """Local path of the image behind a record (ffonto:fileURI), or None. If the stored path does not exist on this
+    machine, the file name is looked up under IMAGES_DIR."""
+    global _image_index
+    if not record_iri:
+        return None
+    try:
+        _, rows = kg.select(config.PREFIX_BLOCK + f"\nSELECT ?f WHERE {{ <{record_iri}> a ffonto:ImageRecord ; "
+                                                  f"ffonto:fileURI ?f }} LIMIT 1")
+    except Exception:
+        return None
+    if not rows:
+        return None
+    from pathlib import Path
+    from urllib.parse import unquote
+    f = unquote(re.sub(r"^file://", "", str(rows[0]["f"])))
+    if Path(f).is_file():
+        return f
+    if config.IMAGES_DIR:
+        if _image_index is None:
+            _image_index = {p.name.lower(): str(p) for p in Path(config.IMAGES_DIR).expanduser().rglob("*")
+                            if p.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp", ".bmp"}}
+        return _image_index.get(Path(f).name.lower())
+    return None
+
+
+def vlm_answer(question, image_path):
+    return llm.chat_vision(prompts.VLM_QA_SYSTEM, f"Question: {question}", [image_path])
+
+
+def vlm_baseline(question, record):
+    """Baseline without the KG: the vision-language model answers from the image alone."""
+    t0 = time.time()
+    out = {"question": question, "record": record, "route": "kg", "cq": None, "mode": "vlm", "rows": [],
+           "columns": [], "answer": "", "sources": [], "error": None}
+    img = record_image_path(record)
+    try:
+        if not img:
+            out["error"] = "no local image for this record (not an image question, or set IMAGES_DIR)"
+            out["answer"] = "Sorry – I could not answer that (no image)."
+        else:
+            out["answer"] = vlm_answer(question, img)
+    except llm.LLMError as e:
+        out["error"] = str(e)
+        out["answer"] = f"Sorry – I could not answer that ({e})."
+    out["seconds"] = round(time.time() - t0, 2)
+    return out
+
+
 def schema_summary():
     """Compact description of the core ontology for the text-to-SPARQL prompt."""
     global _schema
@@ -80,14 +170,14 @@ def schema_summary():
 
     lines = ["Classes:"]
     for c in sorted(g.subjects(RDF.type, OWL.Class), key=str):
-        if isinstance(c, URIRef) and str(c).startswith(config.PREFIXES["ffo"]):
+        if isinstance(c, URIRef) and str(c).startswith(config.PREFIXES["ffonto"]):
             sup = ", ".join(q(s) for s in g.objects(c, RDFS.subClassOf) if isinstance(s, URIRef))
             com = str(g.value(c, RDFS.comment) or "")[:110]
             lines.append(f"  {q(c)}{' subClassOf ' + sup if sup else ''} – {com}")
     lines.append("Properties (domain -> range):")
     for t in (OWL.ObjectProperty, OWL.DatatypeProperty):
         for p in sorted(g.subjects(RDF.type, t), key=str):
-            if str(p).startswith(config.PREFIXES["ffo"]):
+            if str(p).startswith(config.PREFIXES["ffonto"]):
                 lines.append(f"  {q(p)} ({q(g.value(p, RDFS.domain))} -> {q(g.value(p, RDFS.range))})")
     lines.append("Also used: sosa:observedProperty, sosa:hasFeatureOfInterest, prov:wasAttributedTo, "
                  "prov:wasDerivedFrom, skos:prefLabel, skos:broader, rdfs:label.")
@@ -95,23 +185,85 @@ def schema_summary():
     return _schema
 
 
-def text_to_sparql(question, record, hint_cqs):
-    examples = "\n\n".join(f"# {c} – {cqs.REGISTRY[c].title}\n{cqs.REGISTRY[c].query.split('PREFIX dcterms: <http://purl.org/dc/terms/>')[-1].strip()}"
+T2S_SCHEMA = {"type": "object", "properties": {"sparql": {"type": "string"}}, "required": ["sparql"]}
+
+
+def _strip_prefixes(q):
+    return q.split("PREFIX dcterms: <http://purl.org/dc/terms/>")[-1].strip()
+
+
+def bind_context(query, record=None, event=None):
+    """Improvement 1: the CODE restricts the query to the selected context (as CQ mode does), not the model.
+    A trailing VALUES block is valid SPARQL 1.1 after the whole SELECT."""
+    applied = {}
+    if record and re.search(r"\?record\b", query) and "VALUES ?record" not in query:
+        query = query.rstrip() + f"\nVALUES ?record {{ <{record}> }}"
+        applied["record"] = kg.short(record)
+    elif event and re.search(r"\?eventCode\b", query) and "VALUES ?eventCode" not in query:
+        query = query.rstrip() + f'\nVALUES ?eventCode {{ "{event}" }}'
+        applied["event"] = event
+    return query, applied
+
+
+def filter_rows_by_date(cols, rows, date):
+    """Weather questions: keep only rows of the context date (same post-filter as CQ mode)."""
+    for c in ("date", "observationDate", "day"):
+        if date and c in cols:
+            return [r for r in rows if str(r.get(c, "")).startswith(date)], {"date": date}
+    return rows, {}
+
+
+def text_to_sparql(question, record, hint_cqs, date=None, event=None, mode=None):
+    """mode "naive": the model writes the whole query (the baseline in the paper).
+    mode "plus": context binding + schema linking + template adaptation + execution feedback."""
+    mode = mode or config.T2S_MODE
+    examples = "\n\n".join(f"# {c} – {cqs.REGISTRY[c].title}\n{_strip_prefixes(cqs.REGISTRY[c].query)}"
                            for c in hint_cqs if c in cqs.REGISTRY)[:6000]
     system = fill(prompts.TEXT2SPARQL_SYSTEM, schema=schema_summary(), examples=examples or "(none)")
-    error, last = "", None
+    plus = mode == "plus"
+    if plus:
+        system += prompts.TEXT2SPARQL_PLUS_RULES
+        concepts = "(none)"
+        if config.T2S_SCHEMA_LINK:
+            found = rag.match_concepts(question, max_concepts=8)
+            concepts = "\n".join(f"- {kg.short(str(i))} ({l})" for i, l in found) or "(none)"
+        template = (_strip_prefixes(cqs.REGISTRY[hint_cqs[0]].query)
+                    if config.T2S_ADAPT_TEMPLATE and hint_cqs and hint_cqs[0] in cqs.REGISTRY else "(none)")
+        ctx = ", ".join(x for x in [f"selected record bound to ?record" if record else "",
+                                    f"event code {event}" if event else "",
+                                    f"date {date} (use ?date)" if date else ""] if x) or "none"
+    error, last, best = "", None, None
     for attempt in range(2):
-        out = llm.chat_json(system, fill(prompts.TEXT2SPARQL_USER, record=record or "none",
-                                         question=question, error=error),
-                            {"type": "object", "properties": {"sparql": {"type": "string"}}, "required": ["sparql"]},
-                            model=config.SPARQL_MODEL)
+        user = (fill(prompts.TEXT2SPARQL_PLUS_USER, question=question, context=ctx, concepts=concepts,
+                     example_query=template, error=error) if plus else
+                fill(prompts.TEXT2SPARQL_USER, record=record or "none", question=question, error=error))
+        out = llm.chat_json(system, user, T2S_SCHEMA, model=config.SPARQL_MODEL)
         try:
-            q = kg.make_safe(out["sparql"])
+            q = kg.make_safe(out["sparql"])              # prefixes + LIMIT first: VALUES must come last
+            q, applied = (bind_context(q, record, event)
+                          if plus and config.T2S_BIND_CONTEXT else (q, {}))
             cols, rows = kg.select(q)
-            return q, cols, rows
+            if plus and config.T2S_BIND_CONTEXT:
+                rows, f = filter_rows_by_date(cols, rows, date)
+                applied.update(f)
         except kg.KGError as e:
             last = e
             error = f"Your previous query failed: {e}\nPrevious query:\n{out.get('sparql', '')}\nFix it."
+            continue
+        best = best or (q, cols, rows, applied)
+        too_big = (record or date or event) and len(rows) > config.T2S_MAX_ROWS
+        if not (plus and config.T2S_EXEC_FEEDBACK) or (rows and not too_big) or attempt == 1:
+            # keep the better of the two attempts: non-empty and smaller wins
+            cand = (q, cols, rows, applied)
+            if best and best is not cand and best[2] and (not rows or len(best[2]) < len(rows)):
+                cand = best
+            return cand
+        # Improvement 4: execution feedback - one regeneration with what went wrong
+        error = (f"Your previous query returned {'no rows' if not rows else f'{len(rows)} rows'}"
+                 f"{' – too many for a question about one record/date; restrict it' if rows else ' – check the properties and the hierarchy (skos:broader*)'}."
+                 f"\nPrevious query:\n{out['sparql']}\nWrite a corrected query.")
+    if best:
+        return best
     raise last
 
 
@@ -163,7 +315,11 @@ def figure_visuals(figures):
 
 
 # ------------------------------------------------------------------ main entry
-def answer(question, record=None, record_desc=None, force_cq=None, force_text2sparql=None):
+def answer(question, record=None, record_desc=None, force_cq=None, force_text2sparql=None,
+           exclude_self=False, default_date=None, t2s_mode=None, fusion=None, vlm_fallback=None):
+    """exclude_self: leave-one-out evaluation (the question itself is not used as a router example).
+    fusion: if the KG-only answer abstains, answer again with ontology/document background (None = config.ANSWER_FUSION).
+    default_date: context date (YYYY-MM-DD) used when the question names none, e.g. a selected weather record."""
     t0 = time.time()
     out = {"question": question, "record": record, "route": None, "cq": None, "mode": None,
            "sparql": None, "columns": [], "rows": [], "filters": {}, "answer": "", "sources": [], "visuals": [], "error": None}
@@ -172,7 +328,9 @@ def answer(question, record=None, record_desc=None, force_cq=None, force_text2sp
             decision = {"route": "kg", "cq": force_cq, "uses_selected_record": True, "event": "", "site": "", "date": "",
                         "reason": "forced", "examples": []}
         else:
-            decision = route(question, record_desc or (kg.short(record) if record else "none"))
+            decision = route(question, record_desc or (kg.short(record) if record else "none"), exclude_self=exclude_self)
+        if default_date and not decision.get("date"):
+            decision["date"] = default_date
         out["decision"] = decision
         out["route"] = decision["route"]
 
@@ -207,11 +365,31 @@ def answer(question, record=None, record_desc=None, force_cq=None, force_text2sp
                 out.update(mode="cq", cq=cq_id, sparql=res["query"], columns=res["columns"],
                            rows=res["rows"][:200], filters=res["filters"])
                 out["answer"] = answer_from_rows(question, res["title"], res["filters"], res["columns"], res["rows"])
+                use_fusion = config.ANSWER_FUSION if fusion is None else fusion
+                if use_fusion and is_abstention(out["answer"]):
+                    out["kg_only_answer"] = out["answer"]
+                    out["answer"], out["sources"] = fuse_answer(question, res["title"], res["columns"], res["rows"])
+                    out["fused"] = True
+                use_vlm = config.VLM_FALLBACK if vlm_fallback is None else vlm_fallback
+                if use_vlm and is_yes_no_question(question) and _no_positive_evidence(out["answer"]):
+                    img = record_image_path(use_rec or record)
+                    if img:
+                        seen = vlm_answer(question, img)
+                        out["vlm_answer"] = seen
+                        from .metrics import polarity
+                        if polarity(seen) == "yes":            # strict: the vision model must start with "Yes"
+                            out["kg_answer"] = out["answer"]
+                            out["answer"] = (seen.rstrip(".") + " (seen by the vision model in the image; "
+                                             "not recorded in the knowledge graph).")
+                            out["vlm_used"] = True
                 out["visuals"] = visuals.chart_for(cq_id, res["columns"], res["rows"], res["title"])
             elif config.ENABLE_TEXT2SPARQL or baseline:
                 hints = [e["label"] for e in decision.get("examples", []) if e["label"] in cqs.REGISTRY][:3]
-                q, cols, rows = text_to_sparql(question, use_rec or record, hints)
-                out.update(mode="text2sparql", sparql=q, columns=cols, rows=rows[:200])
+                ev = decision.get("event") or (kg.event_of(use_rec or record) if (use_rec or record) else None)
+                q, cols, rows, applied = text_to_sparql(question, use_rec or record, hints,
+                                                        date=decision.get("date") or None, event=ev, mode=t2s_mode)
+                out.update(mode="text2sparql", sparql=q, columns=cols, rows=rows[:200], filters=applied,
+                           t2s_mode=t2s_mode or config.T2S_MODE)
                 out["answer"] = answer_from_rows(question, "generated SPARQL (no matching CQ)", {}, cols, rows)
                 out["visuals"] = visuals.chart_for(None, cols, rows, "Query result")
             else:

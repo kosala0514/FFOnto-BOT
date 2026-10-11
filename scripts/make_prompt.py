@@ -15,13 +15,13 @@ txt = (ROOT / "ontology" / "ffonto-vocab.ttl").read_text(encoding="utf-8")
 
 # parse concept blocks: name, scheme, broader
 concepts = {}
-for block in re.split(r"\n(?=ffv:\w+ a skos:Concept\s*;)", txt):
-    m = re.match(r"ffv:(\w+) a skos:Concept\s*;", block)
+for block in re.split(r"\n(?=ffontov:\w+ a skos:Concept\s*;)", txt):
+    m = re.match(r"ffontov:(\w+) a skos:Concept\s*;", block)
     if not m:
         continue
     name = m.group(1)
-    scheme = re.search(r"skos:inScheme ffv:(\w+)", block).group(1)
-    broader = re.search(r"skos:broader ffv:(\w+)", block)
+    scheme = re.search(r"skos:inScheme ffontov:(\w+)", block).group(1)
+    broader = re.search(r"skos:broader ffontov:(\w+)", block)
     concepts[name] = (scheme, broader.group(1) if broader else None)
 
 def in_scheme(s):

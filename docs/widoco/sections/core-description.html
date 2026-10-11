@@ -21,31 +21,31 @@ every derived conclusion back to the model, the threshold and the record it came
     <text x="135" y="22">WORLD</text><text x="430" y="22">DATA</text><text x="725" y="22">CLAIMS (model outputs)</text>
   </g>
   <g fill="#222">
-    <text x="25" y="60" font-weight="bold">ffo:FireEvent</text>
+    <text x="25" y="60" font-weight="bold">ffonto:FireEvent</text>
     <text x="25" y="80">a fire incident (event_id)</text>
-    <text x="25" y="115" font-weight="bold">ffo:Site</text>
+    <text x="25" y="115" font-weight="bold">ffonto:Site</text>
     <text x="25" y="135">station, camera site, grid cell</text>
-    <text x="25" y="170" font-weight="bold">ffo:SceneEntity</text>
+    <text x="25" y="170" font-weight="bold">ffonto:SceneEntity</text>
     <text x="25" y="190">fire front, firefighter, house …</text>
-    <text x="25" y="210">hasKind → ffv: concept (SKOS)</text>
+    <text x="25" y="210">hasKind → ffontov:concept (SKOS)</text>
     <text x="25" y="230">wears · performs · hasState · near</text>
 
-    <text x="320" y="60" font-weight="bold">ffo:DataRecord</text>
+    <text x="320" y="60" font-weight="bold">ffonto:DataRecord</text>
     <text x="320" y="80">ImageRecord · AudioRecord</text>
     <text x="320" y="100">WeatherRecord (FWI values)</text>
-    <text x="320" y="135" font-weight="bold">ffo:Caption</text>
-    <text x="320" y="170" font-weight="bold">ffo:SceneDescription</text>
+    <text x="320" y="135" font-weight="bold">ffonto:Caption</text>
+    <text x="320" y="170" font-weight="bold">ffonto:SceneDescription</text>
     <text x="320" y="190">VLM output; depicts → SceneEntity</text>
-    <text x="320" y="225" font-weight="bold">ffo:CaptureDevice</text>
+    <text x="320" y="225" font-weight="bold">ffonto:CaptureDevice</text>
 
-    <text x="615" y="60" font-weight="bold">ffo:ModelObservation</text>
+    <text x="615" y="60" font-weight="bold">ffonto:ModelObservation</text>
     <text x="615" y="80">predictedClass · confidence</text>
-    <text x="615" y="100">usedThreshold → ffo:Threshold</text>
-    <text x="615" y="120">wasAttributedTo → ffo:Model</text>
+    <text x="615" y="100">usedThreshold → ffonto:Threshold</text>
+    <text x="615" y="120">wasAttributedTo → ffonto:Model</text>
     <text x="615" y="160" font-weight="bold">Derived by rules:</text>
     <text x="615" y="180">detectedClass · hasCondition</text>
-    <text x="615" y="200">ffo:ModalityConflict</text>
-    <text x="615" y="220">ffo:Hazard (→ ffv: actions)</text>
+    <text x="615" y="200">ffonto:ModalityConflict</text>
+    <text x="615" y="220">ffonto:Hazard (→ ffontov:actions)</text>
   </g>
   <g stroke="#555" stroke-width="1.4" fill="none" marker-end="url(#ah)">
     <path d="M305,70 C285,70 280,70 262,70"/>
@@ -63,17 +63,17 @@ every derived conclusion back to the model, the threshold and the record it came
 
 <h3 id="desc-principles">Design principles</h3>
 <ol>
-<li><b>Separate world, data and claims</b> (Figure 1). Model outputs are <code>ffo:ModelObservation</code>s with a
+<li><b>Separate world, data and claims</b> (Figure 1). Model outputs are <code>ffonto:ModelObservation</code>s with a
 confidence, the threshold used and the model that produced them (PROV-O).</li>
 <li><b>Fine-grained kinds and values are SKOS concepts, not classes.</b> "Is a Pulaski in use?" is answered with the
-generic <code>ffo:hasKind</code> and the concept <code>ffv:Pulaski</code> (narrower than <code>ffv:HandTool</code>).
+generic <code>ffonto:hasKind</code> and the concept <code>ffontov:Pulaski</code> (narrower than <code>ffontov:HandTool</code>).
 A new tool, state or hazard is one new concept in the <a href="vocab/index.html">vocabulary</a>; the schema does not change.</li>
 <li><b>Derived knowledge comes from rules.</b> Detections, weather conditions, cross-modal conflicts and hazards are
 computed by SPARQL rules, so changing a threshold never means editing data.</li>
-<li><b>Reuse standards</b> by IRI: <code>ffo:ModelObservation</code> ⊑ <code>sosa:Observation</code>,
-<code>ffo:CaptureDevice</code> ⊑ <code>sosa:Sensor</code>, <code>ffo:FireEvent</code>, <code>ffo:Site</code>,
-<code>ffo:SceneEntity</code> ⊑ <code>sosa:FeatureOfInterest</code>, <code>ffo:DataRecord</code> ⊑ <code>prov:Entity</code>,
-<code>ffo:Model</code> ⊑ <code>prov:SoftwareAgent</code>.</li>
+<li><b>Reuse standards</b> by IRI: <code>ffonto:ModelObservation</code> ⊑ <code>sosa:Observation</code>,
+<code>ffonto:CaptureDevice</code> ⊑ <code>sosa:Sensor</code>, <code>ffonto:FireEvent</code>, <code>ffonto:Site</code>,
+<code>ffonto:SceneEntity</code> ⊑ <code>sosa:FeatureOfInterest</code>, <code>ffonto:DataRecord</code> ⊑ <code>prov:Entity</code>,
+<code>ffonto:Model</code> ⊑ <code>prov:SoftwareAgent</code>.</li>
 <li><b>Every term is needed by a competency question</b>; terms that no CQ query uses are not part of the core.</li>
 </ol>
 
@@ -85,23 +85,23 @@ of queries answers the whole dataset.</p>
 <h3 id="desc-example">Example</h3>
 <p>An image record with a smoke-classifier observation and one scene entity extracted by a vision-language model:</p>
 <pre class="ffo-code">
-ffd:img081  a ffo:ImageRecord ;
-    ffo:aboutEvent      ffd:event-demo081 ;
-    ffo:hasObservation  ffd:img081-obs-smoke .
+ffd:img081  a ffonto:ImageRecord ;
+    ffonto:aboutEvent      ffd:event-demo081 ;
+    ffonto:hasObservation  ffd:img081-obs-smoke .
 
-ffd:img081-obs-smoke  a ffo:ModelObservation ;
-    ffo:predictedClass   ffv:Smoke ;
-    ffo:confidence       0.73 ;
-    ffo:usedThreshold    ffd:threshold-smoke ;          # 0.60
+ffd:img081-obs-smoke  a ffonto:ModelObservation ;
+    ffonto:predictedClass   ffontov:Smoke ;
+    ffonto:confidence       0.73 ;
+    ffonto:usedThreshold    ffd:threshold-smoke ;          # 0.60
     prov:wasAttributedTo ffd:model-fire-smoke-classifier .
 
-ffd:img081-entity1  a ffo:SceneEntity ;
-    ffo:hasKind  ffv:Firefighter ;
-    ffo:wears    ffv:Helmet ;
-    ffo:performs ffv:ApplyingWater .
+ffd:img081-entity1  a ffonto:SceneEntity ;
+    ffonto:hasKind  ffontov:Firefighter ;
+    ffonto:wears    ffontov:Helmet ;
+    ffonto:performs ffontov:ApplyingWater .
 </pre>
-<p>"Is the firefighter wearing gloves?" then becomes a query over <code>ffo:wears</code>, and "Which PPE is missing?"
-compares <code>ffo:wears</code> with the background knowledge <code>ffv:Firefighter ffo:requiredPPE …</code> in the vocabulary.</p>
+<p>"Is the firefighter wearing gloves?" then becomes a query over <code>ffonto:wears</code>, and "Which PPE is missing?"
+compares <code>ffonto:wears</code> with the background knowledge <code>ffontov:Firefighter ffonto:requiredPPE …</code> in the vocabulary.</p>
 
 <h3 id="desc-validation">Validation</h3>
 <p>The ontology is checked with ROBOT (OWL 2 DL profile, report), the HermiT reasoner (consistency on schema and data,

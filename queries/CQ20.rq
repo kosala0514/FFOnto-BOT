@@ -9,7 +9,7 @@
 #   - Is a bridge visible and passable?
 
 PREFIX ffonto:  <http://purl.org/ffonto#>
-PREFIX ffv:  <http://purl.org/ffonto/vocab#>
+PREFIX ffontov:  <http://purl.org/ffonto/vocab#>
 PREFIX ffd:  <http://purl.org/ffonto/data/>
 PREFIX sosa: <http://www.w3.org/ns/sosa/>
 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -23,7 +23,7 @@ SELECT ?record ?entity ?kind ?count
 WHERE {
   ?sd ffonto:describesRecord ?record ; ffonto:depicts ?entity .
   ?entity ffonto:hasKind ?k .
-  VALUES ?top { ffv:BuiltAssetKind }
+  VALUES ?top { ffontov:BuiltAssetKind }
   ?k skos:broader* ?top ; skos:prefLabel ?kind .
   OPTIONAL { ?entity ffonto:count ?count }
   OPTIONAL { ?entity ffonto:hasState ?st . ?st skos:prefLabel ?stateL }

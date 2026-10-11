@@ -192,7 +192,7 @@ def _load_ontology():
         return _onto
     from rdflib import Graph, Namespace, RDFS
     SKOS = Namespace(config.PREFIXES["skos"])
-    FFO = Namespace(config.PREFIXES["ffo"])
+    FFO = Namespace(config.PREFIXES["ffonto"])
     g = Graph()
     for f in ("ffonto-core.ttl", "ffonto-vocab.ttl"):
         g.parse(config.ONTOLOGY_DIR / f, format="turtle")

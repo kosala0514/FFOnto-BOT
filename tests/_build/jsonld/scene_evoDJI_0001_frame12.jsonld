@@ -1,7 +1,7 @@
 {
   "@context": {
-    "ffo": "http://purl.org/ffonto#",
-    "ffv": "http://purl.org/ffonto/vocab#",
+    "ffonto": "http://purl.org/ffonto#",
+    "ffontov": "http://purl.org/ffonto/vocab#",
     "ffd": "http://purl.org/ffonto/data/",
     "sosa": "http://www.w3.org/ns/sosa/",
     "prov": "http://www.w3.org/ns/prov#",
@@ -191,29 +191,29 @@
   "entities": [
     {
       "@id": "ffd:scene/scene-evodji-0001-frame12/e1",
-      "kind": "ffv:FlameFront",
+      "kind": "ffontov:FlameFront",
       "count": 1,
-      "position": "ffv:HeadOfFire",
+      "position": "ffontov:HeadOfFire",
       "near": [
         "ffd:scene/scene-evodji-0001-frame12/e4"
       ]
     },
     {
       "@id": "ffd:scene/scene-evodji-0001-frame12/e2",
-      "kind": "ffv:SmokePlume",
+      "kind": "ffontov:SmokePlume",
       "count": 1
     },
     {
       "@id": "ffd:scene/scene-evodji-0001-frame12/e3",
-      "kind": "ffv:ConiferousForest",
+      "kind": "ffontov:ConiferousForest",
       "state": [
-        "ffv:Dense",
-        "ffv:Dry"
+        "ffontov:Dense",
+        "ffontov:Dry"
       ]
     },
     {
       "@id": "ffd:scene/scene-evodji-0001-frame12/e4",
-      "kind": "ffv:Lake"
+      "kind": "ffontov:Lake"
     }
   ],
   "attributes": [
@@ -221,72 +221,72 @@
       "@id": "ffd:scene/scene-evodji-0001-frame12/attr/0",
       "@type": "ffonto:ModelObservation",
       "feature_of_interest": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823",
-      "observed_property": "ffv:SmokeColour",
-      "value": "ffv:Gray",
-      "label_source": "ffv:VLMSource",
+      "observed_property": "ffontov:SmokeColour",
+      "value": "ffontov:Gray",
+      "label_source": "ffontov:VLMSource",
       "attributed_to": "ffd:model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0"
     },
     {
       "@id": "ffd:scene/scene-evodji-0001-frame12/attr/1",
       "@type": "ffonto:ModelObservation",
       "feature_of_interest": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823",
-      "observed_property": "ffv:SmokeDensity",
-      "value": "ffv:High",
-      "label_source": "ffv:VLMSource",
+      "observed_property": "ffontov:SmokeDensity",
+      "value": "ffontov:High",
+      "label_source": "ffontov:VLMSource",
       "attributed_to": "ffd:model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0"
     },
     {
       "@id": "ffd:scene/scene-evodji-0001-frame12/attr/2",
       "@type": "ffonto:ModelObservation",
       "feature_of_interest": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823",
-      "observed_property": "ffv:PlumeDirection",
-      "value": "ffv:Drifting",
-      "label_source": "ffv:VLMSource",
+      "observed_property": "ffontov:PlumeDirection",
+      "value": "ffontov:Drifting",
+      "label_source": "ffontov:VLMSource",
       "attributed_to": "ffd:model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0"
     },
     {
       "@id": "ffd:scene/scene-evodji-0001-frame12/attr/3",
       "@type": "ffonto:ModelObservation",
       "feature_of_interest": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823",
-      "observed_property": "ffv:VisibilityLevel",
-      "value": "ffv:Medium",
-      "label_source": "ffv:VLMSource",
+      "observed_property": "ffontov:VisibilityLevel",
+      "value": "ffontov:Medium",
+      "label_source": "ffontov:VLMSource",
       "attributed_to": "ffd:model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0"
     },
     {
       "@id": "ffd:scene/scene-evodji-0001-frame12/attr/4",
       "@type": "ffonto:ModelObservation",
       "feature_of_interest": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823",
-      "observed_property": "ffv:LightCondition",
-      "value": "ffv:Daytime",
-      "label_source": "ffv:VLMSource",
+      "observed_property": "ffontov:LightCondition",
+      "value": "ffontov:Daytime",
+      "label_source": "ffontov:VLMSource",
       "attributed_to": "ffd:model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0"
     },
     {
       "@id": "ffd:scene/scene-evodji-0001-frame12/attr/5",
       "@type": "ffonto:ModelObservation",
       "feature_of_interest": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823",
-      "observed_property": "ffv:FireType",
-      "value": "ffv:SurfaceFireType",
-      "label_source": "ffv:VLMSource",
+      "observed_property": "ffontov:FireType",
+      "value": "ffontov:SurfaceFireType",
+      "label_source": "ffontov:VLMSource",
       "attributed_to": "ffd:model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0"
     },
     {
       "@id": "ffd:scene/scene-evodji-0001-frame12/attr/6",
       "@type": "ffonto:ModelObservation",
       "feature_of_interest": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823",
-      "observed_property": "ffv:FireIntensity",
-      "value": "ffv:Medium",
-      "label_source": "ffv:VLMSource",
+      "observed_property": "ffontov:FireIntensity",
+      "value": "ffontov:Medium",
+      "label_source": "ffontov:VLMSource",
       "attributed_to": "ffd:model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0"
     },
     {
       "@id": "ffd:scene/scene-evodji-0001-frame12/attr/7",
       "@type": "ffonto:ModelObservation",
       "feature_of_interest": "ffd:record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823",
-      "observed_property": "ffv:ScenePurpose",
-      "value": "ffv:Wildfire",
-      "label_source": "ffv:VLMSource",
+      "observed_property": "ffontov:ScenePurpose",
+      "value": "ffontov:Wildfire",
+      "label_source": "ffontov:VLMSource",
       "attributed_to": "ffd:model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0"
     }
   ]

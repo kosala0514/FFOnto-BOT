@@ -3,7 +3,7 @@
 # Executed in file-name order by scripts/run_cqs.py (CONSTRUCT results are added to the graph).
 
 PREFIX ffonto:  <http://purl.org/ffonto#>
-PREFIX ffv:  <http://purl.org/ffonto/vocab#>
+PREFIX ffontov:  <http://purl.org/ffonto/vocab#>
 PREFIX ffd:  <http://purl.org/ffonto/data/>
 PREFIX sosa: <http://www.w3.org/ns/sosa/>
 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -14,14 +14,14 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
 
 CONSTRUCT {
   ?h a ffonto:Hazard ;
-     ffonto:hasHazardType ffv:ExplosionHazard ;
+     ffonto:hasHazardType ffontov:ExplosionHazard ;
      ffonto:inEvent ?ev ;
      prov:wasDerivedFrom ?o ;
      rdfs:comment "Explosion sound detected above threshold." .
 }
 WHERE {
   ?a a ffonto:AudioRecord ; ffonto:hasObservation ?o .
-  ?o ffonto:predictedClass ffv:Explosion ; ffonto:aboveThreshold true .
+  ?o ffonto:predictedClass ffontov:Explosion ; ffonto:aboveThreshold true .
   OPTIONAL { ?a ffonto:aboutEvent ?ev }
   BIND(IRI(CONCAT(STR(?a), "/hazard/ExplosionHazard")) AS ?h)
 }

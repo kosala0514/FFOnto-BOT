@@ -1,5 +1,5 @@
 @prefix ffonto: <http://purl.org/ffonto#> .
-@prefix ffv: <http://purl.org/ffonto/vocab#> .
+@prefix ffontov: <http://purl.org/ffonto/vocab#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix sosa: <http://www.w3.org/ns/sosa/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -13,10 +13,10 @@
 <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/obs/0> a ffonto:ModelObservation ;
     ffonto:confidence 8.1e-01 ;
     ffonto:labelCategory "fire_audio" ;
-    ffonto:labelSource ffv:AudioTaggerSource ;
+    ffonto:labelSource ffontov:AudioTaggerSource ;
     ffonto:maxConfidence 8.8e-01 ;
     ffonto:meanConfidence 8.1e-01 ;
-    ffonto:predictedClass ffv:Explosion ;
+    ffonto:predictedClass ffontov:Explosion ;
     ffonto:topKLabel "crackle",
         "explosion" ;
     ffonto:usedThreshold <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/threshold/Explosion> ;
@@ -26,21 +26,21 @@
 <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/obs/1> a ffonto:ModelObservation ;
     ffonto:confidence 3.5e-01 ;
     ffonto:labelCategory "fire_audio" ;
-    ffonto:labelSource ffv:AudioTaggerSource ;
+    ffonto:labelSource ffontov:AudioTaggerSource ;
     ffonto:maxConfidence 5.2e-01 ;
     ffonto:meanConfidence 3.5e-01 ;
-    ffonto:predictedClass ffv:Siren ;
+    ffonto:predictedClass ffontov:Siren ;
     ffonto:topKLabel "siren" ;
     ffonto:usedThreshold <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/threshold/Siren> ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/google-yamnet/1> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081> .
 
 <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/threshold/Explosion> a ffonto:Threshold ;
-    ffonto:forClass ffv:Explosion ;
+    ffonto:forClass ffontov:Explosion ;
     ffonto:thresholdValue 2e-01 .
 
 <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/threshold/Siren> a ffonto:Threshold ;
-    ffonto:forClass ffv:Siren ;
+    ffonto:forClass ffontov:Siren ;
     ffonto:thresholdValue 2e-01 .
 
 <http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a> a ffonto:AudioRecord ;
@@ -56,17 +56,17 @@
 <http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a/obs/0> a ffonto:ModelObservation ;
     ffonto:confidence 7.337e-01 ;
     ffonto:labelCategory "fire_audio" ;
-    ffonto:labelSource ffv:AudioTaggerSource ;
+    ffonto:labelSource ffontov:AudioTaggerSource ;
     ffonto:maxConfidence 7.337e-01 ;
     ffonto:meanConfidence 7.337e-01 ;
-    ffonto:predictedClass ffv:Explosion ;
+    ffonto:predictedClass ffontov:Explosion ;
     ffonto:topKLabel "explosion" ;
     ffonto:usedThreshold <http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a/threshold/Explosion> ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/google-yamnet/1> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a> .
 
 <http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a/threshold/Explosion> a ffonto:Threshold ;
-    ffonto:forClass ffv:Explosion ;
+    ffonto:forClass ffontov:Explosion ;
     ffonto:thresholdValue 2e-01 .
 
 <http://purl.org/ffonto/data/site/demo-site-a> a ffonto:Site ;

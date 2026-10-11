@@ -24,7 +24,7 @@ Every reply includes its evidence: route, CQ, SPARQL, rows, sources.
 ## How answers stay tied to the ontology
 
 1. **Most questions never get free-form SPARQL.** The LLM only *chooses* a competency question. The SPARQL that runs is one of your 27 tested queries (59/59 tests pass).
-2. **The context is fixed by the UI, not guessed.** The selected image or audio record is injected as `VALUES ?record { <iri> }`. Event-level CQs (hazards, actions) use that record's `ffo:aboutEvent`.
+2. **The context is fixed by the UI, not guessed.** The selected image or audio record is injected as `VALUES ?record { <iri> }`. Event-level CQs (hazards, actions) use that record's `ffonto:aboutEvent`.
 3. **The answer prompt only allows the rows.** If the rows are empty, the assistant says the knowledge graph has no evidence. It does not answer from the LLM's own knowledge.
 4. **Generated SPARQL is the exception and is checked.** Only SELECT/ASK is allowed, a LIMIT is enforced, the syntax is validated, and the query uses only ontology terms (the schema summary is built from `ffonto-core.ttl`).
 5. **General knowledge is grounded too.** RAG first collects facts about the concepts mentioned in the question from `ffonto-core.ttl` and `ffonto-vocab.ttl`, then adds document passages. Citations distinguish `[O]` (ontology) from `[1]`, `[2]` (documents).

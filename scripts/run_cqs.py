@@ -37,7 +37,7 @@ def load_graph(kg_path=None):
         g.parse(ROOT / f, format="turtle")
     n_schema = len(g)
     g.parse(kg_file, format="turtle")
-    for p, ns in [("ffo", "http://purl.org/ffonto#"), ("ffv", "http://purl.org/ffonto/vocab#"),
+    for p, ns in [("ffonto", "http://purl.org/ffonto#"), ("ffontov", "http://purl.org/ffonto/vocab#"),
                   ("ffd", "http://purl.org/ffonto/data/"), ("sosa", "http://www.w3.org/ns/sosa/"),
                   ("prov", "http://www.w3.org/ns/prov#"), ("skos", "http://www.w3.org/2004/02/skos/core#")]:
         g.bind(p, ns, override=True)

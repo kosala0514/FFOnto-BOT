@@ -3,7 +3,7 @@
 # Executed in file-name order by scripts/run_cqs.py (CONSTRUCT results are added to the graph).
 
 PREFIX ffonto:  <http://purl.org/ffonto#>
-PREFIX ffv:  <http://purl.org/ffonto/vocab#>
+PREFIX ffontov:  <http://purl.org/ffonto/vocab#>
 PREFIX ffd:  <http://purl.org/ffonto/data/>
 PREFIX sosa: <http://www.w3.org/ns/sosa/>
 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -23,10 +23,10 @@ WHERE {
   {
     # (a) audio says explosion, image classifier says fire is below threshold
     ?a a ffonto:AudioRecord ; ffonto:aboutEvent ?ev ; ffonto:hasObservation ?o1 .
-    ?o1 ffonto:predictedClass ffv:Explosion ; ffonto:aboveThreshold true .
+    ?o1 ffonto:predictedClass ffontov:Explosion ; ffonto:aboveThreshold true .
     ?i a ffonto:ImageRecord ; ffonto:aboutEvent ?ev ; ffonto:hasObservation ?o2 .
-    ?o2 ffonto:predictedClass ffv:Fire ; ffonto:aboveThreshold false .
-    BIND(ffv:AudioImageConflict AS ?type)
+    ?o2 ffonto:predictedClass ffontov:Fire ; ffonto:aboveThreshold false .
+    BIND(ffontov:AudioImageConflict AS ?type)
     BIND("Audio detects an explosion above threshold, but the image fire score is below threshold." AS ?why)
     BIND(?ev AS ?anchor)
   }
@@ -37,7 +37,7 @@ WHERE {
     ?cap ffonto:mentionsConcept ?cls .
     ?o2 ffonto:predictedClass ?cls ; ffonto:aboveThreshold false .
     OPTIONAL { ?i ffonto:aboutEvent ?ev }
-    BIND(ffv:CaptionScoreConflict AS ?type)
+    BIND(ffontov:CaptionScoreConflict AS ?type)
     BIND(CONCAT("Caption mentions '", STRAFTER(STR(?cls), "#"), "' but the classifier score is below threshold.") AS ?why)
     BIND(?i AS ?anchor)
   }
@@ -47,8 +47,8 @@ WHERE {
     ?w a ffonto:WeatherRecord ; ffonto:aboutEvent ?ev ; ffonto:rainMm ?rain .
     FILTER(?rain > 10)
     ?i a ffonto:ImageRecord ; ffonto:aboutEvent ?ev ; ffonto:hasObservation ?o2 .
-    ?o2 ffonto:predictedClass ffv:Smoke ; ffonto:aboveThreshold true .
-    BIND(ffv:WeatherSmokeConflict AS ?type)
+    ?o2 ffonto:predictedClass ffontov:Smoke ; ffonto:aboveThreshold true .
+    BIND(ffontov:WeatherSmokeConflict AS ?type)
     BIND("More than 10 mm rain recorded for the event while smoke is detected in an image." AS ?why)
     BIND(?ev AS ?anchor)
   }

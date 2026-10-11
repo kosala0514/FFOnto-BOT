@@ -34,8 +34,24 @@ VISUAL_REREAD = env("VISUAL_REREAD", "1") == "1"           # let the VLM look at
 N_REREAD = int(env("N_REREAD", "2"))
 MIN_FIG_PX = int(env("MIN_FIG_PX", "150"))                 # skip icons/logos smaller than this (pixels, both sides)
 ENABLE_KG_CHARTS = env("ENABLE_KG_CHARTS", "1") == "1"     # Vega-Lite charts from knowledge-graph rows
+# When the KG-only answer says "no information" although rows came back, answer again by interpreting the rows
+# with ontology facts + document passages (marked "general knowledge"). Off = strict KG-only answers.
+ANSWER_FUSION = env("ANSWER_FUSION", "1") == "1"
+# Visual check: when the KG has no positive evidence for a yes/no question about an image, let the vision model
+# look at the image itself (the KG records only what scene extraction found). Off by default in the chatbot.
+VLM_FALLBACK = env("VLM_FALLBACK", "0") == "1"
+# Where the dataset images are, if the file paths stored in the KG do not exist on this machine (searched by file name)
+IMAGES_DIR = env("IMAGES_DIR", "")
 ENABLE_TEXT2SPARQL = env("ENABLE_TEXT2SPARQL", "1") == "1"
 FORCE_TEXT2SPARQL = env("FORCE_TEXT2SPARQL", "0") == "1"     # baseline: ignore CQ templates (for the comparison experiment)
+# Text-to-SPARQL mode: "naive" = the model writes the whole query (baseline);
+# "plus" = the four improvements below (each can be switched off for an ablation study)
+T2S_MODE = env("T2S_MODE", "plus")
+T2S_BIND_CONTEXT = env("T2S_BIND_CONTEXT", "1") == "1"     # 1. code binds ?record / ?eventCode / ?date, not the model
+T2S_SCHEMA_LINK = env("T2S_SCHEMA_LINK", "1") == "1"       # 2. show the vocabulary concepts the question mentions
+T2S_ADAPT_TEMPLATE = env("T2S_ADAPT_TEMPLATE", "1") == "1" # 3. start from the nearest tested CQ query and edit it
+T2S_EXEC_FEEDBACK = env("T2S_EXEC_FEEDBACK", "1") == "1"   # 4. regenerate once if the result is empty or too large
+T2S_MAX_ROWS = int(env("T2S_MAX_ROWS", "40"))              # "too large" for a question about one record / date
 
 # Paths
 QUERIES_DIR = ROOT / "queries"
@@ -47,8 +63,8 @@ FIGURES_DIR = INDEX_DIR / "figures"                        # PNGs cut out of the
 FIGURE_CACHE = INDEX_DIR / "figure_descriptions.jsonl"     # VLM descriptions, keyed by image hash (re-runs are cheap)
 
 PREFIXES = {
-    "ffo": "http://purl.org/ffonto#",
-    "ffv": "http://purl.org/ffonto/vocab#",
+    "ffonto": "http://purl.org/ffonto#",
+    "ffontov": "http://purl.org/ffonto/vocab#",
     "ffd": "http://purl.org/ffonto/data/",
     "sosa": "http://www.w3.org/ns/sosa/",
     "prov": "http://www.w3.org/ns/prov#",

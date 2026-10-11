@@ -1,7 +1,8 @@
+@prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ffonto: <http://purl.org/ffonto#> .
+@prefix ffontov: <http://purl.org/ffonto/vocab#> .
 @prefix ffr: <http://purl.org/ffonto/data/rule/> .
-@prefix ffv: <http://purl.org/ffonto/vocab#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -10,6 +11,12 @@
 @prefix sosa: <http://www.w3.org/ns/sosa/> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+dcterms:abstract a owl:AnnotationProperty ;
+    rdfs:label "abstract"@en .
+
+dcterms:bibliographicCitation a owl:AnnotationProperty ;
+    rdfs:label "bibliographic citation"@en .
 
 dcterms:contributor a owl:AnnotationProperty ;
     rdfs:label "contributor"@en .
@@ -26,19 +33,26 @@ dcterms:description a owl:AnnotationProperty ;
 dcterms:license a owl:AnnotationProperty ;
     rdfs:label "license"@en .
 
+dcterms:modified a owl:AnnotationProperty ;
+    rdfs:label "modified"@en .
+
 dcterms:title a owl:AnnotationProperty ;
     rdfs:label "title"@en .
 
 <http://purl.org/ffonto> a owl:Ontology ;
+    rdfs:label "FFOnto"@en ;
+    dcterms:abstract "FFOnto is a competency-question-driven ontology for building multimodal forest-fire knowledge graphs from images, audio clips and weather / Fire Weather Index (FWI) records. It separates the world (fire events and scene entities), the data (records and their metadata) and the claims made about the data by machine-learning models (observations with confidence, threshold and provenance), so that model outputs are never stored as facts. Fine-grained kinds and values are kept in a SKOS vocabulary, and risk knowledge (detections, conditions, cross-modal conflicts, hazards) is derived by rules."@en ;
+    dcterms:bibliographicCitation "Jayaweera, C. K. and Meedeniya, D. (2026). FFOnto: Forest Fire Ontology, version 2.0.0. http://purl.org/ffonto"@en ;
     dcterms:contributor "Prof. Dulani Meedeniya" ;
     dcterms:created "2026-10-07"^^xsd:date ;
     dcterms:creator "Charuni Kosala Jayaweera" ;
-    dcterms:description "Minimal, competency-question-driven ontology for multimodal (image, audio, tabular) forest-fire knowledge graphs, aligned with the ForestFire-VQA dataset."@en ;
+    dcterms:description "Minimal, competency-question-driven ontology for multimodal (image, audio, tabular) forest-fire knowledge graphs, aligned with the ForestFire-VQA dataset. SOSA, PROV-O, SKOS and Dublin Core terms are reused by IRI and declared locally (no owl:imports), so the ontology loads offline and stays in OWL 2 DL."@en ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:modified "2026-10-09"^^xsd:date ;
     dcterms:title "Forest Fire Ontology (FFOnto) – core"@en ;
-    vann:preferredNamespacePrefix "ffo" ;
+    bibo:status "Draft"@en ;
+    vann:preferredNamespacePrefix "ffonto" ;
     vann:preferredNamespaceUri "http://purl.org/ffonto#" ;
-    rdfs:comment "SOSA, PROV-O, SKOS and Dublin Core terms are reused by IRI and declared below (no owl:imports), so the ontology loads offline and stays in OWL 2 DL. To import the full external ontologies, add owl:imports and a catalog entry."@en ;
     owl:versionIRI <http://purl.org/ffonto/2.0.0> ;
     owl:versionInfo "2.0.0" .
 
@@ -148,7 +162,7 @@ ffonto:confidence a owl:DatatypeProperty ;
 
 ffonto:conflictType a owl:ObjectProperty ;
     rdfs:label "conflict type"@en ;
-    rdfs:comment "Type of a derived modality conflict (ffv:ConflictScheme)."@en ;
+    rdfs:comment "Type of a derived modality conflict (ffontov:ConflictScheme)."@en ;
     rdfs:domain ffonto:ModalityConflict ;
     rdfs:range skos:Concept .
 
@@ -286,13 +300,13 @@ ffonto:hasCondition a owl:ObjectProperty ;
 
 ffonto:hasHazardType a owl:ObjectProperty ;
     rdfs:label "has hazard type"@en ;
-    rdfs:comment "Type of a derived hazard (ffv:HazardScheme)."@en ;
+    rdfs:comment "Type of a derived hazard (ffontov:HazardScheme)."@en ;
     rdfs:domain ffonto:Hazard ;
     rdfs:range skos:Concept .
 
 ffonto:hasKind a owl:ObjectProperty ;
     rdfs:label "has kind"@en ;
-    rdfs:comment "Fine-grained kind of a scene entity, from ffv:EntityKindScheme (e.g. ffv:Pulaski, ffv:Firefighter)."@en ;
+    rdfs:comment "Fine-grained kind of a scene entity, from ffontov:EntityKindScheme (e.g. ffontov:Pulaski, ffontov:Firefighter)."@en ;
     rdfs:domain ffonto:SceneEntity ;
     rdfs:range skos:Concept .
 
@@ -305,7 +319,7 @@ ffonto:hasObservation a owl:ObjectProperty ;
 
 ffonto:hasState a owl:ObjectProperty ;
     rdfs:label "has state"@en ;
-    rdfs:comment "Visible state or condition of a scene entity (ffv:StateScheme), e.g. Scorched, Blocked, Dry."@en ;
+    rdfs:comment "Visible state or condition of a scene entity (ffontov:StateScheme), e.g. Scorched, Blocked, Dry."@en ;
     rdfs:domain ffonto:SceneEntity ;
     rdfs:range skos:Concept .
 
@@ -433,7 +447,7 @@ ffonto:operator a owl:DatatypeProperty ;
 
 ffonto:performs a owl:ObjectProperty ;
     rdfs:label "performs"@en ;
-    rdfs:comment "Activity being carried out by an agent or vehicle (ffv:ActivityScheme)."@en ;
+    rdfs:comment "Activity being carried out by an agent or vehicle (ffontov:ActivityScheme)."@en ;
     rdfs:domain ffonto:SceneEntity ;
     rdfs:range skos:Concept .
 
@@ -483,7 +497,7 @@ ffonto:regionName a owl:DatatypeProperty ;
 
 ffonto:relativePosition a owl:ObjectProperty ;
     rdfs:label "relative position"@en ;
-    rdfs:comment "Frame-relative position with respect to the fire (ffv:PositionScheme: left flank, ahead of fire, ridge …)."@en ;
+    rdfs:comment "Frame-relative position with respect to the fire (ffontov:PositionScheme: left flank, ahead of fire, ridge …)."@en ;
     rdfs:domain ffonto:SceneEntity ;
     rdfs:range skos:Concept .
 
@@ -531,7 +545,7 @@ ffonto:suggestedRestoration a owl:ObjectProperty ;
 
 ffonto:threatens a owl:ObjectProperty ;
     rdfs:label "threatens"@en ;
-    rdfs:comment "What the hazard endangers: a scene entity or a concept (e.g. ffv:Firefighter as a group)."@en ;
+    rdfs:comment "What the hazard endangers: a scene entity or a concept (e.g. ffontov:Firefighter as a group)."@en ;
     rdfs:domain ffonto:Hazard .
 
 ffonto:thresholdValue a owl:DatatypeProperty ;
@@ -567,7 +581,7 @@ ffonto:usedThreshold a owl:ObjectProperty ;
 
 ffonto:wears a owl:ObjectProperty ;
     rdfs:label "wears"@en ;
-    rdfs:comment "Protective equipment worn by a person (ffv:PPEScheme)."@en ;
+    rdfs:comment "Protective equipment worn by a person (ffontov:PPEScheme)."@en ;
     rdfs:domain ffonto:Agent ;
     rdfs:range skos:Concept .
 
@@ -578,32 +592,32 @@ ffonto:widthPx a owl:DatatypeProperty ;
     rdfs:range xsd:integer .
 
 <http://purl.org/ffonto/data/event/ev-demo-081/conflict/AudioImageConflict/6ada4bc88defafc432eb856e993ab54c> a ffonto:ModalityConflict ;
-    ffonto:conflictType ffv:AudioImageConflict ;
+    ffonto:conflictType ffontov:AudioImageConflict ;
     ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
     ffonto:involvesObservation <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/0>,
         <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/obs/0> ;
     rdfs:comment "Audio detects an explosion above threshold, but the image fire score is below threshold." .
 
 <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/conflict/CaptionScoreConflict/eab0fbf3795c0e02e6060973feec62dd> a ffonto:ModalityConflict ;
-    ffonto:conflictType ffv:CaptionScoreConflict ;
+    ffonto:conflictType ffontov:CaptionScoreConflict ;
     ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
     ffonto:involvesObservation <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/0> ;
     rdfs:comment "Caption mentions 'Fire' but the classifier score is below threshold." .
 
 <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/hazard/ExplosionHazard> a ffonto:Hazard ;
-    ffonto:hasHazardType ffv:ExplosionHazard ;
+    ffonto:hasHazardType ffontov:ExplosionHazard ;
     ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
     rdfs:comment "Explosion sound detected above threshold." ;
     prov:wasDerivedFrom <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/obs/0> .
 
 <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/conflict/CaptionScoreConflict/d14ddfc6e906275719be32c7650c42d9> a ffonto:ModalityConflict ;
-    ffonto:conflictType ffv:CaptionScoreConflict ;
+    ffonto:conflictType ffontov:CaptionScoreConflict ;
     ffonto:inEvent <http://purl.org/ffonto/data/event/ev-bf59c56acb36> ;
     ffonto:involvesObservation <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/0> ;
     rdfs:comment "Caption mentions 'Fire' but the classifier score is below threshold." .
 
 <http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a/hazard/ExplosionHazard> a ffonto:Hazard ;
-    ffonto:hasHazardType ffv:ExplosionHazard ;
+    ffonto:hasHazardType ffontov:ExplosionHazard ;
     ffonto:inEvent <http://purl.org/ffonto/data/event/ev-22e029d3b190> ;
     rdfs:comment "Explosion sound detected above threshold." ;
     prov:wasDerivedFrom <http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a/obs/0> .
@@ -620,10 +634,10 @@ ffonto:widthPx a owl:DatatypeProperty ;
     ffonto:ffmc 9.48e+01 ;
     ffonto:fireOccurred true ;
     ffonto:fwi 3.31e+01 ;
-    ffonto:hasCondition ffv:ElevatedFireDanger,
-        ffv:FavourDirectAttack,
-        ffv:PersistentCombustion,
-        ffv:RapidFineFuelSpread ;
+    ffonto:hasCondition ffontov:ElevatedFireDanger,
+        ffontov:FavourDirectAttack,
+        ffontov:PersistentCombustion,
+        ffontov:RapidFineFuelSpread ;
     ffonto:isi 1.7e+01 ;
     ffonto:observationDate "2012-08-28T00:00:00+00:00"^^xsd:dateTime ;
     ffonto:previousRecord <http://purl.org/ffonto/data/record/weather/demo-site-a/grid-2-2/2012-08-27> ;
@@ -634,7 +648,7 @@ ffonto:widthPx a owl:DatatypeProperty ;
 
 ffr:dc-persistent a ffonto:DangerRule ;
     rdfs:label "High Drought Code indicates deep, persistent smouldering"@en ;
-    ffonto:indicatesCondition ffv:PersistentCombustion ;
+    ffonto:indicatesCondition ffontov:PersistentCombustion ;
     ffonto:onProperty ffonto:dc ;
     ffonto:operator "ge" ;
     ffonto:thresholdValue 4e+02 ;
@@ -642,7 +656,7 @@ ffr:dc-persistent a ffonto:DangerRule ;
 
 ffr:ffmc-spread a ffonto:DangerRule ;
     rdfs:label "High FFMC indicates easily ignited fine fuels"@en ;
-    ffonto:indicatesCondition ffv:RapidFineFuelSpread ;
+    ffonto:indicatesCondition ffontov:RapidFineFuelSpread ;
     ffonto:onProperty ffonto:ffmc ;
     ffonto:operator "ge" ;
     ffonto:thresholdValue 9e+01 ;
@@ -650,7 +664,7 @@ ffr:ffmc-spread a ffonto:DangerRule ;
 
 ffr:fwi-danger a ffonto:DangerRule ;
     rdfs:label "High FWI indicates elevated fire danger"@en ;
-    ffonto:indicatesCondition ffv:ElevatedFireDanger ;
+    ffonto:indicatesCondition ffontov:ElevatedFireDanger ;
     ffonto:onProperty ffonto:fwi ;
     ffonto:operator "ge" ;
     ffonto:thresholdValue 3e+01 ;
@@ -658,7 +672,7 @@ ffr:fwi-danger a ffonto:DangerRule ;
 
 ffr:isi-spread a ffonto:DangerRule ;
     rdfs:label "High ISI indicates rapid fine-fuel spread"@en ;
-    ffonto:indicatesCondition ffv:RapidFineFuelSpread ;
+    ffonto:indicatesCondition ffontov:RapidFineFuelSpread ;
     ffonto:onProperty ffonto:isi ;
     ffonto:operator "gt" ;
     ffonto:thresholdValue 1e+01 ;
@@ -666,7 +680,7 @@ ffr:isi-spread a ffonto:DangerRule ;
 
 ffr:rain-mopup a ffonto:DangerRule ;
     rdfs:label "Rain improves mop-up conditions"@en ;
-    ffonto:indicatesCondition ffv:ImprovedMopUpConditions ;
+    ffonto:indicatesCondition ffontov:ImprovedMopUpConditions ;
     ffonto:onProperty ffonto:rainMm ;
     ffonto:operator "gt" ;
     ffonto:thresholdValue 2e+00 ;
@@ -674,7 +688,7 @@ ffr:rain-mopup a ffonto:DangerRule ;
 
 ffr:rh-direct a ffonto:DangerRule ;
     rdfs:label "Moderate/high RH favours direct attack with hand tools"@en ;
-    ffonto:indicatesCondition ffv:FavourDirectAttack ;
+    ffonto:indicatesCondition ffontov:FavourDirectAttack ;
     ffonto:onProperty ffonto:relativeHumidityPct ;
     ffonto:operator "ge" ;
     ffonto:thresholdValue 4e+01 ;
@@ -682,7 +696,7 @@ ffr:rh-direct a ffonto:DangerRule ;
 
 ffr:rh-drying a ffonto:DangerRule ;
     rdfs:label "Low RH favours rapid fine-fuel drying"@en ;
-    ffonto:indicatesCondition ffv:RapidFineFuelDrying ;
+    ffonto:indicatesCondition ffontov:RapidFineFuelDrying ;
     ffonto:onProperty ffonto:relativeHumidityPct ;
     ffonto:operator "lt" ;
     ffonto:thresholdValue 3e+01 ;
@@ -690,7 +704,7 @@ ffr:rh-drying a ffonto:DangerRule ;
 
 ffr:temp-heat a ffonto:DangerRule ;
     rdfs:label "High temperature indicates heat-stress risk"@en ;
-    ffonto:indicatesCondition ffv:HeatStressRisk ;
+    ffonto:indicatesCondition ffontov:HeatStressRisk ;
     ffonto:onProperty ffonto:airTemperatureC ;
     ffonto:operator "ge" ;
     ffonto:thresholdValue 3.2e+01 ;
@@ -698,7 +712,7 @@ ffr:temp-heat a ffonto:DangerRule ;
 
 ffr:wind-aerial a ffonto:DangerRule ;
     rdfs:label "Strong wind reduces aerial-drop effectiveness"@en ;
-    ffonto:indicatesCondition ffv:AerialDropCompromised ;
+    ffonto:indicatesCondition ffontov:AerialDropCompromised ;
     ffonto:onProperty ffonto:windSpeedKmh ;
     ffonto:operator "gt" ;
     ffonto:thresholdValue 3e+01 ;
@@ -747,83 +761,83 @@ ffr:wind-aerial a ffonto:DangerRule ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/hazard/CrownFireTransition/2648fb341d5b5a9bdf11778052cb0f79> a ffonto:Hazard ;
-    ffonto:hasHazardType ffv:CrownFireTransition ;
+    ffonto:hasHazardType ffontov:CrownFireTransition ;
     ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
     ffonto:threatens <http://purl.org/ffonto/data/scene/scene-fixture-081/e9> ;
     rdfs:comment "High fire intensity next to conifers or ladder fuels." ;
     prov:wasDerivedFrom <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/5> .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/hazard/ExplosionHazard/7f720711bb54be501e65ae405dc4adfb> a ffonto:Hazard ;
-    ffonto:hasHazardType ffv:ExplosionHazard ;
+    ffonto:hasHazardType ffontov:ExplosionHazard ;
     ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
     ffonto:threatens <http://purl.org/ffonto/data/scene/scene-fixture-081/e6> ;
     rdfs:comment "Pressurised tank near a fire phenomenon." ;
     prov:wasDerivedFrom <http://purl.org/ffonto/data/scene/scene-fixture-081/e5> .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/hazard/FlameProximity/88ea7039c1c8044e169c8008018789fc> a ffonto:Hazard ;
-    ffonto:hasHazardType ffv:FlameProximity ;
+    ffonto:hasHazardType ffontov:FlameProximity ;
     ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
     ffonto:threatens <http://purl.org/ffonto/data/scene/scene-fixture-081/e1> ;
     rdfs:comment "Person depicted near a fire phenomenon." ;
     prov:wasDerivedFrom <http://purl.org/ffonto/data/scene/scene-fixture-081/e5> .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/hazard/FlameProximity/98e65e115e35116740e427dc3391460c> a ffonto:Hazard ;
-    ffonto:hasHazardType ffv:FlameProximity ;
+    ffonto:hasHazardType ffontov:FlameProximity ;
     ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
     ffonto:threatens <http://purl.org/ffonto/data/scene/scene-fixture-081/e2> ;
     rdfs:comment "Person depicted near a fire phenomenon." ;
     prov:wasDerivedFrom <http://purl.org/ffonto/data/scene/scene-fixture-081/e5> .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/hazard/MissingPPEHazard/98e65e115e35116740e427dc3391460c> a ffonto:Hazard ;
-    ffonto:hasHazardType ffv:MissingPPEHazard ;
+    ffonto:hasHazardType ffontov:MissingPPEHazard ;
     ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
     ffonto:threatens <http://purl.org/ffonto/data/scene/scene-fixture-081/e2> ;
     rdfs:comment "Person not seen wearing an item of required PPE." ;
     prov:wasDerivedFrom <http://purl.org/ffonto/data/scene/scene-fixture-081/e2> .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/hazard/RespiratoryHazard/88ea7039c1c8044e169c8008018789fc> a ffonto:Hazard ;
-    ffonto:hasHazardType ffv:RespiratoryHazard ;
+    ffonto:hasHazardType ffontov:RespiratoryHazard ;
     ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
     ffonto:threatens <http://purl.org/ffonto/data/scene/scene-fixture-081/e1> ;
     rdfs:comment "Dense smoke with people present." ;
     prov:wasDerivedFrom <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/1> .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/hazard/RespiratoryHazard/98e65e115e35116740e427dc3391460c> a ffonto:Hazard ;
-    ffonto:hasHazardType ffv:RespiratoryHazard ;
+    ffonto:hasHazardType ffontov:RespiratoryHazard ;
     ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
     ffonto:threatens <http://purl.org/ffonto/data/scene/scene-fixture-081/e2> ;
     rdfs:comment "Dense smoke with people present." ;
     prov:wasDerivedFrom <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/1> .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/hazard/SmokeVisibilityHazard/0823e4213ef85c1af8b04ea5fc0fb882> a ffonto:Hazard ;
-    ffonto:hasHazardType ffv:SmokeVisibilityHazard ;
+    ffonto:hasHazardType ffontov:SmokeVisibilityHazard ;
     ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
     ffonto:threatens <http://purl.org/ffonto/data/scene/scene-fixture-081/e7> ;
     rdfs:comment "Low visibility while a road, vehicle or aircraft is in the scene." ;
     prov:wasDerivedFrom <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/2> .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/hazard/SmokeVisibilityHazard/0cf269879d1a704361952113e657cf7a> a ffonto:Hazard ;
-    ffonto:hasHazardType ffv:SmokeVisibilityHazard ;
+    ffonto:hasHazardType ffontov:SmokeVisibilityHazard ;
     ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
     ffonto:threatens <http://purl.org/ffonto/data/scene/scene-fixture-081/e8> ;
     rdfs:comment "Low visibility while a road, vehicle or aircraft is in the scene." ;
     prov:wasDerivedFrom <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/2> .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/hazard/SmokeVisibilityHazard/1c96ae188d4ddec96847a4437a604657> a ffonto:Hazard ;
-    ffonto:hasHazardType ffv:SmokeVisibilityHazard ;
+    ffonto:hasHazardType ffontov:SmokeVisibilityHazard ;
     ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
     ffonto:threatens <http://purl.org/ffonto/data/scene/scene-fixture-081/e10> ;
     rdfs:comment "Low visibility while a road, vehicle or aircraft is in the scene." ;
     prov:wasDerivedFrom <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/2> .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/hazard/SpottingHazard/9608b6b4c8fb28fc63db63b54ac92776> a ffonto:Hazard ;
-    ffonto:hasHazardType ffv:SpottingHazard ;
+    ffonto:hasHazardType ffontov:SpottingHazard ;
     ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
     rdfs:comment "Spot fires or embers visible." ;
     prov:wasDerivedFrom <http://purl.org/ffonto/data/scene/scene-fixture-081/e11> .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/hazard/StructureIgnitionRisk/042fb895dfdc626d6763893dd71f902f> a ffonto:Hazard ;
-    ffonto:hasHazardType ffv:StructureIgnitionRisk ;
+    ffonto:hasHazardType ffontov:StructureIgnitionRisk ;
     ffonto:inEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
     ffonto:threatens <http://purl.org/ffonto/data/scene/scene-fixture-081/e4> ;
     rdfs:comment "Building marked as threatened by the scene extractor.",
@@ -832,1546 +846,1561 @@ ffr:wind-aerial a ffonto:DangerRule ;
         <http://purl.org/ffonto/data/scene/scene-fixture-081/e5> .
 
 <http://purl.org/ffonto/rules> a owl:Ontology ;
+    rdfs:label "FFOnto danger rules"@en ;
+    dcterms:abstract "Weather and Fire Weather Index (FWI) threshold rules stored as data (individuals of ffonto:DangerRule), so thresholds can be changed and cited without editing queries. The current threshold values are PLACEHOLDERS for testing."@en ;
     dcterms:creator "Charuni Kosala Jayaweera" ;
     dcterms:description "Threshold rules over weather and Fire Weather Index properties, stored as individuals of ffonto:DangerRule."@en ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     dcterms:title "FFOnto weather / FWI danger rules"@en ;
+    vann:preferredNamespacePrefix "ffr" ;
+    vann:preferredNamespaceUri "http://purl.org/ffonto/data/rule/" ;
+    owl:versionIRI <http://purl.org/ffonto/rules/2.0.0> ;
     owl:versionInfo "2.0.0" .
 
 <http://purl.org/ffonto/vocab> a owl:Ontology ;
+    rdfs:label "FFOnto vocabulary"@en ;
+    dcterms:abstract "SKOS controlled vocabulary of FFOnto: the fine-grained kinds and values used in forest-fire knowledge graphs (detection classes, sound events, scene entity kinds, states, activities, PPE, positions, observable properties, values, hazards, actions, weather conditions, modality conflicts and ecological background knowledge). New kinds are added here as concepts under skos:broader, without changing the core schema."@en ;
+    dcterms:contributor "Prof. Dulani Meedeniya" ;
+    dcterms:created "2026-10-07"^^xsd:date ;
     dcterms:creator "Charuni Kosala Jayaweera" ;
-    dcterms:description "SKOS concept schemes for FFOnto: entity kinds, states, activities, PPE, observable properties, values, hazards, actions, conditions and ecological background knowledge."@en ;
+    dcterms:description "SKOS concept schemes for FFOnto: entity kinds, states, activities, PPE, observable properties, values, hazards, actions, conditions and ecological background knowledge. skos:hiddenLabel holds the keywords used for caption tagging and for the scene-extraction prompt. Load together with ffonto-core.ttl (see ffonto.ttl and catalog-v001.xml)."@en ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:modified "2026-10-09"^^xsd:date ;
     dcterms:title "FFOnto controlled vocabulary"@en ;
-    rdfs:comment "Load together with ffonto-core.ttl (see ffonto.ttl and catalog-v001.xml)."@en ;
+    vann:preferredNamespacePrefix "ffontov" ;
+    vann:preferredNamespaceUri "http://purl.org/ffonto/vocab#" ;
+    owl:versionIRI <http://purl.org/ffonto/vocab/2.0.0> ;
     owl:versionInfo "2.0.0" .
 
-ffv:Accessible a skos:Concept ;
+ffontov:Accessible a skos:Concept ;
     rdfs:label "Accessible"@en ;
-    skos:broader ffv:AccessState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:AccessState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Accessible"@en .
 
-ffv:ActingAsLookout a skos:Concept ;
+ffontov:ActingAsLookout a skos:Concept ;
     rdfs:label "Acting as lookout"@en ;
-    skos:broader ffv:ResponseActivity ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:ResponseActivity ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Acting as lookout"@en .
 
-ffv:AerialReconnaissance a skos:Concept ;
+ffontov:AerialReconnaissance a skos:Concept ;
     rdfs:label "Aerial reconnaissance"@en ;
-    skos:broader ffv:AerialSuppression ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:AerialSuppression ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Aerial reconnaissance"@en .
 
-ffv:AgriculturalLand a skos:Concept ;
+ffontov:AgriculturalLand a skos:Concept ;
     rdfs:label "Agricultural land"@en ;
-    skos:broader ffv:EnvironmentFeatureKind ;
+    skos:broader ffontov:EnvironmentFeatureKind ;
     skos:hiddenLabel "crop"@en,
         "farm"@en,
         "farmland"@en,
         "orchard"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Agricultural land"@en .
 
-ffv:AirPollution a skos:Concept ;
+ffontov:AirPollution a skos:Concept ;
     rdfs:label "Air pollution"@en ;
-    skos:broader ffv:EcologicalImpact ;
-    skos:inScheme ffv:EcologyScheme ;
+    skos:broader ffontov:EcologicalImpact ;
+    skos:inScheme ffontov:EcologyScheme ;
     skos:prefLabel "Air pollution"@en .
 
-ffv:AirQualityLevel a skos:Concept ;
+ffontov:AirQualityLevel a skos:Concept ;
     rdfs:label "Air quality level"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
     skos:prefLabel "Air quality level"@en ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
 
-ffv:AirTanker a skos:Concept ;
+ffontov:AirTanker a skos:Concept ;
     rdfs:label "Air tanker"@en ;
-    skos:broader ffv:Aircraft ;
+    skos:broader ffontov:Aircraft ;
     skos:hiddenLabel "air tanker"@en,
         "airtanker"@en,
         "water bomber"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Air tanker"@en .
 
-ffv:Ambulance a skos:Concept ;
+ffontov:Ambulance a skos:Concept ;
     rdfs:label "Ambulance"@en ;
-    skos:broader ffv:GroundVehicle ;
+    skos:broader ffontov:GroundVehicle ;
     skos:hiddenLabel "ambulance"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Ambulance"@en .
 
-ffv:AshColour a skos:Concept ;
+ffontov:AshColour a skos:Concept ;
     rdfs:label "Ash colour"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
     skos:prefLabel "Ash colour"@en ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
 
-ffv:AshDeposit a skos:Concept ;
+ffontov:AshDeposit a skos:Concept ;
     rdfs:label "Ash deposit"@en ;
-    skos:broader ffv:BurnEvidenceKind ;
+    skos:broader ffontov:BurnEvidenceKind ;
     skos:hiddenLabel "ash"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Ash deposit"@en .
 
-ffv:AssistingCivilian a skos:Concept ;
+ffontov:AssistingCivilian a skos:Concept ;
     rdfs:label "Assisting civilian"@en ;
-    skos:broader ffv:ResponseActivity ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:ResponseActivity ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Assisting civilian"@en .
 
-ffv:AssistingVulnerablePerson a skos:Concept ;
+ffontov:AssistingVulnerablePerson a skos:Concept ;
     rdfs:label "Assisting children / elderly"@en ;
-    skos:broader ffv:CivilianActivity ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:CivilianActivity ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Assisting children / elderly"@en .
 
-ffv:Axe a skos:Concept ;
+ffontov:Axe a skos:Concept ;
     rdfs:label "Axe"@en ;
-    skos:broader ffv:HandTool ;
+    skos:broader ffontov:HandTool ;
     skos:hiddenLabel "axe"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Axe"@en .
 
-ffv:BareGround a skos:Concept ;
+ffontov:BareGround a skos:Concept ;
     rdfs:label "Bare ground"@en ;
-    skos:broader ffv:EnvironmentFeatureKind ;
+    skos:broader ffontov:EnvironmentFeatureKind ;
     skos:hiddenLabel "bare"@en,
         "barren"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Bare ground"@en .
 
-ffv:Barn a skos:Concept ;
+ffontov:Barn a skos:Concept ;
     rdfs:label "Barn"@en ;
-    skos:broader ffv:Building ;
+    skos:broader ffontov:Building ;
     skos:hiddenLabel "barn"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Barn"@en .
 
-ffv:Barricade a skos:Concept ;
+ffontov:Barricade a skos:Concept ;
     rdfs:label "Barricade"@en ;
-    skos:broader ffv:TrafficControlDevice ;
+    skos:broader ffontov:TrafficControlDevice ;
     skos:hiddenLabel "barricade"@en,
         "road closure sign"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Barricade"@en .
 
-ffv:BeatingOutFlames a skos:Concept ;
+ffontov:BeatingOutFlames a skos:Concept ;
     rdfs:label "Beating out flames"@en ;
-    skos:broader ffv:DirectAttack ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:DirectAttack ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Beating out flames"@en .
 
-ffv:Black a skos:Concept ;
+ffontov:Black a skos:Concept ;
     rdfs:label "Black"@en ;
-    skos:broader ffv:Colour ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Colour ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Black"@en .
 
-ffv:Blocked a skos:Concept ;
+ffontov:Blocked a skos:Concept ;
     rdfs:label "Blocked"@en ;
-    skos:broader ffv:AccessState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:AccessState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Blocked"@en .
 
-ffv:Blue a skos:Concept ;
+ffontov:Blue a skos:Concept ;
     rdfs:label "Blue"@en ;
-    skos:broader ffv:Colour ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Colour ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Blue"@en .
 
-ffv:Bridge a skos:Concept ;
+ffontov:Bridge a skos:Concept ;
     rdfs:label "Bridge"@en ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "bridge"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Bridge"@en .
 
-ffv:Briefing a skos:Concept ;
+ffontov:Briefing a skos:Concept ;
     rdfs:label "Briefing"@en ;
-    skos:broader ffv:ResponseActivity ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:ResponseActivity ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Briefing"@en .
 
-ffv:Brown a skos:Concept ;
+ffontov:Brown a skos:Concept ;
     rdfs:label "Brown"@en ;
-    skos:broader ffv:Colour ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Colour ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Brown"@en .
 
-ffv:BrushEngine a skos:Concept ;
+ffontov:BrushEngine a skos:Concept ;
     rdfs:label "Brush engine"@en ;
-    skos:broader ffv:FireEngine ;
+    skos:broader ffontov:FireEngine ;
     skos:hiddenLabel "brush engine"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Brush engine"@en .
 
-ffv:BurnSeverity a skos:Concept ;
+ffontov:BurnSeverity a skos:Concept ;
     rdfs:label "Burn severity"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
     skos:prefLabel "Burn severity"@en ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
 
-ffv:Burnout a skos:Concept ;
+ffontov:Burnout a skos:Concept ;
     rdfs:label "Burnout / backburn"@en ;
-    skos:broader ffv:IndirectAttack ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:IndirectAttack ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Burnout / backburn"@en .
 
-ffv:Bus a skos:Concept ;
+ffontov:Bus a skos:Concept ;
     rdfs:label "Bus"@en ;
-    skos:broader ffv:GroundVehicle ;
+    skos:broader ffontov:GroundVehicle ;
     skos:hiddenLabel "bus"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Bus"@en .
 
-ffv:Canyon a skos:Concept ;
+ffontov:Canyon a skos:Concept ;
     rdfs:label "Canyon"@en ;
-    skos:broader ffv:Terrain ;
+    skos:broader ffontov:Terrain ;
     skos:hiddenLabel "canyon"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Canyon"@en .
 
-ffv:CautionTape a skos:Concept ;
+ffontov:CautionTape a skos:Concept ;
     rdfs:label "Caution tape"@en ;
-    skos:broader ffv:TrafficControlDevice ;
+    skos:broader ffontov:TrafficControlDevice ;
     skos:hiddenLabel "caution tape"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Caution tape"@en .
 
-ffv:Chainsaw a skos:Concept ;
+ffontov:Chainsaw a skos:Concept ;
     rdfs:label "Chainsaw"@en ;
-    skos:broader ffv:EquipmentKind ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "chainsaw"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Chainsaw"@en .
 
-ffv:Charred a skos:Concept ;
+ffontov:Charred a skos:Concept ;
     rdfs:label "Charred"@en ;
-    skos:broader ffv:DamageState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:DamageState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Charred"@en .
 
-ffv:CharredTrunk a skos:Concept ;
+ffontov:CharredTrunk a skos:Concept ;
     rdfs:label "Charred trunk"@en ;
-    skos:broader ffv:BurnEvidenceKind ;
+    skos:broader ffontov:BurnEvidenceKind ;
     skos:hiddenLabel "char"@en,
         "charred"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Charred trunk"@en .
 
-ffv:Civilian a skos:Concept ;
+ffontov:Civilian a skos:Concept ;
     rdfs:label "Civilian"@en ;
-    skos:broader ffv:Person ;
+    skos:broader ffontov:Person ;
     skos:hiddenLabel "civilian"@en,
         "people"@en,
         "resident"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Civilian"@en .
 
-ffv:Clear a skos:Concept ;
+ffontov:Clear a skos:Concept ;
     rdfs:label "Clear sky"@en ;
-    skos:broader ffv:Sky ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Sky ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Clear sky"@en .
 
-ffv:Cloudy a skos:Concept ;
+ffontov:Cloudy a skos:Concept ;
     rdfs:label "Cloudy"@en ;
-    skos:broader ffv:Sky ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Sky ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Cloudy"@en .
 
-ffv:Collapsed a skos:Concept ;
+ffontov:Collapsed a skos:Concept ;
     rdfs:label "Collapsed"@en ;
-    skos:broader ffv:DamageState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:DamageState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Collapsed"@en .
 
-ffv:CommandPost a skos:Concept ;
+ffontov:CommandPost a skos:Concept ;
     rdfs:label "Incident command post"@en ;
-    skos:broader ffv:Building ;
+    skos:broader ffontov:Building ;
     skos:hiddenLabel "command post"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Incident command post"@en .
 
-ffv:Communicating a skos:Concept ;
+ffontov:Communicating a skos:Concept ;
     rdfs:label "Communicating"@en ;
-    skos:broader ffv:ResponseActivity ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:ResponseActivity ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Communicating"@en .
 
-ffv:CommunicationTower a skos:Concept ;
+ffontov:CommunicationTower a skos:Concept ;
     rdfs:label "Communication tower"@en ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "antenna"@en,
         "tower"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Communication tower"@en .
 
-ffv:Consumed a skos:Concept ;
+ffontov:Consumed a skos:Concept ;
     rdfs:label "Consumed"@en ;
-    skos:broader ffv:VegetationState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:VegetationState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Consumed"@en .
 
-ffv:Contained a skos:Concept ;
+ffontov:Contained a skos:Concept ;
     rdfs:label "Contained"@en ;
-    skos:broader ffv:SpreadStatus ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:SpreadStatus ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Contained"@en .
 
-ffv:Continuous a skos:Concept ;
+ffontov:Continuous a skos:Concept ;
     rdfs:label "Continuous"@en ;
-    skos:broader ffv:VegetationState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:VegetationState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Continuous"@en .
 
-ffv:ControlLine a skos:Concept ;
+ffontov:ControlLine a skos:Concept ;
     rdfs:label "Control line / dozer line"@en ;
-    skos:broader ffv:BurnEvidenceKind ;
+    skos:broader ffontov:BurnEvidenceKind ;
     skos:hiddenLabel "dozer line"@en,
         "fire line"@en,
         "hand line"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Control line / dozer line"@en .
 
-ffv:Crackling a skos:Concept ;
+ffontov:Crackling a skos:Concept ;
     rdfs:label "Crackling"@en ;
-    skos:broader ffv:FireSound ;
+    skos:broader ffontov:FireSound ;
     skos:hiddenLabel "crackle"@en,
         "crackling"@en ;
-    skos:inScheme ffv:SoundEventScheme ;
+    skos:inScheme ffontov:SoundEventScheme ;
     skos:prefLabel "Crackling"@en .
 
-ffv:CrownFire a skos:Concept ;
+ffontov:CrownFire a skos:Concept ;
     rdfs:label "Crown fire"@en ;
-    skos:broader ffv:FirePhenomenonKind ;
+    skos:broader ffontov:FirePhenomenonKind ;
     skos:hiddenLabel "crown fire"@en,
         "crowning"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Crown fire"@en .
 
-ffv:CrownFireType a skos:Concept ;
+ffontov:CrownFireType a skos:Concept ;
     rdfs:label "Crown fire (type)"@en ;
-    skos:broader ffv:FireTypeValue ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:FireTypeValue ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Crown fire (type)"@en .
 
-ffv:Culvert a skos:Concept ;
+ffontov:Culvert a skos:Concept ;
     rdfs:label "Culvert"@en ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "culvert"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Culvert"@en .
 
-ffv:Cured a skos:Concept ;
+ffontov:Cured a skos:Concept ;
     rdfs:label "Cured"@en ;
-    skos:broader ffv:VegetationState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:VegetationState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Cured"@en .
 
-ffv:CuttingControlLine a skos:Concept ;
+ffontov:CuttingControlLine a skos:Concept ;
     rdfs:label "Cutting control line (dozer)"@en ;
-    skos:broader ffv:IndirectAttack ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:IndirectAttack ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Cutting control line (dozer)"@en .
 
-ffv:Damaged a skos:Concept ;
+ffontov:Damaged a skos:Concept ;
     rdfs:label "Damaged"@en ;
-    skos:broader ffv:DamageState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:DamageState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Damaged"@en .
 
-ffv:Dead a skos:Concept ;
+ffontov:Dead a skos:Concept ;
     rdfs:label "Dead"@en ;
-    skos:broader ffv:VegetationState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:VegetationState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Dead"@en .
 
-ffv:DeciduousForest a skos:Concept ;
+ffontov:DeciduousForest a skos:Concept ;
     rdfs:label "Deciduous forest"@en ;
-    ffonto:providesService ffv:CarbonStorage,
-        ffv:HabitatProvision ;
-    ffonto:suggestedRestoration ffv:NaturalRegenerationMonitoring,
-        ffv:Reforestation ;
-    ffonto:typicalFireImpact ffv:HabitatLoss,
-        ffv:SoilNutrientLoss,
-        ffv:TreeMortality ;
-    skos:broader ffv:Forest ;
+    ffonto:providesService ffontov:CarbonStorage,
+        ffontov:HabitatProvision ;
+    ffonto:suggestedRestoration ffontov:NaturalRegenerationMonitoring,
+        ffontov:Reforestation ;
+    ffonto:typicalFireImpact ffontov:HabitatLoss,
+        ffontov:SoilNutrientLoss,
+        ffontov:TreeMortality ;
+    skos:broader ffontov:Forest ;
     skos:hiddenLabel "birch"@en,
         "deciduous"@en,
         "oak"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Deciduous forest"@en .
 
-ffv:Decreasing a skos:Concept ;
+ffontov:Decreasing a skos:Concept ;
     rdfs:label "Decreasing"@en ;
-    skos:broader ffv:SpreadStatus ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:SpreadStatus ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Decreasing"@en .
 
-ffv:Destroyed a skos:Concept ;
+ffontov:Destroyed a skos:Concept ;
     rdfs:label "Destroyed"@en ;
-    skos:broader ffv:DamageState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:DamageState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Destroyed"@en .
 
-ffv:DetectorSource a skos:Concept ;
+ffontov:DetectorSource a skos:Concept ;
     rdfs:label "Object detector"@en ;
     skos:hiddenLabel "detector"@en ;
-    skos:inScheme ffv:LabelSourceScheme ;
+    skos:inScheme ffontov:LabelSourceScheme ;
     skos:prefLabel "Object detector"@en ;
-    skos:topConceptOf ffv:LabelSourceScheme .
+    skos:topConceptOf ffontov:LabelSourceScheme .
 
-ffv:DiggingHandLine a skos:Concept ;
+ffontov:DiggingHandLine a skos:Concept ;
     rdfs:label "Digging hand line"@en ;
-    skos:broader ffv:IndirectAttack ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:IndirectAttack ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Digging hand line"@en .
 
-ffv:DirectingTraffic a skos:Concept ;
+ffontov:DirectingTraffic a skos:Concept ;
     rdfs:label "Directing traffic"@en ;
-    skos:broader ffv:ResponseActivity ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:ResponseActivity ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Directing traffic"@en .
 
-ffv:DominantAspect a skos:Concept ;
+ffontov:DominantAspect a skos:Concept ;
     rdfs:label "Dominant aspect"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
     skos:prefLabel "Dominant aspect"@en ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
 
-ffv:Down a skos:Concept ;
+ffontov:Down a skos:Concept ;
     rdfs:label "Down / fallen"@en ;
-    skos:broader ffv:OperationalState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:OperationalState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Down / fallen"@en .
 
-ffv:DownedLog a skos:Concept ;
+ffontov:DownedLog a skos:Concept ;
     rdfs:label "Downed log"@en ;
-    skos:broader ffv:Vegetation ;
+    skos:broader ffontov:Vegetation ;
     skos:hiddenLabel "log"@en,
         "logs"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Downed log"@en .
 
-ffv:DownedPowerLineHazard a skos:Concept ;
+ffontov:DownedPowerLineHazard a skos:Concept ;
     rdfs:label "Downed power line hazard"@en ;
-    ffonto:mitigatedBy ffv:CloseRoad,
-        ffv:DeEnergiseLines ;
-    skos:inScheme ffv:HazardScheme ;
+    ffonto:mitigatedBy ffontov:CloseRoad,
+        ffontov:DeEnergiseLines ;
+    skos:inScheme ffontov:HazardScheme ;
     skos:prefLabel "Downed power line hazard"@en ;
-    skos:topConceptOf ffv:HazardScheme .
+    skos:topConceptOf ffontov:HazardScheme .
 
-ffv:Dozer a skos:Concept ;
+ffontov:Dozer a skos:Concept ;
     rdfs:label "Dozer"@en ;
-    skos:broader ffv:GroundVehicle ;
+    skos:broader ffontov:GroundVehicle ;
     skos:hiddenLabel "bulldozer"@en,
         "dozer"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Dozer"@en .
 
-ffv:Drafting a skos:Concept ;
+ffontov:Drafting a skos:Concept ;
     rdfs:label "Drafting / dip site use"@en ;
-    skos:broader ffv:AerialSuppression ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:AerialSuppression ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Drafting / dip site use"@en .
 
-ffv:DripTorch a skos:Concept ;
+ffontov:DripTorch a skos:Concept ;
     rdfs:label "Drip torch"@en ;
-    skos:broader ffv:EquipmentKind ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "drip torch"@en,
         "driptorch"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Drip torch"@en .
 
-ffv:Drone a skos:Concept ;
+ffontov:Drone a skos:Concept ;
     rdfs:label "Drone"@en ;
-    skos:broader ffv:Aircraft ;
+    skos:broader ffontov:Aircraft ;
     skos:hiddenLabel "drone"@en,
         "uas"@en,
         "uav"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Drone"@en .
 
-ffv:Dusk a skos:Concept ;
+ffontov:Dusk a skos:Concept ;
     rdfs:label "Dusk"@en ;
-    skos:broader ffv:Light ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Light ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Dusk"@en .
 
-ffv:EMSWorker a skos:Concept ;
+ffontov:EMSWorker a skos:Concept ;
     rdfs:label "EMS worker"@en ;
-    skos:broader ffv:Responder ;
+    skos:broader ffontov:Responder ;
     skos:hiddenLabel "ems"@en,
         "paramedic"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "EMS worker"@en .
 
-ffv:East a skos:Concept ;
+ffontov:East a skos:Concept ;
     rdfs:label "East"@en ;
-    skos:broader ffv:Direction ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Direction ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "East"@en .
 
-ffv:Ember a skos:Concept ;
+ffontov:Ember a skos:Concept ;
     rdfs:label "Ember"@en ;
-    skos:broader ffv:FirePhenomenonKind ;
+    skos:broader ffontov:FirePhenomenonKind ;
     skos:hiddenLabel "ember"@en,
         "embers"@en,
         "firebrand"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Ember"@en .
 
-ffv:ErosionControlMeasure a skos:Concept ;
+ffontov:ErosionControlMeasure a skos:Concept ;
     rdfs:label "Erosion control measure"@en ;
-    skos:broader ffv:BurnEvidenceKind ;
+    skos:broader ffontov:BurnEvidenceKind ;
     skos:hiddenLabel "erosion matting"@en,
         "mulch"@en,
         "sandbag"@en,
         "wattle"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Erosion control measure"@en .
 
-ffv:ErosionRill a skos:Concept ;
+ffontov:ErosionRill a skos:Concept ;
     rdfs:label "Erosion rill"@en ;
-    skos:broader ffv:BurnEvidenceKind ;
+    skos:broader ffontov:BurnEvidenceKind ;
     skos:hiddenLabel "erosion"@en,
         "rill"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Erosion rill"@en .
 
-ffv:ErosionRisk a skos:Concept ;
+ffontov:ErosionRisk a skos:Concept ;
     rdfs:label "Post-fire erosion / debris-flow risk"@en ;
-    ffonto:mitigatedBy ffv:InstallErosionControl ;
-    skos:inScheme ffv:HazardScheme ;
+    ffonto:mitigatedBy ffontov:InstallErosionControl ;
+    skos:inScheme ffontov:HazardScheme ;
     skos:prefLabel "Post-fire erosion / debris-flow risk"@en ;
-    skos:topConceptOf ffv:HazardScheme .
+    skos:topConceptOf ffontov:HazardScheme .
 
-ffv:EstablishingPerimeter a skos:Concept ;
+ffontov:EstablishingPerimeter a skos:Concept ;
     rdfs:label "Establishing perimeter"@en ;
-    skos:broader ffv:ResponseActivity ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:ResponseActivity ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Establishing perimeter"@en .
 
-ffv:Evacuating a skos:Concept ;
+ffontov:Evacuating a skos:Concept ;
     rdfs:label "Evacuating"@en ;
-    skos:broader ffv:CivilianActivity ;
+    skos:broader ffontov:CivilianActivity ;
     skos:hiddenLabel "evacuating"@en ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Evacuating"@en .
 
-ffv:EvacuationRouteBlocked a skos:Concept ;
+ffontov:EvacuationRouteBlocked a skos:Concept ;
     rdfs:label "Evacuation route blocked"@en ;
-    ffonto:mitigatedBy ffv:CloseRoad,
-        ffv:ShelterInPlace ;
-    skos:inScheme ffv:HazardScheme ;
+    ffonto:mitigatedBy ffontov:CloseRoad,
+        ffontov:ShelterInPlace ;
+    skos:inScheme ffontov:HazardScheme ;
     skos:prefLabel "Evacuation route blocked"@en ;
-    skos:topConceptOf ffv:HazardScheme .
+    skos:topConceptOf ffontov:HazardScheme .
 
-ffv:Excavator a skos:Concept ;
+ffontov:Excavator a skos:Concept ;
     rdfs:label "Excavator"@en ;
-    skos:broader ffv:GroundVehicle ;
+    skos:broader ffontov:GroundVehicle ;
     skos:hiddenLabel "excavator"@en,
         "grader"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Excavator"@en .
 
-ffv:ExposedMineralSoil a skos:Concept ;
+ffontov:ExposedMineralSoil a skos:Concept ;
     rdfs:label "Exposed mineral soil"@en ;
-    skos:broader ffv:BurnEvidenceKind ;
+    skos:broader ffontov:BurnEvidenceKind ;
     skos:hiddenLabel "mineral soil"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Exposed mineral soil"@en .
 
-ffv:Extreme a skos:Concept ;
+ffontov:Extreme a skos:Concept ;
     rdfs:label "Extreme"@en ;
-    skos:broader ffv:Level ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Level ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Extreme"@en .
 
-ffv:FallingTreeHazard a skos:Concept ;
+ffontov:FallingTreeHazard a skos:Concept ;
     rdfs:label "Falling tree hazard"@en ;
-    ffonto:mitigatedBy ffv:AvoidSnagAreas ;
-    skos:inScheme ffv:HazardScheme ;
+    ffonto:mitigatedBy ffontov:AvoidSnagAreas ;
+    skos:inScheme ffontov:HazardScheme ;
     skos:prefLabel "Falling tree hazard"@en ;
-    skos:topConceptOf ffv:HazardScheme .
+    skos:topConceptOf ffontov:HazardScheme .
 
-ffv:FellingTrees a skos:Concept ;
+ffontov:FellingTrees a skos:Concept ;
     rdfs:label "Felling trees"@en ;
-    skos:broader ffv:SuppressionActivity ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:SuppressionActivity ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Felling trees"@en .
 
-ffv:Fence a skos:Concept ;
+ffontov:Fence a skos:Concept ;
     rdfs:label "Fence"@en ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "fence"@en,
         "gate"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Fence"@en .
 
-ffv:FireActivityTrend a skos:Concept ;
+ffontov:FireActivityTrend a skos:Concept ;
     rdfs:label "Fire activity trend"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
     skos:prefLabel "Fire activity trend"@en ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
 
-ffv:FireBeater a skos:Concept ;
+ffontov:FireBeater a skos:Concept ;
     rdfs:label "Fire beater"@en ;
-    skos:broader ffv:HandTool ;
+    skos:broader ffontov:HandTool ;
     skos:hiddenLabel "fire beater"@en,
         "flapper"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Fire beater"@en .
 
-ffv:FireCluster a skos:Concept ;
+ffontov:FireCluster a skos:Concept ;
     rdfs:label "Fire cluster"@en ;
-    skos:broader ffv:FirePhenomenonKind ;
+    skos:broader ffontov:FirePhenomenonKind ;
     skos:hiddenLabel "fire cluster"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Fire cluster"@en .
 
-ffv:FireShelter a skos:Concept ;
+ffontov:FireShelter a skos:Concept ;
     rdfs:label "Fire shelter"@en ;
     skos:hiddenLabel "fire shelter"@en ;
-    skos:inScheme ffv:PPEScheme ;
+    skos:inScheme ffontov:PPEScheme ;
     skos:prefLabel "Fire shelter"@en ;
-    skos:topConceptOf ffv:PPEScheme .
+    skos:topConceptOf ffontov:PPEScheme .
 
-ffv:FireShelterPack a skos:Concept ;
+ffontov:FireShelterPack a skos:Concept ;
     rdfs:label "Fire shelter (packed)"@en ;
-    skos:broader ffv:EquipmentKind ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "fire shelter"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Fire shelter (packed)"@en .
 
-ffv:Foggy a skos:Concept ;
+ffontov:Foggy a skos:Concept ;
     rdfs:label "Foggy"@en ;
-    skos:broader ffv:Sky ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Sky ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Foggy"@en .
 
-ffv:Fragmented a skos:Concept ;
+ffontov:Fragmented a skos:Concept ;
     rdfs:label "Fragmented"@en ;
-    skos:broader ffv:Distribution ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Distribution ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Fragmented"@en .
 
-ffv:FuelCan a skos:Concept ;
+ffontov:FuelCan a skos:Concept ;
     rdfs:label "Fuel can"@en ;
-    skos:broader ffv:EquipmentKind ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "fuel can"@en,
         "jerry can"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Fuel can"@en .
 
-ffv:FuelCondition a skos:Concept ;
+ffontov:FuelCondition a skos:Concept ;
     rdfs:label "Fuel condition"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
     skos:prefLabel "Fuel condition"@en ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
 
-ffv:Fusee a skos:Concept ;
+ffontov:Fusee a skos:Concept ;
     rdfs:label "Fusee"@en ;
-    skos:broader ffv:EquipmentKind ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "fusee"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Fusee"@en .
 
-ffv:Garage a skos:Concept ;
+ffontov:Garage a skos:Concept ;
     rdfs:label "Garage"@en ;
-    skos:broader ffv:Building ;
+    skos:broader ffontov:Building ;
     skos:hiddenLabel "garage"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Garage"@en .
 
-ffv:Gathering a skos:Concept ;
+ffontov:Gathering a skos:Concept ;
     rdfs:label "Gathering at assembly point"@en ;
-    skos:broader ffv:CivilianActivity ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:CivilianActivity ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Gathering at assembly point"@en .
 
-ffv:Generator a skos:Concept ;
+ffontov:Generator a skos:Concept ;
     rdfs:label "Generator"@en ;
-    skos:broader ffv:EquipmentKind ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "generator"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Generator"@en .
 
-ffv:GrassFireType a skos:Concept ;
+ffontov:GrassFireType a skos:Concept ;
     rdfs:label "Grass fire"@en ;
-    skos:broader ffv:FireTypeValue ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:FireTypeValue ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Grass fire"@en .
 
-ffv:Grassland a skos:Concept ;
+ffontov:Grassland a skos:Concept ;
     rdfs:label "Grassland"@en ;
-    ffonto:providesService ffv:Grazing,
-        ffv:SoilProtection ;
-    ffonto:suggestedRestoration ffv:InvasiveSpeciesControl,
-        ffv:Reseeding ;
-    ffonto:typicalFireImpact ffv:InvasiveSpeciesSpread,
-        ffv:NutrientRecycling,
-        ffv:SoilErosion ;
-    skos:broader ffv:Vegetation ;
+    ffonto:providesService ffontov:Grazing,
+        ffontov:SoilProtection ;
+    ffonto:suggestedRestoration ffontov:InvasiveSpeciesControl,
+        ffontov:Reseeding ;
+    ffonto:typicalFireImpact ffontov:InvasiveSpeciesSpread,
+        ffontov:NutrientRecycling,
+        ffontov:SoilErosion ;
+    skos:broader ffontov:Vegetation ;
     skos:hiddenLabel "field"@en,
         "grass"@en,
         "grassland"@en,
         "meadow"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Grassland"@en .
 
-ffv:Green a skos:Concept ;
+ffontov:Green a skos:Concept ;
     rdfs:label "Green"@en ;
-    skos:broader ffv:VegetationState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:VegetationState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Green"@en .
 
-ffv:HandheldRadio a skos:Concept ;
+ffontov:HandheldRadio a skos:Concept ;
     rdfs:label "Handheld radio"@en ;
-    skos:broader ffv:EquipmentKind ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "radio"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Handheld radio"@en .
 
-ffv:Hazy a skos:Concept ;
+ffontov:Hazy a skos:Concept ;
     rdfs:label "Hazy"@en ;
-    skos:broader ffv:Sky ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Sky ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Hazy"@en .
 
-ffv:Headlamp a skos:Concept ;
+ffontov:Headlamp a skos:Concept ;
     rdfs:label "Headlamp"@en ;
     skos:hiddenLabel "headlamp"@en ;
-    skos:inScheme ffv:PPEScheme ;
+    skos:inScheme ffontov:PPEScheme ;
     skos:prefLabel "Headlamp"@en ;
-    skos:topConceptOf ffv:PPEScheme .
+    skos:topConceptOf ffontov:PPEScheme .
 
-ffv:HearingProtection a skos:Concept ;
+ffontov:HearingProtection a skos:Concept ;
     rdfs:label "Hearing protection"@en ;
     skos:hiddenLabel "ear protection"@en,
         "headset"@en ;
-    skos:inScheme ffv:PPEScheme ;
+    skos:inScheme ffontov:PPEScheme ;
     skos:prefLabel "Hearing protection"@en ;
-    skos:topConceptOf ffv:PPEScheme .
+    skos:topConceptOf ffontov:PPEScheme .
 
-ffv:Helicopter a skos:Concept ;
+ffontov:Helicopter a skos:Concept ;
     rdfs:label "Helicopter"@en ;
-    skos:broader ffv:Aircraft ;
+    skos:broader ffontov:Aircraft ;
     skos:hiddenLabel "helicopter"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Helicopter"@en .
 
-ffv:Helispot a skos:Concept ;
+ffontov:Helispot a skos:Concept ;
     rdfs:label "Helispot"@en ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "helispot"@en,
         "landing zone"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Helispot"@en .
 
-ffv:HighVisibilityVest a skos:Concept ;
+ffontov:HighVisibilityVest a skos:Concept ;
     rdfs:label "High visibility vest"@en ;
     skos:hiddenLabel "hi-vis"@en,
         "vest"@en ;
-    skos:inScheme ffv:PPEScheme ;
+    skos:inScheme ffontov:PPEScheme ;
     skos:prefLabel "High visibility vest"@en ;
-    skos:topConceptOf ffv:PPEScheme .
+    skos:topConceptOf ffontov:PPEScheme .
 
-ffv:Hotspot a skos:Concept ;
+ffontov:Hotspot a skos:Concept ;
     rdfs:label "Hotspot"@en ;
-    skos:broader ffv:FirePhenomenonKind ;
+    skos:broader ffontov:FirePhenomenonKind ;
     skos:hiddenLabel "hot spot"@en,
         "hotspot"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Hotspot"@en .
 
-ffv:HumanSource a skos:Concept ;
+ffontov:HumanSource a skos:Concept ;
     rdfs:label "Human annotator"@en ;
     skos:hiddenLabel "human"@en ;
-    skos:inScheme ffv:LabelSourceScheme ;
+    skos:inScheme ffontov:LabelSourceScheme ;
     skos:prefLabel "Human annotator"@en ;
-    skos:topConceptOf ffv:LabelSourceScheme .
+    skos:topConceptOf ffontov:LabelSourceScheme .
 
-ffv:Hydrant a skos:Concept ;
+ffontov:Hydrant a skos:Concept ;
     rdfs:label "Hydrant"@en ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "hydrant"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Hydrant"@en .
 
-ffv:Increasing a skos:Concept ;
+ffontov:Increasing a skos:Concept ;
     rdfs:label "Increasing"@en ;
-    skos:broader ffv:SpreadStatus ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:SpreadStatus ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Increasing"@en .
 
-ffv:InsideBlack a skos:Concept ;
+ffontov:InsideBlack a skos:Concept ;
     rdfs:label "Inside burned area"@en ;
-    skos:inScheme ffv:PositionScheme ;
+    skos:inScheme ffontov:PositionScheme ;
     skos:prefLabel "Inside burned area"@en ;
-    skos:topConceptOf ffv:PositionScheme .
+    skos:topConceptOf ffontov:PositionScheme .
 
-ffv:Intact a skos:Concept ;
+ffontov:Intact a skos:Concept ;
     rdfs:label "Intact"@en ;
-    skos:broader ffv:DamageState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:DamageState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Intact"@en .
 
-ffv:LadderFuel a skos:Concept ;
+ffontov:LadderFuel a skos:Concept ;
     rdfs:label "Ladder fuel"@en ;
-    skos:broader ffv:Vegetation ;
+    skos:broader ffontov:Vegetation ;
     skos:hiddenLabel "ladder fuel"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Ladder fuel"@en .
 
-ffv:LeafLitter a skos:Concept ;
+ffontov:LeafLitter a skos:Concept ;
     rdfs:label "Leaf litter / duff"@en ;
-    skos:broader ffv:Vegetation ;
+    skos:broader ffontov:Vegetation ;
     skos:hiddenLabel "duff"@en,
         "litter"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Leaf litter / duff"@en .
 
-ffv:Leaning a skos:Concept ;
+ffontov:Leaning a skos:Concept ;
     rdfs:label "Leaning"@en ;
-    skos:broader ffv:OperationalState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:OperationalState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Leaning"@en .
 
-ffv:LeftFlank a skos:Concept ;
+ffontov:LeftFlank a skos:Concept ;
     rdfs:label "Left flank"@en ;
-    skos:inScheme ffv:PositionScheme ;
+    skos:inScheme ffontov:PositionScheme ;
     skos:prefLabel "Left flank"@en ;
-    skos:topConceptOf ffv:PositionScheme .
+    skos:topConceptOf ffontov:PositionScheme .
 
-ffv:LightGray a skos:Concept ;
+ffontov:LightGray a skos:Concept ;
     rdfs:label "Light gray"@en ;
-    skos:broader ffv:Colour ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Colour ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Light gray"@en .
 
-ffv:Livestock a skos:Concept ;
+ffontov:Livestock a skos:Concept ;
     rdfs:label "Livestock"@en ;
-    skos:broader ffv:Animal ;
+    skos:broader ffontov:Animal ;
     skos:hiddenLabel "cattle"@en,
         "horse"@en,
         "livestock"@en,
         "sheep"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Livestock"@en .
 
-ffv:LivestockTrailer a skos:Concept ;
+ffontov:LivestockTrailer a skos:Concept ;
     rdfs:label "Livestock trailer"@en ;
-    skos:broader ffv:GroundVehicle ;
+    skos:broader ffontov:GroundVehicle ;
     skos:hiddenLabel "trailer"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Livestock trailer"@en .
 
-ffv:LoadingAnimals a skos:Concept ;
+ffontov:LoadingAnimals a skos:Concept ;
     rdfs:label "Loading animals"@en ;
-    skos:broader ffv:CivilianActivity ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:CivilianActivity ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Loading animals"@en .
 
-ffv:Lookout a skos:Concept ;
+ffontov:Lookout a skos:Concept ;
     rdfs:label "Lookout"@en ;
-    skos:broader ffv:Person ;
+    skos:broader ffontov:Person ;
     skos:hiddenLabel "lookout"@en,
         "spotter"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Lookout"@en .
 
-ffv:LoudActivity a skos:Concept ;
+ffontov:LoudActivity a skos:Concept ;
     rdfs:label "Sustained loud activity"@en ;
     skos:hiddenLabel "loud"@en,
         "roar"@en ;
-    skos:inScheme ffv:SoundEventScheme ;
+    skos:inScheme ffontov:SoundEventScheme ;
     skos:prefLabel "Sustained loud activity"@en ;
-    skos:topConceptOf ffv:SoundEventScheme .
+    skos:topConceptOf ffontov:SoundEventScheme .
 
-ffv:MapBoard a skos:Concept ;
+ffontov:MapBoard a skos:Concept ;
     rdfs:label "Map board"@en ;
-    skos:broader ffv:EquipmentKind ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "map board"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Map board"@en .
 
-ffv:McLeod a skos:Concept ;
-    rdfs:label "Mc leod"@en ;
-    skos:broader ffv:HandTool ;
+ffontov:McLeod a skos:Concept ;
+    rdfs:label "McLeod"@en ;
+    skos:broader ffontov:HandTool ;
     skos:hiddenLabel "mcleod"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:prefLabel "Mc leod"@en .
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:prefLabel "McLeod"@en .
 
-ffv:MediaObserver a skos:Concept ;
+ffontov:MediaObserver a skos:Concept ;
     rdfs:label "Media / observer"@en ;
-    skos:broader ffv:Person ;
+    skos:broader ffontov:Person ;
     skos:hiddenLabel "media"@en,
         "observer"@en,
         "reporter"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Media / observer"@en .
 
-ffv:Melted a skos:Concept ;
+ffontov:Melted a skos:Concept ;
     rdfs:label "Melted"@en ;
-    skos:broader ffv:DamageState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:DamageState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Melted"@en .
 
-ffv:MixedForest a skos:Concept ;
+ffontov:MixedForest a skos:Concept ;
     rdfs:label "Mixed forest"@en ;
-    ffonto:providesService ffv:CarbonStorage,
-        ffv:HabitatProvision ;
-    ffonto:suggestedRestoration ffv:NaturalRegenerationMonitoring,
-        ffv:Reforestation ;
-    ffonto:typicalFireImpact ffv:CarbonRelease,
-        ffv:HabitatLoss,
-        ffv:TreeMortality ;
-    skos:broader ffv:Forest ;
+    ffonto:providesService ffontov:CarbonStorage,
+        ffontov:HabitatProvision ;
+    ffonto:suggestedRestoration ffontov:NaturalRegenerationMonitoring,
+        ffontov:Reforestation ;
+    ffonto:typicalFireImpact ffontov:CarbonRelease,
+        ffontov:HabitatLoss,
+        ffontov:TreeMortality ;
+    skos:broader ffontov:Forest ;
     skos:hiddenLabel "mixed forest"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Mixed forest"@en .
 
-ffv:MopUp a skos:Concept ;
+ffontov:MopUp a skos:Concept ;
     rdfs:label "Mop-up"@en ;
-    skos:broader ffv:SuppressionActivity ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:SuppressionActivity ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Mop-up"@en .
 
-ffv:Mountain a skos:Concept ;
+ffontov:Mountain a skos:Concept ;
     rdfs:label "Mountain"@en ;
-    skos:broader ffv:Terrain ;
+    skos:broader ffontov:Terrain ;
     skos:hiddenLabel "mountain"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Mountain"@en .
 
-ffv:Night a skos:Concept ;
+ffontov:Night a skos:Concept ;
     rdfs:label "Night"@en ;
-    skos:broader ffv:Light ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Light ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Night"@en .
 
-ffv:North a skos:Concept ;
+ffontov:North a skos:Concept ;
     rdfs:label "North"@en ;
-    skos:broader ffv:Direction ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Direction ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "North"@en .
 
-ffv:Nozzle a skos:Concept ;
+ffontov:Nozzle a skos:Concept ;
     rdfs:label "Nozzle"@en ;
-    skos:broader ffv:EquipmentKind ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "nozzle"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Nozzle"@en .
 
-ffv:Official a skos:Concept ;
+ffontov:Official a skos:Concept ;
     rdfs:label "Official"@en ;
-    skos:broader ffv:Person ;
+    skos:broader ffontov:Person ;
     skos:hiddenLabel "official"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Official"@en .
 
-ffv:OnFire a skos:Concept ;
+ffontov:OnFire a skos:Concept ;
     rdfs:label "On fire"@en ;
-    skos:broader ffv:FireState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:FireState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "On fire"@en .
 
-ffv:OnFireEdge a skos:Concept ;
+ffontov:OnFireEdge a skos:Concept ;
     rdfs:label "On fire edge"@en ;
-    skos:inScheme ffv:PositionScheme ;
+    skos:inScheme ffontov:PositionScheme ;
     skos:prefLabel "On fire edge"@en ;
-    skos:topConceptOf ffv:PositionScheme .
+    skos:topConceptOf ffontov:PositionScheme .
 
-ffv:Orange a skos:Concept ;
+ffontov:Orange a skos:Concept ;
     rdfs:label "Orange"@en ;
-    skos:broader ffv:Colour ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Colour ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Orange"@en .
 
-ffv:Passable a skos:Concept ;
+ffontov:Passable a skos:Concept ;
     rdfs:label "Passable"@en ;
-    skos:broader ffv:AccessState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:AccessState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Passable"@en .
 
-ffv:Patchy a skos:Concept ;
+ffontov:Patchy a skos:Concept ;
     rdfs:label "Patchy"@en ;
-    skos:broader ffv:VegetationState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:VegetationState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Patchy"@en .
 
-ffv:PatchyDistribution a skos:Concept ;
+ffontov:PatchyDistribution a skos:Concept ;
     rdfs:label "Patchy (distribution)"@en ;
-    skos:broader ffv:Distribution ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Distribution ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Patchy (distribution)"@en .
 
-ffv:Patrolling a skos:Concept ;
+ffontov:Patrolling a skos:Concept ;
     rdfs:label "Patrolling perimeter"@en ;
-    skos:broader ffv:ResponseActivity ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:ResponseActivity ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Patrolling perimeter"@en .
 
-ffv:Pet a skos:Concept ;
+ffontov:Pet a skos:Concept ;
     rdfs:label "Pet"@en ;
-    skos:broader ffv:Animal ;
+    skos:broader ffontov:Animal ;
     skos:hiddenLabel "cat"@en,
         "dog"@en,
         "pet"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Pet"@en .
 
-ffv:PileBurn a skos:Concept ;
+ffontov:PileBurn a skos:Concept ;
     rdfs:label "Pile burn"@en ;
-    skos:broader ffv:FirePhenomenonKind ;
+    skos:broader ffontov:FirePhenomenonKind ;
     skos:hiddenLabel "burn pile"@en,
         "pile burn"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Pile burn"@en .
 
-ffv:PileFireType a skos:Concept ;
+ffontov:PileFireType a skos:Concept ;
     rdfs:label "Pile burn (type)"@en ;
-    skos:broader ffv:FireTypeValue ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:FireTypeValue ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Pile burn (type)"@en .
 
-ffv:PlumeHeight a skos:Concept ;
+ffontov:PlumeHeight a skos:Concept ;
     rdfs:label "Plume height"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
     skos:prefLabel "Plume height"@en ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
 
-ffv:PoliceCar a skos:Concept ;
+ffontov:PoliceCar a skos:Concept ;
     rdfs:label "Police car"@en ;
-    skos:broader ffv:GroundVehicle ;
+    skos:broader ffontov:GroundVehicle ;
     skos:hiddenLabel "police car"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Police car"@en .
 
-ffv:PoliceOfficer a skos:Concept ;
+ffontov:PoliceOfficer a skos:Concept ;
     rdfs:label "Police officer"@en ;
-    skos:broader ffv:Responder ;
+    skos:broader ffontov:Responder ;
     skos:hiddenLabel "police"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Police officer"@en .
 
-ffv:Pond a skos:Concept ;
+ffontov:Pond a skos:Concept ;
     rdfs:label "Pond"@en ;
-    skos:broader ffv:WaterBody ;
+    skos:broader ffontov:WaterBody ;
     skos:hiddenLabel "pond"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Pond"@en .
 
-ffv:PortableLighting a skos:Concept ;
+ffontov:PortableLighting a skos:Concept ;
     rdfs:label "Portable lighting"@en ;
-    skos:broader ffv:EquipmentKind ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "light tower"@en,
         "portable light"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Portable lighting"@en .
 
-ffv:PortablePump a skos:Concept ;
+ffontov:PortablePump a skos:Concept ;
     rdfs:label "Portable pump"@en ;
-    skos:broader ffv:EquipmentKind ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "portable pump"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Portable pump"@en .
 
-ffv:PortableWaterTank a skos:Concept ;
+ffontov:PortableWaterTank a skos:Concept ;
     rdfs:label "Portable water tank"@en ;
-    skos:broader ffv:EquipmentKind ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "portable tank"@en,
         "pumpkin"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Portable water tank"@en .
 
-ffv:PowerLine a skos:Concept ;
+ffontov:PowerLine a skos:Concept ;
     rdfs:label "Power line"@en ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "power line"@en,
         "powerline"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Power line"@en .
 
-ffv:PowerPole a skos:Concept ;
+ffontov:PowerPole a skos:Concept ;
     rdfs:label "Power pole"@en ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "power pole"@en,
         "utility pole"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Power pole"@en .
 
-ffv:PrescribedBurn a skos:Concept ;
+ffontov:PrescribedBurn a skos:Concept ;
     rdfs:label "Prescribed / controlled burn"@en ;
-    ffonto:suggestedRestoration ffv:FuelManagement ;
-    ffonto:typicalFireImpact ffv:NutrientRecycling,
-        ffv:SeedReleaseAndRegeneration ;
-    skos:broader ffv:Purpose ;
-    skos:inScheme ffv:ValueScheme ;
+    ffonto:suggestedRestoration ffontov:FuelManagement ;
+    ffonto:typicalFireImpact ffontov:NutrientRecycling,
+        ffontov:SeedReleaseAndRegeneration ;
+    skos:broader ffontov:Purpose ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Prescribed / controlled burn"@en .
 
-ffv:Pulaski a skos:Concept ;
+ffontov:Pulaski a skos:Concept ;
     rdfs:label "Pulaski"@en ;
-    skos:broader ffv:HandTool ;
+    skos:broader ffontov:HandTool ;
     skos:hiddenLabel "pulaski"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Pulaski"@en .
 
-ffv:Pyrocumulus a skos:Concept ;
+ffontov:Pyrocumulus a skos:Concept ;
     rdfs:label "Pyrocumulus"@en ;
-    skos:broader ffv:FirePhenomenonKind ;
+    skos:broader ffontov:FirePhenomenonKind ;
     skos:hiddenLabel "pyrocumulus"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Pyrocumulus"@en .
 
-ffv:RadioChestHarness a skos:Concept ;
+ffontov:RadioChestHarness a skos:Concept ;
     rdfs:label "Radio chest harness"@en ;
     skos:hiddenLabel "chest harness"@en ;
-    skos:inScheme ffv:PPEScheme ;
+    skos:inScheme ffontov:PPEScheme ;
     skos:prefLabel "Radio chest harness"@en ;
-    skos:topConceptOf ffv:PPEScheme .
+    skos:topConceptOf ffontov:PPEScheme .
 
-ffv:Recreation a skos:Concept ;
+ffontov:Recreation a skos:Concept ;
     rdfs:label "Recreation"@en ;
-    skos:broader ffv:EcosystemService ;
-    skos:inScheme ffv:EcologyScheme ;
+    skos:broader ffontov:EcosystemService ;
+    skos:inScheme ffontov:EcologyScheme ;
     skos:prefLabel "Recreation"@en .
 
-ffv:Regrowth a skos:Concept ;
+ffontov:Regrowth a skos:Concept ;
     rdfs:label "Regrowth"@en ;
-    skos:broader ffv:BurnEvidenceKind ;
+    skos:broader ffontov:BurnEvidenceKind ;
     skos:hiddenLabel "regrowth"@en,
         "seedling"@en,
         "sprout"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Regrowth"@en .
 
-ffv:ReignitionHazard a skos:Concept ;
+ffontov:ReignitionHazard a skos:Concept ;
     rdfs:label "Reignition hazard"@en ;
-    ffonto:mitigatedBy ffv:MopUpAndPatrol ;
-    skos:inScheme ffv:HazardScheme ;
+    ffonto:mitigatedBy ffontov:MopUpAndPatrol ;
+    skos:inScheme ffontov:HazardScheme ;
     skos:prefLabel "Reignition hazard"@en ;
-    skos:topConceptOf ffv:HazardScheme .
+    skos:topConceptOf ffontov:HazardScheme .
 
-ffv:Respirator a skos:Concept ;
+ffontov:Respirator a skos:Concept ;
     rdfs:label "Respirator / mask"@en ;
     skos:hiddenLabel "mask"@en,
         "respirator"@en ;
-    skos:inScheme ffv:PPEScheme ;
+    skos:inScheme ffontov:PPEScheme ;
     skos:prefLabel "Respirator / mask"@en ;
-    skos:topConceptOf ffv:PPEScheme .
+    skos:topConceptOf ffontov:PPEScheme .
 
-ffv:RetardantDrop a skos:Concept ;
+ffontov:RetardantDrop a skos:Concept ;
     rdfs:label "Retardant drop"@en ;
-    skos:broader ffv:AerialSuppression ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:AerialSuppression ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Retardant drop"@en .
 
-ffv:RetardantLine a skos:Concept ;
+ffontov:RetardantLine a skos:Concept ;
     rdfs:label "Retardant line"@en ;
-    skos:broader ffv:BurnEvidenceKind ;
+    skos:broader ffontov:BurnEvidenceKind ;
     skos:hiddenLabel "red stain"@en,
         "retardant line"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Retardant line"@en .
 
-ffv:RetardantLineConstruction a skos:Concept ;
+ffontov:RetardantLineConstruction a skos:Concept ;
     rdfs:label "Retardant line construction"@en ;
-    skos:broader ffv:IndirectAttack ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:IndirectAttack ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Retardant line construction"@en .
 
-ffv:Retreating a skos:Concept ;
+ffontov:Retreating a skos:Concept ;
     rdfs:label "Retreating"@en ;
-    skos:broader ffv:ResponseActivity ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:ResponseActivity ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Retreating"@en .
 
-ffv:Ridge a skos:Concept ;
+ffontov:Ridge a skos:Concept ;
     rdfs:label "Ridge"@en ;
-    skos:broader ffv:Terrain ;
+    skos:broader ffontov:Terrain ;
     skos:hiddenLabel "ridge"@en,
         "ridgeline"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Ridge"@en .
 
-ffv:RidgeTop a skos:Concept ;
+ffontov:RidgeTop a skos:Concept ;
     rdfs:label "Ridge top"@en ;
-    skos:inScheme ffv:PositionScheme ;
+    skos:inScheme ffontov:PositionScheme ;
     skos:prefLabel "Ridge top"@en ;
-    skos:topConceptOf ffv:PositionScheme .
+    skos:topConceptOf ffontov:PositionScheme .
 
-ffv:RightFlank a skos:Concept ;
+ffontov:RightFlank a skos:Concept ;
     rdfs:label "Right flank"@en ;
-    skos:inScheme ffv:PositionScheme ;
+    skos:inScheme ffontov:PositionScheme ;
     skos:prefLabel "Right flank"@en ;
-    skos:topConceptOf ffv:PositionScheme .
+    skos:topConceptOf ffontov:PositionScheme .
 
-ffv:River a skos:Concept ;
+ffontov:River a skos:Concept ;
     rdfs:label "River"@en ;
-    skos:broader ffv:WaterBody ;
+    skos:broader ffontov:WaterBody ;
     skos:hiddenLabel "river"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "River"@en .
 
-ffv:RockyTerrain a skos:Concept ;
+ffontov:RockyTerrain a skos:Concept ;
     rdfs:label "Rocky terrain"@en ;
-    skos:broader ffv:Terrain ;
+    skos:broader ffontov:Terrain ;
     skos:hiddenLabel "rock"@en,
         "rocky"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Rocky terrain"@en .
 
-ffv:ScorchedCrown a skos:Concept ;
+ffontov:ScorchedCrown a skos:Concept ;
     rdfs:label "Scorched crown"@en ;
-    skos:broader ffv:BurnEvidenceKind ;
+    skos:broader ffontov:BurnEvidenceKind ;
     skos:hiddenLabel "scorched crown"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Scorched crown"@en .
 
-ffv:Sea a skos:Concept ;
+ffontov:Sea a skos:Concept ;
     rdfs:label "Sea"@en ;
-    skos:broader ffv:WaterBody ;
+    skos:broader ffontov:WaterBody ;
     skos:hiddenLabel "ocean"@en,
         "sea"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Sea"@en .
 
-ffv:Shed a skos:Concept ;
+ffontov:Shed a skos:Concept ;
     rdfs:label "Shed"@en ;
-    skos:broader ffv:Building ;
+    skos:broader ffontov:Building ;
     skos:hiddenLabel "greenhouse"@en,
         "shed"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Shed"@en .
 
-ffv:ShelteringInPlace a skos:Concept ;
+ffontov:ShelteringInPlace a skos:Concept ;
     rdfs:label "Sheltering in place"@en ;
-    skos:broader ffv:CivilianActivity ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:CivilianActivity ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Sheltering in place"@en .
 
-ffv:Shovel a skos:Concept ;
+ffontov:Shovel a skos:Concept ;
     rdfs:label "Shovel"@en ;
-    skos:broader ffv:HandTool ;
+    skos:broader ffontov:HandTool ;
     skos:hiddenLabel "shovel"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Shovel"@en .
 
-ffv:Shrubland a skos:Concept ;
+ffontov:Shrubland a skos:Concept ;
     rdfs:label "Shrubland"@en ;
-    ffonto:providesService ffv:HabitatProvision,
-        ffv:SoilProtection ;
-    ffonto:suggestedRestoration ffv:ErosionControl,
-        ffv:Reseeding ;
-    ffonto:typicalFireImpact ffv:HabitatLoss,
-        ffv:InvasiveSpeciesSpread,
-        ffv:SoilErosion ;
-    skos:broader ffv:Vegetation ;
+    ffonto:providesService ffontov:HabitatProvision,
+        ffontov:SoilProtection ;
+    ffonto:suggestedRestoration ffontov:ErosionControl,
+        ffontov:Reseeding ;
+    ffonto:typicalFireImpact ffontov:HabitatLoss,
+        ffontov:InvasiveSpeciesSpread,
+        ffontov:SoilErosion ;
+    skos:broader ffontov:Vegetation ;
     skos:hiddenLabel "brush"@en,
         "bush"@en,
         "chaparral"@en,
         "shrub"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Shrubland"@en .
 
-ffv:Sign a skos:Concept ;
+ffontov:Sign a skos:Concept ;
     rdfs:label "Sign"@en ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "sign"@en,
         "signpost"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Sign"@en .
 
-ffv:SkyCondition a skos:Concept ;
+ffontov:SkyCondition a skos:Concept ;
     rdfs:label "Sky condition"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
     skos:prefLabel "Sky condition"@en ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
 
-ffv:Slope a skos:Concept ;
+ffontov:Slope a skos:Concept ;
     rdfs:label "Slope"@en ;
-    skos:broader ffv:Terrain ;
+    skos:broader ffontov:Terrain ;
     skos:hiddenLabel "hill"@en,
         "hillside"@en,
         "slope"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Slope"@en .
 
-ffv:SmokeLayering a skos:Concept ;
+ffontov:SmokeLayering a skos:Concept ;
     rdfs:label "Smoke layering"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
     skos:prefLabel "Smoke layering"@en ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
 
-ffv:Smouldering a skos:Concept ;
+ffontov:Smouldering a skos:Concept ;
     rdfs:label "Smouldering"@en ;
-    skos:broader ffv:FirePhenomenonKind ;
+    skos:broader ffontov:FirePhenomenonKind ;
     skos:hiddenLabel "smolder"@en,
         "smoldering"@en,
         "smoulder"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Smouldering"@en .
 
-ffv:SmoulderingState a skos:Concept ;
+ffontov:SmoulderingState a skos:Concept ;
     rdfs:label "Smouldering (state)"@en ;
-    skos:broader ffv:FireState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:FireState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Smouldering (state)"@en .
 
-ffv:Snag a skos:Concept ;
+ffontov:Snag a skos:Concept ;
     rdfs:label "Snag"@en ;
-    skos:broader ffv:BurnEvidenceKind ;
+    skos:broader ffontov:BurnEvidenceKind ;
     skos:hiddenLabel "dead standing tree"@en,
         "snag"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Snag"@en .
 
-ffv:SnowCover a skos:Concept ;
+ffontov:SnowCover a skos:Concept ;
     rdfs:label "Snow cover"@en ;
-    skos:broader ffv:EnvironmentFeatureKind ;
+    skos:broader ffontov:EnvironmentFeatureKind ;
     skos:hiddenLabel "ice"@en,
         "snow"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Snow cover"@en .
 
-ffv:SolarPanel a skos:Concept ;
+ffontov:SolarPanel a skos:Concept ;
     rdfs:label "Solar panel"@en ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "solar panel"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Solar panel"@en .
 
-ffv:South a skos:Concept ;
+ffontov:South a skos:Concept ;
     rdfs:label "South"@en ;
-    skos:broader ffv:Direction ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Direction ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "South"@en .
 
-ffv:Sparse a skos:Concept ;
+ffontov:Sparse a skos:Concept ;
     rdfs:label "Sparse"@en ;
-    skos:broader ffv:VegetationState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:VegetationState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Sparse"@en .
 
-ffv:Speech a skos:Concept ;
+ffontov:Speech a skos:Concept ;
     rdfs:label "Speech"@en ;
     skos:hiddenLabel "speech"@en ;
-    skos:inScheme ffv:SoundEventScheme ;
+    skos:inScheme ffontov:SoundEventScheme ;
     skos:prefLabel "Speech"@en ;
-    skos:topConceptOf ffv:SoundEventScheme .
+    skos:topConceptOf ffontov:SoundEventScheme .
 
-ffv:SpotFireTriage a skos:Concept ;
+ffontov:SpotFireTriage a skos:Concept ;
     rdfs:label "Spot fire triage"@en ;
-    skos:broader ffv:DirectAttack ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:DirectAttack ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Spot fire triage"@en .
 
-ffv:Sprinkler a skos:Concept ;
+ffontov:Sprinkler a skos:Concept ;
     rdfs:label "Sprinkler"@en ;
-    skos:broader ffv:EquipmentKind ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "mister"@en,
         "sprinkler"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Sprinkler"@en .
 
-ffv:Stable a skos:Concept ;
+ffontov:Stable a skos:Concept ;
     rdfs:label "Stable"@en ;
-    skos:broader ffv:SpreadStatus ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:SpreadStatus ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Stable"@en .
 
-ffv:Staged a skos:Concept ;
+ffontov:Staged a skos:Concept ;
     rdfs:label "Staged"@en ;
-    skos:broader ffv:OperationalState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:OperationalState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Staged"@en .
 
-ffv:StandingBy a skos:Concept ;
+ffontov:StandingBy a skos:Concept ;
     rdfs:label "Standing by"@en ;
-    skos:broader ffv:ResponseActivity ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:ResponseActivity ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Standing by"@en .
 
-ffv:Stream a skos:Concept ;
+ffontov:Stream a skos:Concept ;
     rdfs:label "Stream"@en ;
-    skos:broader ffv:WaterBody ;
+    skos:broader ffontov:WaterBody ;
     skos:hiddenLabel "creek"@en,
         "stream"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Stream"@en .
 
-ffv:SunVisibleThroughSmoke a skos:Concept ;
+ffontov:SunVisibleThroughSmoke a skos:Concept ;
     rdfs:label "Sun visible through smoke"@en ;
-    skos:broader ffv:Sky ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Sky ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Sun visible through smoke"@en .
 
-ffv:SurfaceFire a skos:Concept ;
+ffontov:SurfaceFire a skos:Concept ;
     rdfs:label "Surface fire"@en ;
-    skos:broader ffv:FirePhenomenonKind ;
+    skos:broader ffontov:FirePhenomenonKind ;
     skos:hiddenLabel "ground fire"@en,
         "surface fire"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Surface fire"@en .
 
-ffv:TakingCover a skos:Concept ;
+ffontov:TakingCover a skos:Concept ;
     rdfs:label "Taking cover"@en ;
-    skos:broader ffv:ResponseActivity ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:ResponseActivity ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Taking cover"@en .
 
-ffv:Torching a skos:Concept ;
+ffontov:Torching a skos:Concept ;
     rdfs:label "Torching"@en ;
-    skos:broader ffv:FirePhenomenonKind ;
+    skos:broader ffontov:FirePhenomenonKind ;
     skos:hiddenLabel "torching"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Torching"@en .
 
-ffv:TrafficCone a skos:Concept ;
+ffontov:TrafficCone a skos:Concept ;
     rdfs:label "Traffic cone"@en ;
-    skos:broader ffv:TrafficControlDevice ;
+    skos:broader ffontov:TrafficControlDevice ;
     skos:hiddenLabel "cone"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Traffic cone"@en .
 
-ffv:Transformer a skos:Concept ;
+ffontov:Transformer a skos:Concept ;
     rdfs:label "Transformer"@en ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "transformer"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Transformer"@en .
 
-ffv:Tree a skos:Concept ;
+ffontov:Tree a skos:Concept ;
     rdfs:label "Tree"@en ;
-    skos:broader ffv:Vegetation ;
+    skos:broader ffontov:Vegetation ;
     skos:hiddenLabel "tree"@en,
         "trees"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Tree"@en .
 
-ffv:UnburnedPatch a skos:Concept ;
+ffontov:UnburnedPatch a skos:Concept ;
     rdfs:label "Unburned patch"@en ;
-    skos:broader ffv:BurnEvidenceKind ;
+    skos:broader ffontov:BurnEvidenceKind ;
     skos:hiddenLabel "green patch"@en,
         "unburned patch"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Unburned patch"@en .
 
-ffv:Uniform a skos:Concept ;
+ffontov:Uniform a skos:Concept ;
     rdfs:label "Uniform"@en ;
-    skos:broader ffv:Distribution ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Distribution ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Uniform"@en .
 
-ffv:UrbanArea a skos:Concept ;
+ffontov:UrbanArea a skos:Concept ;
     rdfs:label "Urban / WUI area"@en ;
-    skos:broader ffv:EnvironmentFeatureKind ;
+    skos:broader ffontov:EnvironmentFeatureKind ;
     skos:hiddenLabel "city"@en,
         "neighborhood"@en,
         "town"@en,
         "village"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Urban / WUI area"@en .
 
-ffv:UtilityWorker a skos:Concept ;
+ffontov:UtilityWorker a skos:Concept ;
     rdfs:label "Utility worker"@en ;
-    skos:broader ffv:Responder ;
+    skos:broader ffontov:Responder ;
     skos:hiddenLabel "lineman"@en,
         "utility crew"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Utility worker"@en .
 
-ffv:Valley a skos:Concept ;
+ffontov:Valley a skos:Concept ;
     rdfs:label "Valley"@en ;
-    skos:broader ffv:Terrain ;
+    skos:broader ffontov:Terrain ;
     skos:hiddenLabel "valley"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Valley"@en .
 
-ffv:ValleyBottom a skos:Concept ;
+ffontov:ValleyBottom a skos:Concept ;
     rdfs:label "Valley bottom"@en ;
-    skos:inScheme ffv:PositionScheme ;
+    skos:inScheme ffontov:PositionScheme ;
     skos:prefLabel "Valley bottom"@en ;
-    skos:topConceptOf ffv:PositionScheme .
+    skos:topConceptOf ffontov:PositionScheme .
 
-ffv:VegetationDensity a skos:Concept ;
+ffontov:VegetationDensity a skos:Concept ;
     rdfs:label "Vegetation density"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
     skos:prefLabel "Vegetation density"@en ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
 
-ffv:VegetationDistribution a skos:Concept ;
+ffontov:VegetationDistribution a skos:Concept ;
     rdfs:label "Vegetation distribution"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
     skos:prefLabel "Vegetation distribution"@en ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
 
-ffv:VehicleSound a skos:Concept ;
+ffontov:VehicleSound a skos:Concept ;
     rdfs:label "Vehicle sound"@en ;
     skos:hiddenLabel "engine"@en,
         "vehicle"@en ;
-    skos:inScheme ffv:SoundEventScheme ;
+    skos:inScheme ffontov:SoundEventScheme ;
     skos:prefLabel "Vehicle sound"@en ;
-    skos:topConceptOf ffv:SoundEventScheme .
+    skos:topConceptOf ffontov:SoundEventScheme .
 
-ffv:Vertical a skos:Concept ;
+ffontov:Vertical a skos:Concept ;
     rdfs:label "Rising vertically"@en ;
-    skos:broader ffv:Direction ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Direction ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Rising vertically"@en .
 
-ffv:WaterDrop a skos:Concept ;
+ffontov:WaterDrop a skos:Concept ;
     rdfs:label "Water drop"@en ;
-    skos:broader ffv:AerialSuppression ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:AerialSuppression ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Water drop"@en .
 
-ffv:WaterTender a skos:Concept ;
+ffontov:WaterTender a skos:Concept ;
     rdfs:label "Water tender"@en ;
-    skos:broader ffv:GroundVehicle ;
+    skos:broader ffontov:GroundVehicle ;
     skos:hiddenLabel "tanker truck"@en,
         "water tender"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Water tender"@en .
 
-ffv:WeatherSmokeConflict a skos:Concept ;
+ffontov:WeatherSmokeConflict a skos:Concept ;
     rdfs:label "Heavy rain recorded while smoke detected"@en ;
-    skos:inScheme ffv:ConflictScheme ;
+    skos:inScheme ffontov:ConflictScheme ;
     skos:prefLabel "Heavy rain recorded while smoke detected"@en ;
-    skos:topConceptOf ffv:ConflictScheme .
+    skos:topConceptOf ffontov:ConflictScheme .
 
-ffv:West a skos:Concept ;
+ffontov:West a skos:Concept ;
     rdfs:label "West"@en ;
-    skos:broader ffv:Direction ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Direction ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "West"@en .
 
-ffv:White a skos:Concept ;
+ffontov:White a skos:Concept ;
     rdfs:label "White"@en ;
-    skos:broader ffv:Colour ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Colour ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "White"@en .
 
-ffv:Wildlife a skos:Concept ;
+ffontov:Wildlife a skos:Concept ;
     rdfs:label "Wildlife"@en ;
-    skos:broader ffv:Animal ;
+    skos:broader ffontov:Animal ;
     skos:hiddenLabel "bird"@en,
         "deer"@en,
         "wildlife"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Wildlife"@en .
 
-ffv:WildlifeThreat a skos:Concept ;
+ffontov:WildlifeThreat a skos:Concept ;
     rdfs:label "Wildlife threat"@en ;
-    ffonto:mitigatedBy ffv:EvacuateImmediately ;
-    skos:inScheme ffv:HazardScheme ;
+    ffonto:mitigatedBy ffontov:EvacuateImmediately ;
+    skos:inScheme ffontov:HazardScheme ;
     skos:prefLabel "Wildlife threat"@en ;
-    skos:topConceptOf ffv:HazardScheme .
+    skos:topConceptOf ffontov:HazardScheme .
+
+bibo:status a owl:AnnotationProperty ;
+    rdfs:label "status"@en .
 
 vann:preferredNamespacePrefix a owl:AnnotationProperty ;
     rdfs:label "preferred namespace prefix"@en .
@@ -2466,93 +2495,93 @@ ffonto:windSpeedKmh a owl:DatatypeProperty ;
 
 <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/caption> a ffonto:Caption ;
     ffonto:captionText "firefighters spraying water on a burning house next to a pine forest" ;
-    ffonto:mentionsConcept ffv:ConiferousForest,
-        ffv:Fire,
-        ffv:Firefighter,
-        ffv:Forest,
-        ffv:House,
-        ffv:WaterBody ;
+    ffonto:mentionsConcept ffontov:ConiferousForest,
+        ffontov:Fire,
+        ffontov:Firefighter,
+        ffontov:Forest,
+        ffontov:House,
+        ffontov:WaterBody ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/salesforce-blip-image-captioning-large> .
 
 <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/1> a ffonto:ModelObservation ;
     ffonto:aboveThreshold true ;
     ffonto:confidence 7e-01 ;
-    ffonto:labelSource ffv:ZeroShotSource ;
-    ffonto:predictedClass ffv:Smoke ;
+    ffonto:labelSource ffontov:ZeroShotSource ;
+    ffonto:predictedClass ffontov:Smoke ;
     ffonto:usedThreshold <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/threshold/Smoke> ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> .
 
 <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/z2> a ffonto:ModelObservation ;
     ffonto:confidence 9e-02 ;
-    ffonto:labelSource ffv:ZeroShotSource ;
-    ffonto:predictedClass ffv:NoFire ;
+    ffonto:labelSource ffontov:ZeroShotSource ;
+    ffonto:predictedClass ffontov:NoFire ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> .
 
 <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/threshold/Fire> a ffonto:Threshold ;
-    ffonto:forClass ffv:Fire ;
+    ffonto:forClass ffontov:Fire ;
     ffonto:thresholdValue 5.5e-01 .
 
 <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/threshold/Smoke> a ffonto:Threshold ;
-    ffonto:forClass ffv:Smoke ;
+    ffonto:forClass ffontov:Smoke ;
     ffonto:thresholdValue 6e-01 .
 
 <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/obs/1> a ffonto:ModelObservation ;
     ffonto:aboveThreshold true ;
     ffonto:confidence 3.5e-01 ;
     ffonto:labelCategory "fire_audio" ;
-    ffonto:labelSource ffv:AudioTaggerSource ;
+    ffonto:labelSource ffontov:AudioTaggerSource ;
     ffonto:maxConfidence 5.2e-01 ;
     ffonto:meanConfidence 3.5e-01 ;
-    ffonto:predictedClass ffv:Siren ;
+    ffonto:predictedClass ffontov:Siren ;
     ffonto:topKLabel "siren" ;
     ffonto:usedThreshold <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/threshold/Siren> ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/google-yamnet/1> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081> .
 
 <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/threshold/Explosion> a ffonto:Threshold ;
-    ffonto:forClass ffv:Explosion ;
+    ffonto:forClass ffontov:Explosion ;
     ffonto:thresholdValue 2e-01 .
 
 <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/threshold/Siren> a ffonto:Threshold ;
-    ffonto:forClass ffv:Siren ;
+    ffonto:forClass ffontov:Siren ;
     ffonto:thresholdValue 2e-01 .
 
 <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/caption> a ffonto:Caption ;
     ffonto:captionText "arafed forest fire in the middle of a forest with a lake" ;
-    ffonto:mentionsConcept ffv:Fire,
-        ffv:Forest,
-        ffv:Lake ;
+    ffonto:mentionsConcept ffontov:Fire,
+        ffontov:Forest,
+        ffontov:Lake ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/salesforce-blip-image-captioning-large> .
 
 <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/1> a ffonto:ModelObservation ;
     ffonto:aboveThreshold true ;
     ffonto:confidence 7.291e-01 ;
-    ffonto:labelSource ffv:ZeroShotSource ;
-    ffonto:predictedClass ffv:Smoke ;
+    ffonto:labelSource ffontov:ZeroShotSource ;
+    ffonto:predictedClass ffontov:Smoke ;
     ffonto:usedThreshold <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/threshold/Smoke> ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> .
 
 <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/z2> a ffonto:ModelObservation ;
     ffonto:confidence 1.124601e-01 ;
-    ffonto:labelSource ffv:ZeroShotSource ;
-    ffonto:predictedClass ffv:NoFire ;
+    ffonto:labelSource ffontov:ZeroShotSource ;
+    ffonto:predictedClass ffontov:NoFire ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> .
 
 <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/threshold/Fire> a ffonto:Threshold ;
-    ffonto:forClass ffv:Fire ;
+    ffonto:forClass ffontov:Fire ;
     ffonto:thresholdValue 5.5e-01 .
 
 <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/threshold/Smoke> a ffonto:Threshold ;
-    ffonto:forClass ffv:Smoke ;
+    ffonto:forClass ffontov:Smoke ;
     ffonto:thresholdValue 6e-01 .
 
 <http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a> a ffonto:AudioRecord ;
     ffonto:aboutEvent <http://purl.org/ffonto/data/event/ev-22e029d3b190> ;
-    ffonto:detectedClass ffv:Explosion ;
+    ffonto:detectedClass ffontov:Explosion ;
     ffonto:durationMs 4.8e+02 ;
     ffonto:fileURI "/home/cse/Documents/AudioToText/dataset/videoplayback_14.wav" ;
     ffonto:globalThreshold 2e-01 ;
@@ -2562,7 +2591,7 @@ ffonto:windSpeedKmh a owl:DatatypeProperty ;
     ffonto:sourceName "unknown_microphone" .
 
 <http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a/threshold/Explosion> a ffonto:Threshold ;
-    ffonto:forClass ffv:Explosion ;
+    ffonto:forClass ffontov:Explosion ;
     ffonto:thresholdValue 2e-01 .
 
 <http://purl.org/ffonto/data/record/weather/demo-site-a/grid-2-2/2012-08-27> a ffonto:WeatherRecord ;
@@ -2576,9 +2605,9 @@ ffonto:windSpeedKmh a owl:DatatypeProperty ;
     ffonto:ffmc 9.21e+01 ;
     ffonto:fireOccurred false ;
     ffonto:fwi 2.13e+01 ;
-    ffonto:hasCondition ffv:FavourDirectAttack,
-        ffv:PersistentCombustion,
-        ffv:RapidFineFuelSpread ;
+    ffonto:hasCondition ffontov:FavourDirectAttack,
+        ffontov:PersistentCombustion,
+        ffontov:RapidFineFuelSpread ;
     ffonto:isi 9.2e+00 ;
     ffonto:observationDate "2012-08-27T00:00:00+00:00"^^xsd:dateTime ;
     ffonto:rainMm 0e+00 ;
@@ -2587,466 +2616,466 @@ ffonto:windSpeedKmh a owl:DatatypeProperty ;
     ffonto:windSpeedKmh 4.5e+00 .
 
 <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/0> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:Gray ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:Gray ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
-    sosa:observedProperty ffv:SmokeColour .
+    sosa:observedProperty ffontov:SmokeColour .
 
 <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/1> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:High ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:High ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
-    sosa:observedProperty ffv:SmokeDensity .
+    sosa:observedProperty ffontov:SmokeDensity .
 
 <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/2> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:Drifting ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:Drifting ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
-    sosa:observedProperty ffv:PlumeDirection .
+    sosa:observedProperty ffontov:PlumeDirection .
 
 <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/3> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:Medium ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:Medium ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
-    sosa:observedProperty ffv:VisibilityLevel .
+    sosa:observedProperty ffontov:VisibilityLevel .
 
 <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/4> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:Daytime ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:Daytime ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
-    sosa:observedProperty ffv:LightCondition .
+    sosa:observedProperty ffontov:LightCondition .
 
 <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/5> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:SurfaceFireType ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:SurfaceFireType ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
-    sosa:observedProperty ffv:FireType .
+    sosa:observedProperty ffontov:FireType .
 
 <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/6> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:Medium ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:Medium ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
-    sosa:observedProperty ffv:FireIntensity .
+    sosa:observedProperty ffontov:FireIntensity .
 
 <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/attr/7> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:Wildfire ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:Wildfire ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> ;
-    sosa:observedProperty ffv:ScenePurpose .
+    sosa:observedProperty ffontov:ScenePurpose .
 
 <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e1> a ffonto:FirePhenomenon ;
     ffonto:count 1 ;
-    ffonto:hasKind ffv:FlameFront ;
+    ffonto:hasKind ffontov:FlameFront ;
     ffonto:near <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e4> ;
-    ffonto:relativePosition ffv:HeadOfFire .
+    ffonto:relativePosition ffontov:HeadOfFire .
 
 <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e2> a ffonto:FirePhenomenon ;
     ffonto:count 1 ;
-    ffonto:hasKind ffv:SmokePlume .
+    ffonto:hasKind ffontov:SmokePlume .
 
 <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e3> a ffonto:EnvironmentFeature ;
-    ffonto:hasKind ffv:ConiferousForest ;
-    ffonto:hasState ffv:Dense,
-        ffv:Dry .
+    ffonto:hasKind ffontov:ConiferousForest ;
+    ffonto:hasState ffontov:Dense,
+        ffontov:Dry .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/0> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:DarkGray ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:DarkGray ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
-    sosa:observedProperty ffv:SmokeColour .
+    sosa:observedProperty ffontov:SmokeColour .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/3> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:Daytime ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:Daytime ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
-    sosa:observedProperty ffv:LightCondition .
+    sosa:observedProperty ffontov:LightCondition .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/4> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:StructureFireType ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:StructureFireType ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
-    sosa:observedProperty ffv:FireType .
+    sosa:observedProperty ffontov:FireType .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/6> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:Expanding ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:Expanding ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
-    sosa:observedProperty ffv:FireSpreadStatus .
+    sosa:observedProperty ffontov:FireSpreadStatus .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/7> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:Wildfire ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:Wildfire ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
-    sosa:observedProperty ffv:ScenePurpose .
+    sosa:observedProperty ffontov:ScenePurpose .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/e12> a ffonto:BurnEvidence ;
     ffonto:count 1 ;
-    ffonto:hasKind ffv:Foam ;
-    ffonto:hasState ffv:Deployed .
+    ffonto:hasKind ffontov:Foam ;
+    ffonto:hasState ffontov:Deployed .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/e3> a ffonto:Equipment ;
     ffonto:count 2 ;
-    ffonto:hasKind ffv:HoseLine ;
-    ffonto:hasState ffv:Charged,
-        ffv:Flowing .
+    ffonto:hasKind ffontov:HoseLine ;
+    ffonto:hasState ffontov:Charged,
+        ffontov:Flowing .
 
 <http://purl.org/ffonto/data/site/demo-site-a> a ffonto:Site ;
     ffonto:siteName "demo_site_A" .
 
-ffv:AdvancingHoseLine a skos:Concept ;
+ffontov:AdvancingHoseLine a skos:Concept ;
     rdfs:label "Advancing hose line"@en ;
-    skos:broader ffv:DirectAttack ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:DirectAttack ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Advancing hose line"@en .
 
-ffv:AerialDropCompromised a skos:Concept ;
+ffontov:AerialDropCompromised a skos:Concept ;
     rdfs:label "Aerial drop effectiveness reduced"@en ;
-    skos:inScheme ffv:ConditionScheme ;
+    skos:inScheme ffontov:ConditionScheme ;
     skos:prefLabel "Aerial drop effectiveness reduced"@en ;
-    skos:topConceptOf ffv:ConditionScheme .
+    skos:topConceptOf ffontov:ConditionScheme .
 
-ffv:AheadOfFire a skos:Concept ;
+ffontov:AheadOfFire a skos:Concept ;
     rdfs:label "Ahead of fire"@en ;
-    skos:inScheme ffv:PositionScheme ;
+    skos:inScheme ffontov:PositionScheme ;
     skos:prefLabel "Ahead of fire"@en ;
-    skos:topConceptOf ffv:PositionScheme .
+    skos:topConceptOf ffontov:PositionScheme .
 
-ffv:ApplyingWater a skos:Concept ;
+ffontov:ApplyingWater a skos:Concept ;
     rdfs:label "Applying water / foam to flames"@en ;
-    skos:broader ffv:DirectAttack ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:DirectAttack ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Applying water / foam to flames"@en .
 
-ffv:AudioImageConflict a skos:Concept ;
+ffontov:AudioImageConflict a skos:Concept ;
     rdfs:label "Audio indicates escalation but image shows no fire"@en ;
-    skos:inScheme ffv:ConflictScheme ;
+    skos:inScheme ffontov:ConflictScheme ;
     skos:prefLabel "Audio indicates escalation but image shows no fire"@en ;
-    skos:topConceptOf ffv:ConflictScheme .
+    skos:topConceptOf ffontov:ConflictScheme .
 
-ffv:AvoidSnagAreas a skos:Concept ;
+ffontov:AvoidSnagAreas a skos:Concept ;
     rdfs:label "Avoid snag / hazard-tree areas"@en ;
-    skos:inScheme ffv:ActionScheme ;
+    skos:inScheme ffontov:ActionScheme ;
     skos:prefLabel "Avoid snag / hazard-tree areas"@en ;
-    skos:topConceptOf ffv:ActionScheme .
+    skos:topConceptOf ffontov:ActionScheme .
 
-ffv:CaptionSource a skos:Concept ;
+ffontov:CaptionSource a skos:Concept ;
     rdfs:label "Caption (label source)"@en ;
     skos:hiddenLabel "caption"@en ;
-    skos:inScheme ffv:LabelSourceScheme ;
+    skos:inScheme ffontov:LabelSourceScheme ;
     skos:prefLabel "Caption (label source)"@en ;
-    skos:topConceptOf ffv:LabelSourceScheme .
+    skos:topConceptOf ffontov:LabelSourceScheme .
 
-ffv:Charged a skos:Concept ;
+ffontov:Charged a skos:Concept ;
     rdfs:label "Charged (hose)"@en ;
-    skos:broader ffv:OperationalState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:OperationalState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Charged (hose)"@en .
 
-ffv:CoolAndIsolateTank a skos:Concept ;
+ffontov:CoolAndIsolateTank a skos:Concept ;
     rdfs:label "Cool and isolate pressurised tank"@en ;
-    skos:inScheme ffv:ActionScheme ;
+    skos:inScheme ffontov:ActionScheme ;
     skos:prefLabel "Cool and isolate pressurised tank"@en ;
-    skos:topConceptOf ffv:ActionScheme .
+    skos:topConceptOf ffontov:ActionScheme .
 
-ffv:CrownFireTransition a skos:Concept ;
+ffontov:CrownFireTransition a skos:Concept ;
     rdfs:label "Surface-to-crown transition risk"@en ;
-    ffonto:mitigatedBy ffv:RequestAerialSupport,
-        ffv:WithdrawToSafetyZone ;
-    skos:inScheme ffv:HazardScheme ;
+    ffonto:mitigatedBy ffontov:RequestAerialSupport,
+        ffontov:WithdrawToSafetyZone ;
+    skos:inScheme ffontov:HazardScheme ;
     skos:prefLabel "Surface-to-crown transition risk"@en ;
-    skos:topConceptOf ffv:HazardScheme .
+    skos:topConceptOf ffontov:HazardScheme .
 
-ffv:DarkGray a skos:Concept ;
+ffontov:DarkGray a skos:Concept ;
     rdfs:label "Dark gray"@en ;
-    skos:broader ffv:Colour ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Colour ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Dark gray"@en .
 
-ffv:DeEnergiseLines a skos:Concept ;
+ffontov:DeEnergiseLines a skos:Concept ;
     rdfs:label "De-energise power lines"@en ;
-    skos:inScheme ffv:ActionScheme ;
+    skos:inScheme ffontov:ActionScheme ;
     skos:prefLabel "De-energise power lines"@en ;
-    skos:topConceptOf ffv:ActionScheme .
+    skos:topConceptOf ffontov:ActionScheme .
 
-ffv:DefensiveStrategy a skos:Concept ;
+ffontov:DefensiveStrategy a skos:Concept ;
     rdfs:label "Adopt defensive strategy"@en ;
-    skos:inScheme ffv:ActionScheme ;
+    skos:inScheme ffontov:ActionScheme ;
     skos:prefLabel "Adopt defensive strategy"@en ;
-    skos:topConceptOf ffv:ActionScheme .
+    skos:topConceptOf ffontov:ActionScheme .
 
-ffv:Dense a skos:Concept ;
+ffontov:Dense a skos:Concept ;
     rdfs:label "Dense (vegetation)"@en ;
-    skos:broader ffv:VegetationState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:VegetationState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Dense (vegetation)"@en .
 
-ffv:Deployed a skos:Concept ;
+ffontov:Deployed a skos:Concept ;
     rdfs:label "Deployed"@en ;
-    skos:broader ffv:OperationalState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:OperationalState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Deployed"@en .
 
-ffv:Drifting a skos:Concept ;
+ffontov:Drifting a skos:Concept ;
     rdfs:label "Drifting horizontally"@en ;
-    skos:broader ffv:Direction ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Direction ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Drifting horizontally"@en .
 
-ffv:Expanding a skos:Concept ;
+ffontov:Expanding a skos:Concept ;
     rdfs:label "Expanding"@en ;
-    skos:broader ffv:SpreadStatus ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:SpreadStatus ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Expanding"@en .
 
-ffv:FireSpreadStatus a skos:Concept ;
+ffontov:FireSpreadStatus a skos:Concept ;
     rdfs:label "Fire spread status"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
     skos:prefLabel "Fire spread status"@en ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
 
-ffv:Flowing a skos:Concept ;
+ffontov:Flowing a skos:Concept ;
     rdfs:label "Flowing water/foam"@en ;
-    skos:broader ffv:OperationalState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:OperationalState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Flowing water/foam"@en .
 
-ffv:Foam a skos:Concept ;
+ffontov:Foam a skos:Concept ;
     rdfs:label "Foam"@en ;
-    skos:broader ffv:BurnEvidenceKind ;
+    skos:broader ffontov:BurnEvidenceKind ;
     skos:hiddenLabel "foam"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Foam"@en .
 
-ffv:FuelManagement a skos:Concept ;
+ffontov:FuelManagement a skos:Concept ;
     rdfs:label "Fuel management / prescribed burning"@en ;
-    skos:broader ffv:RestorationMeasure ;
-    skos:inScheme ffv:EcologyScheme ;
+    skos:broader ffontov:RestorationMeasure ;
+    skos:inScheme ffontov:EcologyScheme ;
     skos:prefLabel "Fuel management / prescribed burning"@en .
 
-ffv:Gray a skos:Concept ;
+ffontov:Gray a skos:Concept ;
     rdfs:label "Gray"@en ;
-    skos:broader ffv:Colour ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Colour ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Gray"@en .
 
-ffv:Grazing a skos:Concept ;
+ffontov:Grazing a skos:Concept ;
     rdfs:label "Grazing / forage"@en ;
-    skos:broader ffv:EcosystemService ;
-    skos:inScheme ffv:EcologyScheme ;
+    skos:broader ffontov:EcosystemService ;
+    skos:inScheme ffontov:EcologyScheme ;
     skos:prefLabel "Grazing / forage"@en .
 
-ffv:HeadOfFire a skos:Concept ;
+ffontov:HeadOfFire a skos:Concept ;
     rdfs:label "Head of fire"@en ;
-    skos:inScheme ffv:PositionScheme ;
+    skos:inScheme ffontov:PositionScheme ;
     skos:prefLabel "Head of fire"@en ;
-    skos:topConceptOf ffv:PositionScheme .
+    skos:topConceptOf ffontov:PositionScheme .
 
-ffv:HeatStressRisk a skos:Concept ;
+ffontov:HeatStressRisk a skos:Concept ;
     rdfs:label "Heat stress risk"@en ;
-    skos:inScheme ffv:ConditionScheme ;
+    skos:inScheme ffontov:ConditionScheme ;
     skos:prefLabel "Heat stress risk"@en ;
-    skos:topConceptOf ffv:ConditionScheme .
+    skos:topConceptOf ffontov:ConditionScheme .
 
-ffv:HoseLine a skos:Concept ;
+ffontov:HoseLine a skos:Concept ;
     rdfs:label "Hose line"@en ;
-    skos:broader ffv:EquipmentKind ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "hose"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Hose line"@en .
 
-ffv:ImprovedMopUpConditions a skos:Concept ;
+ffontov:ImprovedMopUpConditions a skos:Concept ;
     rdfs:label "Improved mop up conditions"@en ;
-    skos:inScheme ffv:ConditionScheme ;
+    skos:inScheme ffontov:ConditionScheme ;
     skos:prefLabel "Improved mop up conditions"@en ;
-    skos:topConceptOf ffv:ConditionScheme .
+    skos:topConceptOf ffontov:ConditionScheme .
 
-ffv:InstallErosionControl a skos:Concept ;
+ffontov:InstallErosionControl a skos:Concept ;
     rdfs:label "Install erosion control"@en ;
-    skos:inScheme ffv:ActionScheme ;
+    skos:inScheme ffontov:ActionScheme ;
     skos:prefLabel "Install erosion control"@en ;
-    skos:topConceptOf ffv:ActionScheme .
+    skos:topConceptOf ffontov:ActionScheme .
 
-ffv:InvasiveSpeciesControl a skos:Concept ;
+ffontov:InvasiveSpeciesControl a skos:Concept ;
     rdfs:label "Invasive species control"@en ;
-    skos:broader ffv:RestorationMeasure ;
-    skos:inScheme ffv:EcologyScheme ;
+    skos:broader ffontov:RestorationMeasure ;
+    skos:inScheme ffontov:EcologyScheme ;
     skos:prefLabel "Invasive species control"@en .
 
-ffv:LightsOn a skos:Concept ;
+ffontov:LightsOn a skos:Concept ;
     rdfs:label "Emergency lights on"@en ;
-    skos:broader ffv:OperationalState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:OperationalState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Emergency lights on"@en .
 
-ffv:MissingPPEHazard a skos:Concept ;
+ffontov:MissingPPEHazard a skos:Concept ;
     rdfs:label "Missing PPE"@en ;
-    ffonto:mitigatedBy ffv:WearFullPPE ;
-    skos:inScheme ffv:HazardScheme ;
+    ffonto:mitigatedBy ffontov:WearFullPPE ;
+    skos:inScheme ffontov:HazardScheme ;
     skos:prefLabel "Missing PPE"@en ;
-    skos:topConceptOf ffv:HazardScheme .
+    skos:topConceptOf ffontov:HazardScheme .
 
-ffv:Open a skos:Concept ;
+ffontov:Open a skos:Concept ;
     rdfs:label "Open"@en ;
-    skos:broader ffv:AccessState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:AccessState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Open"@en .
 
-ffv:PlumeDirection a skos:Concept ;
+ffontov:PlumeDirection a skos:Concept ;
     rdfs:label "Plume direction"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
     skos:prefLabel "Plume direction"@en ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
 
-ffv:PrivateCar a skos:Concept ;
+ffontov:PrivateCar a skos:Concept ;
     rdfs:label "Private car"@en ;
-    skos:broader ffv:GroundVehicle ;
+    skos:broader ffontov:GroundVehicle ;
     skos:hiddenLabel "car"@en,
         "pickup"@en,
         "suv"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Private car"@en .
 
-ffv:PropaneTank a skos:Concept ;
+ffontov:PropaneTank a skos:Concept ;
     rdfs:label "Propane tank"@en ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "gas cylinder"@en,
         "gas tank"@en,
         "propane"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Propane tank"@en .
 
-ffv:Pumping a skos:Concept ;
+ffontov:Pumping a skos:Concept ;
     rdfs:label "Pumping water"@en ;
-    skos:broader ffv:SuppressionActivity ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:SuppressionActivity ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Pumping water"@en .
 
-ffv:RapidFineFuelDrying a skos:Concept ;
+ffontov:RapidFineFuelDrying a skos:Concept ;
     rdfs:label "Rapid fine fuel drying"@en ;
-    skos:inScheme ffv:ConditionScheme ;
+    skos:inScheme ffontov:ConditionScheme ;
     skos:prefLabel "Rapid fine fuel drying"@en ;
-    skos:topConceptOf ffv:ConditionScheme .
+    skos:topConceptOf ffontov:ConditionScheme .
 
-ffv:RequestAerialSupport a skos:Concept ;
+ffontov:RequestAerialSupport a skos:Concept ;
     rdfs:label "Request aerial support"@en ;
-    skos:inScheme ffv:ActionScheme ;
+    skos:inScheme ffontov:ActionScheme ;
     skos:prefLabel "Request aerial support"@en ;
-    skos:topConceptOf ffv:ActionScheme .
+    skos:topConceptOf ffontov:ActionScheme .
 
-ffv:RiparianRestoration a skos:Concept ;
+ffontov:RiparianRestoration a skos:Concept ;
     rdfs:label "Riparian restoration"@en ;
-    skos:broader ffv:RestorationMeasure ;
-    skos:inScheme ffv:EcologyScheme ;
+    skos:broader ffontov:RestorationMeasure ;
+    skos:inScheme ffontov:EcologyScheme ;
     skos:prefLabel "Riparian restoration"@en .
 
-ffv:Road a skos:Concept ;
+ffontov:Road a skos:Concept ;
     rdfs:label "Road"@en ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "highway"@en,
         "road"@en,
         "street"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Road"@en .
 
-ffv:Scorched a skos:Concept ;
+ffontov:Scorched a skos:Concept ;
     rdfs:label "Scorched"@en ;
-    skos:broader ffv:DamageState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:DamageState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Scorched"@en .
 
-ffv:SmokePlume a skos:Concept ;
+ffontov:SmokePlume a skos:Concept ;
     rdfs:label "Smoke plume"@en ;
-    skos:broader ffv:FirePhenomenonKind ;
+    skos:broader ffontov:FirePhenomenonKind ;
     skos:hiddenLabel "billowing"@en,
         "plume"@en,
         "smoke column"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Smoke plume"@en .
 
-ffv:SoilNutrientLoss a skos:Concept ;
+ffontov:SoilNutrientLoss a skos:Concept ;
     rdfs:label "Soil nutrient loss"@en ;
-    skos:broader ffv:EcologicalImpact ;
-    skos:inScheme ffv:EcologyScheme ;
+    skos:broader ffontov:EcologicalImpact ;
+    skos:inScheme ffontov:EcologyScheme ;
     skos:prefLabel "Soil nutrient loss"@en .
 
-ffv:SpotFire a skos:Concept ;
+ffontov:SpotFire a skos:Concept ;
     rdfs:label "Spot fire"@en ;
-    skos:broader ffv:FirePhenomenonKind ;
+    skos:broader ffontov:FirePhenomenonKind ;
     skos:hiddenLabel "spot fire"@en,
         "spot fires"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Spot fire"@en .
 
-ffv:SpottingHazard a skos:Concept ;
+ffontov:SpottingHazard a skos:Concept ;
     rdfs:label "Spotting / ember cast"@en ;
-    ffonto:mitigatedBy ffv:MopUpAndPatrol,
-        ffv:PostLookouts ;
-    skos:inScheme ffv:HazardScheme ;
+    ffonto:mitigatedBy ffontov:MopUpAndPatrol,
+        ffontov:PostLookouts ;
+    skos:inScheme ffontov:HazardScheme ;
     skos:prefLabel "Spotting / ember cast"@en ;
-    skos:topConceptOf ffv:HazardScheme .
+    skos:topConceptOf ffontov:HazardScheme .
 
-ffv:StructureFireType a skos:Concept ;
+ffontov:StructureFireType a skos:Concept ;
     rdfs:label "Structure fire"@en ;
-    skos:broader ffv:FireTypeValue ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:FireTypeValue ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Structure fire"@en .
 
-ffv:StructureIgnitionRisk a skos:Concept ;
+ffontov:StructureIgnitionRisk a skos:Concept ;
     rdfs:label "Structure ignition risk"@en ;
-    ffonto:mitigatedBy ffv:DefensiveStrategy,
-        ffv:EvacuateImmediately ;
-    skos:inScheme ffv:HazardScheme ;
+    ffonto:mitigatedBy ffontov:DefensiveStrategy,
+        ffontov:EvacuateImmediately ;
+    skos:inScheme ffontov:HazardScheme ;
     skos:prefLabel "Structure ignition risk"@en ;
-    skos:topConceptOf ffv:HazardScheme .
+    skos:topConceptOf ffontov:HazardScheme .
 
-ffv:StructureProtection a skos:Concept ;
+ffontov:StructureProtection a skos:Concept ;
     rdfs:label "Structure protection"@en ;
-    skos:broader ffv:SuppressionActivity ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:SuppressionActivity ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Structure protection"@en .
 
-ffv:SurfaceFireType a skos:Concept ;
+ffontov:SurfaceFireType a skos:Concept ;
     rdfs:label "Surface/ground fire"@en ;
-    skos:broader ffv:FireTypeValue ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:FireTypeValue ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Surface/ground fire"@en .
 
-ffv:Threatened a skos:Concept ;
+ffontov:Threatened a skos:Concept ;
     rdfs:label "Threatened"@en ;
-    skos:broader ffv:FireState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:FireState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Threatened"@en .
 
-ffv:UseHeadlightsAndSlowDown a skos:Concept ;
+ffontov:UseHeadlightsAndSlowDown a skos:Concept ;
     rdfs:label "Use headlights and slow down"@en ;
-    skos:inScheme ffv:ActionScheme ;
+    skos:inScheme ffontov:ActionScheme ;
     skos:prefLabel "Use headlights and slow down"@en ;
-    skos:topConceptOf ffv:ActionScheme .
+    skos:topConceptOf ffontov:ActionScheme .
 
-ffv:WaterQualityDegradation a skos:Concept ;
+ffontov:WaterQualityDegradation a skos:Concept ;
     rdfs:label "Water quality degradation"@en ;
-    skos:broader ffv:EcologicalImpact ;
-    skos:inScheme ffv:EcologyScheme ;
+    skos:broader ffontov:EcologicalImpact ;
+    skos:inScheme ffontov:EcologyScheme ;
     skos:prefLabel "Water quality degradation"@en .
 
-ffv:WearRespirator a skos:Concept ;
+ffontov:WearRespirator a skos:Concept ;
     rdfs:label "Wear respirator / N95"@en ;
-    skos:inScheme ffv:ActionScheme ;
+    skos:inScheme ffontov:ActionScheme ;
     skos:prefLabel "Wear respirator / N95"@en ;
-    skos:topConceptOf ffv:ActionScheme .
+    skos:topConceptOf ffontov:ActionScheme .
 
 prov:Agent a owl:Class ;
     rdfs:label "Agent (PROV)"@en ;
@@ -3083,8 +3112,8 @@ ffonto:relativeHumidityPct a owl:DatatypeProperty ;
     ffonto:aboutEvent <http://purl.org/ffonto/data/event/ev-demo-081> ;
     ffonto:atSite <http://purl.org/ffonto/data/site/demo-site-a> ;
     ffonto:captureTime "2012-08-28T14:05:30+00:00"^^xsd:dateTime ;
-    ffonto:detectedClass ffv:Explosion,
-        ffv:Siren ;
+    ffonto:detectedClass ffontov:Explosion,
+        ffontov:Siren ;
     ffonto:deviceId "mic-01" ;
     ffonto:durationMs 9.6e+03 ;
     ffonto:fileURI "fixtures/forest_fire_081.wav" ;
@@ -3098,9 +3127,9 @@ ffonto:relativeHumidityPct a owl:DatatypeProperty ;
 <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/obs/0> a ffonto:ModelObservation ;
     ffonto:aboveThreshold false ;
     ffonto:confidence 1.585e-01 ;
-    ffonto:labelSource ffv:CaptionSource ;
-    ffonto:predictedClass ffv:Fire ;
-    ffonto:severity ffv:Low ;
+    ffonto:labelSource ffontov:CaptionSource ;
+    ffonto:predictedClass ffontov:Fire ;
+    ffonto:severity ffontov:Low ;
     ffonto:usedThreshold <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/threshold/Fire> ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823> .
@@ -3109,318 +3138,318 @@ ffonto:relativeHumidityPct a owl:DatatypeProperty ;
     ffonto:aboveThreshold true ;
     ffonto:confidence 7.337e-01 ;
     ffonto:labelCategory "fire_audio" ;
-    ffonto:labelSource ffv:AudioTaggerSource ;
+    ffonto:labelSource ffontov:AudioTaggerSource ;
     ffonto:maxConfidence 7.337e-01 ;
     ffonto:meanConfidence 7.337e-01 ;
-    ffonto:predictedClass ffv:Explosion ;
+    ffonto:predictedClass ffontov:Explosion ;
     ffonto:topKLabel "explosion" ;
     ffonto:usedThreshold <http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a/threshold/Explosion> ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/google-yamnet/1> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/7cd6773c-c37e-4acc-a594-20a8d0a5c74a> .
 
 <http://purl.org/ffonto/data/scene/scene-evodji-0001-frame12/e4> a ffonto:EnvironmentFeature ;
-    ffonto:hasKind ffv:Lake .
+    ffonto:hasKind ffontov:Lake .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/5> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:High ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:High ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
-    sosa:observedProperty ffv:FireIntensity .
+    sosa:observedProperty ffontov:FireIntensity .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/e10> a ffonto:Vehicle ;
     ffonto:count 1 ;
-    ffonto:hasKind ffv:FireEngine ;
-    ffonto:hasState ffv:LightsOn ;
-    ffonto:performs ffv:Pumping ;
+    ffonto:hasKind ffontov:FireEngine ;
+    ffonto:hasState ffontov:LightsOn ;
+    ffonto:performs ffontov:Pumping ;
     ffonto:protects <http://purl.org/ffonto/data/scene/scene-fixture-081/e4> ;
-    ffonto:relativePosition ffv:BetweenFireAndAsset .
+    ffonto:relativePosition ffontov:BetweenFireAndAsset .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/e11> a ffonto:FirePhenomenon ;
     ffonto:count 1 ;
-    ffonto:hasKind ffv:SpotFire ;
-    ffonto:relativePosition ffv:AheadOfFire .
+    ffonto:hasKind ffontov:SpotFire ;
+    ffonto:relativePosition ffontov:AheadOfFire .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/e6> a ffonto:BuiltAsset ;
     ffonto:count 1 ;
-    ffonto:hasKind ffv:PropaneTank ;
+    ffonto:hasKind ffontov:PropaneTank ;
     ffonto:near <http://purl.org/ffonto/data/scene/scene-fixture-081/e5> .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/e7> a ffonto:BuiltAsset ;
-    ffonto:hasKind ffv:Road ;
-    ffonto:hasState ffv:Open .
+    ffonto:hasKind ffontov:Road ;
+    ffonto:hasState ffontov:Open .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/e8> a ffonto:Vehicle ;
     ffonto:count 1 ;
-    ffonto:hasKind ffv:PrivateCar ;
+    ffonto:hasKind ffontov:PrivateCar ;
     ffonto:near <http://purl.org/ffonto/data/scene/scene-fixture-081/e5> .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/e9> a ffonto:EnvironmentFeature ;
-    ffonto:hasKind ffv:ConiferousForest ;
-    ffonto:hasState ffv:Dry .
+    ffonto:hasKind ffontov:ConiferousForest ;
+    ffonto:hasState ffontov:Dry .
 
 <http://purl.org/ffonto/data/site/demo-site-a/grid-2-2> a ffonto:Site ;
     ffonto:gridX 2 ;
     ffonto:gridY 2 ;
     ffonto:siteName "demo_site_A (grid 2,2)" .
 
-ffv:AgentKind a skos:Concept ;
+ffontov:AgentKind a skos:Concept ;
     rdfs:label "Agent (kind)"@en ;
     rdfs:seeAlso ffonto:Agent ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Agent (kind)"@en ;
-    skos:topConceptOf ffv:EntityKindScheme .
+    skos:topConceptOf ffontov:EntityKindScheme .
 
-ffv:BetweenFireAndAsset a skos:Concept ;
+ffontov:BetweenFireAndAsset a skos:Concept ;
     rdfs:label "Between fire and asset"@en ;
-    skos:inScheme ffv:PositionScheme ;
+    skos:inScheme ffontov:PositionScheme ;
     skos:prefLabel "Between fire and asset"@en ;
-    skos:topConceptOf ffv:PositionScheme .
+    skos:topConceptOf ffontov:PositionScheme .
 
-ffv:CaptionScoreConflict a skos:Concept ;
+ffontov:CaptionScoreConflict a skos:Concept ;
     rdfs:label "Caption mentions a class the classifier scored below threshold"@en ;
-    skos:inScheme ffv:ConflictScheme ;
+    skos:inScheme ffontov:ConflictScheme ;
     skos:prefLabel "Caption mentions a class the classifier scored below threshold"@en ;
-    skos:topConceptOf ffv:ConflictScheme .
+    skos:topConceptOf ffontov:ConflictScheme .
 
-ffv:CarbonRelease a skos:Concept ;
+ffontov:CarbonRelease a skos:Concept ;
     rdfs:label "Carbon release"@en ;
-    skos:broader ffv:EcologicalImpact ;
-    skos:inScheme ffv:EcologyScheme ;
+    skos:broader ffontov:EcologicalImpact ;
+    skos:inScheme ffontov:EcologyScheme ;
     skos:prefLabel "Carbon release"@en .
 
-ffv:Daytime a skos:Concept ;
+ffontov:Daytime a skos:Concept ;
     rdfs:label "Daytime"@en ;
-    skos:broader ffv:Light ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Light ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Daytime"@en .
 
-ffv:Dry a skos:Concept ;
+ffontov:Dry a skos:Concept ;
     rdfs:label "Dry"@en ;
-    skos:broader ffv:VegetationState ;
-    skos:inScheme ffv:StateScheme ;
+    skos:broader ffontov:VegetationState ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Dry"@en .
 
-ffv:ElevatedFireDanger a skos:Concept ;
+ffontov:ElevatedFireDanger a skos:Concept ;
     rdfs:label "Elevated fire danger"@en ;
-    skos:inScheme ffv:ConditionScheme ;
+    skos:inScheme ffontov:ConditionScheme ;
     skos:prefLabel "Elevated fire danger"@en ;
-    skos:topConceptOf ffv:ConditionScheme .
+    skos:topConceptOf ffontov:ConditionScheme .
 
-ffv:ErosionControl a skos:Concept ;
+ffontov:ErosionControl a skos:Concept ;
     rdfs:label "Erosion control (mulch, wattles)"@en ;
-    skos:broader ffv:RestorationMeasure ;
-    skos:inScheme ffv:EcologyScheme ;
+    skos:broader ffontov:RestorationMeasure ;
+    skos:inScheme ffontov:EcologyScheme ;
     skos:prefLabel "Erosion control (mulch, wattles)"@en .
 
-ffv:EvacuateImmediately a skos:Concept ;
+ffontov:EvacuateImmediately a skos:Concept ;
     rdfs:label "Evacuate immediately"@en ;
-    skos:inScheme ffv:ActionScheme ;
+    skos:inScheme ffontov:ActionScheme ;
     skos:prefLabel "Evacuate immediately"@en ;
-    skos:topConceptOf ffv:ActionScheme .
+    skos:topConceptOf ffontov:ActionScheme .
 
-ffv:EyeProtection a skos:Concept ;
+ffontov:EyeProtection a skos:Concept ;
     rdfs:label "Goggles / face shield"@en ;
     skos:hiddenLabel "face shield"@en,
         "goggles"@en ;
-    skos:inScheme ffv:PPEScheme ;
+    skos:inScheme ffontov:PPEScheme ;
     skos:prefLabel "Goggles / face shield"@en ;
-    skos:topConceptOf ffv:PPEScheme .
+    skos:topConceptOf ffontov:PPEScheme .
 
-ffv:FireEngine a skos:Concept ;
+ffontov:FireEngine a skos:Concept ;
     rdfs:label "Fire engine"@en ;
-    skos:broader ffv:GroundVehicle ;
+    skos:broader ffontov:GroundVehicle ;
     skos:hiddenLabel "fire engine"@en,
         "fire truck"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Fire engine"@en .
 
-ffv:FireIntensity a skos:Concept ;
+ffontov:FireIntensity a skos:Concept ;
     rdfs:label "Fire intensity"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
     skos:prefLabel "Fire intensity"@en ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
 
-ffv:FireSound a skos:Concept ;
+ffontov:FireSound a skos:Concept ;
     rdfs:label "Fire-related sound"@en ;
-    skos:inScheme ffv:SoundEventScheme ;
+    skos:inScheme ffontov:SoundEventScheme ;
     skos:prefLabel "Fire-related sound"@en ;
-    skos:topConceptOf ffv:SoundEventScheme .
+    skos:topConceptOf ffontov:SoundEventScheme .
 
-ffv:FireType a skos:Concept ;
+ffontov:FireType a skos:Concept ;
     rdfs:label "Fire type"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
     skos:prefLabel "Fire type"@en ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
 
-ffv:FlameFront a skos:Concept ;
+ffontov:FlameFront a skos:Concept ;
     rdfs:label "Flame front"@en ;
-    skos:broader ffv:FirePhenomenonKind ;
+    skos:broader ffontov:FirePhenomenonKind ;
     skos:hiddenLabel "fire front"@en,
         "fire line"@en,
         "flame front"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Flame front"@en .
 
-ffv:FlameProximity a skos:Concept ;
+ffontov:FlameProximity a skos:Concept ;
     rdfs:label "Flame proximity to people"@en ;
-    ffonto:mitigatedBy ffv:PostLookouts,
-        ffv:WearFullPPE,
-        ffv:WithdrawToSafetyZone ;
-    skos:inScheme ffv:HazardScheme ;
+    ffonto:mitigatedBy ffontov:PostLookouts,
+        ffontov:WearFullPPE,
+        ffontov:WithdrawToSafetyZone ;
+    skos:inScheme ffontov:HazardScheme ;
     skos:prefLabel "Flame proximity to people"@en ;
-    skos:topConceptOf ffv:HazardScheme .
+    skos:topConceptOf ffontov:HazardScheme .
 
-ffv:Gloves a skos:Concept ;
+ffontov:Gloves a skos:Concept ;
     rdfs:label "Gloves"@en ;
     skos:hiddenLabel "gloves"@en ;
-    skos:inScheme ffv:PPEScheme ;
+    skos:inScheme ffontov:PPEScheme ;
     skos:prefLabel "Gloves"@en ;
-    skos:topConceptOf ffv:PPEScheme .
+    skos:topConceptOf ffontov:PPEScheme .
 
-ffv:House a skos:Concept ;
+ffontov:House a skos:Concept ;
     rdfs:label "House"@en ;
-    skos:broader ffv:Building ;
+    skos:broader ffontov:Building ;
     skos:hiddenLabel "home"@en,
         "house"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "House"@en .
 
-ffv:InvasiveSpeciesSpread a skos:Concept ;
+ffontov:InvasiveSpeciesSpread a skos:Concept ;
     rdfs:label "Invasive species spread"@en ;
-    skos:broader ffv:EcologicalImpact ;
-    skos:inScheme ffv:EcologyScheme ;
+    skos:broader ffontov:EcologicalImpact ;
+    skos:inScheme ffontov:EcologyScheme ;
     skos:prefLabel "Invasive species spread"@en .
 
-ffv:Lake a skos:Concept ;
+ffontov:Lake a skos:Concept ;
     rdfs:label "Lake"@en ;
-    skos:broader ffv:WaterBody ;
+    skos:broader ffontov:WaterBody ;
     skos:hiddenLabel "lake"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Lake"@en .
 
-ffv:LightCondition a skos:Concept ;
+ffontov:LightCondition a skos:Concept ;
     rdfs:label "Light condition"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
     skos:prefLabel "Light condition"@en ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
 
-ffv:Low a skos:Concept ;
+ffontov:Low a skos:Concept ;
     rdfs:label "Low"@en ;
-    skos:broader ffv:Level ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Level ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Low"@en .
 
-ffv:MopUpAndPatrol a skos:Concept ;
+ffontov:MopUpAndPatrol a skos:Concept ;
     rdfs:label "Mop up and patrol"@en ;
-    skos:inScheme ffv:ActionScheme ;
+    skos:inScheme ffontov:ActionScheme ;
     skos:prefLabel "Mop up and patrol"@en ;
-    skos:topConceptOf ffv:ActionScheme .
+    skos:topConceptOf ffontov:ActionScheme .
 
-ffv:NoFire a skos:Concept ;
+ffontov:NoFire a skos:Concept ;
     rdfs:label "No fire"@en ;
     skos:hiddenLabel "no fire"@en ;
-    skos:inScheme ffv:DetectionClassScheme ;
+    skos:inScheme ffontov:DetectionClassScheme ;
     skos:prefLabel "No fire"@en ;
-    skos:topConceptOf ffv:DetectionClassScheme .
+    skos:topConceptOf ffontov:DetectionClassScheme .
 
-ffv:NutrientRecycling a skos:Concept ;
+ffontov:NutrientRecycling a skos:Concept ;
     rdfs:label "Nutrient recycling (beneficial)"@en ;
-    skos:broader ffv:EcologicalImpact ;
-    skos:inScheme ffv:EcologyScheme ;
+    skos:broader ffontov:EcologicalImpact ;
+    skos:inScheme ffontov:EcologyScheme ;
     skos:prefLabel "Nutrient recycling (beneficial)"@en .
 
-ffv:PostLookouts a skos:Concept ;
+ffontov:PostLookouts a skos:Concept ;
     rdfs:label "Post lookouts (LCES)"@en ;
-    skos:inScheme ffv:ActionScheme ;
+    skos:inScheme ffontov:ActionScheme ;
     skos:prefLabel "Post lookouts (LCES)"@en ;
-    skos:topConceptOf ffv:ActionScheme .
+    skos:topConceptOf ffontov:ActionScheme .
 
-ffv:Purpose a skos:Concept ;
+ffontov:Purpose a skos:Concept ;
     rdfs:label "Purpose"@en ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Purpose"@en ;
-    skos:topConceptOf ffv:ValueScheme .
+    skos:topConceptOf ffontov:ValueScheme .
 
-ffv:Reseeding a skos:Concept ;
+ffontov:Reseeding a skos:Concept ;
     rdfs:label "Native grass reseeding"@en ;
-    skos:broader ffv:RestorationMeasure ;
-    skos:inScheme ffv:EcologyScheme ;
+    skos:broader ffontov:RestorationMeasure ;
+    skos:inScheme ffontov:EcologyScheme ;
     skos:prefLabel "Native grass reseeding"@en .
 
-ffv:RespiratoryHazard a skos:Concept ;
+ffontov:RespiratoryHazard a skos:Concept ;
     rdfs:label "Respiratory hazard"@en ;
-    ffonto:mitigatedBy ffv:ShelterInPlace,
-        ffv:WearRespirator ;
-    skos:inScheme ffv:HazardScheme ;
+    ffonto:mitigatedBy ffontov:ShelterInPlace,
+        ffontov:WearRespirator ;
+    skos:inScheme ffontov:HazardScheme ;
     skos:prefLabel "Respiratory hazard"@en ;
-    skos:topConceptOf ffv:HazardScheme .
+    skos:topConceptOf ffontov:HazardScheme .
 
-ffv:ScenePurpose a skos:Concept ;
+ffontov:ScenePurpose a skos:Concept ;
     rdfs:label "Fire purpose (wildfire vs prescribed)"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
     skos:prefLabel "Fire purpose (wildfire vs prescribed)"@en ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
 
-ffv:SeedReleaseAndRegeneration a skos:Concept ;
+ffontov:SeedReleaseAndRegeneration a skos:Concept ;
     rdfs:label "Seed release / regeneration (beneficial)"@en ;
-    skos:broader ffv:EcologicalImpact ;
-    skos:inScheme ffv:EcologyScheme ;
+    skos:broader ffontov:EcologicalImpact ;
+    skos:inScheme ffontov:EcologyScheme ;
     skos:prefLabel "Seed release / regeneration (beneficial)"@en .
 
-ffv:ShelterInPlace a skos:Concept ;
+ffontov:ShelterInPlace a skos:Concept ;
     rdfs:label "Shelter in place"@en ;
-    skos:inScheme ffv:ActionScheme ;
+    skos:inScheme ffontov:ActionScheme ;
     skos:prefLabel "Shelter in place"@en ;
-    skos:topConceptOf ffv:ActionScheme .
+    skos:topConceptOf ffontov:ActionScheme .
 
-ffv:SmokeColour a skos:Concept ;
+ffontov:SmokeColour a skos:Concept ;
     rdfs:label "Smoke colour"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
     skos:prefLabel "Smoke colour"@en ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
 
-ffv:SmokeDensity a skos:Concept ;
+ffontov:SmokeDensity a skos:Concept ;
     rdfs:label "Smoke density"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
     skos:prefLabel "Smoke density"@en ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
 
-ffv:SoilProtection a skos:Concept ;
+ffontov:SoilProtection a skos:Concept ;
     rdfs:label "Soil protection"@en ;
-    skos:broader ffv:EcosystemService ;
-    skos:inScheme ffv:EcologyScheme ;
+    skos:broader ffontov:EcosystemService ;
+    skos:inScheme ffontov:EcologyScheme ;
     skos:prefLabel "Soil protection"@en .
 
-ffv:VehicleKind a skos:Concept ;
+ffontov:VehicleKind a skos:Concept ;
     rdfs:label "Vehicle (kind)"@en ;
     rdfs:seeAlso ffonto:Vehicle ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Vehicle (kind)"@en ;
-    skos:topConceptOf ffv:EntityKindScheme .
+    skos:topConceptOf ffontov:EntityKindScheme .
 
-ffv:VisibilityLevel a skos:Concept ;
+ffontov:VisibilityLevel a skos:Concept ;
     rdfs:label "Visibility level"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
     skos:prefLabel "Visibility level"@en ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
 
-ffv:WaterRegulation a skos:Concept ;
+ffontov:WaterRegulation a skos:Concept ;
     rdfs:label "Water regulation"@en ;
-    skos:broader ffv:EcosystemService ;
-    skos:inScheme ffv:EcologyScheme ;
+    skos:broader ffontov:EcosystemService ;
+    skos:inScheme ffontov:EcologyScheme ;
     skos:prefLabel "Water regulation"@en .
 
-ffv:WearFullPPE a skos:Concept ;
+ffontov:WearFullPPE a skos:Concept ;
     rdfs:label "Wear full PPE"@en ;
-    skos:inScheme ffv:ActionScheme ;
+    skos:inScheme ffontov:ActionScheme ;
     skos:prefLabel "Wear full PPE"@en ;
-    skos:topConceptOf ffv:ActionScheme .
+    skos:topConceptOf ffontov:ActionScheme .
 
-ffv:Wildfire a skos:Concept ;
+ffontov:Wildfire a skos:Concept ;
     rdfs:label "Wildfire"@en ;
-    skos:broader ffv:Purpose ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Purpose ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Wildfire"@en .
 
 sosa:Sensor a owl:Class ;
@@ -3449,9 +3478,9 @@ ffonto:Equipment a owl:Class ;
 <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/obs/0> a ffonto:ModelObservation ;
     ffonto:aboveThreshold false ;
     ffonto:confidence 4.1e-01 ;
-    ffonto:labelSource ffv:ZeroShotSource ;
-    ffonto:predictedClass ffv:Fire ;
-    ffonto:severity ffv:Medium ;
+    ffonto:labelSource ffontov:ZeroShotSource ;
+    ffonto:predictedClass ffontov:Fire ;
+    ffonto:severity ffontov:Medium ;
     ffonto:usedThreshold <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/threshold/Fire> ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/openai-clip-vit-large-patch14/hf> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> .
@@ -3460,10 +3489,10 @@ ffonto:Equipment a owl:Class ;
     ffonto:aboveThreshold true ;
     ffonto:confidence 8.1e-01 ;
     ffonto:labelCategory "fire_audio" ;
-    ffonto:labelSource ffv:AudioTaggerSource ;
+    ffonto:labelSource ffontov:AudioTaggerSource ;
     ffonto:maxConfidence 8.8e-01 ;
     ffonto:meanConfidence 8.1e-01 ;
-    ffonto:predictedClass ffv:Explosion ;
+    ffonto:predictedClass ffontov:Explosion ;
     ffonto:topKLabel "crackle",
         "explosion" ;
     ffonto:usedThreshold <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081/threshold/Explosion> ;
@@ -3471,217 +3500,217 @@ ffonto:Equipment a owl:Class ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-0000000a0081> .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/1> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:High ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:High ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
-    sosa:observedProperty ffv:SmokeDensity .
+    sosa:observedProperty ffontov:SmokeDensity .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/e1> a ffonto:Agent ;
     ffonto:count 2 ;
-    ffonto:hasKind ffv:Firefighter ;
+    ffonto:hasKind ffontov:Firefighter ;
     ffonto:near <http://purl.org/ffonto/data/scene/scene-fixture-081/e5> ;
-    ffonto:performs ffv:ApplyingWater,
-        ffv:StructureProtection ;
-    ffonto:relativePosition ffv:BetweenFireAndAsset ;
-    ffonto:wears ffv:EyeProtection,
-        ffv:FireResistantClothing,
-        ffv:Gloves,
-        ffv:Helmet .
+    ffonto:performs ffontov:ApplyingWater,
+        ffontov:StructureProtection ;
+    ffonto:relativePosition ffontov:BetweenFireAndAsset ;
+    ffonto:wears ffontov:EyeProtection,
+        ffontov:FireResistantClothing,
+        ffontov:Gloves,
+        ffontov:Helmet .
 
-ffv:Aircraft a skos:Concept ;
+ffontov:Aircraft a skos:Concept ;
     rdfs:label "Aircraft"@en ;
-    skos:broader ffv:VehicleKind ;
+    skos:broader ffontov:VehicleKind ;
     skos:hiddenLabel "aircraft"@en,
         "plane"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Aircraft"@en .
 
-ffv:Animal a skos:Concept ;
+ffontov:Animal a skos:Concept ;
     rdfs:label "Animal"@en ;
-    skos:broader ffv:AgentKind ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:broader ffontov:AgentKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Animal"@en .
 
-ffv:AudioTaggerSource a skos:Concept ;
+ffontov:AudioTaggerSource a skos:Concept ;
     rdfs:label "Audio tagger"@en ;
     skos:hiddenLabel "audio"@en ;
-    skos:inScheme ffv:LabelSourceScheme ;
+    skos:inScheme ffontov:LabelSourceScheme ;
     skos:prefLabel "Audio tagger"@en ;
-    skos:topConceptOf ffv:LabelSourceScheme .
+    skos:topConceptOf ffontov:LabelSourceScheme .
 
-ffv:CarbonStorage a skos:Concept ;
+ffontov:CarbonStorage a skos:Concept ;
     rdfs:label "Carbon storage"@en ;
-    skos:broader ffv:EcosystemService ;
-    skos:inScheme ffv:EcologyScheme ;
+    skos:broader ffontov:EcosystemService ;
+    skos:inScheme ffontov:EcologyScheme ;
     skos:prefLabel "Carbon storage"@en .
 
-ffv:CloseRoad a skos:Concept ;
+ffontov:CloseRoad a skos:Concept ;
     rdfs:label "Close road / control traffic"@en ;
-    skos:inScheme ffv:ActionScheme ;
+    skos:inScheme ffontov:ActionScheme ;
     skos:prefLabel "Close road / control traffic"@en ;
-    skos:topConceptOf ffv:ActionScheme .
+    skos:topConceptOf ffontov:ActionScheme .
 
-ffv:ConiferousForest a skos:Concept ;
+ffontov:ConiferousForest a skos:Concept ;
     rdfs:label "Coniferous forest"@en ;
-    ffonto:providesService ffv:CarbonStorage,
-        ffv:HabitatProvision,
-        ffv:WaterRegulation ;
-    ffonto:suggestedRestoration ffv:ErosionControl,
-        ffv:NaturalRegenerationMonitoring,
-        ffv:Reforestation ;
-    ffonto:typicalFireImpact ffv:CarbonRelease,
-        ffv:HabitatLoss,
-        ffv:SeedReleaseAndRegeneration,
-        ffv:SoilErosion,
-        ffv:TreeMortality ;
-    skos:broader ffv:Forest ;
+    ffonto:providesService ffontov:CarbonStorage,
+        ffontov:HabitatProvision,
+        ffontov:WaterRegulation ;
+    ffonto:suggestedRestoration ffontov:ErosionControl,
+        ffontov:NaturalRegenerationMonitoring,
+        ffontov:Reforestation ;
+    ffonto:typicalFireImpact ffontov:CarbonRelease,
+        ffontov:HabitatLoss,
+        ffontov:SeedReleaseAndRegeneration,
+        ffontov:SoilErosion,
+        ffontov:TreeMortality ;
+    skos:broader ffontov:Forest ;
     skos:hiddenLabel "conifer"@en,
         "fir"@en,
         "pine"@en,
         "spruce"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Coniferous forest"@en .
 
-ffv:Distribution a skos:Concept ;
+ffontov:Distribution a skos:Concept ;
     rdfs:label "Distribution"@en ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Distribution"@en ;
-    skos:topConceptOf ffv:ValueScheme .
+    skos:topConceptOf ffontov:ValueScheme .
 
-ffv:ExplosionHazard a skos:Concept ;
+ffontov:ExplosionHazard a skos:Concept ;
     rdfs:label "Explosion hazard"@en ;
-    ffonto:mitigatedBy ffv:CoolAndIsolateTank,
-        ffv:WithdrawToSafetyZone ;
-    skos:inScheme ffv:HazardScheme ;
+    ffonto:mitigatedBy ffontov:CoolAndIsolateTank,
+        ffontov:WithdrawToSafetyZone ;
+    skos:inScheme ffontov:HazardScheme ;
     skos:prefLabel "Explosion hazard"@en ;
-    skos:topConceptOf ffv:HazardScheme .
+    skos:topConceptOf ffontov:HazardScheme .
 
-ffv:FavourDirectAttack a skos:Concept ;
+ffontov:FavourDirectAttack a skos:Concept ;
     rdfs:label "Favour direct attack"@en ;
-    skos:inScheme ffv:ConditionScheme ;
+    skos:inScheme ffontov:ConditionScheme ;
     skos:prefLabel "Favour direct attack"@en ;
-    skos:topConceptOf ffv:ConditionScheme .
+    skos:topConceptOf ffontov:ConditionScheme .
 
-ffv:FireResistantClothing a skos:Concept ;
+ffontov:FireResistantClothing a skos:Concept ;
     rdfs:label "Fire-resistant clothing (Nomex)"@en ;
     skos:hiddenLabel "fire-resistant"@en,
         "nomex"@en,
         "turnout"@en ;
-    skos:inScheme ffv:PPEScheme ;
+    skos:inScheme ffontov:PPEScheme ;
     skos:prefLabel "Fire-resistant clothing (Nomex)"@en ;
-    skos:topConceptOf ffv:PPEScheme .
+    skos:topConceptOf ffontov:PPEScheme .
 
-ffv:FireState a skos:Concept ;
+ffontov:FireState a skos:Concept ;
     rdfs:label "Fire involvement"@en ;
-    skos:inScheme ffv:StateScheme ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Fire involvement"@en ;
-    skos:topConceptOf ffv:StateScheme .
+    skos:topConceptOf ffontov:StateScheme .
 
-ffv:Firefighter a skos:Concept ;
+ffontov:Firefighter a skos:Concept ;
     rdfs:label "Firefighter"@en ;
-    ffonto:requiredPPE ffv:EyeProtection,
-        ffv:FireResistantClothing,
-        ffv:Gloves,
-        ffv:Helmet ;
-    skos:broader ffv:Person ;
+    ffonto:requiredPPE ffontov:EyeProtection,
+        ffontov:FireResistantClothing,
+        ffontov:Gloves,
+        ffontov:Helmet ;
+    skos:broader ffontov:Person ;
     skos:hiddenLabel "crew"@en,
         "firefighter"@en,
         "firefighters"@en,
         "fireman"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Firefighter"@en .
 
-ffv:Helmet a skos:Concept ;
+ffontov:Helmet a skos:Concept ;
     rdfs:label "Helmet"@en ;
     skos:hiddenLabel "hard hat"@en,
         "helmet"@en ;
-    skos:inScheme ffv:PPEScheme ;
+    skos:inScheme ffontov:PPEScheme ;
     skos:prefLabel "Helmet"@en ;
-    skos:topConceptOf ffv:PPEScheme .
+    skos:topConceptOf ffontov:PPEScheme .
 
-ffv:High a skos:Concept ;
+ffontov:High a skos:Concept ;
     rdfs:label "High"@en ;
-    skos:broader ffv:Level ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Level ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "High"@en .
 
-ffv:Light a skos:Concept ;
+ffontov:Light a skos:Concept ;
     rdfs:label "Light"@en ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Light"@en ;
-    skos:topConceptOf ffv:ValueScheme .
+    skos:topConceptOf ffontov:ValueScheme .
 
-ffv:Medium a skos:Concept ;
+ffontov:Medium a skos:Concept ;
     rdfs:label "Medium"@en ;
-    skos:broader ffv:Level ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:broader ffontov:Level ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Medium"@en .
 
-ffv:NaturalRegenerationMonitoring a skos:Concept ;
+ffontov:NaturalRegenerationMonitoring a skos:Concept ;
     rdfs:label "Natural regeneration monitoring"@en ;
-    skos:broader ffv:RestorationMeasure ;
-    skos:inScheme ffv:EcologyScheme ;
+    skos:broader ffontov:RestorationMeasure ;
+    skos:inScheme ffontov:EcologyScheme ;
     skos:prefLabel "Natural regeneration monitoring"@en .
 
-ffv:PersistentCombustion a skos:Concept ;
+ffontov:PersistentCombustion a skos:Concept ;
     rdfs:label "Persistent smouldering likely"@en ;
-    skos:inScheme ffv:ConditionScheme ;
+    skos:inScheme ffontov:ConditionScheme ;
     skos:prefLabel "Persistent smouldering likely"@en ;
-    skos:topConceptOf ffv:ConditionScheme .
+    skos:topConceptOf ffontov:ConditionScheme .
 
-ffv:Reforestation a skos:Concept ;
+ffontov:Reforestation a skos:Concept ;
     rdfs:label "Replanting / reforestation"@en ;
-    skos:broader ffv:RestorationMeasure ;
-    skos:inScheme ffv:EcologyScheme ;
+    skos:broader ffontov:RestorationMeasure ;
+    skos:inScheme ffontov:EcologyScheme ;
     skos:prefLabel "Replanting / reforestation"@en .
 
-ffv:Responder a skos:Concept ;
+ffontov:Responder a skos:Concept ;
     rdfs:label "Responder"@en ;
-    skos:broader ffv:Person ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:broader ffontov:Person ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Responder"@en .
 
-ffv:Siren a skos:Concept ;
+ffontov:Siren a skos:Concept ;
     rdfs:label "Siren"@en ;
     skos:hiddenLabel "emergency vehicle"@en,
         "fire engine, fire truck (siren)"@en,
         "siren"@en ;
-    skos:inScheme ffv:SoundEventScheme ;
+    skos:inScheme ffontov:SoundEventScheme ;
     skos:prefLabel "Siren"@en ;
-    skos:topConceptOf ffv:SoundEventScheme .
+    skos:topConceptOf ffontov:SoundEventScheme .
 
-ffv:SmokeVisibilityHazard a skos:Concept ;
+ffontov:SmokeVisibilityHazard a skos:Concept ;
     rdfs:label "Smoke visibility hazard (roads/aviation)"@en ;
-    ffonto:mitigatedBy ffv:CloseRoad,
-        ffv:UseHeadlightsAndSlowDown ;
-    skos:inScheme ffv:HazardScheme ;
+    ffonto:mitigatedBy ffontov:CloseRoad,
+        ffontov:UseHeadlightsAndSlowDown ;
+    skos:inScheme ffontov:HazardScheme ;
     skos:prefLabel "Smoke visibility hazard (roads/aviation)"@en ;
-    skos:topConceptOf ffv:HazardScheme .
+    skos:topConceptOf ffontov:HazardScheme .
 
-ffv:SoilErosion a skos:Concept ;
+ffontov:SoilErosion a skos:Concept ;
     rdfs:label "Soil erosion"@en ;
-    skos:broader ffv:EcologicalImpact ;
-    skos:inScheme ffv:EcologyScheme ;
+    skos:broader ffontov:EcologicalImpact ;
+    skos:inScheme ffontov:EcologyScheme ;
     skos:prefLabel "Soil erosion"@en .
 
-ffv:TrafficControlDevice a skos:Concept ;
+ffontov:TrafficControlDevice a skos:Concept ;
     rdfs:label "Traffic control device"@en ;
-    skos:broader ffv:EquipmentKind ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:broader ffontov:EquipmentKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Traffic control device"@en .
 
-ffv:TreeMortality a skos:Concept ;
+ffontov:TreeMortality a skos:Concept ;
     rdfs:label "Tree mortality"@en ;
-    skos:broader ffv:EcologicalImpact ;
-    skos:inScheme ffv:EcologyScheme ;
+    skos:broader ffontov:EcologicalImpact ;
+    skos:inScheme ffontov:EcologyScheme ;
     skos:prefLabel "Tree mortality"@en .
 
-ffv:WithdrawToSafetyZone a skos:Concept ;
+ffontov:WithdrawToSafetyZone a skos:Concept ;
     rdfs:label "Withdraw to safety zone"@en ;
-    skos:inScheme ffv:ActionScheme ;
+    skos:inScheme ffontov:ActionScheme ;
     skos:prefLabel "Withdraw to safety zone"@en ;
-    skos:topConceptOf ffv:ActionScheme .
+    skos:topConceptOf ffontov:ActionScheme .
 
 sosa:FeatureOfInterest a owl:Class ;
     rdfs:label "Feature of interest"@en ;
@@ -3694,59 +3723,59 @@ ffonto:Vehicle a owl:Class ;
     rdfs:subClassOf ffonto:SceneEntity .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/attr/2> a ffonto:ModelObservation ;
-    ffonto:hasValueConcept ffv:Low ;
-    ffonto:labelSource ffv:VLMSource ;
+    ffonto:hasValueConcept ffontov:Low ;
+    ffonto:labelSource ffontov:VLMSource ;
     prov:wasAttributedTo <http://purl.org/ffonto/data/model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0> ;
     sosa:hasFeatureOfInterest <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> ;
-    sosa:observedProperty ffv:VisibilityLevel .
+    sosa:observedProperty ffontov:VisibilityLevel .
 
-ffv:AccessState a skos:Concept ;
+ffontov:AccessState a skos:Concept ;
     rdfs:label "Access state"@en ;
-    skos:inScheme ffv:StateScheme ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Access state"@en ;
-    skos:topConceptOf ffv:StateScheme .
+    skos:topConceptOf ffontov:StateScheme .
 
-ffv:AerialSuppression a skos:Concept ;
+ffontov:AerialSuppression a skos:Concept ;
     rdfs:label "Aerial suppression"@en ;
-    skos:broader ffv:SuppressionActivity ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:SuppressionActivity ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Aerial suppression"@en .
 
-ffv:DirectAttack a skos:Concept ;
+ffontov:DirectAttack a skos:Concept ;
     rdfs:label "Direct attack"@en ;
-    skos:broader ffv:SuppressionActivity ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:SuppressionActivity ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Direct attack"@en .
 
-ffv:HabitatLoss a skos:Concept ;
+ffontov:HabitatLoss a skos:Concept ;
     rdfs:label "Habitat loss"@en ;
-    skos:broader ffv:EcologicalImpact ;
-    skos:inScheme ffv:EcologyScheme ;
+    skos:broader ffontov:EcologicalImpact ;
+    skos:inScheme ffontov:EcologyScheme ;
     skos:prefLabel "Habitat loss"@en .
 
-ffv:HabitatProvision a skos:Concept ;
+ffontov:HabitatProvision a skos:Concept ;
     rdfs:label "Habitat provision"@en ;
-    skos:broader ffv:EcosystemService ;
-    skos:inScheme ffv:EcologyScheme ;
+    skos:broader ffontov:EcosystemService ;
+    skos:inScheme ffontov:EcologyScheme ;
     skos:prefLabel "Habitat provision"@en .
 
-ffv:IndirectAttack a skos:Concept ;
+ffontov:IndirectAttack a skos:Concept ;
     rdfs:label "Indirect attack"@en ;
-    skos:broader ffv:SuppressionActivity ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:broader ffontov:SuppressionActivity ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Indirect attack"@en .
 
-ffv:Level a skos:Concept ;
+ffontov:Level a skos:Concept ;
     rdfs:label "Level"@en ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Level"@en ;
-    skos:topConceptOf ffv:ValueScheme .
+    skos:topConceptOf ffontov:ValueScheme .
 
-ffv:RapidFineFuelSpread a skos:Concept ;
+ffontov:RapidFineFuelSpread a skos:Concept ;
     rdfs:label "Rapid fine-fuel spread (favour indirect attack)"@en ;
-    skos:inScheme ffv:ConditionScheme ;
+    skos:inScheme ffontov:ConditionScheme ;
     skos:prefLabel "Rapid fine-fuel spread (favour indirect attack)"@en ;
-    skos:topConceptOf ffv:ConditionScheme .
+    skos:topConceptOf ffontov:ConditionScheme .
 
 ffonto:Agent a owl:Class ;
     rdfs:label "Agent (person or animal)"@en ;
@@ -3782,72 +3811,72 @@ ffonto:spatiallyRelated a owl:ObjectProperty ;
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/e2> a ffonto:Agent ;
     ffonto:count 1 ;
-    ffonto:hasKind ffv:Firefighter ;
+    ffonto:hasKind ffontov:Firefighter ;
     ffonto:near <http://purl.org/ffonto/data/scene/scene-fixture-081/e5> ;
-    ffonto:performs ffv:AdvancingHoseLine ;
-    ffonto:wears ffv:FireResistantClothing,
-        ffv:Helmet .
+    ffonto:performs ffontov:AdvancingHoseLine ;
+    ffonto:wears ffontov:FireResistantClothing,
+        ffontov:Helmet .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/e4> a ffonto:BuiltAsset ;
     ffonto:count 1 ;
-    ffonto:hasKind ffv:House ;
-    ffonto:hasState ffv:Scorched,
-        ffv:Threatened .
+    ffonto:hasKind ffontov:House ;
+    ffonto:hasState ffontov:Scorched,
+        ffontov:Threatened .
 
-ffv:Building a skos:Concept ;
+ffontov:Building a skos:Concept ;
     rdfs:label "Building"@en ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "building"@en,
         "structure"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Building"@en .
 
-ffv:CivilianActivity a skos:Concept ;
+ffontov:CivilianActivity a skos:Concept ;
     rdfs:label "Civilian activity"@en ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Civilian activity"@en ;
-    skos:topConceptOf ffv:ActivityScheme .
+    skos:topConceptOf ffontov:ActivityScheme .
 
-ffv:FireTypeValue a skos:Concept ;
+ffontov:FireTypeValue a skos:Concept ;
     rdfs:label "Fire type value"@en ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Fire type value"@en ;
-    skos:topConceptOf ffv:ValueScheme .
+    skos:topConceptOf ffontov:ValueScheme .
 
-ffv:Forest a skos:Concept ;
+ffontov:Forest a skos:Concept ;
     rdfs:label "Forest"@en ;
-    skos:broader ffv:Vegetation ;
+    skos:broader ffontov:Vegetation ;
     skos:hiddenLabel "forest"@en,
         "woodland"@en,
         "woods"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Forest"@en .
 
-ffv:HandTool a skos:Concept ;
+ffontov:HandTool a skos:Concept ;
     rdfs:label "Hand tool"@en ;
-    skos:broader ffv:EquipmentKind ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:broader ffontov:EquipmentKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Hand tool"@en .
 
-ffv:Sky a skos:Concept ;
+ffontov:Sky a skos:Concept ;
     rdfs:label "Sky"@en ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Sky"@en ;
-    skos:topConceptOf ffv:ValueScheme .
+    skos:topConceptOf ffontov:ValueScheme .
 
-ffv:SpreadStatus a skos:Concept ;
+ffontov:SpreadStatus a skos:Concept ;
     rdfs:label "Spread status"@en ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Spread status"@en ;
-    skos:topConceptOf ffv:ValueScheme .
+    skos:topConceptOf ffontov:ValueScheme .
 
-ffv:ZeroShotSource a skos:Concept ;
+ffontov:ZeroShotSource a skos:Concept ;
     rdfs:label "Zero-shot classifier"@en ;
     skos:hiddenLabel "zero-shot"@en,
         "zshot"@en ;
-    skos:inScheme ffv:LabelSourceScheme ;
+    skos:inScheme ffontov:LabelSourceScheme ;
     skos:prefLabel "Zero-shot classifier"@en ;
-    skos:topConceptOf ffv:LabelSourceScheme .
+    skos:topConceptOf ffontov:LabelSourceScheme .
 
 ffonto:FireEvent a owl:Class ;
     rdfs:label "Fire event"@en ;
@@ -3873,77 +3902,77 @@ ffonto:SceneDescription a owl:Class ;
     ffonto:modelName "openai/clip-vit-large-patch14" ;
     ffonto:modelVersion "hf" .
 
-ffv:ConflictScheme a skos:ConceptScheme ;
+ffontov:ConflictScheme a skos:ConceptScheme ;
     rdfs:label "Conflict types (scheme)"@en ;
     skos:definition "Types of cross-modal / internal inconsistencies."@en ;
     skos:prefLabel "Conflict types"@en .
 
-ffv:DetectionClassScheme a skos:ConceptScheme ;
+ffontov:DetectionClassScheme a skos:ConceptScheme ;
     rdfs:label "Detection classes (scheme)"@en ;
     skos:definition "Classes predicted by image fire/smoke classifiers."@en ;
     skos:prefLabel "Detection classes"@en .
 
-ffv:Direction a skos:Concept ;
+ffontov:Direction a skos:Concept ;
     rdfs:label "Direction"@en ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Direction"@en ;
-    skos:topConceptOf ffv:ValueScheme .
+    skos:topConceptOf ffontov:ValueScheme .
 
-ffv:EcosystemService a skos:Concept ;
+ffontov:EcosystemService a skos:Concept ;
     rdfs:label "Ecosystem service"@en ;
-    skos:inScheme ffv:EcologyScheme ;
+    skos:inScheme ffontov:EcologyScheme ;
     skos:prefLabel "Ecosystem service"@en ;
-    skos:topConceptOf ffv:EcologyScheme .
+    skos:topConceptOf ffontov:EcologyScheme .
 
-ffv:Explosion a skos:Concept ;
+ffontov:Explosion a skos:Concept ;
     rdfs:label "Explosion"@en ;
-    skos:broader ffv:FireSound ;
+    skos:broader ffontov:FireSound ;
     skos:hiddenLabel "boom"@en,
         "burst"@en,
         "explosion"@en ;
-    skos:inScheme ffv:SoundEventScheme ;
+    skos:inScheme ffontov:SoundEventScheme ;
     skos:prefLabel "Explosion"@en .
 
-ffv:Fire a skos:Concept ;
+ffontov:Fire a skos:Concept ;
     rdfs:label "Fire"@en ;
     skos:hiddenLabel "blaze"@en,
         "burning"@en,
         "fire"@en,
         "flame"@en,
         "flames"@en ;
-    skos:inScheme ffv:DetectionClassScheme ;
+    skos:inScheme ffontov:DetectionClassScheme ;
     skos:prefLabel "Fire"@en ;
-    skos:topConceptOf ffv:DetectionClassScheme .
+    skos:topConceptOf ffontov:DetectionClassScheme .
 
-ffv:Person a skos:Concept ;
+ffontov:Person a skos:Concept ;
     rdfs:label "Person"@en ;
-    skos:broader ffv:AgentKind ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:broader ffontov:AgentKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Person"@en .
 
-ffv:Smoke a skos:Concept ;
+ffontov:Smoke a skos:Concept ;
     rdfs:label "Smoke"@en ;
     skos:hiddenLabel "haze"@en,
         "smoke"@en,
         "smoky"@en ;
-    skos:inScheme ffv:DetectionClassScheme ;
+    skos:inScheme ffontov:DetectionClassScheme ;
     skos:prefLabel "Smoke"@en ;
-    skos:topConceptOf ffv:DetectionClassScheme .
+    skos:topConceptOf ffontov:DetectionClassScheme .
 
-ffv:Terrain a skos:Concept ;
+ffontov:Terrain a skos:Concept ;
     rdfs:label "Terrain"@en ;
-    skos:broader ffv:EnvironmentFeatureKind ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:broader ffontov:EnvironmentFeatureKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Terrain"@en .
 
-ffv:WaterBody a skos:Concept ;
+ffontov:WaterBody a skos:Concept ;
     rdfs:label "Water body"@en ;
-    ffonto:providesService ffv:WaterRegulation ;
-    ffonto:suggestedRestoration ffv:RiparianRestoration ;
-    ffonto:typicalFireImpact ffv:WaterQualityDegradation ;
-    skos:broader ffv:EnvironmentFeatureKind ;
+    ffonto:providesService ffontov:WaterRegulation ;
+    ffonto:suggestedRestoration ffontov:RiparianRestoration ;
+    ffonto:typicalFireImpact ffontov:WaterQualityDegradation ;
+    skos:broader ffontov:EnvironmentFeatureKind ;
     skos:hiddenLabel "water"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Water body"@en .
 
 ffonto:Site a owl:Class ;
@@ -3951,41 +3980,41 @@ ffonto:Site a owl:Class ;
     rdfs:comment "A named place or grid cell where data were recorded (weather station, camera site, grid cell)."@en ;
     rdfs:subClassOf sosa:FeatureOfInterest .
 
-ffv:DamageState a skos:Concept ;
+ffontov:DamageState a skos:Concept ;
     rdfs:label "Damage state"@en ;
-    skos:inScheme ffv:StateScheme ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Damage state"@en ;
-    skos:topConceptOf ffv:StateScheme .
+    skos:topConceptOf ffontov:StateScheme .
 
-ffv:EnvironmentFeatureKind a skos:Concept ;
+ffontov:EnvironmentFeatureKind a skos:Concept ;
     rdfs:label "Environment feature (kind)"@en ;
     rdfs:seeAlso ffonto:EnvironmentFeature ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Environment feature (kind)"@en ;
-    skos:topConceptOf ffv:EntityKindScheme .
+    skos:topConceptOf ffontov:EntityKindScheme .
 
-ffv:OperationalState a skos:Concept ;
+ffontov:OperationalState a skos:Concept ;
     rdfs:label "Operational state"@en ;
-    skos:inScheme ffv:StateScheme ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Operational state"@en ;
-    skos:topConceptOf ffv:StateScheme .
+    skos:topConceptOf ffontov:StateScheme .
 
-ffv:RestorationMeasure a skos:Concept ;
+ffontov:RestorationMeasure a skos:Concept ;
     rdfs:label "Restoration measure"@en ;
-    skos:inScheme ffv:EcologyScheme ;
+    skos:inScheme ffontov:EcologyScheme ;
     skos:prefLabel "Restoration measure"@en ;
-    skos:topConceptOf ffv:EcologyScheme .
+    skos:topConceptOf ffontov:EcologyScheme .
 
-ffv:SuppressionActivity a skos:Concept ;
+ffontov:SuppressionActivity a skos:Concept ;
     rdfs:label "Suppression activity"@en ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Suppression activity"@en ;
-    skos:topConceptOf ffv:ActivityScheme .
+    skos:topConceptOf ffontov:ActivityScheme .
 
-ffv:Vegetation a skos:Concept ;
+ffontov:Vegetation a skos:Concept ;
     rdfs:label "Vegetation"@en ;
-    skos:broader ffv:EnvironmentFeatureKind ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:broader ffontov:EnvironmentFeatureKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Vegetation"@en .
 
 prov:Entity a owl:Class ;
@@ -3993,28 +4022,28 @@ prov:Entity a owl:Class ;
     rdfs:comment "A physical, digital or conceptual thing with some fixed aspects (PROV-O)."@en ;
     rdfs:isDefinedBy <http://www.w3.org/ns/prov-o#> .
 
-ffv:Colour a skos:Concept ;
+ffontov:Colour a skos:Concept ;
     rdfs:label "Colour"@en ;
-    skos:inScheme ffv:ValueScheme ;
+    skos:inScheme ffontov:ValueScheme ;
     skos:prefLabel "Colour"@en ;
-    skos:topConceptOf ffv:ValueScheme .
+    skos:topConceptOf ffontov:ValueScheme .
 
 <http://purl.org/ffonto/data/scene/scene-fixture-081/e5> a ffonto:FirePhenomenon ;
     ffonto:advancingToward <http://purl.org/ffonto/data/scene/scene-fixture-081/e4> ;
     ffonto:count 2 ;
-    ffonto:hasKind ffv:FlameFront .
+    ffonto:hasKind ffontov:FlameFront .
 
-ffv:GroundVehicle a skos:Concept ;
+ffontov:GroundVehicle a skos:Concept ;
     rdfs:label "Ground vehicle"@en ;
-    skos:broader ffv:VehicleKind ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:broader ffontov:VehicleKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Ground vehicle"@en .
 
-ffv:VegetationState a skos:Concept ;
+ffontov:VegetationState a skos:Concept ;
     rdfs:label "Vegetation state"@en ;
-    skos:inScheme ffv:StateScheme ;
+    skos:inScheme ffontov:StateScheme ;
     skos:prefLabel "Vegetation state"@en ;
-    skos:topConceptOf ffv:StateScheme .
+    skos:topConceptOf ffontov:StateScheme .
 
 ffonto:ImageRecord a owl:Class ;
     rdfs:label "Image record"@en ;
@@ -4034,17 +4063,17 @@ ffonto:Threshold a owl:Class ;
     rdfs:comment "A configured decision threshold for one class (e.g. fire_threshold = 0.55)."@en ;
     rdfs:subClassOf prov:Entity .
 
-ffv:EcologicalImpact a skos:Concept ;
+ffontov:EcologicalImpact a skos:Concept ;
     rdfs:label "Ecological impact"@en ;
-    skos:inScheme ffv:EcologyScheme ;
+    skos:inScheme ffontov:EcologyScheme ;
     skos:prefLabel "Ecological impact"@en ;
-    skos:topConceptOf ffv:EcologyScheme .
+    skos:topConceptOf ffontov:EcologyScheme .
 
-ffv:ResponseActivity a skos:Concept ;
+ffontov:ResponseActivity a skos:Concept ;
     rdfs:label "Response activity"@en ;
-    skos:inScheme ffv:ActivityScheme ;
+    skos:inScheme ffontov:ActivityScheme ;
     skos:prefLabel "Response activity"@en ;
-    skos:topConceptOf ffv:ActivityScheme .
+    skos:topConceptOf ffontov:ActivityScheme .
 
 <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081> a ffonto:ImageRecord ;
     dcterms:license "CC-BY-4.0" ;
@@ -4055,7 +4084,7 @@ ffv:ResponseActivity a skos:Concept ;
     ffonto:centerWKT "POINT(-6.85 41.8)" ;
     ffonto:checksumSHA256 "0000000000000000000000000000000000000000000000000000000000000000" ;
     ffonto:crs "EPSG:4326" ;
-    ffonto:detectedClass ffv:Smoke ;
+    ffonto:detectedClass ffontov:Smoke ;
     ffonto:fileURI "fixtures/forest_fire_081.jpg" ;
     ffonto:georeferenced true ;
     ffonto:hasCaption <http://purl.org/ffonto/data/record/00000000-0000-4000-8000-000000000081/caption> ;
@@ -4073,7 +4102,7 @@ ffv:ResponseActivity a skos:Concept ;
     dcterms:license "CC-BY-4.0" ;
     ffonto:aboutEvent <http://purl.org/ffonto/data/event/ev-bf59c56acb36> ;
     ffonto:checksumSHA256 "df5124ebe5531b3d7d9b1573e65ad2a354b523f0d35ec933dbdb3066d1161372" ;
-    ffonto:detectedClass ffv:Smoke ;
+    ffonto:detectedClass ffontov:Smoke ;
     ffonto:fileURI "/home/cse/Documents/ImageToText/dataset_2/evoDJI_0001_frame12.jpg" ;
     ffonto:georeferenced false ;
     ffonto:hasCaption <http://purl.org/ffonto/data/record/3f6d562f-33d3-49ee-a40b-3a8b6cf07823/caption> ;
@@ -4087,26 +4116,26 @@ ffv:ResponseActivity a skos:Concept ;
     ffonto:sourceName "unknown_camera" ;
     ffonto:widthPx 2048 .
 
-ffv:BurnEvidenceKind a skos:Concept ;
+ffontov:BurnEvidenceKind a skos:Concept ;
     rdfs:label "Burn evidence (kind)"@en ;
     rdfs:seeAlso ffonto:BurnEvidence ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Burn evidence (kind)"@en ;
-    skos:topConceptOf ffv:EntityKindScheme .
+    skos:topConceptOf ffontov:EntityKindScheme .
 
-ffv:FirePhenomenonKind a skos:Concept ;
+ffontov:FirePhenomenonKind a skos:Concept ;
     rdfs:label "Fire phenomenon (kind)"@en ;
     rdfs:seeAlso ffonto:FirePhenomenon ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Fire phenomenon (kind)"@en ;
-    skos:topConceptOf ffv:EntityKindScheme .
+    skos:topConceptOf ffontov:EntityKindScheme .
 
-ffv:LabelSourceScheme a skos:ConceptScheme ;
+ffontov:LabelSourceScheme a skos:ConceptScheme ;
     rdfs:label "Label sources (scheme)"@en ;
     skos:definition "Where a label came from."@en ;
     skos:prefLabel "Label sources"@en .
 
-ffv:SoundEventScheme a skos:ConceptScheme ;
+ffontov:SoundEventScheme a skos:ConceptScheme ;
     rdfs:label "Sound events (scheme)"@en ;
     skos:definition "Audio event classes (aligned with AudioSet/YAMNet labels where possible)."@en ;
     skos:prefLabel "Sound events"@en .
@@ -4116,40 +4145,40 @@ ffonto:DangerRule a owl:Class ;
     rdfs:comment "A threshold rule over a weather/FWI property (property, operator, value) that indicates an operational condition. Stored as data so experts can edit it."@en ;
     rdfs:subClassOf prov:Entity .
 
-ffv:BuiltAssetKind a skos:Concept ;
+ffontov:BuiltAssetKind a skos:Concept ;
     rdfs:label "Built asset (kind)"@en ;
     rdfs:seeAlso ffonto:BuiltAsset ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Built asset (kind)"@en ;
-    skos:topConceptOf ffv:EntityKindScheme .
+    skos:topConceptOf ffontov:EntityKindScheme .
 
 skos:ConceptScheme a owl:Class ;
     rdfs:label "Concept scheme"@en ;
     rdfs:comment "A set of concepts forming one controlled vocabulary (SKOS)."@en ;
     rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> .
 
-ffv:ConditionScheme a skos:ConceptScheme ;
+ffontov:ConditionScheme a skos:ConceptScheme ;
     rdfs:label "Operational conditions (scheme)"@en ;
     skos:definition "Conditions implied by weather/FWI danger rules."@en ;
     skos:prefLabel "Operational conditions"@en .
 
-ffv:EquipmentKind a skos:Concept ;
+ffontov:EquipmentKind a skos:Concept ;
     rdfs:label "Equipment (kind)"@en ;
     rdfs:seeAlso ffonto:Equipment ;
-    skos:inScheme ffv:EntityKindScheme ;
+    skos:inScheme ffontov:EntityKindScheme ;
     skos:prefLabel "Equipment (kind)"@en ;
-    skos:topConceptOf ffv:EntityKindScheme .
+    skos:topConceptOf ffontov:EntityKindScheme .
 
-ffv:VLMSource a skos:Concept ;
+ffontov:VLMSource a skos:Concept ;
     rdfs:label "Vision-language model"@en ;
     skos:hiddenLabel "vlm"@en ;
-    skos:inScheme ffv:LabelSourceScheme ;
+    skos:inScheme ffontov:LabelSourceScheme ;
     skos:prefLabel "Vision-language model"@en ;
-    skos:topConceptOf ffv:LabelSourceScheme .
+    skos:topConceptOf ffontov:LabelSourceScheme .
 
 ffonto:Hazard a owl:Class ;
     rdfs:label "Hazard"@en ;
-    rdfs:comment "A risk DERIVED by a rule from observations; typed by ffonto:hasHazardType → ffv:HazardScheme concept and linked to what it threatens."@en ;
+    rdfs:comment "A risk DERIVED by a rule from observations; typed by ffonto:hasHazardType → ffontov:HazardScheme concept and linked to what it threatens."@en ;
     rdfs:subClassOf prov:Entity .
 
 <http://purl.org/ffonto/data/event/ev-demo-081> a ffonto:FireEvent ;
@@ -4159,12 +4188,12 @@ ffonto:Hazard a owl:Class ;
     ffonto:modelName "EXAMPLE-VLM (hand-written fixture, replace with real VLM output)" ;
     ffonto:modelVersion "0" .
 
-ffv:PositionScheme a skos:ConceptScheme ;
+ffontov:PositionScheme a skos:ConceptScheme ;
     rdfs:label "Frame-relative positions (scheme)"@en ;
     skos:definition "Position of an entity relative to the fire in the frame."@en ;
     skos:prefLabel "Frame-relative positions"@en .
 
-ffv:PPEScheme a skos:ConceptScheme ;
+ffontov:PPEScheme a skos:ConceptScheme ;
     rdfs:label "Personal protective equipment (scheme)"@en ;
     skos:definition "Items a person can be seen wearing."@en ;
     skos:prefLabel "Personal protective equipment"@en .
@@ -4181,20 +4210,20 @@ ffonto:WeatherRecord a owl:Class ;
 
 ffonto:SceneEntity a owl:Class ;
     rdfs:label "Scene entity"@en ;
-    rdfs:comment "Something depicted in an image according to a scene description (a fire front, a firefighter, a building …). Its fine-grained kind is given by ffonto:hasKind → a concept in ffv:EntityKindScheme."@en ;
+    rdfs:comment "Something depicted in an image according to a scene description (a fire front, a firefighter, a building …). Its fine-grained kind is given by ffonto:hasKind → a concept in ffontov:EntityKindScheme."@en ;
     rdfs:subClassOf sosa:FeatureOfInterest .
 
-ffv:HazardScheme a skos:ConceptScheme ;
+ffontov:HazardScheme a skos:ConceptScheme ;
     rdfs:label "Hazard types (scheme)"@en ;
     skos:definition "Types of hazards derived by rules."@en ;
     skos:prefLabel "Hazard types"@en .
 
-ffv:EcologyScheme a skos:ConceptScheme ;
+ffontov:EcologyScheme a skos:ConceptScheme ;
     rdfs:label "Ecological impacts, services and restoration (scheme)"@en ;
     skos:definition "Background ecological knowledge for CQ26."@en ;
     skos:prefLabel "Ecological impacts, services and restoration"@en .
 
-ffv:ActionScheme a skos:ConceptScheme ;
+ffontov:ActionScheme a skos:ConceptScheme ;
     rdfs:label "Recommended actions (scheme)"@en ;
     skos:definition "Protective / operational actions recommended for hazards."@en ;
     skos:prefLabel "Recommended actions"@en .
@@ -4204,27 +4233,27 @@ ffonto:ModelObservation a owl:Class ;
     rdfs:comment "A claim made by a model about a data record: either a predicted class with a confidence (ffonto:predictedClass) or a categorical value for an observable property (sosa:observedProperty + ffonto:hasValueConcept)."@en ;
     rdfs:subClassOf sosa:Observation .
 
-ffv:ActivityScheme a skos:ConceptScheme ;
+ffontov:ActivityScheme a skos:ConceptScheme ;
     rdfs:label "Activities (scheme)"@en ;
     skos:definition "What agents or vehicles are doing."@en ;
     skos:prefLabel "Activities"@en .
 
-ffv:ObservablePropertyScheme a skos:ConceptScheme ;
+ffontov:ObservablePropertyScheme a skos:ConceptScheme ;
     rdfs:label "Observable scene properties (scheme)"@en ;
     skos:definition "Scene-level properties a model can report a categorical value for."@en ;
     skos:prefLabel "Observable scene properties"@en .
 
-ffv:StateScheme a skos:ConceptScheme ;
+ffontov:StateScheme a skos:ConceptScheme ;
     rdfs:label "Entity states (scheme)"@en ;
     skos:definition "States / conditions of scene entities."@en ;
     skos:prefLabel "Entity states"@en .
 
-ffv:ValueScheme a skos:ConceptScheme ;
+ffontov:ValueScheme a skos:ConceptScheme ;
     rdfs:label "Categorical values (scheme)"@en ;
     skos:definition "Shared value concepts used as observation results."@en ;
     skos:prefLabel "Categorical values"@en .
 
-ffv:EntityKindScheme a skos:ConceptScheme ;
+ffontov:EntityKindScheme a skos:ConceptScheme ;
     rdfs:label "Scene entity kinds (scheme)"@en ;
     skos:definition "Fine-grained kinds of things that can be depicted in a fire scene. The top concepts correspond to the core classes."@en ;
     skos:prefLabel "Scene entity kinds"@en .

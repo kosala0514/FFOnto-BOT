@@ -2,5 +2,5 @@
 # ffonto:wears has domain ffonto:Agent, so a building that "wears" a helmet is
 # inferred to be an Agent – which is disjoint with BuiltAsset.
 @prefix ffonto: <http://purl.org/ffonto#> .
-@prefix ffv: <http://purl.org/ffonto/vocab#> .
-<http://purl.org/ffonto/data/test/b1> a ffonto:BuiltAsset ; ffonto:wears ffv:Helmet .
+@prefix ffontov: <http://purl.org/ffonto/vocab#> .
+<http://purl.org/ffonto/data/test/b1> a ffonto:BuiltAsset ; ffonto:wears ffontov:Helmet .

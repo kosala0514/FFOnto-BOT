@@ -117,20 +117,20 @@ def test_index_retrieve_answer_and_charts(monkeypatch):
     assert vis[0]["cited"] and vis[0]["reading"]
 
     # full answer() through rag route
-    monkeypatch.setattr(pipeline, "route", lambda q, d: {"route": "rag", "cq": "NONE", "examples": []})
+    monkeypatch.setattr(pipeline, "route", lambda q, d, **kw: {"route": "rag", "cq": "NONE", "examples": []})
     out = pipeline.answer("What does the FWI trend chart show?")
     print("answer() visuals:", [(v["kind"], v["cited"]) for v in out["visuals"]], "error:", out["error"])
     assert out["visuals"] and not out["error"]
 
     # KG charts
-    r05 = [{"record": "ffd:record/a", "class": "ffv:Fire", "confidence": "0.16", "threshold": "0.55", "aboveThreshold": "false"},
-           {"record": "ffd:record/a", "class": "ffv:Smoke", "confidence": "0.73", "threshold": "0.6", "aboveThreshold": "true"}]
+    r05 = [{"record": "ffd:record/a", "class": "ffontov:Fire", "confidence": "0.16", "threshold": "0.55", "aboveThreshold": "false"},
+           {"record": "ffd:record/a", "class": "ffontov:Smoke", "confidence": "0.73", "threshold": "0.6", "aboveThreshold": "true"}]
     r09 = [{"w": "ffd:w/1", "site": "ffd:site/montesinho/grid-7-5", "date": f"2012-08-{d:02d}T00:00:00Z", "FFMC": "90", "DMC": str(100+d),
             "DC": "600", "ISI": "8", "BUI": "120", "FWI": str(20+d), "previousDate": "", "previousFWI": ""} for d in (26, 27, 28)]
     r09s = [{**r09[2], "previousDate": "2012-08-27", "previousFWI": "47"}]
-    r10 = [{"w": "x", "site": "s", "date": "2012-08-28", "condition": "ffv:HighFWI", "ruleLabel": "Elevated fire danger", "property": "ffo:fwi",
+    r10 = [{"w": "x", "site": "s", "date": "2012-08-28", "condition": "ffontov:HighFWI", "ruleLabel": "Elevated fire danger", "property": "ffonto:fwi",
             "operator": ">=", "threshold": "30.0", "observedValue": "33.1"}]
-    rg = [{"kind": "ffv:Firefighter", "count": "3"}, {"kind": "ffv:Vehicle", "count": "1"}]
+    rg = [{"kind": "ffontov:Firefighter", "count": "3"}, {"kind": "ffontov:Vehicle", "count": "1"}]
     for cq, cols, rows in (("CQ05", list(r05[0]), r05), ("CQ09", list(r09[0]), r09), ("CQ09", list(r09s[0]), r09s),
                            ("CQ10", list(r10[0]), r10), ("CQ13", ["kind", "count"], rg), ("CQ02", ["record", "missing"], [{"record": "x", "missing": "crs"}])):
         ch = visuals.chart_for(cq, cols, rows, cq)

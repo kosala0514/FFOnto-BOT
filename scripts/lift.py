@@ -13,7 +13,7 @@ Why a normaliser before JSON-LD?
     2. score maps such as {"smoke": 0.73, "fire": 0.16} and threshold maps such as
        {"fire_threshold": 0.55} become explicit observation / threshold nodes;
     3. identifiers are minted (record, event, model, site) and class names such as
-       "fire" or "Firefighter" are turned into vocabulary IRIs (ffv:Fire, ffv:Firefighter).
+       "fire" or "Firefighter" are turned into vocabulary IRIs (ffontov:Fire, ffontov:Firefighter).
   Every key left in the normalised JSON is mapped by context/ffonto.context.jsonld;
   the script warns about any key the context does not cover (JSON-LD would drop it silently).
 
@@ -36,7 +36,7 @@ def warn(msg):
 def load_concepts():
     """Concept local names in ffonto-vocab.ttl (regex – no rdflib needed)."""
     txt = VOCAB_FILE.read_text(encoding="utf-8")
-    return set(re.findall(r"^ffv:(\w+) a skos:Concept\s*;", txt, flags=re.M))
+    return set(re.findall(r"^ffontov:(\w+) a skos:Concept\s*;", txt, flags=re.M))
 
 CONCEPTS = load_concepts()
 
@@ -56,17 +56,17 @@ LABEL_MAP = {
 }
 
 def concept(raw, what="value"):
-    """Map a raw label / short name to a compact vocab IRI 'ffv:X'. Returns None if unknown."""
+    """Map a raw label / short name to a compact vocab IRI 'ffontov:X'. Returns None if unknown."""
     if raw is None or raw == "":
         return None
     key = str(raw).strip()
     name = LABEL_MAP.get(key.lower(), key)
-    if name.startswith("ffv:"):
-        name = name[4:]
+    if name.startswith("ffontov:"):
+        name = name.split(":", 1)[1]
     if name not in CONCEPTS:
         warn(f"unknown {what} '{raw}' – add it to ontology/ffonto-vocab.ttl or LABEL_MAP; skipped")
         return None
-    return "ffv:" + name
+    return "ffontov:" + name
 
 def slug(s):
     return re.sub(r"[^A-Za-z0-9]+", "-", str(s)).strip("-").lower()
@@ -146,7 +146,7 @@ def normalise_image(raw):
     def threshold_node(c):
         if c not in thresholds:
             return None
-        return {"@id": f"{rid}/threshold/{c[4:]}", "@type": "ffonto:Threshold",
+        return {"@id": f"{rid}/threshold/{c.split(':', 1)[1]}", "@type": "ffonto:Threshold",
                 "for_class": c, "threshold_value": num(thresholds[c])}
 
     observations, seen_classes = [], set()
@@ -177,7 +177,7 @@ def normalise_image(raw):
         observations.append(drop_nulls({
             "@id": f"{rid}/obs/z{j}", "@type": "ffonto:ModelObservation",
             "feature_of_interest": rid, "predicted_class": c, "confidence": num(score),
-            "label_source": "ffv:ZeroShotSource",
+            "label_source": "ffontov:ZeroShotSource",
             "attributed_to": model_node(zmodel, versions.get(zmodel)) if zmodel else None,
             "used_threshold": threshold_node(c),
         }))
@@ -239,9 +239,9 @@ def normalise_audio(raw):
             "mean_confidence": num(lab.get("mean_confidence")),
             "max_confidence": num(lab.get("max_confidence")),
             "top_k_labels": lab.get("topk_frame_labels"),
-            "label_source": "ffv:AudioTaggerSource",
+            "label_source": "ffontov:AudioTaggerSource",
             "attributed_to": model,
-            "used_threshold": {"@id": f"{rid}/threshold/{c[4:]}", "@type": "ffonto:Threshold",
+            "used_threshold": {"@id": f"{rid}/threshold/{c.split(':', 1)[1]}", "@type": "ffonto:Threshold",
                                "for_class": c, "threshold_value": num(thr)} if thr is not None else None,
         }))
     return drop_nulls({
@@ -369,7 +369,7 @@ def normalise_scene(raw):
         if p and v:
             attributes.append({"@id": f"{sid}/attr/{i}", "@type": "ffonto:ModelObservation",
                                "feature_of_interest": rec, "observed_property": p, "value": v,
-                               "label_source": "ffv:VLMSource", "attributed_to": model["@id"]})
+                               "label_source": "ffontov:VLMSource", "attributed_to": model["@id"]})
     return drop_nulls({
         "@id": sid, "@type": "ffonto:SceneDescription",
         "describes_record": rec,
@@ -437,7 +437,7 @@ def main():
         except ImportError:
             sys.exit("rdflib not installed: pip install rdflib   (or use --no-rdf)")
         g = Graph()
-        g.bind("ffo", "http://purl.org/ffonto#"); g.bind("ffv", "http://purl.org/ffonto/vocab#")
+        g.bind("ffonto", "http://purl.org/ffonto#"); g.bind("ffontov", "http://purl.org/ffonto/vocab#")
         g.bind("ffd", "http://purl.org/ffonto/data/"); g.bind("sosa", "http://www.w3.org/ns/sosa/")
         g.bind("prov", "http://www.w3.org/ns/prov#")
         # one graph per modality (for GraphDB named graphs) + one merged graph

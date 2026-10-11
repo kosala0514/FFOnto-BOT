@@ -1,5 +1,5 @@
-@prefix ffo:  <http://purl.org/ffonto#> .
-@prefix ffv:  <http://purl.org/ffonto/vocab#> .
+@prefix ffonto:  <http://purl.org/ffonto#> .
+@prefix ffontov:  <http://purl.org/ffonto/vocab#> .
 @prefix ffd:  <http://purl.org/ffonto/data/> .
 @prefix ffr:  <http://purl.org/ffonto/data/rule/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -14,8 +14,8 @@
     owl:versionIRI <http://purl.org/ffonto/rules/2.0.0> ;
     owl:versionInfo "2.0.0" ;
     dcterms:title "FFOnto weather / FWI danger rules"@en ;
-    dcterms:description "Threshold rules over weather and Fire Weather Index properties, stored as individuals of ffo:DangerRule."@en ;
-    dcterms:abstract "Weather and Fire Weather Index (FWI) threshold rules stored as data (individuals of ffo:DangerRule), so thresholds can be changed and cited without editing queries. The current threshold values are PLACEHOLDERS for testing."@en ;
+    dcterms:description "Threshold rules over weather and Fire Weather Index properties, stored as individuals of ffonto:DangerRule."@en ;
+    dcterms:abstract "Weather and Fire Weather Index (FWI) threshold rules stored as data (individuals of ffonto:DangerRule), so thresholds can be changed and cited without editing queries. The current threshold values are PLACEHOLDERS for testing."@en ;
     dcterms:creator "Charuni Kosala Jayaweera" ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     vann:preferredNamespacePrefix "ffr" ;
@@ -27,61 +27,61 @@
 #  !! Replace them with values from your agency's operating procedures
 #  !! or the literature, and cite the source in rdfs:comment.
 #  Threshold literals are xsd:double (written 30.0e0) to match the
-#  range of ffo:thresholdValue – a plain 30.0 would be xsd:decimal and
+#  range of ffonto:thresholdValue – a plain 30.0 would be xsd:decimal and
 #  HermiT would report the ontology as inconsistent.
 #  Operators: "gt" (>), "ge" (>=), "lt" (<), "le" (<=)
 # =====================================================================
 
-ffr:wind-aerial a ffo:DangerRule ;
+ffr:wind-aerial a ffonto:DangerRule ;
     rdfs:label "Strong wind reduces aerial-drop effectiveness"@en ;
-    ffo:onProperty ffo:windSpeedKmh ; ffo:operator "gt" ; ffo:thresholdValue 30.0e0 ;
-    ffo:indicatesCondition ffv:AerialDropCompromised ;
+    ffonto:onProperty ffonto:windSpeedKmh ; ffonto:operator "gt" ; ffonto:thresholdValue 30.0e0 ;
+    ffonto:indicatesCondition ffontov:AerialDropCompromised ;
     rdfs:comment "PLACEHOLDER threshold."@en .
 
-ffr:isi-spread a ffo:DangerRule ;
+ffr:isi-spread a ffonto:DangerRule ;
     rdfs:label "High ISI indicates rapid fine-fuel spread"@en ;
-    ffo:onProperty ffo:isi ; ffo:operator "gt" ; ffo:thresholdValue 10.0e0 ;
-    ffo:indicatesCondition ffv:RapidFineFuelSpread ;
+    ffonto:onProperty ffonto:isi ; ffonto:operator "gt" ; ffonto:thresholdValue 10.0e0 ;
+    ffonto:indicatesCondition ffontov:RapidFineFuelSpread ;
     rdfs:comment "PLACEHOLDER threshold."@en .
 
-ffr:ffmc-spread a ffo:DangerRule ;
+ffr:ffmc-spread a ffonto:DangerRule ;
     rdfs:label "High FFMC indicates easily ignited fine fuels"@en ;
-    ffo:onProperty ffo:ffmc ; ffo:operator "ge" ; ffo:thresholdValue 90.0e0 ;
-    ffo:indicatesCondition ffv:RapidFineFuelSpread ;
+    ffonto:onProperty ffonto:ffmc ; ffonto:operator "ge" ; ffonto:thresholdValue 90.0e0 ;
+    ffonto:indicatesCondition ffontov:RapidFineFuelSpread ;
     rdfs:comment "PLACEHOLDER threshold."@en .
 
-ffr:fwi-danger a ffo:DangerRule ;
+ffr:fwi-danger a ffonto:DangerRule ;
     rdfs:label "High FWI indicates elevated fire danger"@en ;
-    ffo:onProperty ffo:fwi ; ffo:operator "ge" ; ffo:thresholdValue 30.0e0 ;
-    ffo:indicatesCondition ffv:ElevatedFireDanger ;
+    ffonto:onProperty ffonto:fwi ; ffonto:operator "ge" ; ffonto:thresholdValue 30.0e0 ;
+    ffonto:indicatesCondition ffontov:ElevatedFireDanger ;
     rdfs:comment "PLACEHOLDER threshold."@en .
 
-ffr:rh-drying a ffo:DangerRule ;
+ffr:rh-drying a ffonto:DangerRule ;
     rdfs:label "Low RH favours rapid fine-fuel drying"@en ;
-    ffo:onProperty ffo:relativeHumidityPct ; ffo:operator "lt" ; ffo:thresholdValue 30.0e0 ;
-    ffo:indicatesCondition ffv:RapidFineFuelDrying ;
+    ffonto:onProperty ffonto:relativeHumidityPct ; ffonto:operator "lt" ; ffonto:thresholdValue 30.0e0 ;
+    ffonto:indicatesCondition ffontov:RapidFineFuelDrying ;
     rdfs:comment "PLACEHOLDER threshold."@en .
 
-ffr:rh-direct a ffo:DangerRule ;
+ffr:rh-direct a ffonto:DangerRule ;
     rdfs:label "Moderate/high RH favours direct attack with hand tools"@en ;
-    ffo:onProperty ffo:relativeHumidityPct ; ffo:operator "ge" ; ffo:thresholdValue 40.0e0 ;
-    ffo:indicatesCondition ffv:FavourDirectAttack ;
+    ffonto:onProperty ffonto:relativeHumidityPct ; ffonto:operator "ge" ; ffonto:thresholdValue 40.0e0 ;
+    ffonto:indicatesCondition ffontov:FavourDirectAttack ;
     rdfs:comment "PLACEHOLDER threshold."@en .
 
-ffr:temp-heat a ffo:DangerRule ;
+ffr:temp-heat a ffonto:DangerRule ;
     rdfs:label "High temperature indicates heat-stress risk"@en ;
-    ffo:onProperty ffo:airTemperatureC ; ffo:operator "ge" ; ffo:thresholdValue 32.0e0 ;
-    ffo:indicatesCondition ffv:HeatStressRisk ;
+    ffonto:onProperty ffonto:airTemperatureC ; ffonto:operator "ge" ; ffonto:thresholdValue 32.0e0 ;
+    ffonto:indicatesCondition ffontov:HeatStressRisk ;
     rdfs:comment "PLACEHOLDER threshold."@en .
 
-ffr:rain-mopup a ffo:DangerRule ;
+ffr:rain-mopup a ffonto:DangerRule ;
     rdfs:label "Rain improves mop-up conditions"@en ;
-    ffo:onProperty ffo:rainMm ; ffo:operator "gt" ; ffo:thresholdValue 2.0e0 ;
-    ffo:indicatesCondition ffv:ImprovedMopUpConditions ;
+    ffonto:onProperty ffonto:rainMm ; ffonto:operator "gt" ; ffonto:thresholdValue 2.0e0 ;
+    ffonto:indicatesCondition ffontov:ImprovedMopUpConditions ;
     rdfs:comment "PLACEHOLDER threshold."@en .
 
-ffr:dc-persistent a ffo:DangerRule ;
+ffr:dc-persistent a ffonto:DangerRule ;
     rdfs:label "High Drought Code indicates deep, persistent smouldering"@en ;
-    ffo:onProperty ffo:dc ; ffo:operator "ge" ; ffo:thresholdValue 400.0e0 ;
-    ffo:indicatesCondition ffv:PersistentCombustion ;
+    ffonto:onProperty ffonto:dc ; ffonto:operator "ge" ; ffonto:thresholdValue 400.0e0 ;
+    ffonto:indicatesCondition ffontov:PersistentCombustion ;
     rdfs:comment "PLACEHOLDER threshold."@en .

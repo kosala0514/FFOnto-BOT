@@ -3,7 +3,7 @@
 # Executed in file-name order by scripts/run_cqs.py (CONSTRUCT results are added to the graph).
 
 PREFIX ffonto:  <http://purl.org/ffonto#>
-PREFIX ffv:  <http://purl.org/ffonto/vocab#>
+PREFIX ffontov:  <http://purl.org/ffonto/vocab#>
 PREFIX ffd:  <http://purl.org/ffonto/data/>
 PREFIX sosa: <http://www.w3.org/ns/sosa/>
 PREFIX prov: <http://www.w3.org/ns/prov#>
@@ -16,7 +16,7 @@ CONSTRUCT { ?cap ffonto:mentionsConcept ?c }
 WHERE {
   ?cap a ffonto:Caption ;
        ffonto:captionText ?text .
-  VALUES ?scheme { ffv:DetectionClassScheme ffv:EntityKindScheme }
+  VALUES ?scheme { ffontov:DetectionClassScheme ffontov:EntityKindScheme }
   ?c skos:inScheme ?scheme ;
      skos:hiddenLabel ?kw .
   BIND(CONCAT(" ", LCASE(REPLACE(STR(?text), "[^A-Za-z0-9]+", " ")), " ") AS ?norm)

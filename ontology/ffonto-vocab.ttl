@@ -1,5 +1,5 @@
-@prefix ffo:  <http://purl.org/ffonto#> .
-@prefix ffv:  <http://purl.org/ffonto/vocab#> .
+@prefix ffonto:  <http://purl.org/ffonto#> .
+@prefix ffontov:  <http://purl.org/ffonto/vocab#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl:  <http://www.w3.org/2002/07/owl#> .
@@ -28,2121 +28,2121 @@
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     dcterms:created "2026-10-07"^^xsd:date ;
     dcterms:modified "2026-10-09"^^xsd:date ;
-    vann:preferredNamespacePrefix "ffv" ;
+    vann:preferredNamespacePrefix "ffontov" ;
     vann:preferredNamespaceUri "http://purl.org/ffonto/vocab#" .
 
 
 
 # ---------------- Detection classes ----------------
-ffv:DetectionClassScheme a skos:ConceptScheme ;
+ffontov:DetectionClassScheme a skos:ConceptScheme ;
     rdfs:label "Detection classes (scheme)"@en ;
     skos:prefLabel "Detection classes"@en ;
     skos:definition "Classes predicted by image fire/smoke classifiers."@en .
-ffv:Fire a skos:Concept ;
+ffontov:Fire a skos:Concept ;
     rdfs:label "Fire"@en ;
     skos:prefLabel "Fire"@en ;
-    skos:inScheme ffv:DetectionClassScheme ;
-    skos:topConceptOf ffv:DetectionClassScheme ;
+    skos:inScheme ffontov:DetectionClassScheme ;
+    skos:topConceptOf ffontov:DetectionClassScheme ;
     skos:hiddenLabel "fire"@en , "flame"@en , "flames"@en , "blaze"@en , "burning"@en .
-ffv:Smoke a skos:Concept ;
+ffontov:Smoke a skos:Concept ;
     rdfs:label "Smoke"@en ;
     skos:prefLabel "Smoke"@en ;
-    skos:inScheme ffv:DetectionClassScheme ;
-    skos:topConceptOf ffv:DetectionClassScheme ;
+    skos:inScheme ffontov:DetectionClassScheme ;
+    skos:topConceptOf ffontov:DetectionClassScheme ;
     skos:hiddenLabel "smoke"@en , "smoky"@en , "haze"@en .
-ffv:NoFire a skos:Concept ;
+ffontov:NoFire a skos:Concept ;
     rdfs:label "No fire"@en ;
     skos:prefLabel "No fire"@en ;
-    skos:inScheme ffv:DetectionClassScheme ;
-    skos:topConceptOf ffv:DetectionClassScheme ;
+    skos:inScheme ffontov:DetectionClassScheme ;
+    skos:topConceptOf ffontov:DetectionClassScheme ;
     skos:hiddenLabel "no fire"@en .
 
 # ---------------- Sound events ----------------
-ffv:SoundEventScheme a skos:ConceptScheme ;
+ffontov:SoundEventScheme a skos:ConceptScheme ;
     rdfs:label "Sound events (scheme)"@en ;
     skos:prefLabel "Sound events"@en ;
     skos:definition "Audio event classes (aligned with AudioSet/YAMNet labels where possible)."@en .
-ffv:FireSound a skos:Concept ;
+ffontov:FireSound a skos:Concept ;
     rdfs:label "Fire-related sound"@en ;
     skos:prefLabel "Fire-related sound"@en ;
-    skos:inScheme ffv:SoundEventScheme ;
-    skos:topConceptOf ffv:SoundEventScheme .
-ffv:Crackling a skos:Concept ;
+    skos:inScheme ffontov:SoundEventScheme ;
+    skos:topConceptOf ffontov:SoundEventScheme .
+ffontov:Crackling a skos:Concept ;
     rdfs:label "Crackling"@en ;
     skos:prefLabel "Crackling"@en ;
-    skos:inScheme ffv:SoundEventScheme ;
-    skos:broader ffv:FireSound ;
+    skos:inScheme ffontov:SoundEventScheme ;
+    skos:broader ffontov:FireSound ;
     skos:hiddenLabel "crackle"@en , "crackling"@en .
-ffv:Explosion a skos:Concept ;
+ffontov:Explosion a skos:Concept ;
     rdfs:label "Explosion"@en ;
     skos:prefLabel "Explosion"@en ;
-    skos:inScheme ffv:SoundEventScheme ;
-    skos:broader ffv:FireSound ;
+    skos:inScheme ffontov:SoundEventScheme ;
+    skos:broader ffontov:FireSound ;
     skos:hiddenLabel "explosion"@en , "burst"@en , "boom"@en .
-ffv:Siren a skos:Concept ;
+ffontov:Siren a skos:Concept ;
     rdfs:label "Siren"@en ;
     skos:prefLabel "Siren"@en ;
-    skos:inScheme ffv:SoundEventScheme ;
-    skos:topConceptOf ffv:SoundEventScheme ;
+    skos:inScheme ffontov:SoundEventScheme ;
+    skos:topConceptOf ffontov:SoundEventScheme ;
     skos:hiddenLabel "siren"@en , "emergency vehicle"@en , "fire engine, fire truck (siren)"@en .
-ffv:LoudActivity a skos:Concept ;
+ffontov:LoudActivity a skos:Concept ;
     rdfs:label "Sustained loud activity"@en ;
     skos:prefLabel "Sustained loud activity"@en ;
-    skos:inScheme ffv:SoundEventScheme ;
-    skos:topConceptOf ffv:SoundEventScheme ;
+    skos:inScheme ffontov:SoundEventScheme ;
+    skos:topConceptOf ffontov:SoundEventScheme ;
     skos:hiddenLabel "loud"@en , "roar"@en .
-ffv:Speech a skos:Concept ;
+ffontov:Speech a skos:Concept ;
     rdfs:label "Speech"@en ;
     skos:prefLabel "Speech"@en ;
-    skos:inScheme ffv:SoundEventScheme ;
-    skos:topConceptOf ffv:SoundEventScheme ;
+    skos:inScheme ffontov:SoundEventScheme ;
+    skos:topConceptOf ffontov:SoundEventScheme ;
     skos:hiddenLabel "speech"@en .
-ffv:VehicleSound a skos:Concept ;
+ffontov:VehicleSound a skos:Concept ;
     rdfs:label "Vehicle sound"@en ;
     skos:prefLabel "Vehicle sound"@en ;
-    skos:inScheme ffv:SoundEventScheme ;
-    skos:topConceptOf ffv:SoundEventScheme ;
+    skos:inScheme ffontov:SoundEventScheme ;
+    skos:topConceptOf ffontov:SoundEventScheme ;
     skos:hiddenLabel "vehicle"@en , "engine"@en .
 
 # ---------------- Label sources ----------------
-ffv:LabelSourceScheme a skos:ConceptScheme ;
+ffontov:LabelSourceScheme a skos:ConceptScheme ;
     rdfs:label "Label sources (scheme)"@en ;
     skos:prefLabel "Label sources"@en ;
     skos:definition "Where a label came from."@en .
-ffv:CaptionSource a skos:Concept ;
+ffontov:CaptionSource a skos:Concept ;
     rdfs:label "Caption (label source)"@en ;
     skos:prefLabel "Caption (label source)"@en ;
-    skos:inScheme ffv:LabelSourceScheme ;
-    skos:topConceptOf ffv:LabelSourceScheme ;
+    skos:inScheme ffontov:LabelSourceScheme ;
+    skos:topConceptOf ffontov:LabelSourceScheme ;
     skos:hiddenLabel "caption"@en .
-ffv:ZeroShotSource a skos:Concept ;
+ffontov:ZeroShotSource a skos:Concept ;
     rdfs:label "Zero-shot classifier"@en ;
     skos:prefLabel "Zero-shot classifier"@en ;
-    skos:inScheme ffv:LabelSourceScheme ;
-    skos:topConceptOf ffv:LabelSourceScheme ;
+    skos:inScheme ffontov:LabelSourceScheme ;
+    skos:topConceptOf ffontov:LabelSourceScheme ;
     skos:hiddenLabel "zshot"@en , "zero-shot"@en .
-ffv:DetectorSource a skos:Concept ;
+ffontov:DetectorSource a skos:Concept ;
     rdfs:label "Object detector"@en ;
     skos:prefLabel "Object detector"@en ;
-    skos:inScheme ffv:LabelSourceScheme ;
-    skos:topConceptOf ffv:LabelSourceScheme ;
+    skos:inScheme ffontov:LabelSourceScheme ;
+    skos:topConceptOf ffontov:LabelSourceScheme ;
     skos:hiddenLabel "detector"@en .
-ffv:AudioTaggerSource a skos:Concept ;
+ffontov:AudioTaggerSource a skos:Concept ;
     rdfs:label "Audio tagger"@en ;
     skos:prefLabel "Audio tagger"@en ;
-    skos:inScheme ffv:LabelSourceScheme ;
-    skos:topConceptOf ffv:LabelSourceScheme ;
+    skos:inScheme ffontov:LabelSourceScheme ;
+    skos:topConceptOf ffontov:LabelSourceScheme ;
     skos:hiddenLabel "audio"@en .
-ffv:VLMSource a skos:Concept ;
+ffontov:VLMSource a skos:Concept ;
     rdfs:label "Vision-language model"@en ;
     skos:prefLabel "Vision-language model"@en ;
-    skos:inScheme ffv:LabelSourceScheme ;
-    skos:topConceptOf ffv:LabelSourceScheme ;
+    skos:inScheme ffontov:LabelSourceScheme ;
+    skos:topConceptOf ffontov:LabelSourceScheme ;
     skos:hiddenLabel "vlm"@en .
-ffv:HumanSource a skos:Concept ;
+ffontov:HumanSource a skos:Concept ;
     rdfs:label "Human annotator"@en ;
     skos:prefLabel "Human annotator"@en ;
-    skos:inScheme ffv:LabelSourceScheme ;
-    skos:topConceptOf ffv:LabelSourceScheme ;
+    skos:inScheme ffontov:LabelSourceScheme ;
+    skos:topConceptOf ffontov:LabelSourceScheme ;
     skos:hiddenLabel "human"@en .
 
 # ---------------- Scene entity kinds ----------------
-ffv:EntityKindScheme a skos:ConceptScheme ;
+ffontov:EntityKindScheme a skos:ConceptScheme ;
     rdfs:label "Scene entity kinds (scheme)"@en ;
     skos:prefLabel "Scene entity kinds"@en ;
     skos:definition "Fine-grained kinds of things that can be depicted in a fire scene. The top concepts correspond to the core classes."@en .
-ffv:FirePhenomenonKind a skos:Concept ;
+ffontov:FirePhenomenonKind a skos:Concept ;
     rdfs:label "Fire phenomenon (kind)"@en ;
     skos:prefLabel "Fire phenomenon (kind)"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:topConceptOf ffv:EntityKindScheme .
-ffv:FlameFront a skos:Concept ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:topConceptOf ffontov:EntityKindScheme .
+ffontov:FlameFront a skos:Concept ;
     rdfs:label "Flame front"@en ;
     skos:prefLabel "Flame front"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:FirePhenomenonKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:FirePhenomenonKind ;
     skos:hiddenLabel "flame front"@en , "fire front"@en , "fire line"@en .
-ffv:SpotFire a skos:Concept ;
+ffontov:SpotFire a skos:Concept ;
     rdfs:label "Spot fire"@en ;
     skos:prefLabel "Spot fire"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:FirePhenomenonKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:FirePhenomenonKind ;
     skos:hiddenLabel "spot fire"@en , "spot fires"@en .
-ffv:CrownFire a skos:Concept ;
+ffontov:CrownFire a skos:Concept ;
     rdfs:label "Crown fire"@en ;
     skos:prefLabel "Crown fire"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:FirePhenomenonKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:FirePhenomenonKind ;
     skos:hiddenLabel "crown fire"@en , "crowning"@en .
-ffv:SurfaceFire a skos:Concept ;
+ffontov:SurfaceFire a skos:Concept ;
     rdfs:label "Surface fire"@en ;
     skos:prefLabel "Surface fire"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:FirePhenomenonKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:FirePhenomenonKind ;
     skos:hiddenLabel "surface fire"@en , "ground fire"@en .
-ffv:Torching a skos:Concept ;
+ffontov:Torching a skos:Concept ;
     rdfs:label "Torching"@en ;
     skos:prefLabel "Torching"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:FirePhenomenonKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:FirePhenomenonKind ;
     skos:hiddenLabel "torching"@en .
-ffv:Smouldering a skos:Concept ;
+ffontov:Smouldering a skos:Concept ;
     rdfs:label "Smouldering"@en ;
     skos:prefLabel "Smouldering"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:FirePhenomenonKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:FirePhenomenonKind ;
     skos:hiddenLabel "smoulder"@en , "smolder"@en , "smoldering"@en .
-ffv:Hotspot a skos:Concept ;
+ffontov:Hotspot a skos:Concept ;
     rdfs:label "Hotspot"@en ;
     skos:prefLabel "Hotspot"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:FirePhenomenonKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:FirePhenomenonKind ;
     skos:hiddenLabel "hotspot"@en , "hot spot"@en .
-ffv:FireCluster a skos:Concept ;
+ffontov:FireCluster a skos:Concept ;
     rdfs:label "Fire cluster"@en ;
     skos:prefLabel "Fire cluster"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:FirePhenomenonKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:FirePhenomenonKind ;
     skos:hiddenLabel "fire cluster"@en .
-ffv:SmokePlume a skos:Concept ;
+ffontov:SmokePlume a skos:Concept ;
     rdfs:label "Smoke plume"@en ;
     skos:prefLabel "Smoke plume"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:FirePhenomenonKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:FirePhenomenonKind ;
     skos:hiddenLabel "plume"@en , "smoke column"@en , "billowing"@en .
-ffv:Pyrocumulus a skos:Concept ;
+ffontov:Pyrocumulus a skos:Concept ;
     rdfs:label "Pyrocumulus"@en ;
     skos:prefLabel "Pyrocumulus"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:FirePhenomenonKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:FirePhenomenonKind ;
     skos:hiddenLabel "pyrocumulus"@en .
-ffv:Ember a skos:Concept ;
+ffontov:Ember a skos:Concept ;
     rdfs:label "Ember"@en ;
     skos:prefLabel "Ember"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:FirePhenomenonKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:FirePhenomenonKind ;
     skos:hiddenLabel "ember"@en , "embers"@en , "firebrand"@en .
-ffv:PileBurn a skos:Concept ;
+ffontov:PileBurn a skos:Concept ;
     rdfs:label "Pile burn"@en ;
     skos:prefLabel "Pile burn"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:FirePhenomenonKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:FirePhenomenonKind ;
     skos:hiddenLabel "pile burn"@en , "burn pile"@en .
-ffv:AgentKind a skos:Concept ;
+ffontov:AgentKind a skos:Concept ;
     rdfs:label "Agent (kind)"@en ;
     skos:prefLabel "Agent (kind)"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:topConceptOf ffv:EntityKindScheme .
-ffv:Person a skos:Concept ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:topConceptOf ffontov:EntityKindScheme .
+ffontov:Person a skos:Concept ;
     rdfs:label "Person"@en ;
     skos:prefLabel "Person"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:AgentKind .
-ffv:Firefighter a skos:Concept ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:AgentKind .
+ffontov:Firefighter a skos:Concept ;
     rdfs:label "Firefighter"@en ;
     skos:prefLabel "Firefighter"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Person ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Person ;
     skos:hiddenLabel "firefighter"@en , "firefighters"@en , "fireman"@en , "crew"@en .
-ffv:Civilian a skos:Concept ;
+ffontov:Civilian a skos:Concept ;
     rdfs:label "Civilian"@en ;
     skos:prefLabel "Civilian"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Person ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Person ;
     skos:hiddenLabel "civilian"@en , "resident"@en , "people"@en .
-ffv:Responder a skos:Concept ;
+ffontov:Responder a skos:Concept ;
     rdfs:label "Responder"@en ;
     skos:prefLabel "Responder"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Person .
-ffv:PoliceOfficer a skos:Concept ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Person .
+ffontov:PoliceOfficer a skos:Concept ;
     rdfs:label "Police officer"@en ;
     skos:prefLabel "Police officer"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Responder ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Responder ;
     skos:hiddenLabel "police"@en .
-ffv:EMSWorker a skos:Concept ;
+ffontov:EMSWorker a skos:Concept ;
     rdfs:label "EMS worker"@en ;
     skos:prefLabel "EMS worker"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Responder ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Responder ;
     skos:hiddenLabel "paramedic"@en , "ems"@en .
-ffv:UtilityWorker a skos:Concept ;
+ffontov:UtilityWorker a skos:Concept ;
     rdfs:label "Utility worker"@en ;
     skos:prefLabel "Utility worker"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Responder ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Responder ;
     skos:hiddenLabel "utility crew"@en , "lineman"@en .
-ffv:Official a skos:Concept ;
+ffontov:Official a skos:Concept ;
     rdfs:label "Official"@en ;
     skos:prefLabel "Official"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Person ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Person ;
     skos:hiddenLabel "official"@en .
-ffv:Lookout a skos:Concept ;
+ffontov:Lookout a skos:Concept ;
     rdfs:label "Lookout"@en ;
     skos:prefLabel "Lookout"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Person ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Person ;
     skos:hiddenLabel "lookout"@en , "spotter"@en .
-ffv:MediaObserver a skos:Concept ;
+ffontov:MediaObserver a skos:Concept ;
     rdfs:label "Media / observer"@en ;
     skos:prefLabel "Media / observer"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Person ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Person ;
     skos:hiddenLabel "media"@en , "reporter"@en , "observer"@en .
-ffv:Animal a skos:Concept ;
+ffontov:Animal a skos:Concept ;
     rdfs:label "Animal"@en ;
     skos:prefLabel "Animal"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:AgentKind .
-ffv:Pet a skos:Concept ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:AgentKind .
+ffontov:Pet a skos:Concept ;
     rdfs:label "Pet"@en ;
     skos:prefLabel "Pet"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Animal ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Animal ;
     skos:hiddenLabel "dog"@en , "cat"@en , "pet"@en .
-ffv:Livestock a skos:Concept ;
+ffontov:Livestock a skos:Concept ;
     rdfs:label "Livestock"@en ;
     skos:prefLabel "Livestock"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Animal ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Animal ;
     skos:hiddenLabel "cattle"@en , "horse"@en , "livestock"@en , "sheep"@en .
-ffv:Wildlife a skos:Concept ;
+ffontov:Wildlife a skos:Concept ;
     rdfs:label "Wildlife"@en ;
     skos:prefLabel "Wildlife"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Animal ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Animal ;
     skos:hiddenLabel "deer"@en , "wildlife"@en , "bird"@en .
-ffv:EquipmentKind a skos:Concept ;
+ffontov:EquipmentKind a skos:Concept ;
     rdfs:label "Equipment (kind)"@en ;
     skos:prefLabel "Equipment (kind)"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:topConceptOf ffv:EntityKindScheme .
-ffv:HandTool a skos:Concept ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:topConceptOf ffontov:EntityKindScheme .
+ffontov:HandTool a skos:Concept ;
     rdfs:label "Hand tool"@en ;
     skos:prefLabel "Hand tool"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:EquipmentKind .
-ffv:Pulaski a skos:Concept ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:EquipmentKind .
+ffontov:Pulaski a skos:Concept ;
     rdfs:label "Pulaski"@en ;
     skos:prefLabel "Pulaski"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:HandTool ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:HandTool ;
     skos:hiddenLabel "pulaski"@en .
-ffv:McLeod a skos:Concept ;
+ffontov:McLeod a skos:Concept ;
     rdfs:label "McLeod"@en ;
     skos:prefLabel "McLeod"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:HandTool ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:HandTool ;
     skos:hiddenLabel "mcleod"@en .
-ffv:Shovel a skos:Concept ;
+ffontov:Shovel a skos:Concept ;
     rdfs:label "Shovel"@en ;
     skos:prefLabel "Shovel"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:HandTool ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:HandTool ;
     skos:hiddenLabel "shovel"@en .
-ffv:Axe a skos:Concept ;
+ffontov:Axe a skos:Concept ;
     rdfs:label "Axe"@en ;
     skos:prefLabel "Axe"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:HandTool ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:HandTool ;
     skos:hiddenLabel "axe"@en .
-ffv:FireBeater a skos:Concept ;
+ffontov:FireBeater a skos:Concept ;
     rdfs:label "Fire beater"@en ;
     skos:prefLabel "Fire beater"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:HandTool ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:HandTool ;
     skos:hiddenLabel "fire beater"@en , "flapper"@en .
-ffv:Chainsaw a skos:Concept ;
+ffontov:Chainsaw a skos:Concept ;
     rdfs:label "Chainsaw"@en ;
     skos:prefLabel "Chainsaw"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:EquipmentKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "chainsaw"@en .
-ffv:DripTorch a skos:Concept ;
+ffontov:DripTorch a skos:Concept ;
     rdfs:label "Drip torch"@en ;
     skos:prefLabel "Drip torch"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:EquipmentKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "drip torch"@en , "driptorch"@en .
-ffv:Fusee a skos:Concept ;
+ffontov:Fusee a skos:Concept ;
     rdfs:label "Fusee"@en ;
     skos:prefLabel "Fusee"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:EquipmentKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "fusee"@en .
-ffv:HoseLine a skos:Concept ;
+ffontov:HoseLine a skos:Concept ;
     rdfs:label "Hose line"@en ;
     skos:prefLabel "Hose line"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:EquipmentKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "hose"@en .
-ffv:Nozzle a skos:Concept ;
+ffontov:Nozzle a skos:Concept ;
     rdfs:label "Nozzle"@en ;
     skos:prefLabel "Nozzle"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:EquipmentKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "nozzle"@en .
-ffv:PortablePump a skos:Concept ;
+ffontov:PortablePump a skos:Concept ;
     rdfs:label "Portable pump"@en ;
     skos:prefLabel "Portable pump"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:EquipmentKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "portable pump"@en .
-ffv:PortableWaterTank a skos:Concept ;
+ffontov:PortableWaterTank a skos:Concept ;
     rdfs:label "Portable water tank"@en ;
     skos:prefLabel "Portable water tank"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:EquipmentKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "pumpkin"@en , "portable tank"@en .
-ffv:Sprinkler a skos:Concept ;
+ffontov:Sprinkler a skos:Concept ;
     rdfs:label "Sprinkler"@en ;
     skos:prefLabel "Sprinkler"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:EquipmentKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "sprinkler"@en , "mister"@en .
-ffv:HandheldRadio a skos:Concept ;
+ffontov:HandheldRadio a skos:Concept ;
     rdfs:label "Handheld radio"@en ;
     skos:prefLabel "Handheld radio"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:EquipmentKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "radio"@en .
-ffv:MapBoard a skos:Concept ;
+ffontov:MapBoard a skos:Concept ;
     rdfs:label "Map board"@en ;
     skos:prefLabel "Map board"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:EquipmentKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "map board"@en .
-ffv:Generator a skos:Concept ;
+ffontov:Generator a skos:Concept ;
     rdfs:label "Generator"@en ;
     skos:prefLabel "Generator"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:EquipmentKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "generator"@en .
-ffv:PortableLighting a skos:Concept ;
+ffontov:PortableLighting a skos:Concept ;
     rdfs:label "Portable lighting"@en ;
     skos:prefLabel "Portable lighting"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:EquipmentKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "light tower"@en , "portable light"@en .
-ffv:TrafficControlDevice a skos:Concept ;
+ffontov:TrafficControlDevice a skos:Concept ;
     rdfs:label "Traffic control device"@en ;
     skos:prefLabel "Traffic control device"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:EquipmentKind .
-ffv:TrafficCone a skos:Concept ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:EquipmentKind .
+ffontov:TrafficCone a skos:Concept ;
     rdfs:label "Traffic cone"@en ;
     skos:prefLabel "Traffic cone"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:TrafficControlDevice ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:TrafficControlDevice ;
     skos:hiddenLabel "cone"@en .
-ffv:CautionTape a skos:Concept ;
+ffontov:CautionTape a skos:Concept ;
     rdfs:label "Caution tape"@en ;
     skos:prefLabel "Caution tape"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:TrafficControlDevice ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:TrafficControlDevice ;
     skos:hiddenLabel "caution tape"@en .
-ffv:Barricade a skos:Concept ;
+ffontov:Barricade a skos:Concept ;
     rdfs:label "Barricade"@en ;
     skos:prefLabel "Barricade"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:TrafficControlDevice ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:TrafficControlDevice ;
     skos:hiddenLabel "barricade"@en , "road closure sign"@en .
-ffv:FuelCan a skos:Concept ;
+ffontov:FuelCan a skos:Concept ;
     rdfs:label "Fuel can"@en ;
     skos:prefLabel "Fuel can"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:EquipmentKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "fuel can"@en , "jerry can"@en .
-ffv:FireShelterPack a skos:Concept ;
+ffontov:FireShelterPack a skos:Concept ;
     rdfs:label "Fire shelter (packed)"@en ;
     skos:prefLabel "Fire shelter (packed)"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:EquipmentKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:EquipmentKind ;
     skos:hiddenLabel "fire shelter"@en .
-ffv:VehicleKind a skos:Concept ;
+ffontov:VehicleKind a skos:Concept ;
     rdfs:label "Vehicle (kind)"@en ;
     skos:prefLabel "Vehicle (kind)"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:topConceptOf ffv:EntityKindScheme .
-ffv:GroundVehicle a skos:Concept ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:topConceptOf ffontov:EntityKindScheme .
+ffontov:GroundVehicle a skos:Concept ;
     rdfs:label "Ground vehicle"@en ;
     skos:prefLabel "Ground vehicle"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:VehicleKind .
-ffv:FireEngine a skos:Concept ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:VehicleKind .
+ffontov:FireEngine a skos:Concept ;
     rdfs:label "Fire engine"@en ;
     skos:prefLabel "Fire engine"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:GroundVehicle ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:GroundVehicle ;
     skos:hiddenLabel "fire engine"@en , "fire truck"@en .
-ffv:BrushEngine a skos:Concept ;
+ffontov:BrushEngine a skos:Concept ;
     rdfs:label "Brush engine"@en ;
     skos:prefLabel "Brush engine"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:FireEngine ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:FireEngine ;
     skos:hiddenLabel "brush engine"@en .
-ffv:WaterTender a skos:Concept ;
+ffontov:WaterTender a skos:Concept ;
     rdfs:label "Water tender"@en ;
     skos:prefLabel "Water tender"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:GroundVehicle ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:GroundVehicle ;
     skos:hiddenLabel "water tender"@en , "tanker truck"@en .
-ffv:Dozer a skos:Concept ;
+ffontov:Dozer a skos:Concept ;
     rdfs:label "Dozer"@en ;
     skos:prefLabel "Dozer"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:GroundVehicle ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:GroundVehicle ;
     skos:hiddenLabel "dozer"@en , "bulldozer"@en .
-ffv:Excavator a skos:Concept ;
+ffontov:Excavator a skos:Concept ;
     rdfs:label "Excavator"@en ;
     skos:prefLabel "Excavator"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:GroundVehicle ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:GroundVehicle ;
     skos:hiddenLabel "excavator"@en , "grader"@en .
-ffv:PoliceCar a skos:Concept ;
+ffontov:PoliceCar a skos:Concept ;
     rdfs:label "Police car"@en ;
     skos:prefLabel "Police car"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:GroundVehicle ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:GroundVehicle ;
     skos:hiddenLabel "police car"@en .
-ffv:Ambulance a skos:Concept ;
+ffontov:Ambulance a skos:Concept ;
     rdfs:label "Ambulance"@en ;
     skos:prefLabel "Ambulance"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:GroundVehicle ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:GroundVehicle ;
     skos:hiddenLabel "ambulance"@en .
-ffv:Bus a skos:Concept ;
+ffontov:Bus a skos:Concept ;
     rdfs:label "Bus"@en ;
     skos:prefLabel "Bus"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:GroundVehicle ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:GroundVehicle ;
     skos:hiddenLabel "bus"@en .
-ffv:PrivateCar a skos:Concept ;
+ffontov:PrivateCar a skos:Concept ;
     rdfs:label "Private car"@en ;
     skos:prefLabel "Private car"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:GroundVehicle ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:GroundVehicle ;
     skos:hiddenLabel "car"@en , "suv"@en , "pickup"@en .
-ffv:LivestockTrailer a skos:Concept ;
+ffontov:LivestockTrailer a skos:Concept ;
     rdfs:label "Livestock trailer"@en ;
     skos:prefLabel "Livestock trailer"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:GroundVehicle ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:GroundVehicle ;
     skos:hiddenLabel "trailer"@en .
-ffv:Aircraft a skos:Concept ;
+ffontov:Aircraft a skos:Concept ;
     rdfs:label "Aircraft"@en ;
     skos:prefLabel "Aircraft"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:VehicleKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:VehicleKind ;
     skos:hiddenLabel "aircraft"@en , "plane"@en .
-ffv:Helicopter a skos:Concept ;
+ffontov:Helicopter a skos:Concept ;
     rdfs:label "Helicopter"@en ;
     skos:prefLabel "Helicopter"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Aircraft ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Aircraft ;
     skos:hiddenLabel "helicopter"@en .
-ffv:AirTanker a skos:Concept ;
+ffontov:AirTanker a skos:Concept ;
     rdfs:label "Air tanker"@en ;
     skos:prefLabel "Air tanker"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Aircraft ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Aircraft ;
     skos:hiddenLabel "air tanker"@en , "airtanker"@en , "water bomber"@en .
-ffv:Drone a skos:Concept ;
+ffontov:Drone a skos:Concept ;
     rdfs:label "Drone"@en ;
     skos:prefLabel "Drone"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Aircraft ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Aircraft ;
     skos:hiddenLabel "drone"@en , "uav"@en , "uas"@en .
-ffv:BuiltAssetKind a skos:Concept ;
+ffontov:BuiltAssetKind a skos:Concept ;
     rdfs:label "Built asset (kind)"@en ;
     skos:prefLabel "Built asset (kind)"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:topConceptOf ffv:EntityKindScheme .
-ffv:Building a skos:Concept ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:topConceptOf ffontov:EntityKindScheme .
+ffontov:Building a skos:Concept ;
     rdfs:label "Building"@en ;
     skos:prefLabel "Building"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "building"@en , "structure"@en .
-ffv:House a skos:Concept ;
+ffontov:House a skos:Concept ;
     rdfs:label "House"@en ;
     skos:prefLabel "House"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Building ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Building ;
     skos:hiddenLabel "house"@en , "home"@en .
-ffv:Garage a skos:Concept ;
+ffontov:Garage a skos:Concept ;
     rdfs:label "Garage"@en ;
     skos:prefLabel "Garage"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Building ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Building ;
     skos:hiddenLabel "garage"@en .
-ffv:Barn a skos:Concept ;
+ffontov:Barn a skos:Concept ;
     rdfs:label "Barn"@en ;
     skos:prefLabel "Barn"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Building ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Building ;
     skos:hiddenLabel "barn"@en .
-ffv:Shed a skos:Concept ;
+ffontov:Shed a skos:Concept ;
     rdfs:label "Shed"@en ;
     skos:prefLabel "Shed"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Building ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Building ;
     skos:hiddenLabel "shed"@en , "greenhouse"@en .
-ffv:CommandPost a skos:Concept ;
+ffontov:CommandPost a skos:Concept ;
     rdfs:label "Incident command post"@en ;
     skos:prefLabel "Incident command post"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Building ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Building ;
     skos:hiddenLabel "command post"@en .
-ffv:Road a skos:Concept ;
+ffontov:Road a skos:Concept ;
     rdfs:label "Road"@en ;
     skos:prefLabel "Road"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "road"@en , "highway"@en , "street"@en .
-ffv:Bridge a skos:Concept ;
+ffontov:Bridge a skos:Concept ;
     rdfs:label "Bridge"@en ;
     skos:prefLabel "Bridge"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "bridge"@en .
-ffv:PowerLine a skos:Concept ;
+ffontov:PowerLine a skos:Concept ;
     rdfs:label "Power line"@en ;
     skos:prefLabel "Power line"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "power line"@en , "powerline"@en .
-ffv:PowerPole a skos:Concept ;
+ffontov:PowerPole a skos:Concept ;
     rdfs:label "Power pole"@en ;
     skos:prefLabel "Power pole"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "power pole"@en , "utility pole"@en .
-ffv:Transformer a skos:Concept ;
+ffontov:Transformer a skos:Concept ;
     rdfs:label "Transformer"@en ;
     skos:prefLabel "Transformer"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "transformer"@en .
-ffv:Hydrant a skos:Concept ;
+ffontov:Hydrant a skos:Concept ;
     rdfs:label "Hydrant"@en ;
     skos:prefLabel "Hydrant"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "hydrant"@en .
-ffv:PropaneTank a skos:Concept ;
+ffontov:PropaneTank a skos:Concept ;
     rdfs:label "Propane tank"@en ;
     skos:prefLabel "Propane tank"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "propane"@en , "gas tank"@en , "gas cylinder"@en .
-ffv:Fence a skos:Concept ;
+ffontov:Fence a skos:Concept ;
     rdfs:label "Fence"@en ;
     skos:prefLabel "Fence"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "fence"@en , "gate"@en .
-ffv:Sign a skos:Concept ;
+ffontov:Sign a skos:Concept ;
     rdfs:label "Sign"@en ;
     skos:prefLabel "Sign"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "sign"@en , "signpost"@en .
-ffv:CommunicationTower a skos:Concept ;
+ffontov:CommunicationTower a skos:Concept ;
     rdfs:label "Communication tower"@en ;
     skos:prefLabel "Communication tower"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "tower"@en , "antenna"@en .
-ffv:SolarPanel a skos:Concept ;
+ffontov:SolarPanel a skos:Concept ;
     rdfs:label "Solar panel"@en ;
     skos:prefLabel "Solar panel"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "solar panel"@en .
-ffv:Culvert a skos:Concept ;
+ffontov:Culvert a skos:Concept ;
     rdfs:label "Culvert"@en ;
     skos:prefLabel "Culvert"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "culvert"@en .
-ffv:Helispot a skos:Concept ;
+ffontov:Helispot a skos:Concept ;
     rdfs:label "Helispot"@en ;
     skos:prefLabel "Helispot"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:BuiltAssetKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:BuiltAssetKind ;
     skos:hiddenLabel "helispot"@en , "landing zone"@en .
-ffv:EnvironmentFeatureKind a skos:Concept ;
+ffontov:EnvironmentFeatureKind a skos:Concept ;
     rdfs:label "Environment feature (kind)"@en ;
     skos:prefLabel "Environment feature (kind)"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:topConceptOf ffv:EntityKindScheme .
-ffv:Vegetation a skos:Concept ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:topConceptOf ffontov:EntityKindScheme .
+ffontov:Vegetation a skos:Concept ;
     rdfs:label "Vegetation"@en ;
     skos:prefLabel "Vegetation"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:EnvironmentFeatureKind .
-ffv:Forest a skos:Concept ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:EnvironmentFeatureKind .
+ffontov:Forest a skos:Concept ;
     rdfs:label "Forest"@en ;
     skos:prefLabel "Forest"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Vegetation ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Vegetation ;
     skos:hiddenLabel "forest"@en , "woods"@en , "woodland"@en .
-ffv:ConiferousForest a skos:Concept ;
+ffontov:ConiferousForest a skos:Concept ;
     rdfs:label "Coniferous forest"@en ;
     skos:prefLabel "Coniferous forest"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Forest ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Forest ;
     skos:hiddenLabel "pine"@en , "conifer"@en , "spruce"@en , "fir"@en .
-ffv:DeciduousForest a skos:Concept ;
+ffontov:DeciduousForest a skos:Concept ;
     rdfs:label "Deciduous forest"@en ;
     skos:prefLabel "Deciduous forest"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Forest ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Forest ;
     skos:hiddenLabel "deciduous"@en , "oak"@en , "birch"@en .
-ffv:MixedForest a skos:Concept ;
+ffontov:MixedForest a skos:Concept ;
     rdfs:label "Mixed forest"@en ;
     skos:prefLabel "Mixed forest"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Forest ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Forest ;
     skos:hiddenLabel "mixed forest"@en .
-ffv:Grassland a skos:Concept ;
+ffontov:Grassland a skos:Concept ;
     rdfs:label "Grassland"@en ;
     skos:prefLabel "Grassland"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Vegetation ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Vegetation ;
     skos:hiddenLabel "grass"@en , "grassland"@en , "meadow"@en , "field"@en .
-ffv:Shrubland a skos:Concept ;
+ffontov:Shrubland a skos:Concept ;
     rdfs:label "Shrubland"@en ;
     skos:prefLabel "Shrubland"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Vegetation ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Vegetation ;
     skos:hiddenLabel "shrub"@en , "brush"@en , "chaparral"@en , "bush"@en .
-ffv:Tree a skos:Concept ;
+ffontov:Tree a skos:Concept ;
     rdfs:label "Tree"@en ;
     skos:prefLabel "Tree"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Vegetation ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Vegetation ;
     skos:hiddenLabel "tree"@en , "trees"@en .
-ffv:DownedLog a skos:Concept ;
+ffontov:DownedLog a skos:Concept ;
     rdfs:label "Downed log"@en ;
     skos:prefLabel "Downed log"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Vegetation ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Vegetation ;
     skos:hiddenLabel "log"@en , "logs"@en .
-ffv:LadderFuel a skos:Concept ;
+ffontov:LadderFuel a skos:Concept ;
     rdfs:label "Ladder fuel"@en ;
     skos:prefLabel "Ladder fuel"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Vegetation ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Vegetation ;
     skos:hiddenLabel "ladder fuel"@en .
-ffv:LeafLitter a skos:Concept ;
+ffontov:LeafLitter a skos:Concept ;
     rdfs:label "Leaf litter / duff"@en ;
     skos:prefLabel "Leaf litter / duff"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Vegetation ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Vegetation ;
     skos:hiddenLabel "litter"@en , "duff"@en .
-ffv:Terrain a skos:Concept ;
+ffontov:Terrain a skos:Concept ;
     rdfs:label "Terrain"@en ;
     skos:prefLabel "Terrain"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:EnvironmentFeatureKind .
-ffv:Ridge a skos:Concept ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:EnvironmentFeatureKind .
+ffontov:Ridge a skos:Concept ;
     rdfs:label "Ridge"@en ;
     skos:prefLabel "Ridge"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Terrain ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Terrain ;
     skos:hiddenLabel "ridge"@en , "ridgeline"@en .
-ffv:Slope a skos:Concept ;
+ffontov:Slope a skos:Concept ;
     rdfs:label "Slope"@en ;
     skos:prefLabel "Slope"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Terrain ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Terrain ;
     skos:hiddenLabel "slope"@en , "hillside"@en , "hill"@en .
-ffv:Valley a skos:Concept ;
+ffontov:Valley a skos:Concept ;
     rdfs:label "Valley"@en ;
     skos:prefLabel "Valley"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Terrain ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Terrain ;
     skos:hiddenLabel "valley"@en .
-ffv:Canyon a skos:Concept ;
+ffontov:Canyon a skos:Concept ;
     rdfs:label "Canyon"@en ;
     skos:prefLabel "Canyon"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Terrain ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Terrain ;
     skos:hiddenLabel "canyon"@en .
-ffv:Mountain a skos:Concept ;
+ffontov:Mountain a skos:Concept ;
     rdfs:label "Mountain"@en ;
     skos:prefLabel "Mountain"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Terrain ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Terrain ;
     skos:hiddenLabel "mountain"@en .
-ffv:RockyTerrain a skos:Concept ;
+ffontov:RockyTerrain a skos:Concept ;
     rdfs:label "Rocky terrain"@en ;
     skos:prefLabel "Rocky terrain"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:Terrain ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:Terrain ;
     skos:hiddenLabel "rock"@en , "rocky"@en .
-ffv:WaterBody a skos:Concept ;
+ffontov:WaterBody a skos:Concept ;
     rdfs:label "Water body"@en ;
     skos:prefLabel "Water body"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:EnvironmentFeatureKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:EnvironmentFeatureKind ;
     skos:hiddenLabel "water"@en .
-ffv:River a skos:Concept ;
+ffontov:River a skos:Concept ;
     rdfs:label "River"@en ;
     skos:prefLabel "River"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:WaterBody ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:WaterBody ;
     skos:hiddenLabel "river"@en .
-ffv:Lake a skos:Concept ;
+ffontov:Lake a skos:Concept ;
     rdfs:label "Lake"@en ;
     skos:prefLabel "Lake"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:WaterBody ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:WaterBody ;
     skos:hiddenLabel "lake"@en .
-ffv:Pond a skos:Concept ;
+ffontov:Pond a skos:Concept ;
     rdfs:label "Pond"@en ;
     skos:prefLabel "Pond"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:WaterBody ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:WaterBody ;
     skos:hiddenLabel "pond"@en .
-ffv:Stream a skos:Concept ;
+ffontov:Stream a skos:Concept ;
     rdfs:label "Stream"@en ;
     skos:prefLabel "Stream"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:WaterBody ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:WaterBody ;
     skos:hiddenLabel "stream"@en , "creek"@en .
-ffv:Sea a skos:Concept ;
+ffontov:Sea a skos:Concept ;
     rdfs:label "Sea"@en ;
     skos:prefLabel "Sea"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:WaterBody ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:WaterBody ;
     skos:hiddenLabel "sea"@en , "ocean"@en .
-ffv:SnowCover a skos:Concept ;
+ffontov:SnowCover a skos:Concept ;
     rdfs:label "Snow cover"@en ;
     skos:prefLabel "Snow cover"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:EnvironmentFeatureKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:EnvironmentFeatureKind ;
     skos:hiddenLabel "snow"@en , "ice"@en .
-ffv:AgriculturalLand a skos:Concept ;
+ffontov:AgriculturalLand a skos:Concept ;
     rdfs:label "Agricultural land"@en ;
     skos:prefLabel "Agricultural land"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:EnvironmentFeatureKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:EnvironmentFeatureKind ;
     skos:hiddenLabel "farm"@en , "crop"@en , "orchard"@en , "farmland"@en .
-ffv:UrbanArea a skos:Concept ;
+ffontov:UrbanArea a skos:Concept ;
     rdfs:label "Urban / WUI area"@en ;
     skos:prefLabel "Urban / WUI area"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:EnvironmentFeatureKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:EnvironmentFeatureKind ;
     skos:hiddenLabel "town"@en , "city"@en , "village"@en , "neighborhood"@en .
-ffv:BareGround a skos:Concept ;
+ffontov:BareGround a skos:Concept ;
     rdfs:label "Bare ground"@en ;
     skos:prefLabel "Bare ground"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:EnvironmentFeatureKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:EnvironmentFeatureKind ;
     skos:hiddenLabel "bare"@en , "barren"@en .
-ffv:BurnEvidenceKind a skos:Concept ;
+ffontov:BurnEvidenceKind a skos:Concept ;
     rdfs:label "Burn evidence (kind)"@en ;
     skos:prefLabel "Burn evidence (kind)"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:topConceptOf ffv:EntityKindScheme .
-ffv:AshDeposit a skos:Concept ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:topConceptOf ffontov:EntityKindScheme .
+ffontov:AshDeposit a skos:Concept ;
     rdfs:label "Ash deposit"@en ;
     skos:prefLabel "Ash deposit"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:BurnEvidenceKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:BurnEvidenceKind ;
     skos:hiddenLabel "ash"@en .
-ffv:CharredTrunk a skos:Concept ;
+ffontov:CharredTrunk a skos:Concept ;
     rdfs:label "Charred trunk"@en ;
     skos:prefLabel "Charred trunk"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:BurnEvidenceKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:BurnEvidenceKind ;
     skos:hiddenLabel "charred"@en , "char"@en .
-ffv:ScorchedCrown a skos:Concept ;
+ffontov:ScorchedCrown a skos:Concept ;
     rdfs:label "Scorched crown"@en ;
     skos:prefLabel "Scorched crown"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:BurnEvidenceKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:BurnEvidenceKind ;
     skos:hiddenLabel "scorched crown"@en .
-ffv:Snag a skos:Concept ;
+ffontov:Snag a skos:Concept ;
     rdfs:label "Snag"@en ;
     skos:prefLabel "Snag"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:BurnEvidenceKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:BurnEvidenceKind ;
     skos:hiddenLabel "snag"@en , "dead standing tree"@en .
-ffv:ExposedMineralSoil a skos:Concept ;
+ffontov:ExposedMineralSoil a skos:Concept ;
     rdfs:label "Exposed mineral soil"@en ;
     skos:prefLabel "Exposed mineral soil"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:BurnEvidenceKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:BurnEvidenceKind ;
     skos:hiddenLabel "mineral soil"@en .
-ffv:ErosionRill a skos:Concept ;
+ffontov:ErosionRill a skos:Concept ;
     rdfs:label "Erosion rill"@en ;
     skos:prefLabel "Erosion rill"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:BurnEvidenceKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:BurnEvidenceKind ;
     skos:hiddenLabel "rill"@en , "erosion"@en .
-ffv:UnburnedPatch a skos:Concept ;
+ffontov:UnburnedPatch a skos:Concept ;
     rdfs:label "Unburned patch"@en ;
     skos:prefLabel "Unburned patch"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:BurnEvidenceKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:BurnEvidenceKind ;
     skos:hiddenLabel "unburned patch"@en , "green patch"@en .
-ffv:Regrowth a skos:Concept ;
+ffontov:Regrowth a skos:Concept ;
     rdfs:label "Regrowth"@en ;
     skos:prefLabel "Regrowth"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:BurnEvidenceKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:BurnEvidenceKind ;
     skos:hiddenLabel "regrowth"@en , "sprout"@en , "seedling"@en .
-ffv:RetardantLine a skos:Concept ;
+ffontov:RetardantLine a skos:Concept ;
     rdfs:label "Retardant line"@en ;
     skos:prefLabel "Retardant line"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:BurnEvidenceKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:BurnEvidenceKind ;
     skos:hiddenLabel "retardant line"@en , "red stain"@en .
-ffv:Foam a skos:Concept ;
+ffontov:Foam a skos:Concept ;
     rdfs:label "Foam"@en ;
     skos:prefLabel "Foam"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:BurnEvidenceKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:BurnEvidenceKind ;
     skos:hiddenLabel "foam"@en .
-ffv:ControlLine a skos:Concept ;
+ffontov:ControlLine a skos:Concept ;
     rdfs:label "Control line / dozer line"@en ;
     skos:prefLabel "Control line / dozer line"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:BurnEvidenceKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:BurnEvidenceKind ;
     skos:hiddenLabel "dozer line"@en , "hand line"@en , "fire line"@en .
-ffv:ErosionControlMeasure a skos:Concept ;
+ffontov:ErosionControlMeasure a skos:Concept ;
     rdfs:label "Erosion control measure"@en ;
     skos:prefLabel "Erosion control measure"@en ;
-    skos:inScheme ffv:EntityKindScheme ;
-    skos:broader ffv:BurnEvidenceKind ;
+    skos:inScheme ffontov:EntityKindScheme ;
+    skos:broader ffontov:BurnEvidenceKind ;
     skos:hiddenLabel "wattle"@en , "mulch"@en , "sandbag"@en , "erosion matting"@en .
 
 # ---------------- Entity states ----------------
-ffv:StateScheme a skos:ConceptScheme ;
+ffontov:StateScheme a skos:ConceptScheme ;
     rdfs:label "Entity states (scheme)"@en ;
     skos:prefLabel "Entity states"@en ;
     skos:definition "States / conditions of scene entities."@en .
-ffv:DamageState a skos:Concept ;
+ffontov:DamageState a skos:Concept ;
     rdfs:label "Damage state"@en ;
     skos:prefLabel "Damage state"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:topConceptOf ffv:StateScheme .
-ffv:Intact a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:topConceptOf ffontov:StateScheme .
+ffontov:Intact a skos:Concept ;
     rdfs:label "Intact"@en ;
     skos:prefLabel "Intact"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:DamageState .
-ffv:Scorched a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:DamageState .
+ffontov:Scorched a skos:Concept ;
     rdfs:label "Scorched"@en ;
     skos:prefLabel "Scorched"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:DamageState .
-ffv:Charred a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:DamageState .
+ffontov:Charred a skos:Concept ;
     rdfs:label "Charred"@en ;
     skos:prefLabel "Charred"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:DamageState .
-ffv:Melted a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:DamageState .
+ffontov:Melted a skos:Concept ;
     rdfs:label "Melted"@en ;
     skos:prefLabel "Melted"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:DamageState .
-ffv:Damaged a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:DamageState .
+ffontov:Damaged a skos:Concept ;
     rdfs:label "Damaged"@en ;
     skos:prefLabel "Damaged"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:DamageState .
-ffv:Destroyed a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:DamageState .
+ffontov:Destroyed a skos:Concept ;
     rdfs:label "Destroyed"@en ;
     skos:prefLabel "Destroyed"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:DamageState .
-ffv:Collapsed a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:DamageState .
+ffontov:Collapsed a skos:Concept ;
     rdfs:label "Collapsed"@en ;
     skos:prefLabel "Collapsed"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:DamageState .
-ffv:FireState a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:DamageState .
+ffontov:FireState a skos:Concept ;
     rdfs:label "Fire involvement"@en ;
     skos:prefLabel "Fire involvement"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:topConceptOf ffv:StateScheme .
-ffv:OnFire a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:topConceptOf ffontov:StateScheme .
+ffontov:OnFire a skos:Concept ;
     rdfs:label "On fire"@en ;
     skos:prefLabel "On fire"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:FireState .
-ffv:SmoulderingState a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:FireState .
+ffontov:SmoulderingState a skos:Concept ;
     rdfs:label "Smouldering (state)"@en ;
     skos:prefLabel "Smouldering (state)"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:FireState .
-ffv:Threatened a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:FireState .
+ffontov:Threatened a skos:Concept ;
     rdfs:label "Threatened"@en ;
     skos:prefLabel "Threatened"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:FireState .
-ffv:AccessState a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:FireState .
+ffontov:AccessState a skos:Concept ;
     rdfs:label "Access state"@en ;
     skos:prefLabel "Access state"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:topConceptOf ffv:StateScheme .
-ffv:Open a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:topConceptOf ffontov:StateScheme .
+ffontov:Open a skos:Concept ;
     rdfs:label "Open"@en ;
     skos:prefLabel "Open"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:AccessState .
-ffv:Blocked a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:AccessState .
+ffontov:Blocked a skos:Concept ;
     rdfs:label "Blocked"@en ;
     skos:prefLabel "Blocked"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:AccessState .
-ffv:Passable a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:AccessState .
+ffontov:Passable a skos:Concept ;
     rdfs:label "Passable"@en ;
     skos:prefLabel "Passable"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:AccessState .
-ffv:Accessible a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:AccessState .
+ffontov:Accessible a skos:Concept ;
     rdfs:label "Accessible"@en ;
     skos:prefLabel "Accessible"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:AccessState .
-ffv:OperationalState a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:AccessState .
+ffontov:OperationalState a skos:Concept ;
     rdfs:label "Operational state"@en ;
     skos:prefLabel "Operational state"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:topConceptOf ffv:StateScheme .
-ffv:Deployed a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:topConceptOf ffontov:StateScheme .
+ffontov:Deployed a skos:Concept ;
     rdfs:label "Deployed"@en ;
     skos:prefLabel "Deployed"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:OperationalState .
-ffv:Staged a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:OperationalState .
+ffontov:Staged a skos:Concept ;
     rdfs:label "Staged"@en ;
     skos:prefLabel "Staged"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:OperationalState .
-ffv:Charged a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:OperationalState .
+ffontov:Charged a skos:Concept ;
     rdfs:label "Charged (hose)"@en ;
     skos:prefLabel "Charged (hose)"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:OperationalState .
-ffv:Flowing a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:OperationalState .
+ffontov:Flowing a skos:Concept ;
     rdfs:label "Flowing water/foam"@en ;
     skos:prefLabel "Flowing water/foam"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:OperationalState .
-ffv:LightsOn a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:OperationalState .
+ffontov:LightsOn a skos:Concept ;
     rdfs:label "Emergency lights on"@en ;
     skos:prefLabel "Emergency lights on"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:OperationalState .
-ffv:Down a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:OperationalState .
+ffontov:Down a skos:Concept ;
     rdfs:label "Down / fallen"@en ;
     skos:prefLabel "Down / fallen"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:OperationalState .
-ffv:Leaning a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:OperationalState .
+ffontov:Leaning a skos:Concept ;
     rdfs:label "Leaning"@en ;
     skos:prefLabel "Leaning"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:OperationalState .
-ffv:VegetationState a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:OperationalState .
+ffontov:VegetationState a skos:Concept ;
     rdfs:label "Vegetation state"@en ;
     skos:prefLabel "Vegetation state"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:topConceptOf ffv:StateScheme .
-ffv:Green a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:topConceptOf ffontov:StateScheme .
+ffontov:Green a skos:Concept ;
     rdfs:label "Green"@en ;
     skos:prefLabel "Green"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:VegetationState .
-ffv:Dry a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:VegetationState .
+ffontov:Dry a skos:Concept ;
     rdfs:label "Dry"@en ;
     skos:prefLabel "Dry"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:VegetationState .
-ffv:Cured a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:VegetationState .
+ffontov:Cured a skos:Concept ;
     rdfs:label "Cured"@en ;
     skos:prefLabel "Cured"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:VegetationState .
-ffv:Dead a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:VegetationState .
+ffontov:Dead a skos:Concept ;
     rdfs:label "Dead"@en ;
     skos:prefLabel "Dead"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:VegetationState .
-ffv:Consumed a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:VegetationState .
+ffontov:Consumed a skos:Concept ;
     rdfs:label "Consumed"@en ;
     skos:prefLabel "Consumed"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:VegetationState .
-ffv:Patchy a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:VegetationState .
+ffontov:Patchy a skos:Concept ;
     rdfs:label "Patchy"@en ;
     skos:prefLabel "Patchy"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:VegetationState .
-ffv:Continuous a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:VegetationState .
+ffontov:Continuous a skos:Concept ;
     rdfs:label "Continuous"@en ;
     skos:prefLabel "Continuous"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:VegetationState .
-ffv:Dense a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:VegetationState .
+ffontov:Dense a skos:Concept ;
     rdfs:label "Dense (vegetation)"@en ;
     skos:prefLabel "Dense (vegetation)"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:VegetationState .
-ffv:Sparse a skos:Concept ;
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:VegetationState .
+ffontov:Sparse a skos:Concept ;
     rdfs:label "Sparse"@en ;
     skos:prefLabel "Sparse"@en ;
-    skos:inScheme ffv:StateScheme ;
-    skos:broader ffv:VegetationState .
+    skos:inScheme ffontov:StateScheme ;
+    skos:broader ffontov:VegetationState .
 
 # ---------------- Activities ----------------
-ffv:ActivityScheme a skos:ConceptScheme ;
+ffontov:ActivityScheme a skos:ConceptScheme ;
     rdfs:label "Activities (scheme)"@en ;
     skos:prefLabel "Activities"@en ;
     skos:definition "What agents or vehicles are doing."@en .
-ffv:CivilianActivity a skos:Concept ;
+ffontov:CivilianActivity a skos:Concept ;
     rdfs:label "Civilian activity"@en ;
     skos:prefLabel "Civilian activity"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:topConceptOf ffv:ActivityScheme .
-ffv:Evacuating a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:topConceptOf ffontov:ActivityScheme .
+ffontov:Evacuating a skos:Concept ;
     rdfs:label "Evacuating"@en ;
     skos:prefLabel "Evacuating"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:CivilianActivity ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:CivilianActivity ;
     skos:hiddenLabel "evacuating"@en .
-ffv:ShelteringInPlace a skos:Concept ;
+ffontov:ShelteringInPlace a skos:Concept ;
     rdfs:label "Sheltering in place"@en ;
     skos:prefLabel "Sheltering in place"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:CivilianActivity .
-ffv:Gathering a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:CivilianActivity .
+ffontov:Gathering a skos:Concept ;
     rdfs:label "Gathering at assembly point"@en ;
     skos:prefLabel "Gathering at assembly point"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:CivilianActivity .
-ffv:AssistingVulnerablePerson a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:CivilianActivity .
+ffontov:AssistingVulnerablePerson a skos:Concept ;
     rdfs:label "Assisting children / elderly"@en ;
     skos:prefLabel "Assisting children / elderly"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:CivilianActivity .
-ffv:LoadingAnimals a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:CivilianActivity .
+ffontov:LoadingAnimals a skos:Concept ;
     rdfs:label "Loading animals"@en ;
     skos:prefLabel "Loading animals"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:CivilianActivity .
-ffv:ResponseActivity a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:CivilianActivity .
+ffontov:ResponseActivity a skos:Concept ;
     rdfs:label "Response activity"@en ;
     skos:prefLabel "Response activity"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:topConceptOf ffv:ActivityScheme .
-ffv:DirectingTraffic a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:topConceptOf ffontov:ActivityScheme .
+ffontov:DirectingTraffic a skos:Concept ;
     rdfs:label "Directing traffic"@en ;
     skos:prefLabel "Directing traffic"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:ResponseActivity .
-ffv:EstablishingPerimeter a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:ResponseActivity .
+ffontov:EstablishingPerimeter a skos:Concept ;
     rdfs:label "Establishing perimeter"@en ;
     skos:prefLabel "Establishing perimeter"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:ResponseActivity .
-ffv:Briefing a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:ResponseActivity .
+ffontov:Briefing a skos:Concept ;
     rdfs:label "Briefing"@en ;
     skos:prefLabel "Briefing"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:ResponseActivity .
-ffv:Communicating a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:ResponseActivity .
+ffontov:Communicating a skos:Concept ;
     rdfs:label "Communicating"@en ;
     skos:prefLabel "Communicating"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:ResponseActivity .
-ffv:AssistingCivilian a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:ResponseActivity .
+ffontov:AssistingCivilian a skos:Concept ;
     rdfs:label "Assisting civilian"@en ;
     skos:prefLabel "Assisting civilian"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:ResponseActivity .
-ffv:StandingBy a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:ResponseActivity .
+ffontov:StandingBy a skos:Concept ;
     rdfs:label "Standing by"@en ;
     skos:prefLabel "Standing by"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:ResponseActivity .
-ffv:Retreating a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:ResponseActivity .
+ffontov:Retreating a skos:Concept ;
     rdfs:label "Retreating"@en ;
     skos:prefLabel "Retreating"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:ResponseActivity .
-ffv:TakingCover a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:ResponseActivity .
+ffontov:TakingCover a skos:Concept ;
     rdfs:label "Taking cover"@en ;
     skos:prefLabel "Taking cover"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:ResponseActivity .
-ffv:Patrolling a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:ResponseActivity .
+ffontov:Patrolling a skos:Concept ;
     rdfs:label "Patrolling perimeter"@en ;
     skos:prefLabel "Patrolling perimeter"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:ResponseActivity .
-ffv:ActingAsLookout a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:ResponseActivity .
+ffontov:ActingAsLookout a skos:Concept ;
     rdfs:label "Acting as lookout"@en ;
     skos:prefLabel "Acting as lookout"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:ResponseActivity .
-ffv:SuppressionActivity a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:ResponseActivity .
+ffontov:SuppressionActivity a skos:Concept ;
     rdfs:label "Suppression activity"@en ;
     skos:prefLabel "Suppression activity"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:topConceptOf ffv:ActivityScheme .
-ffv:DirectAttack a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:topConceptOf ffontov:ActivityScheme .
+ffontov:DirectAttack a skos:Concept ;
     rdfs:label "Direct attack"@en ;
     skos:prefLabel "Direct attack"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:SuppressionActivity .
-ffv:ApplyingWater a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:SuppressionActivity .
+ffontov:ApplyingWater a skos:Concept ;
     rdfs:label "Applying water / foam to flames"@en ;
     skos:prefLabel "Applying water / foam to flames"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:DirectAttack .
-ffv:AdvancingHoseLine a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:DirectAttack .
+ffontov:AdvancingHoseLine a skos:Concept ;
     rdfs:label "Advancing hose line"@en ;
     skos:prefLabel "Advancing hose line"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:DirectAttack .
-ffv:BeatingOutFlames a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:DirectAttack .
+ffontov:BeatingOutFlames a skos:Concept ;
     rdfs:label "Beating out flames"@en ;
     skos:prefLabel "Beating out flames"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:DirectAttack .
-ffv:SpotFireTriage a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:DirectAttack .
+ffontov:SpotFireTriage a skos:Concept ;
     rdfs:label "Spot fire triage"@en ;
     skos:prefLabel "Spot fire triage"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:DirectAttack .
-ffv:IndirectAttack a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:DirectAttack .
+ffontov:IndirectAttack a skos:Concept ;
     rdfs:label "Indirect attack"@en ;
     skos:prefLabel "Indirect attack"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:SuppressionActivity .
-ffv:DiggingHandLine a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:SuppressionActivity .
+ffontov:DiggingHandLine a skos:Concept ;
     rdfs:label "Digging hand line"@en ;
     skos:prefLabel "Digging hand line"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:IndirectAttack .
-ffv:CuttingControlLine a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:IndirectAttack .
+ffontov:CuttingControlLine a skos:Concept ;
     rdfs:label "Cutting control line (dozer)"@en ;
     skos:prefLabel "Cutting control line (dozer)"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:IndirectAttack .
-ffv:Burnout a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:IndirectAttack .
+ffontov:Burnout a skos:Concept ;
     rdfs:label "Burnout / backburn"@en ;
     skos:prefLabel "Burnout / backburn"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:IndirectAttack .
-ffv:RetardantLineConstruction a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:IndirectAttack .
+ffontov:RetardantLineConstruction a skos:Concept ;
     rdfs:label "Retardant line construction"@en ;
     skos:prefLabel "Retardant line construction"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:IndirectAttack .
-ffv:AerialSuppression a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:IndirectAttack .
+ffontov:AerialSuppression a skos:Concept ;
     rdfs:label "Aerial suppression"@en ;
     skos:prefLabel "Aerial suppression"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:SuppressionActivity .
-ffv:WaterDrop a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:SuppressionActivity .
+ffontov:WaterDrop a skos:Concept ;
     rdfs:label "Water drop"@en ;
     skos:prefLabel "Water drop"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:AerialSuppression .
-ffv:RetardantDrop a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:AerialSuppression .
+ffontov:RetardantDrop a skos:Concept ;
     rdfs:label "Retardant drop"@en ;
     skos:prefLabel "Retardant drop"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:AerialSuppression .
-ffv:Drafting a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:AerialSuppression .
+ffontov:Drafting a skos:Concept ;
     rdfs:label "Drafting / dip site use"@en ;
     skos:prefLabel "Drafting / dip site use"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:AerialSuppression .
-ffv:AerialReconnaissance a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:AerialSuppression .
+ffontov:AerialReconnaissance a skos:Concept ;
     rdfs:label "Aerial reconnaissance"@en ;
     skos:prefLabel "Aerial reconnaissance"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:AerialSuppression .
-ffv:StructureProtection a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:AerialSuppression .
+ffontov:StructureProtection a skos:Concept ;
     rdfs:label "Structure protection"@en ;
     skos:prefLabel "Structure protection"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:SuppressionActivity .
-ffv:MopUp a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:SuppressionActivity .
+ffontov:MopUp a skos:Concept ;
     rdfs:label "Mop-up"@en ;
     skos:prefLabel "Mop-up"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:SuppressionActivity .
-ffv:Pumping a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:SuppressionActivity .
+ffontov:Pumping a skos:Concept ;
     rdfs:label "Pumping water"@en ;
     skos:prefLabel "Pumping water"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:SuppressionActivity .
-ffv:FellingTrees a skos:Concept ;
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:SuppressionActivity .
+ffontov:FellingTrees a skos:Concept ;
     rdfs:label "Felling trees"@en ;
     skos:prefLabel "Felling trees"@en ;
-    skos:inScheme ffv:ActivityScheme ;
-    skos:broader ffv:SuppressionActivity .
+    skos:inScheme ffontov:ActivityScheme ;
+    skos:broader ffontov:SuppressionActivity .
 
 # ---------------- Personal protective equipment ----------------
-ffv:PPEScheme a skos:ConceptScheme ;
+ffontov:PPEScheme a skos:ConceptScheme ;
     rdfs:label "Personal protective equipment (scheme)"@en ;
     skos:prefLabel "Personal protective equipment"@en ;
     skos:definition "Items a person can be seen wearing."@en .
-ffv:Helmet a skos:Concept ;
+ffontov:Helmet a skos:Concept ;
     rdfs:label "Helmet"@en ;
     skos:prefLabel "Helmet"@en ;
-    skos:inScheme ffv:PPEScheme ;
-    skos:topConceptOf ffv:PPEScheme ;
+    skos:inScheme ffontov:PPEScheme ;
+    skos:topConceptOf ffontov:PPEScheme ;
     skos:hiddenLabel "helmet"@en , "hard hat"@en .
-ffv:FireResistantClothing a skos:Concept ;
+ffontov:FireResistantClothing a skos:Concept ;
     rdfs:label "Fire-resistant clothing (Nomex)"@en ;
     skos:prefLabel "Fire-resistant clothing (Nomex)"@en ;
-    skos:inScheme ffv:PPEScheme ;
-    skos:topConceptOf ffv:PPEScheme ;
+    skos:inScheme ffontov:PPEScheme ;
+    skos:topConceptOf ffontov:PPEScheme ;
     skos:hiddenLabel "nomex"@en , "turnout"@en , "fire-resistant"@en .
-ffv:Gloves a skos:Concept ;
+ffontov:Gloves a skos:Concept ;
     rdfs:label "Gloves"@en ;
     skos:prefLabel "Gloves"@en ;
-    skos:inScheme ffv:PPEScheme ;
-    skos:topConceptOf ffv:PPEScheme ;
+    skos:inScheme ffontov:PPEScheme ;
+    skos:topConceptOf ffontov:PPEScheme ;
     skos:hiddenLabel "gloves"@en .
-ffv:EyeProtection a skos:Concept ;
+ffontov:EyeProtection a skos:Concept ;
     rdfs:label "Goggles / face shield"@en ;
     skos:prefLabel "Goggles / face shield"@en ;
-    skos:inScheme ffv:PPEScheme ;
-    skos:topConceptOf ffv:PPEScheme ;
+    skos:inScheme ffontov:PPEScheme ;
+    skos:topConceptOf ffontov:PPEScheme ;
     skos:hiddenLabel "goggles"@en , "face shield"@en .
-ffv:Respirator a skos:Concept ;
+ffontov:Respirator a skos:Concept ;
     rdfs:label "Respirator / mask"@en ;
     skos:prefLabel "Respirator / mask"@en ;
-    skos:inScheme ffv:PPEScheme ;
-    skos:topConceptOf ffv:PPEScheme ;
+    skos:inScheme ffontov:PPEScheme ;
+    skos:topConceptOf ffontov:PPEScheme ;
     skos:hiddenLabel "respirator"@en , "mask"@en .
-ffv:HighVisibilityVest a skos:Concept ;
+ffontov:HighVisibilityVest a skos:Concept ;
     rdfs:label "High visibility vest"@en ;
     skos:prefLabel "High visibility vest"@en ;
-    skos:inScheme ffv:PPEScheme ;
-    skos:topConceptOf ffv:PPEScheme ;
+    skos:inScheme ffontov:PPEScheme ;
+    skos:topConceptOf ffontov:PPEScheme ;
     skos:hiddenLabel "vest"@en , "hi-vis"@en .
-ffv:Headlamp a skos:Concept ;
+ffontov:Headlamp a skos:Concept ;
     rdfs:label "Headlamp"@en ;
     skos:prefLabel "Headlamp"@en ;
-    skos:inScheme ffv:PPEScheme ;
-    skos:topConceptOf ffv:PPEScheme ;
+    skos:inScheme ffontov:PPEScheme ;
+    skos:topConceptOf ffontov:PPEScheme ;
     skos:hiddenLabel "headlamp"@en .
-ffv:RadioChestHarness a skos:Concept ;
+ffontov:RadioChestHarness a skos:Concept ;
     rdfs:label "Radio chest harness"@en ;
     skos:prefLabel "Radio chest harness"@en ;
-    skos:inScheme ffv:PPEScheme ;
-    skos:topConceptOf ffv:PPEScheme ;
+    skos:inScheme ffontov:PPEScheme ;
+    skos:topConceptOf ffontov:PPEScheme ;
     skos:hiddenLabel "chest harness"@en .
-ffv:HearingProtection a skos:Concept ;
+ffontov:HearingProtection a skos:Concept ;
     rdfs:label "Hearing protection"@en ;
     skos:prefLabel "Hearing protection"@en ;
-    skos:inScheme ffv:PPEScheme ;
-    skos:topConceptOf ffv:PPEScheme ;
+    skos:inScheme ffontov:PPEScheme ;
+    skos:topConceptOf ffontov:PPEScheme ;
     skos:hiddenLabel "ear protection"@en , "headset"@en .
-ffv:FireShelter a skos:Concept ;
+ffontov:FireShelter a skos:Concept ;
     rdfs:label "Fire shelter"@en ;
     skos:prefLabel "Fire shelter"@en ;
-    skos:inScheme ffv:PPEScheme ;
-    skos:topConceptOf ffv:PPEScheme ;
+    skos:inScheme ffontov:PPEScheme ;
+    skos:topConceptOf ffontov:PPEScheme ;
     skos:hiddenLabel "fire shelter"@en .
 
 # ---------------- Frame-relative positions ----------------
-ffv:PositionScheme a skos:ConceptScheme ;
+ffontov:PositionScheme a skos:ConceptScheme ;
     rdfs:label "Frame-relative positions (scheme)"@en ;
     skos:prefLabel "Frame-relative positions"@en ;
     skos:definition "Position of an entity relative to the fire in the frame."@en .
-ffv:LeftFlank a skos:Concept ;
+ffontov:LeftFlank a skos:Concept ;
     rdfs:label "Left flank"@en ;
     skos:prefLabel "Left flank"@en ;
-    skos:inScheme ffv:PositionScheme ;
-    skos:topConceptOf ffv:PositionScheme .
-ffv:RightFlank a skos:Concept ;
+    skos:inScheme ffontov:PositionScheme ;
+    skos:topConceptOf ffontov:PositionScheme .
+ffontov:RightFlank a skos:Concept ;
     rdfs:label "Right flank"@en ;
     skos:prefLabel "Right flank"@en ;
-    skos:inScheme ffv:PositionScheme ;
-    skos:topConceptOf ffv:PositionScheme .
-ffv:HeadOfFire a skos:Concept ;
+    skos:inScheme ffontov:PositionScheme ;
+    skos:topConceptOf ffontov:PositionScheme .
+ffontov:HeadOfFire a skos:Concept ;
     rdfs:label "Head of fire"@en ;
     skos:prefLabel "Head of fire"@en ;
-    skos:inScheme ffv:PositionScheme ;
-    skos:topConceptOf ffv:PositionScheme .
-ffv:AheadOfFire a skos:Concept ;
+    skos:inScheme ffontov:PositionScheme ;
+    skos:topConceptOf ffontov:PositionScheme .
+ffontov:AheadOfFire a skos:Concept ;
     rdfs:label "Ahead of fire"@en ;
     skos:prefLabel "Ahead of fire"@en ;
-    skos:inScheme ffv:PositionScheme ;
-    skos:topConceptOf ffv:PositionScheme .
-ffv:OnFireEdge a skos:Concept ;
+    skos:inScheme ffontov:PositionScheme ;
+    skos:topConceptOf ffontov:PositionScheme .
+ffontov:OnFireEdge a skos:Concept ;
     rdfs:label "On fire edge"@en ;
     skos:prefLabel "On fire edge"@en ;
-    skos:inScheme ffv:PositionScheme ;
-    skos:topConceptOf ffv:PositionScheme .
-ffv:InsideBlack a skos:Concept ;
+    skos:inScheme ffontov:PositionScheme ;
+    skos:topConceptOf ffontov:PositionScheme .
+ffontov:InsideBlack a skos:Concept ;
     rdfs:label "Inside burned area"@en ;
     skos:prefLabel "Inside burned area"@en ;
-    skos:inScheme ffv:PositionScheme ;
-    skos:topConceptOf ffv:PositionScheme .
-ffv:RidgeTop a skos:Concept ;
+    skos:inScheme ffontov:PositionScheme ;
+    skos:topConceptOf ffontov:PositionScheme .
+ffontov:RidgeTop a skos:Concept ;
     rdfs:label "Ridge top"@en ;
     skos:prefLabel "Ridge top"@en ;
-    skos:inScheme ffv:PositionScheme ;
-    skos:topConceptOf ffv:PositionScheme .
-ffv:ValleyBottom a skos:Concept ;
+    skos:inScheme ffontov:PositionScheme ;
+    skos:topConceptOf ffontov:PositionScheme .
+ffontov:ValleyBottom a skos:Concept ;
     rdfs:label "Valley bottom"@en ;
     skos:prefLabel "Valley bottom"@en ;
-    skos:inScheme ffv:PositionScheme ;
-    skos:topConceptOf ffv:PositionScheme .
-ffv:BetweenFireAndAsset a skos:Concept ;
+    skos:inScheme ffontov:PositionScheme ;
+    skos:topConceptOf ffontov:PositionScheme .
+ffontov:BetweenFireAndAsset a skos:Concept ;
     rdfs:label "Between fire and asset"@en ;
     skos:prefLabel "Between fire and asset"@en ;
-    skos:inScheme ffv:PositionScheme ;
-    skos:topConceptOf ffv:PositionScheme .
+    skos:inScheme ffontov:PositionScheme ;
+    skos:topConceptOf ffontov:PositionScheme .
 
 # ---------------- Observable scene properties ----------------
-ffv:ObservablePropertyScheme a skos:ConceptScheme ;
+ffontov:ObservablePropertyScheme a skos:ConceptScheme ;
     rdfs:label "Observable scene properties (scheme)"@en ;
     skos:prefLabel "Observable scene properties"@en ;
     skos:definition "Scene-level properties a model can report a categorical value for."@en .
-ffv:SmokeColour a skos:Concept ;
+ffontov:SmokeColour a skos:Concept ;
     rdfs:label "Smoke colour"@en ;
     skos:prefLabel "Smoke colour"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
-ffv:SmokeDensity a skos:Concept ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
+ffontov:SmokeDensity a skos:Concept ;
     rdfs:label "Smoke density"@en ;
     skos:prefLabel "Smoke density"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
-ffv:PlumeDirection a skos:Concept ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
+ffontov:PlumeDirection a skos:Concept ;
     rdfs:label "Plume direction"@en ;
     skos:prefLabel "Plume direction"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
-ffv:PlumeHeight a skos:Concept ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
+ffontov:PlumeHeight a skos:Concept ;
     rdfs:label "Plume height"@en ;
     skos:prefLabel "Plume height"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
-ffv:SmokeLayering a skos:Concept ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
+ffontov:SmokeLayering a skos:Concept ;
     rdfs:label "Smoke layering"@en ;
     skos:prefLabel "Smoke layering"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
-ffv:VisibilityLevel a skos:Concept ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
+ffontov:VisibilityLevel a skos:Concept ;
     rdfs:label "Visibility level"@en ;
     skos:prefLabel "Visibility level"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
-ffv:SkyCondition a skos:Concept ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
+ffontov:SkyCondition a skos:Concept ;
     rdfs:label "Sky condition"@en ;
     skos:prefLabel "Sky condition"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
-ffv:LightCondition a skos:Concept ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
+ffontov:LightCondition a skos:Concept ;
     rdfs:label "Light condition"@en ;
     skos:prefLabel "Light condition"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
-ffv:AirQualityLevel a skos:Concept ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
+ffontov:AirQualityLevel a skos:Concept ;
     rdfs:label "Air quality level"@en ;
     skos:prefLabel "Air quality level"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
-ffv:FireType a skos:Concept ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
+ffontov:FireType a skos:Concept ;
     rdfs:label "Fire type"@en ;
     skos:prefLabel "Fire type"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
-ffv:FireIntensity a skos:Concept ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
+ffontov:FireIntensity a skos:Concept ;
     rdfs:label "Fire intensity"@en ;
     skos:prefLabel "Fire intensity"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
-ffv:FireSpreadStatus a skos:Concept ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
+ffontov:FireSpreadStatus a skos:Concept ;
     rdfs:label "Fire spread status"@en ;
     skos:prefLabel "Fire spread status"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
-ffv:FireActivityTrend a skos:Concept ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
+ffontov:FireActivityTrend a skos:Concept ;
     rdfs:label "Fire activity trend"@en ;
     skos:prefLabel "Fire activity trend"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
-ffv:DominantAspect a skos:Concept ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
+ffontov:DominantAspect a skos:Concept ;
     rdfs:label "Dominant aspect"@en ;
     skos:prefLabel "Dominant aspect"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
-ffv:FuelCondition a skos:Concept ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
+ffontov:FuelCondition a skos:Concept ;
     rdfs:label "Fuel condition"@en ;
     skos:prefLabel "Fuel condition"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
-ffv:VegetationDensity a skos:Concept ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
+ffontov:VegetationDensity a skos:Concept ;
     rdfs:label "Vegetation density"@en ;
     skos:prefLabel "Vegetation density"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
-ffv:VegetationDistribution a skos:Concept ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
+ffontov:VegetationDistribution a skos:Concept ;
     rdfs:label "Vegetation distribution"@en ;
     skos:prefLabel "Vegetation distribution"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
-ffv:BurnSeverity a skos:Concept ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
+ffontov:BurnSeverity a skos:Concept ;
     rdfs:label "Burn severity"@en ;
     skos:prefLabel "Burn severity"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
-ffv:AshColour a skos:Concept ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
+ffontov:AshColour a skos:Concept ;
     rdfs:label "Ash colour"@en ;
     skos:prefLabel "Ash colour"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
-ffv:ScenePurpose a skos:Concept ;
+    skos:inScheme ffontov:ObservablePropertyScheme ;
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
+ffontov:ScenePurpose a skos:Concept ;
     rdfs:label "Fire purpose (wildfire vs prescribed)"@en ;
     skos:prefLabel "Fire purpose (wildfire vs prescribed)"@en ;
-    skos:inScheme ffv:ObservablePropertyScheme ;
-    skos:topConceptOf ffv:ObservablePropertyScheme .
+    skos:inScheme ffontov:ObservablePropertyScheme ;
+    skos:topConceptOf ffontov:ObservablePropertyScheme .
 
 # ---------------- Categorical values ----------------
-ffv:ValueScheme a skos:ConceptScheme ;
+ffontov:ValueScheme a skos:ConceptScheme ;
     rdfs:label "Categorical values (scheme)"@en ;
     skos:prefLabel "Categorical values"@en ;
     skos:definition "Shared value concepts used as observation results."@en .
-ffv:Colour a skos:Concept ;
+ffontov:Colour a skos:Concept ;
     rdfs:label "Colour"@en ;
     skos:prefLabel "Colour"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:topConceptOf ffv:ValueScheme .
-ffv:White a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:topConceptOf ffontov:ValueScheme .
+ffontov:White a skos:Concept ;
     rdfs:label "White"@en ;
     skos:prefLabel "White"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Colour .
-ffv:LightGray a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Colour .
+ffontov:LightGray a skos:Concept ;
     rdfs:label "Light gray"@en ;
     skos:prefLabel "Light gray"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Colour .
-ffv:Gray a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Colour .
+ffontov:Gray a skos:Concept ;
     rdfs:label "Gray"@en ;
     skos:prefLabel "Gray"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Colour .
-ffv:DarkGray a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Colour .
+ffontov:DarkGray a skos:Concept ;
     rdfs:label "Dark gray"@en ;
     skos:prefLabel "Dark gray"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Colour .
-ffv:Black a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Colour .
+ffontov:Black a skos:Concept ;
     rdfs:label "Black"@en ;
     skos:prefLabel "Black"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Colour .
-ffv:Brown a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Colour .
+ffontov:Brown a skos:Concept ;
     rdfs:label "Brown"@en ;
     skos:prefLabel "Brown"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Colour .
-ffv:Orange a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Colour .
+ffontov:Orange a skos:Concept ;
     rdfs:label "Orange"@en ;
     skos:prefLabel "Orange"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Colour .
-ffv:Blue a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Colour .
+ffontov:Blue a skos:Concept ;
     rdfs:label "Blue"@en ;
     skos:prefLabel "Blue"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Colour .
-ffv:Level a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Colour .
+ffontov:Level a skos:Concept ;
     rdfs:label "Level"@en ;
     skos:prefLabel "Level"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:topConceptOf ffv:ValueScheme .
-ffv:Low a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:topConceptOf ffontov:ValueScheme .
+ffontov:Low a skos:Concept ;
     rdfs:label "Low"@en ;
     skos:prefLabel "Low"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Level .
-ffv:Medium a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Level .
+ffontov:Medium a skos:Concept ;
     rdfs:label "Medium"@en ;
     skos:prefLabel "Medium"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Level .
-ffv:High a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Level .
+ffontov:High a skos:Concept ;
     rdfs:label "High"@en ;
     skos:prefLabel "High"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Level .
-ffv:Extreme a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Level .
+ffontov:Extreme a skos:Concept ;
     rdfs:label "Extreme"@en ;
     skos:prefLabel "Extreme"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Level .
-ffv:Direction a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Level .
+ffontov:Direction a skos:Concept ;
     rdfs:label "Direction"@en ;
     skos:prefLabel "Direction"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:topConceptOf ffv:ValueScheme .
-ffv:Vertical a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:topConceptOf ffontov:ValueScheme .
+ffontov:Vertical a skos:Concept ;
     rdfs:label "Rising vertically"@en ;
     skos:prefLabel "Rising vertically"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Direction .
-ffv:Drifting a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Direction .
+ffontov:Drifting a skos:Concept ;
     rdfs:label "Drifting horizontally"@en ;
     skos:prefLabel "Drifting horizontally"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Direction .
-ffv:North a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Direction .
+ffontov:North a skos:Concept ;
     rdfs:label "North"@en ;
     skos:prefLabel "North"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Direction .
-ffv:East a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Direction .
+ffontov:East a skos:Concept ;
     rdfs:label "East"@en ;
     skos:prefLabel "East"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Direction .
-ffv:South a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Direction .
+ffontov:South a skos:Concept ;
     rdfs:label "South"@en ;
     skos:prefLabel "South"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Direction .
-ffv:West a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Direction .
+ffontov:West a skos:Concept ;
     rdfs:label "West"@en ;
     skos:prefLabel "West"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Direction .
-ffv:Sky a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Direction .
+ffontov:Sky a skos:Concept ;
     rdfs:label "Sky"@en ;
     skos:prefLabel "Sky"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:topConceptOf ffv:ValueScheme .
-ffv:Clear a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:topConceptOf ffontov:ValueScheme .
+ffontov:Clear a skos:Concept ;
     rdfs:label "Clear sky"@en ;
     skos:prefLabel "Clear sky"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Sky .
-ffv:Cloudy a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Sky .
+ffontov:Cloudy a skos:Concept ;
     rdfs:label "Cloudy"@en ;
     skos:prefLabel "Cloudy"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Sky .
-ffv:Hazy a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Sky .
+ffontov:Hazy a skos:Concept ;
     rdfs:label "Hazy"@en ;
     skos:prefLabel "Hazy"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Sky .
-ffv:Foggy a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Sky .
+ffontov:Foggy a skos:Concept ;
     rdfs:label "Foggy"@en ;
     skos:prefLabel "Foggy"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Sky .
-ffv:SunVisibleThroughSmoke a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Sky .
+ffontov:SunVisibleThroughSmoke a skos:Concept ;
     rdfs:label "Sun visible through smoke"@en ;
     skos:prefLabel "Sun visible through smoke"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Sky .
-ffv:Light a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Sky .
+ffontov:Light a skos:Concept ;
     rdfs:label "Light"@en ;
     skos:prefLabel "Light"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:topConceptOf ffv:ValueScheme .
-ffv:Daytime a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:topConceptOf ffontov:ValueScheme .
+ffontov:Daytime a skos:Concept ;
     rdfs:label "Daytime"@en ;
     skos:prefLabel "Daytime"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Light .
-ffv:Night a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Light .
+ffontov:Night a skos:Concept ;
     rdfs:label "Night"@en ;
     skos:prefLabel "Night"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Light .
-ffv:Dusk a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Light .
+ffontov:Dusk a skos:Concept ;
     rdfs:label "Dusk"@en ;
     skos:prefLabel "Dusk"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Light .
-ffv:FireTypeValue a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Light .
+ffontov:FireTypeValue a skos:Concept ;
     rdfs:label "Fire type value"@en ;
     skos:prefLabel "Fire type value"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:topConceptOf ffv:ValueScheme .
-ffv:SurfaceFireType a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:topConceptOf ffontov:ValueScheme .
+ffontov:SurfaceFireType a skos:Concept ;
     rdfs:label "Surface/ground fire"@en ;
     skos:prefLabel "Surface/ground fire"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:FireTypeValue .
-ffv:CrownFireType a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:FireTypeValue .
+ffontov:CrownFireType a skos:Concept ;
     rdfs:label "Crown fire (type)"@en ;
     skos:prefLabel "Crown fire (type)"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:FireTypeValue .
-ffv:StructureFireType a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:FireTypeValue .
+ffontov:StructureFireType a skos:Concept ;
     rdfs:label "Structure fire"@en ;
     skos:prefLabel "Structure fire"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:FireTypeValue .
-ffv:GrassFireType a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:FireTypeValue .
+ffontov:GrassFireType a skos:Concept ;
     rdfs:label "Grass fire"@en ;
     skos:prefLabel "Grass fire"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:FireTypeValue .
-ffv:PileFireType a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:FireTypeValue .
+ffontov:PileFireType a skos:Concept ;
     rdfs:label "Pile burn (type)"@en ;
     skos:prefLabel "Pile burn (type)"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:FireTypeValue .
-ffv:SpreadStatus a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:FireTypeValue .
+ffontov:SpreadStatus a skos:Concept ;
     rdfs:label "Spread status"@en ;
     skos:prefLabel "Spread status"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:topConceptOf ffv:ValueScheme .
-ffv:Expanding a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:topConceptOf ffontov:ValueScheme .
+ffontov:Expanding a skos:Concept ;
     rdfs:label "Expanding"@en ;
     skos:prefLabel "Expanding"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:SpreadStatus .
-ffv:Stable a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:SpreadStatus .
+ffontov:Stable a skos:Concept ;
     rdfs:label "Stable"@en ;
     skos:prefLabel "Stable"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:SpreadStatus .
-ffv:Contained a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:SpreadStatus .
+ffontov:Contained a skos:Concept ;
     rdfs:label "Contained"@en ;
     skos:prefLabel "Contained"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:SpreadStatus .
-ffv:Increasing a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:SpreadStatus .
+ffontov:Increasing a skos:Concept ;
     rdfs:label "Increasing"@en ;
     skos:prefLabel "Increasing"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:SpreadStatus .
-ffv:Decreasing a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:SpreadStatus .
+ffontov:Decreasing a skos:Concept ;
     rdfs:label "Decreasing"@en ;
     skos:prefLabel "Decreasing"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:SpreadStatus .
-ffv:Purpose a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:SpreadStatus .
+ffontov:Purpose a skos:Concept ;
     rdfs:label "Purpose"@en ;
     skos:prefLabel "Purpose"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:topConceptOf ffv:ValueScheme .
-ffv:Wildfire a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:topConceptOf ffontov:ValueScheme .
+ffontov:Wildfire a skos:Concept ;
     rdfs:label "Wildfire"@en ;
     skos:prefLabel "Wildfire"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Purpose .
-ffv:PrescribedBurn a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Purpose .
+ffontov:PrescribedBurn a skos:Concept ;
     rdfs:label "Prescribed / controlled burn"@en ;
     skos:prefLabel "Prescribed / controlled burn"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Purpose .
-ffv:Distribution a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Purpose .
+ffontov:Distribution a skos:Concept ;
     rdfs:label "Distribution"@en ;
     skos:prefLabel "Distribution"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:topConceptOf ffv:ValueScheme .
-ffv:Uniform a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:topConceptOf ffontov:ValueScheme .
+ffontov:Uniform a skos:Concept ;
     rdfs:label "Uniform"@en ;
     skos:prefLabel "Uniform"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Distribution .
-ffv:PatchyDistribution a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Distribution .
+ffontov:PatchyDistribution a skos:Concept ;
     rdfs:label "Patchy (distribution)"@en ;
     skos:prefLabel "Patchy (distribution)"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Distribution .
-ffv:Fragmented a skos:Concept ;
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Distribution .
+ffontov:Fragmented a skos:Concept ;
     rdfs:label "Fragmented"@en ;
     skos:prefLabel "Fragmented"@en ;
-    skos:inScheme ffv:ValueScheme ;
-    skos:broader ffv:Distribution .
+    skos:inScheme ffontov:ValueScheme ;
+    skos:broader ffontov:Distribution .
 
 # ---------------- Hazard types ----------------
-ffv:HazardScheme a skos:ConceptScheme ;
+ffontov:HazardScheme a skos:ConceptScheme ;
     rdfs:label "Hazard types (scheme)"@en ;
     skos:prefLabel "Hazard types"@en ;
     skos:definition "Types of hazards derived by rules."@en .
-ffv:FlameProximity a skos:Concept ;
+ffontov:FlameProximity a skos:Concept ;
     rdfs:label "Flame proximity to people"@en ;
     skos:prefLabel "Flame proximity to people"@en ;
-    skos:inScheme ffv:HazardScheme ;
-    skos:topConceptOf ffv:HazardScheme .
-ffv:StructureIgnitionRisk a skos:Concept ;
+    skos:inScheme ffontov:HazardScheme ;
+    skos:topConceptOf ffontov:HazardScheme .
+ffontov:StructureIgnitionRisk a skos:Concept ;
     rdfs:label "Structure ignition risk"@en ;
     skos:prefLabel "Structure ignition risk"@en ;
-    skos:inScheme ffv:HazardScheme ;
-    skos:topConceptOf ffv:HazardScheme .
-ffv:ExplosionHazard a skos:Concept ;
+    skos:inScheme ffontov:HazardScheme ;
+    skos:topConceptOf ffontov:HazardScheme .
+ffontov:ExplosionHazard a skos:Concept ;
     rdfs:label "Explosion hazard"@en ;
     skos:prefLabel "Explosion hazard"@en ;
-    skos:inScheme ffv:HazardScheme ;
-    skos:topConceptOf ffv:HazardScheme .
-ffv:SmokeVisibilityHazard a skos:Concept ;
+    skos:inScheme ffontov:HazardScheme ;
+    skos:topConceptOf ffontov:HazardScheme .
+ffontov:SmokeVisibilityHazard a skos:Concept ;
     rdfs:label "Smoke visibility hazard (roads/aviation)"@en ;
     skos:prefLabel "Smoke visibility hazard (roads/aviation)"@en ;
-    skos:inScheme ffv:HazardScheme ;
-    skos:topConceptOf ffv:HazardScheme .
-ffv:RespiratoryHazard a skos:Concept ;
+    skos:inScheme ffontov:HazardScheme ;
+    skos:topConceptOf ffontov:HazardScheme .
+ffontov:RespiratoryHazard a skos:Concept ;
     rdfs:label "Respiratory hazard"@en ;
     skos:prefLabel "Respiratory hazard"@en ;
-    skos:inScheme ffv:HazardScheme ;
-    skos:topConceptOf ffv:HazardScheme .
-ffv:DownedPowerLineHazard a skos:Concept ;
+    skos:inScheme ffontov:HazardScheme ;
+    skos:topConceptOf ffontov:HazardScheme .
+ffontov:DownedPowerLineHazard a skos:Concept ;
     rdfs:label "Downed power line hazard"@en ;
     skos:prefLabel "Downed power line hazard"@en ;
-    skos:inScheme ffv:HazardScheme ;
-    skos:topConceptOf ffv:HazardScheme .
-ffv:MissingPPEHazard a skos:Concept ;
+    skos:inScheme ffontov:HazardScheme ;
+    skos:topConceptOf ffontov:HazardScheme .
+ffontov:MissingPPEHazard a skos:Concept ;
     rdfs:label "Missing PPE"@en ;
     skos:prefLabel "Missing PPE"@en ;
-    skos:inScheme ffv:HazardScheme ;
-    skos:topConceptOf ffv:HazardScheme .
-ffv:CrownFireTransition a skos:Concept ;
+    skos:inScheme ffontov:HazardScheme ;
+    skos:topConceptOf ffontov:HazardScheme .
+ffontov:CrownFireTransition a skos:Concept ;
     rdfs:label "Surface-to-crown transition risk"@en ;
     skos:prefLabel "Surface-to-crown transition risk"@en ;
-    skos:inScheme ffv:HazardScheme ;
-    skos:topConceptOf ffv:HazardScheme .
-ffv:SpottingHazard a skos:Concept ;
+    skos:inScheme ffontov:HazardScheme ;
+    skos:topConceptOf ffontov:HazardScheme .
+ffontov:SpottingHazard a skos:Concept ;
     rdfs:label "Spotting / ember cast"@en ;
     skos:prefLabel "Spotting / ember cast"@en ;
-    skos:inScheme ffv:HazardScheme ;
-    skos:topConceptOf ffv:HazardScheme .
-ffv:EvacuationRouteBlocked a skos:Concept ;
+    skos:inScheme ffontov:HazardScheme ;
+    skos:topConceptOf ffontov:HazardScheme .
+ffontov:EvacuationRouteBlocked a skos:Concept ;
     rdfs:label "Evacuation route blocked"@en ;
     skos:prefLabel "Evacuation route blocked"@en ;
-    skos:inScheme ffv:HazardScheme ;
-    skos:topConceptOf ffv:HazardScheme .
-ffv:FallingTreeHazard a skos:Concept ;
+    skos:inScheme ffontov:HazardScheme ;
+    skos:topConceptOf ffontov:HazardScheme .
+ffontov:FallingTreeHazard a skos:Concept ;
     rdfs:label "Falling tree hazard"@en ;
     skos:prefLabel "Falling tree hazard"@en ;
-    skos:inScheme ffv:HazardScheme ;
-    skos:topConceptOf ffv:HazardScheme .
-ffv:ReignitionHazard a skos:Concept ;
+    skos:inScheme ffontov:HazardScheme ;
+    skos:topConceptOf ffontov:HazardScheme .
+ffontov:ReignitionHazard a skos:Concept ;
     rdfs:label "Reignition hazard"@en ;
     skos:prefLabel "Reignition hazard"@en ;
-    skos:inScheme ffv:HazardScheme ;
-    skos:topConceptOf ffv:HazardScheme .
-ffv:ErosionRisk a skos:Concept ;
+    skos:inScheme ffontov:HazardScheme ;
+    skos:topConceptOf ffontov:HazardScheme .
+ffontov:ErosionRisk a skos:Concept ;
     rdfs:label "Post-fire erosion / debris-flow risk"@en ;
     skos:prefLabel "Post-fire erosion / debris-flow risk"@en ;
-    skos:inScheme ffv:HazardScheme ;
-    skos:topConceptOf ffv:HazardScheme .
-ffv:WildlifeThreat a skos:Concept ;
+    skos:inScheme ffontov:HazardScheme ;
+    skos:topConceptOf ffontov:HazardScheme .
+ffontov:WildlifeThreat a skos:Concept ;
     rdfs:label "Wildlife threat"@en ;
     skos:prefLabel "Wildlife threat"@en ;
-    skos:inScheme ffv:HazardScheme ;
-    skos:topConceptOf ffv:HazardScheme .
+    skos:inScheme ffontov:HazardScheme ;
+    skos:topConceptOf ffontov:HazardScheme .
 
 # ---------------- Recommended actions ----------------
-ffv:ActionScheme a skos:ConceptScheme ;
+ffontov:ActionScheme a skos:ConceptScheme ;
     rdfs:label "Recommended actions (scheme)"@en ;
     skos:prefLabel "Recommended actions"@en ;
     skos:definition "Protective / operational actions recommended for hazards."@en .
-ffv:EvacuateImmediately a skos:Concept ;
+ffontov:EvacuateImmediately a skos:Concept ;
     rdfs:label "Evacuate immediately"@en ;
     skos:prefLabel "Evacuate immediately"@en ;
-    skos:inScheme ffv:ActionScheme ;
-    skos:topConceptOf ffv:ActionScheme .
-ffv:ShelterInPlace a skos:Concept ;
+    skos:inScheme ffontov:ActionScheme ;
+    skos:topConceptOf ffontov:ActionScheme .
+ffontov:ShelterInPlace a skos:Concept ;
     rdfs:label "Shelter in place"@en ;
     skos:prefLabel "Shelter in place"@en ;
-    skos:inScheme ffv:ActionScheme ;
-    skos:topConceptOf ffv:ActionScheme .
-ffv:WithdrawToSafetyZone a skos:Concept ;
+    skos:inScheme ffontov:ActionScheme ;
+    skos:topConceptOf ffontov:ActionScheme .
+ffontov:WithdrawToSafetyZone a skos:Concept ;
     rdfs:label "Withdraw to safety zone"@en ;
     skos:prefLabel "Withdraw to safety zone"@en ;
-    skos:inScheme ffv:ActionScheme ;
-    skos:topConceptOf ffv:ActionScheme .
-ffv:DefensiveStrategy a skos:Concept ;
+    skos:inScheme ffontov:ActionScheme ;
+    skos:topConceptOf ffontov:ActionScheme .
+ffontov:DefensiveStrategy a skos:Concept ;
     rdfs:label "Adopt defensive strategy"@en ;
     skos:prefLabel "Adopt defensive strategy"@en ;
-    skos:inScheme ffv:ActionScheme ;
-    skos:topConceptOf ffv:ActionScheme .
-ffv:RequestAerialSupport a skos:Concept ;
+    skos:inScheme ffontov:ActionScheme ;
+    skos:topConceptOf ffontov:ActionScheme .
+ffontov:RequestAerialSupport a skos:Concept ;
     rdfs:label "Request aerial support"@en ;
     skos:prefLabel "Request aerial support"@en ;
-    skos:inScheme ffv:ActionScheme ;
-    skos:topConceptOf ffv:ActionScheme .
-ffv:CloseRoad a skos:Concept ;
+    skos:inScheme ffontov:ActionScheme ;
+    skos:topConceptOf ffontov:ActionScheme .
+ffontov:CloseRoad a skos:Concept ;
     rdfs:label "Close road / control traffic"@en ;
     skos:prefLabel "Close road / control traffic"@en ;
-    skos:inScheme ffv:ActionScheme ;
-    skos:topConceptOf ffv:ActionScheme .
-ffv:UseHeadlightsAndSlowDown a skos:Concept ;
+    skos:inScheme ffontov:ActionScheme ;
+    skos:topConceptOf ffontov:ActionScheme .
+ffontov:UseHeadlightsAndSlowDown a skos:Concept ;
     rdfs:label "Use headlights and slow down"@en ;
     skos:prefLabel "Use headlights and slow down"@en ;
-    skos:inScheme ffv:ActionScheme ;
-    skos:topConceptOf ffv:ActionScheme .
-ffv:WearRespirator a skos:Concept ;
+    skos:inScheme ffontov:ActionScheme ;
+    skos:topConceptOf ffontov:ActionScheme .
+ffontov:WearRespirator a skos:Concept ;
     rdfs:label "Wear respirator / N95"@en ;
     skos:prefLabel "Wear respirator / N95"@en ;
-    skos:inScheme ffv:ActionScheme ;
-    skos:topConceptOf ffv:ActionScheme .
-ffv:DeEnergiseLines a skos:Concept ;
+    skos:inScheme ffontov:ActionScheme ;
+    skos:topConceptOf ffontov:ActionScheme .
+ffontov:DeEnergiseLines a skos:Concept ;
     rdfs:label "De-energise power lines"@en ;
     skos:prefLabel "De-energise power lines"@en ;
-    skos:inScheme ffv:ActionScheme ;
-    skos:topConceptOf ffv:ActionScheme .
-ffv:CoolAndIsolateTank a skos:Concept ;
+    skos:inScheme ffontov:ActionScheme ;
+    skos:topConceptOf ffontov:ActionScheme .
+ffontov:CoolAndIsolateTank a skos:Concept ;
     rdfs:label "Cool and isolate pressurised tank"@en ;
     skos:prefLabel "Cool and isolate pressurised tank"@en ;
-    skos:inScheme ffv:ActionScheme ;
-    skos:topConceptOf ffv:ActionScheme .
-ffv:WearFullPPE a skos:Concept ;
+    skos:inScheme ffontov:ActionScheme ;
+    skos:topConceptOf ffontov:ActionScheme .
+ffontov:WearFullPPE a skos:Concept ;
     rdfs:label "Wear full PPE"@en ;
     skos:prefLabel "Wear full PPE"@en ;
-    skos:inScheme ffv:ActionScheme ;
-    skos:topConceptOf ffv:ActionScheme .
-ffv:PostLookouts a skos:Concept ;
+    skos:inScheme ffontov:ActionScheme ;
+    skos:topConceptOf ffontov:ActionScheme .
+ffontov:PostLookouts a skos:Concept ;
     rdfs:label "Post lookouts (LCES)"@en ;
     skos:prefLabel "Post lookouts (LCES)"@en ;
-    skos:inScheme ffv:ActionScheme ;
-    skos:topConceptOf ffv:ActionScheme .
-ffv:MopUpAndPatrol a skos:Concept ;
+    skos:inScheme ffontov:ActionScheme ;
+    skos:topConceptOf ffontov:ActionScheme .
+ffontov:MopUpAndPatrol a skos:Concept ;
     rdfs:label "Mop up and patrol"@en ;
     skos:prefLabel "Mop up and patrol"@en ;
-    skos:inScheme ffv:ActionScheme ;
-    skos:topConceptOf ffv:ActionScheme .
-ffv:InstallErosionControl a skos:Concept ;
+    skos:inScheme ffontov:ActionScheme ;
+    skos:topConceptOf ffontov:ActionScheme .
+ffontov:InstallErosionControl a skos:Concept ;
     rdfs:label "Install erosion control"@en ;
     skos:prefLabel "Install erosion control"@en ;
-    skos:inScheme ffv:ActionScheme ;
-    skos:topConceptOf ffv:ActionScheme .
-ffv:AvoidSnagAreas a skos:Concept ;
+    skos:inScheme ffontov:ActionScheme ;
+    skos:topConceptOf ffontov:ActionScheme .
+ffontov:AvoidSnagAreas a skos:Concept ;
     rdfs:label "Avoid snag / hazard-tree areas"@en ;
     skos:prefLabel "Avoid snag / hazard-tree areas"@en ;
-    skos:inScheme ffv:ActionScheme ;
-    skos:topConceptOf ffv:ActionScheme .
+    skos:inScheme ffontov:ActionScheme ;
+    skos:topConceptOf ffontov:ActionScheme .
 
 # ---------------- Operational conditions ----------------
-ffv:ConditionScheme a skos:ConceptScheme ;
+ffontov:ConditionScheme a skos:ConceptScheme ;
     rdfs:label "Operational conditions (scheme)"@en ;
     skos:prefLabel "Operational conditions"@en ;
     skos:definition "Conditions implied by weather/FWI danger rules."@en .
-ffv:ElevatedFireDanger a skos:Concept ;
+ffontov:ElevatedFireDanger a skos:Concept ;
     rdfs:label "Elevated fire danger"@en ;
     skos:prefLabel "Elevated fire danger"@en ;
-    skos:inScheme ffv:ConditionScheme ;
-    skos:topConceptOf ffv:ConditionScheme .
-ffv:RapidFineFuelSpread a skos:Concept ;
+    skos:inScheme ffontov:ConditionScheme ;
+    skos:topConceptOf ffontov:ConditionScheme .
+ffontov:RapidFineFuelSpread a skos:Concept ;
     rdfs:label "Rapid fine-fuel spread (favour indirect attack)"@en ;
     skos:prefLabel "Rapid fine-fuel spread (favour indirect attack)"@en ;
-    skos:inScheme ffv:ConditionScheme ;
-    skos:topConceptOf ffv:ConditionScheme .
-ffv:FavourDirectAttack a skos:Concept ;
+    skos:inScheme ffontov:ConditionScheme ;
+    skos:topConceptOf ffontov:ConditionScheme .
+ffontov:FavourDirectAttack a skos:Concept ;
     rdfs:label "Favour direct attack"@en ;
     skos:prefLabel "Favour direct attack"@en ;
-    skos:inScheme ffv:ConditionScheme ;
-    skos:topConceptOf ffv:ConditionScheme .
-ffv:AerialDropCompromised a skos:Concept ;
+    skos:inScheme ffontov:ConditionScheme ;
+    skos:topConceptOf ffontov:ConditionScheme .
+ffontov:AerialDropCompromised a skos:Concept ;
     rdfs:label "Aerial drop effectiveness reduced"@en ;
     skos:prefLabel "Aerial drop effectiveness reduced"@en ;
-    skos:inScheme ffv:ConditionScheme ;
-    skos:topConceptOf ffv:ConditionScheme .
-ffv:RapidFineFuelDrying a skos:Concept ;
+    skos:inScheme ffontov:ConditionScheme ;
+    skos:topConceptOf ffontov:ConditionScheme .
+ffontov:RapidFineFuelDrying a skos:Concept ;
     rdfs:label "Rapid fine fuel drying"@en ;
     skos:prefLabel "Rapid fine fuel drying"@en ;
-    skos:inScheme ffv:ConditionScheme ;
-    skos:topConceptOf ffv:ConditionScheme .
-ffv:HeatStressRisk a skos:Concept ;
+    skos:inScheme ffontov:ConditionScheme ;
+    skos:topConceptOf ffontov:ConditionScheme .
+ffontov:HeatStressRisk a skos:Concept ;
     rdfs:label "Heat stress risk"@en ;
     skos:prefLabel "Heat stress risk"@en ;
-    skos:inScheme ffv:ConditionScheme ;
-    skos:topConceptOf ffv:ConditionScheme .
-ffv:ImprovedMopUpConditions a skos:Concept ;
+    skos:inScheme ffontov:ConditionScheme ;
+    skos:topConceptOf ffontov:ConditionScheme .
+ffontov:ImprovedMopUpConditions a skos:Concept ;
     rdfs:label "Improved mop up conditions"@en ;
     skos:prefLabel "Improved mop up conditions"@en ;
-    skos:inScheme ffv:ConditionScheme ;
-    skos:topConceptOf ffv:ConditionScheme .
-ffv:PersistentCombustion a skos:Concept ;
+    skos:inScheme ffontov:ConditionScheme ;
+    skos:topConceptOf ffontov:ConditionScheme .
+ffontov:PersistentCombustion a skos:Concept ;
     rdfs:label "Persistent smouldering likely"@en ;
     skos:prefLabel "Persistent smouldering likely"@en ;
-    skos:inScheme ffv:ConditionScheme ;
-    skos:topConceptOf ffv:ConditionScheme .
+    skos:inScheme ffontov:ConditionScheme ;
+    skos:topConceptOf ffontov:ConditionScheme .
 
 # ---------------- Conflict types ----------------
-ffv:ConflictScheme a skos:ConceptScheme ;
+ffontov:ConflictScheme a skos:ConceptScheme ;
     rdfs:label "Conflict types (scheme)"@en ;
     skos:prefLabel "Conflict types"@en ;
     skos:definition "Types of cross-modal / internal inconsistencies."@en .
-ffv:AudioImageConflict a skos:Concept ;
+ffontov:AudioImageConflict a skos:Concept ;
     rdfs:label "Audio indicates escalation but image shows no fire"@en ;
     skos:prefLabel "Audio indicates escalation but image shows no fire"@en ;
-    skos:inScheme ffv:ConflictScheme ;
-    skos:topConceptOf ffv:ConflictScheme .
-ffv:CaptionScoreConflict a skos:Concept ;
+    skos:inScheme ffontov:ConflictScheme ;
+    skos:topConceptOf ffontov:ConflictScheme .
+ffontov:CaptionScoreConflict a skos:Concept ;
     rdfs:label "Caption mentions a class the classifier scored below threshold"@en ;
     skos:prefLabel "Caption mentions a class the classifier scored below threshold"@en ;
-    skos:inScheme ffv:ConflictScheme ;
-    skos:topConceptOf ffv:ConflictScheme .
-ffv:WeatherSmokeConflict a skos:Concept ;
+    skos:inScheme ffontov:ConflictScheme ;
+    skos:topConceptOf ffontov:ConflictScheme .
+ffontov:WeatherSmokeConflict a skos:Concept ;
     rdfs:label "Heavy rain recorded while smoke detected"@en ;
     skos:prefLabel "Heavy rain recorded while smoke detected"@en ;
-    skos:inScheme ffv:ConflictScheme ;
-    skos:topConceptOf ffv:ConflictScheme .
+    skos:inScheme ffontov:ConflictScheme ;
+    skos:topConceptOf ffontov:ConflictScheme .
 
 # ---------------- Ecological impacts, services and restoration ----------------
-ffv:EcologyScheme a skos:ConceptScheme ;
+ffontov:EcologyScheme a skos:ConceptScheme ;
     rdfs:label "Ecological impacts, services and restoration (scheme)"@en ;
     skos:prefLabel "Ecological impacts, services and restoration"@en ;
     skos:definition "Background ecological knowledge for CQ26."@en .
-ffv:EcologicalImpact a skos:Concept ;
+ffontov:EcologicalImpact a skos:Concept ;
     rdfs:label "Ecological impact"@en ;
     skos:prefLabel "Ecological impact"@en ;
-    skos:inScheme ffv:EcologyScheme ;
-    skos:topConceptOf ffv:EcologyScheme .
-ffv:HabitatLoss a skos:Concept ;
+    skos:inScheme ffontov:EcologyScheme ;
+    skos:topConceptOf ffontov:EcologyScheme .
+ffontov:HabitatLoss a skos:Concept ;
     rdfs:label "Habitat loss"@en ;
     skos:prefLabel "Habitat loss"@en ;
-    skos:inScheme ffv:EcologyScheme ;
-    skos:broader ffv:EcologicalImpact .
-ffv:SoilNutrientLoss a skos:Concept ;
+    skos:inScheme ffontov:EcologyScheme ;
+    skos:broader ffontov:EcologicalImpact .
+ffontov:SoilNutrientLoss a skos:Concept ;
     rdfs:label "Soil nutrient loss"@en ;
     skos:prefLabel "Soil nutrient loss"@en ;
-    skos:inScheme ffv:EcologyScheme ;
-    skos:broader ffv:EcologicalImpact .
-ffv:SoilErosion a skos:Concept ;
+    skos:inScheme ffontov:EcologyScheme ;
+    skos:broader ffontov:EcologicalImpact .
+ffontov:SoilErosion a skos:Concept ;
     rdfs:label "Soil erosion"@en ;
     skos:prefLabel "Soil erosion"@en ;
-    skos:inScheme ffv:EcologyScheme ;
-    skos:broader ffv:EcologicalImpact .
-ffv:WaterQualityDegradation a skos:Concept ;
+    skos:inScheme ffontov:EcologyScheme ;
+    skos:broader ffontov:EcologicalImpact .
+ffontov:WaterQualityDegradation a skos:Concept ;
     rdfs:label "Water quality degradation"@en ;
     skos:prefLabel "Water quality degradation"@en ;
-    skos:inScheme ffv:EcologyScheme ;
-    skos:broader ffv:EcologicalImpact .
-ffv:CarbonRelease a skos:Concept ;
+    skos:inScheme ffontov:EcologyScheme ;
+    skos:broader ffontov:EcologicalImpact .
+ffontov:CarbonRelease a skos:Concept ;
     rdfs:label "Carbon release"@en ;
     skos:prefLabel "Carbon release"@en ;
-    skos:inScheme ffv:EcologyScheme ;
-    skos:broader ffv:EcologicalImpact .
-ffv:TreeMortality a skos:Concept ;
+    skos:inScheme ffontov:EcologyScheme ;
+    skos:broader ffontov:EcologicalImpact .
+ffontov:TreeMortality a skos:Concept ;
     rdfs:label "Tree mortality"@en ;
     skos:prefLabel "Tree mortality"@en ;
-    skos:inScheme ffv:EcologyScheme ;
-    skos:broader ffv:EcologicalImpact .
-ffv:NutrientRecycling a skos:Concept ;
+    skos:inScheme ffontov:EcologyScheme ;
+    skos:broader ffontov:EcologicalImpact .
+ffontov:NutrientRecycling a skos:Concept ;
     rdfs:label "Nutrient recycling (beneficial)"@en ;
     skos:prefLabel "Nutrient recycling (beneficial)"@en ;
-    skos:inScheme ffv:EcologyScheme ;
-    skos:broader ffv:EcologicalImpact .
-ffv:SeedReleaseAndRegeneration a skos:Concept ;
+    skos:inScheme ffontov:EcologyScheme ;
+    skos:broader ffontov:EcologicalImpact .
+ffontov:SeedReleaseAndRegeneration a skos:Concept ;
     rdfs:label "Seed release / regeneration (beneficial)"@en ;
     skos:prefLabel "Seed release / regeneration (beneficial)"@en ;
-    skos:inScheme ffv:EcologyScheme ;
-    skos:broader ffv:EcologicalImpact .
-ffv:InvasiveSpeciesSpread a skos:Concept ;
+    skos:inScheme ffontov:EcologyScheme ;
+    skos:broader ffontov:EcologicalImpact .
+ffontov:InvasiveSpeciesSpread a skos:Concept ;
     rdfs:label "Invasive species spread"@en ;
     skos:prefLabel "Invasive species spread"@en ;
-    skos:inScheme ffv:EcologyScheme ;
-    skos:broader ffv:EcologicalImpact .
-ffv:AirPollution a skos:Concept ;
+    skos:inScheme ffontov:EcologyScheme ;
+    skos:broader ffontov:EcologicalImpact .
+ffontov:AirPollution a skos:Concept ;
     rdfs:label "Air pollution"@en ;
     skos:prefLabel "Air pollution"@en ;
-    skos:inScheme ffv:EcologyScheme ;
-    skos:broader ffv:EcologicalImpact .
-ffv:EcosystemService a skos:Concept ;
+    skos:inScheme ffontov:EcologyScheme ;
+    skos:broader ffontov:EcologicalImpact .
+ffontov:EcosystemService a skos:Concept ;
     rdfs:label "Ecosystem service"@en ;
     skos:prefLabel "Ecosystem service"@en ;
-    skos:inScheme ffv:EcologyScheme ;
-    skos:topConceptOf ffv:EcologyScheme .
-ffv:CarbonStorage a skos:Concept ;
+    skos:inScheme ffontov:EcologyScheme ;
+    skos:topConceptOf ffontov:EcologyScheme .
+ffontov:CarbonStorage a skos:Concept ;
     rdfs:label "Carbon storage"@en ;
     skos:prefLabel "Carbon storage"@en ;
-    skos:inScheme ffv:EcologyScheme ;
-    skos:broader ffv:EcosystemService .
-ffv:WaterRegulation a skos:Concept ;
+    skos:inScheme ffontov:EcologyScheme ;
+    skos:broader ffontov:EcosystemService .
+ffontov:WaterRegulation a skos:Concept ;
     rdfs:label "Water regulation"@en ;
     skos:prefLabel "Water regulation"@en ;
-    skos:inScheme ffv:EcologyScheme ;
-    skos:broader ffv:EcosystemService .
-ffv:HabitatProvision a skos:Concept ;
+    skos:inScheme ffontov:EcologyScheme ;
+    skos:broader ffontov:EcosystemService .
+ffontov:HabitatProvision a skos:Concept ;
     rdfs:label "Habitat provision"@en ;
     skos:prefLabel "Habitat provision"@en ;
-    skos:inScheme ffv:EcologyScheme ;
-    skos:broader ffv:EcosystemService .
-ffv:SoilProtection a skos:Concept ;
+    skos:inScheme ffontov:EcologyScheme ;
+    skos:broader ffontov:EcosystemService .
+ffontov:SoilProtection a skos:Concept ;
     rdfs:label "Soil protection"@en ;
     skos:prefLabel "Soil protection"@en ;
-    skos:inScheme ffv:EcologyScheme ;
-    skos:broader ffv:EcosystemService .
-ffv:Recreation a skos:Concept ;
+    skos:inScheme ffontov:EcologyScheme ;
+    skos:broader ffontov:EcosystemService .
+ffontov:Recreation a skos:Concept ;
     rdfs:label "Recreation"@en ;
     skos:prefLabel "Recreation"@en ;
-    skos:inScheme ffv:EcologyScheme ;
-    skos:broader ffv:EcosystemService .
-ffv:Grazing a skos:Concept ;
+    skos:inScheme ffontov:EcologyScheme ;
+    skos:broader ffontov:EcosystemService .
+ffontov:Grazing a skos:Concept ;
     rdfs:label "Grazing / forage"@en ;
     skos:prefLabel "Grazing / forage"@en ;
-    skos:inScheme ffv:EcologyScheme ;
-    skos:broader ffv:EcosystemService .
-ffv:RestorationMeasure a skos:Concept ;
+    skos:inScheme ffontov:EcologyScheme ;
+    skos:broader ffontov:EcosystemService .
+ffontov:RestorationMeasure a skos:Concept ;
     rdfs:label "Restoration measure"@en ;
     skos:prefLabel "Restoration measure"@en ;
-    skos:inScheme ffv:EcologyScheme ;
-    skos:topConceptOf ffv:EcologyScheme .
-ffv:NaturalRegenerationMonitoring a skos:Concept ;
+    skos:inScheme ffontov:EcologyScheme ;
+    skos:topConceptOf ffontov:EcologyScheme .
+ffontov:NaturalRegenerationMonitoring a skos:Concept ;
     rdfs:label "Natural regeneration monitoring"@en ;
     skos:prefLabel "Natural regeneration monitoring"@en ;
-    skos:inScheme ffv:EcologyScheme ;
-    skos:broader ffv:RestorationMeasure .
-ffv:Reforestation a skos:Concept ;
+    skos:inScheme ffontov:EcologyScheme ;
+    skos:broader ffontov:RestorationMeasure .
+ffontov:Reforestation a skos:Concept ;
     rdfs:label "Replanting / reforestation"@en ;
     skos:prefLabel "Replanting / reforestation"@en ;
-    skos:inScheme ffv:EcologyScheme ;
-    skos:broader ffv:RestorationMeasure .
-ffv:ErosionControl a skos:Concept ;
+    skos:inScheme ffontov:EcologyScheme ;
+    skos:broader ffontov:RestorationMeasure .
+ffontov:ErosionControl a skos:Concept ;
     rdfs:label "Erosion control (mulch, wattles)"@en ;
     skos:prefLabel "Erosion control (mulch, wattles)"@en ;
-    skos:inScheme ffv:EcologyScheme ;
-    skos:broader ffv:RestorationMeasure .
-ffv:InvasiveSpeciesControl a skos:Concept ;
+    skos:inScheme ffontov:EcologyScheme ;
+    skos:broader ffontov:RestorationMeasure .
+ffontov:InvasiveSpeciesControl a skos:Concept ;
     rdfs:label "Invasive species control"@en ;
     skos:prefLabel "Invasive species control"@en ;
-    skos:inScheme ffv:EcologyScheme ;
-    skos:broader ffv:RestorationMeasure .
-ffv:RiparianRestoration a skos:Concept ;
+    skos:inScheme ffontov:EcologyScheme ;
+    skos:broader ffontov:RestorationMeasure .
+ffontov:RiparianRestoration a skos:Concept ;
     rdfs:label "Riparian restoration"@en ;
     skos:prefLabel "Riparian restoration"@en ;
-    skos:inScheme ffv:EcologyScheme ;
-    skos:broader ffv:RestorationMeasure .
-ffv:Reseeding a skos:Concept ;
+    skos:inScheme ffontov:EcologyScheme ;
+    skos:broader ffontov:RestorationMeasure .
+ffontov:Reseeding a skos:Concept ;
     rdfs:label "Native grass reseeding"@en ;
     skos:prefLabel "Native grass reseeding"@en ;
-    skos:inScheme ffv:EcologyScheme ;
-    skos:broader ffv:RestorationMeasure .
-ffv:FuelManagement a skos:Concept ;
+    skos:inScheme ffontov:EcologyScheme ;
+    skos:broader ffontov:RestorationMeasure .
+ffontov:FuelManagement a skos:Concept ;
     rdfs:label "Fuel management / prescribed burning"@en ;
     skos:prefLabel "Fuel management / prescribed burning"@en ;
-    skos:inScheme ffv:EcologyScheme ;
-    skos:broader ffv:RestorationMeasure .
+    skos:inScheme ffontov:EcologyScheme ;
+    skos:broader ffontov:RestorationMeasure .
 
 # ---------------- kind ↔ core class alignment ----------------
-ffv:FirePhenomenonKind     rdfs:seeAlso ffo:FirePhenomenon .
-ffv:AgentKind              rdfs:seeAlso ffo:Agent .
-ffv:EquipmentKind          rdfs:seeAlso ffo:Equipment .
-ffv:VehicleKind            rdfs:seeAlso ffo:Vehicle .
-ffv:BuiltAssetKind         rdfs:seeAlso ffo:BuiltAsset .
-ffv:EnvironmentFeatureKind rdfs:seeAlso ffo:EnvironmentFeature .
-ffv:BurnEvidenceKind       rdfs:seeAlso ffo:BurnEvidence .
+ffontov:FirePhenomenonKind     rdfs:seeAlso ffonto:FirePhenomenon .
+ffontov:AgentKind              rdfs:seeAlso ffonto:Agent .
+ffontov:EquipmentKind          rdfs:seeAlso ffonto:Equipment .
+ffontov:VehicleKind            rdfs:seeAlso ffonto:Vehicle .
+ffontov:BuiltAssetKind         rdfs:seeAlso ffonto:BuiltAsset .
+ffontov:EnvironmentFeatureKind rdfs:seeAlso ffonto:EnvironmentFeature .
+ffontov:BurnEvidenceKind       rdfs:seeAlso ffonto:BurnEvidence .
 
 
 # =====================================================================
@@ -2150,50 +2150,50 @@ ffv:BurnEvidenceKind       rdfs:seeAlso ffo:BurnEvidence .
 # =====================================================================
 
 # --- hazard → recommended action (CQ25) ---
-ffv:FlameProximity          ffo:mitigatedBy ffv:WithdrawToSafetyZone , ffv:PostLookouts , ffv:WearFullPPE .
-ffv:StructureIgnitionRisk   ffo:mitigatedBy ffv:DefensiveStrategy , ffv:EvacuateImmediately .
-ffv:ExplosionHazard         ffo:mitigatedBy ffv:CoolAndIsolateTank , ffv:WithdrawToSafetyZone .
-ffv:SmokeVisibilityHazard   ffo:mitigatedBy ffv:CloseRoad , ffv:UseHeadlightsAndSlowDown .
-ffv:RespiratoryHazard       ffo:mitigatedBy ffv:WearRespirator , ffv:ShelterInPlace .
-ffv:DownedPowerLineHazard   ffo:mitigatedBy ffv:DeEnergiseLines , ffv:CloseRoad .
-ffv:MissingPPEHazard        ffo:mitigatedBy ffv:WearFullPPE .
-ffv:CrownFireTransition     ffo:mitigatedBy ffv:RequestAerialSupport , ffv:WithdrawToSafetyZone .
-ffv:SpottingHazard          ffo:mitigatedBy ffv:PostLookouts , ffv:MopUpAndPatrol .
-ffv:EvacuationRouteBlocked  ffo:mitigatedBy ffv:ShelterInPlace , ffv:CloseRoad .
-ffv:FallingTreeHazard       ffo:mitigatedBy ffv:AvoidSnagAreas .
-ffv:ReignitionHazard        ffo:mitigatedBy ffv:MopUpAndPatrol .
-ffv:ErosionRisk             ffo:mitigatedBy ffv:InstallErosionControl .
-ffv:WildlifeThreat          ffo:mitigatedBy ffv:EvacuateImmediately .
+ffontov:FlameProximity          ffonto:mitigatedBy ffontov:WithdrawToSafetyZone , ffontov:PostLookouts , ffontov:WearFullPPE .
+ffontov:StructureIgnitionRisk   ffonto:mitigatedBy ffontov:DefensiveStrategy , ffontov:EvacuateImmediately .
+ffontov:ExplosionHazard         ffonto:mitigatedBy ffontov:CoolAndIsolateTank , ffontov:WithdrawToSafetyZone .
+ffontov:SmokeVisibilityHazard   ffonto:mitigatedBy ffontov:CloseRoad , ffontov:UseHeadlightsAndSlowDown .
+ffontov:RespiratoryHazard       ffonto:mitigatedBy ffontov:WearRespirator , ffontov:ShelterInPlace .
+ffontov:DownedPowerLineHazard   ffonto:mitigatedBy ffontov:DeEnergiseLines , ffontov:CloseRoad .
+ffontov:MissingPPEHazard        ffonto:mitigatedBy ffontov:WearFullPPE .
+ffontov:CrownFireTransition     ffonto:mitigatedBy ffontov:RequestAerialSupport , ffontov:WithdrawToSafetyZone .
+ffontov:SpottingHazard          ffonto:mitigatedBy ffontov:PostLookouts , ffontov:MopUpAndPatrol .
+ffontov:EvacuationRouteBlocked  ffonto:mitigatedBy ffontov:ShelterInPlace , ffontov:CloseRoad .
+ffontov:FallingTreeHazard       ffonto:mitigatedBy ffontov:AvoidSnagAreas .
+ffontov:ReignitionHazard        ffonto:mitigatedBy ffontov:MopUpAndPatrol .
+ffontov:ErosionRisk             ffonto:mitigatedBy ffontov:InstallErosionControl .
+ffontov:WildlifeThreat          ffonto:mitigatedBy ffontov:EvacuateImmediately .
 
 # --- required PPE per person kind (CQ17 + SHACL) ---
-ffv:Firefighter ffo:requiredPPE ffv:Helmet , ffv:FireResistantClothing , ffv:Gloves , ffv:EyeProtection .
+ffontov:Firefighter ffonto:requiredPPE ffontov:Helmet , ffontov:FireResistantClothing , ffontov:Gloves , ffontov:EyeProtection .
 
 # --- ecosystem kind → typical impacts / services / restoration (CQ26) ---
-ffv:ConiferousForest
-    ffo:typicalFireImpact ffv:TreeMortality , ffv:HabitatLoss , ffv:CarbonRelease , ffv:SoilErosion , ffv:SeedReleaseAndRegeneration ;
-    ffo:providesService ffv:CarbonStorage , ffv:HabitatProvision , ffv:WaterRegulation ;
-    ffo:suggestedRestoration ffv:NaturalRegenerationMonitoring , ffv:Reforestation , ffv:ErosionControl .
-ffv:DeciduousForest
-    ffo:typicalFireImpact ffv:TreeMortality , ffv:HabitatLoss , ffv:SoilNutrientLoss ;
-    ffo:providesService ffv:CarbonStorage , ffv:HabitatProvision ;
-    ffo:suggestedRestoration ffv:NaturalRegenerationMonitoring , ffv:Reforestation .
-ffv:MixedForest
-    ffo:typicalFireImpact ffv:TreeMortality , ffv:HabitatLoss , ffv:CarbonRelease ;
-    ffo:providesService ffv:CarbonStorage , ffv:HabitatProvision ;
-    ffo:suggestedRestoration ffv:NaturalRegenerationMonitoring , ffv:Reforestation .
-ffv:Grassland
-    ffo:typicalFireImpact ffv:NutrientRecycling , ffv:InvasiveSpeciesSpread , ffv:SoilErosion ;
-    ffo:providesService ffv:Grazing , ffv:SoilProtection ;
-    ffo:suggestedRestoration ffv:Reseeding , ffv:InvasiveSpeciesControl .
-ffv:Shrubland
-    ffo:typicalFireImpact ffv:SoilErosion , ffv:InvasiveSpeciesSpread , ffv:HabitatLoss ;
-    ffo:providesService ffv:SoilProtection , ffv:HabitatProvision ;
-    ffo:suggestedRestoration ffv:ErosionControl , ffv:Reseeding .
-ffv:WaterBody
-    ffo:typicalFireImpact ffv:WaterQualityDegradation ;
-    ffo:providesService ffv:WaterRegulation ;
-    ffo:suggestedRestoration ffv:RiparianRestoration .
-ffv:PrescribedBurn
-    ffo:typicalFireImpact ffv:NutrientRecycling , ffv:SeedReleaseAndRegeneration ;
-    ffo:suggestedRestoration ffv:FuelManagement .
+ffontov:ConiferousForest
+    ffonto:typicalFireImpact ffontov:TreeMortality , ffontov:HabitatLoss , ffontov:CarbonRelease , ffontov:SoilErosion , ffontov:SeedReleaseAndRegeneration ;
+    ffonto:providesService ffontov:CarbonStorage , ffontov:HabitatProvision , ffontov:WaterRegulation ;
+    ffonto:suggestedRestoration ffontov:NaturalRegenerationMonitoring , ffontov:Reforestation , ffontov:ErosionControl .
+ffontov:DeciduousForest
+    ffonto:typicalFireImpact ffontov:TreeMortality , ffontov:HabitatLoss , ffontov:SoilNutrientLoss ;
+    ffonto:providesService ffontov:CarbonStorage , ffontov:HabitatProvision ;
+    ffonto:suggestedRestoration ffontov:NaturalRegenerationMonitoring , ffontov:Reforestation .
+ffontov:MixedForest
+    ffonto:typicalFireImpact ffontov:TreeMortality , ffontov:HabitatLoss , ffontov:CarbonRelease ;
+    ffonto:providesService ffontov:CarbonStorage , ffontov:HabitatProvision ;
+    ffonto:suggestedRestoration ffontov:NaturalRegenerationMonitoring , ffontov:Reforestation .
+ffontov:Grassland
+    ffonto:typicalFireImpact ffontov:NutrientRecycling , ffontov:InvasiveSpeciesSpread , ffontov:SoilErosion ;
+    ffonto:providesService ffontov:Grazing , ffontov:SoilProtection ;
+    ffonto:suggestedRestoration ffontov:Reseeding , ffontov:InvasiveSpeciesControl .
+ffontov:Shrubland
+    ffonto:typicalFireImpact ffontov:SoilErosion , ffontov:InvasiveSpeciesSpread , ffontov:HabitatLoss ;
+    ffonto:providesService ffontov:SoilProtection , ffontov:HabitatProvision ;
+    ffonto:suggestedRestoration ffontov:ErosionControl , ffontov:Reseeding .
+ffontov:WaterBody
+    ffonto:typicalFireImpact ffontov:WaterQualityDegradation ;
+    ffonto:providesService ffontov:WaterRegulation ;
+    ffonto:suggestedRestoration ffontov:RiparianRestoration .
+ffontov:PrescribedBurn
+    ffonto:typicalFireImpact ffontov:NutrientRecycling , ffontov:SeedReleaseAndRegeneration ;
+    ffonto:suggestedRestoration ffontov:FuelManagement .
 

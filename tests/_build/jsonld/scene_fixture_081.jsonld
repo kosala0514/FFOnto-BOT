@@ -1,7 +1,7 @@
 {
   "@context": {
-    "ffo": "http://purl.org/ffonto#",
-    "ffv": "http://purl.org/ffonto/vocab#",
+    "ffonto": "http://purl.org/ffonto#",
+    "ffontov": "http://purl.org/ffonto/vocab#",
     "ffd": "http://purl.org/ffonto/data/",
     "sosa": "http://www.w3.org/ns/sosa/",
     "prov": "http://www.w3.org/ns/prov#",
@@ -191,33 +191,33 @@
   "entities": [
     {
       "@id": "ffd:scene/scene-fixture-081/e1",
-      "kind": "ffv:Firefighter",
+      "kind": "ffontov:Firefighter",
       "count": 2,
       "activity": [
-        "ffv:ApplyingWater",
-        "ffv:StructureProtection"
+        "ffontov:ApplyingWater",
+        "ffontov:StructureProtection"
       ],
       "wears": [
-        "ffv:Helmet",
-        "ffv:FireResistantClothing",
-        "ffv:Gloves",
-        "ffv:EyeProtection"
+        "ffontov:Helmet",
+        "ffontov:FireResistantClothing",
+        "ffontov:Gloves",
+        "ffontov:EyeProtection"
       ],
-      "position": "ffv:BetweenFireAndAsset",
+      "position": "ffontov:BetweenFireAndAsset",
       "near": [
         "ffd:scene/scene-fixture-081/e5"
       ]
     },
     {
       "@id": "ffd:scene/scene-fixture-081/e2",
-      "kind": "ffv:Firefighter",
+      "kind": "ffontov:Firefighter",
       "count": 1,
       "activity": [
-        "ffv:AdvancingHoseLine"
+        "ffontov:AdvancingHoseLine"
       ],
       "wears": [
-        "ffv:Helmet",
-        "ffv:FireResistantClothing"
+        "ffontov:Helmet",
+        "ffontov:FireResistantClothing"
       ],
       "near": [
         "ffd:scene/scene-fixture-081/e5"
@@ -225,25 +225,25 @@
     },
     {
       "@id": "ffd:scene/scene-fixture-081/e3",
-      "kind": "ffv:HoseLine",
+      "kind": "ffontov:HoseLine",
       "count": 2,
       "state": [
-        "ffv:Charged",
-        "ffv:Flowing"
+        "ffontov:Charged",
+        "ffontov:Flowing"
       ]
     },
     {
       "@id": "ffd:scene/scene-fixture-081/e4",
-      "kind": "ffv:House",
+      "kind": "ffontov:House",
       "count": 1,
       "state": [
-        "ffv:Scorched",
-        "ffv:Threatened"
+        "ffontov:Scorched",
+        "ffontov:Threatened"
       ]
     },
     {
       "@id": "ffd:scene/scene-fixture-081/e5",
-      "kind": "ffv:FlameFront",
+      "kind": "ffontov:FlameFront",
       "count": 2,
       "advancing_toward": [
         "ffd:scene/scene-fixture-081/e4"
@@ -251,7 +251,7 @@
     },
     {
       "@id": "ffd:scene/scene-fixture-081/e6",
-      "kind": "ffv:PropaneTank",
+      "kind": "ffontov:PropaneTank",
       "count": 1,
       "near": [
         "ffd:scene/scene-fixture-081/e5"
@@ -259,14 +259,14 @@
     },
     {
       "@id": "ffd:scene/scene-fixture-081/e7",
-      "kind": "ffv:Road",
+      "kind": "ffontov:Road",
       "state": [
-        "ffv:Open"
+        "ffontov:Open"
       ]
     },
     {
       "@id": "ffd:scene/scene-fixture-081/e8",
-      "kind": "ffv:PrivateCar",
+      "kind": "ffontov:PrivateCar",
       "count": 1,
       "near": [
         "ffd:scene/scene-fixture-081/e5"
@@ -274,38 +274,38 @@
     },
     {
       "@id": "ffd:scene/scene-fixture-081/e9",
-      "kind": "ffv:ConiferousForest",
+      "kind": "ffontov:ConiferousForest",
       "state": [
-        "ffv:Dry"
+        "ffontov:Dry"
       ]
     },
     {
       "@id": "ffd:scene/scene-fixture-081/e10",
-      "kind": "ffv:FireEngine",
+      "kind": "ffontov:FireEngine",
       "count": 1,
       "state": [
-        "ffv:LightsOn"
+        "ffontov:LightsOn"
       ],
       "activity": [
-        "ffv:Pumping"
+        "ffontov:Pumping"
       ],
-      "position": "ffv:BetweenFireAndAsset",
+      "position": "ffontov:BetweenFireAndAsset",
       "protects": [
         "ffd:scene/scene-fixture-081/e4"
       ]
     },
     {
       "@id": "ffd:scene/scene-fixture-081/e11",
-      "kind": "ffv:SpotFire",
+      "kind": "ffontov:SpotFire",
       "count": 1,
-      "position": "ffv:AheadOfFire"
+      "position": "ffontov:AheadOfFire"
     },
     {
       "@id": "ffd:scene/scene-fixture-081/e12",
-      "kind": "ffv:Foam",
+      "kind": "ffontov:Foam",
       "count": 1,
       "state": [
-        "ffv:Deployed"
+        "ffontov:Deployed"
       ]
     }
   ],
@@ -314,72 +314,72 @@
       "@id": "ffd:scene/scene-fixture-081/attr/0",
       "@type": "ffonto:ModelObservation",
       "feature_of_interest": "ffd:record/00000000-0000-4000-8000-000000000081",
-      "observed_property": "ffv:SmokeColour",
-      "value": "ffv:DarkGray",
-      "label_source": "ffv:VLMSource",
+      "observed_property": "ffontov:SmokeColour",
+      "value": "ffontov:DarkGray",
+      "label_source": "ffontov:VLMSource",
       "attributed_to": "ffd:model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0"
     },
     {
       "@id": "ffd:scene/scene-fixture-081/attr/1",
       "@type": "ffonto:ModelObservation",
       "feature_of_interest": "ffd:record/00000000-0000-4000-8000-000000000081",
-      "observed_property": "ffv:SmokeDensity",
-      "value": "ffv:High",
-      "label_source": "ffv:VLMSource",
+      "observed_property": "ffontov:SmokeDensity",
+      "value": "ffontov:High",
+      "label_source": "ffontov:VLMSource",
       "attributed_to": "ffd:model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0"
     },
     {
       "@id": "ffd:scene/scene-fixture-081/attr/2",
       "@type": "ffonto:ModelObservation",
       "feature_of_interest": "ffd:record/00000000-0000-4000-8000-000000000081",
-      "observed_property": "ffv:VisibilityLevel",
-      "value": "ffv:Low",
-      "label_source": "ffv:VLMSource",
+      "observed_property": "ffontov:VisibilityLevel",
+      "value": "ffontov:Low",
+      "label_source": "ffontov:VLMSource",
       "attributed_to": "ffd:model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0"
     },
     {
       "@id": "ffd:scene/scene-fixture-081/attr/3",
       "@type": "ffonto:ModelObservation",
       "feature_of_interest": "ffd:record/00000000-0000-4000-8000-000000000081",
-      "observed_property": "ffv:LightCondition",
-      "value": "ffv:Daytime",
-      "label_source": "ffv:VLMSource",
+      "observed_property": "ffontov:LightCondition",
+      "value": "ffontov:Daytime",
+      "label_source": "ffontov:VLMSource",
       "attributed_to": "ffd:model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0"
     },
     {
       "@id": "ffd:scene/scene-fixture-081/attr/4",
       "@type": "ffonto:ModelObservation",
       "feature_of_interest": "ffd:record/00000000-0000-4000-8000-000000000081",
-      "observed_property": "ffv:FireType",
-      "value": "ffv:StructureFireType",
-      "label_source": "ffv:VLMSource",
+      "observed_property": "ffontov:FireType",
+      "value": "ffontov:StructureFireType",
+      "label_source": "ffontov:VLMSource",
       "attributed_to": "ffd:model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0"
     },
     {
       "@id": "ffd:scene/scene-fixture-081/attr/5",
       "@type": "ffonto:ModelObservation",
       "feature_of_interest": "ffd:record/00000000-0000-4000-8000-000000000081",
-      "observed_property": "ffv:FireIntensity",
-      "value": "ffv:High",
-      "label_source": "ffv:VLMSource",
+      "observed_property": "ffontov:FireIntensity",
+      "value": "ffontov:High",
+      "label_source": "ffontov:VLMSource",
       "attributed_to": "ffd:model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0"
     },
     {
       "@id": "ffd:scene/scene-fixture-081/attr/6",
       "@type": "ffonto:ModelObservation",
       "feature_of_interest": "ffd:record/00000000-0000-4000-8000-000000000081",
-      "observed_property": "ffv:FireSpreadStatus",
-      "value": "ffv:Expanding",
-      "label_source": "ffv:VLMSource",
+      "observed_property": "ffontov:FireSpreadStatus",
+      "value": "ffontov:Expanding",
+      "label_source": "ffontov:VLMSource",
       "attributed_to": "ffd:model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0"
     },
     {
       "@id": "ffd:scene/scene-fixture-081/attr/7",
       "@type": "ffonto:ModelObservation",
       "feature_of_interest": "ffd:record/00000000-0000-4000-8000-000000000081",
-      "observed_property": "ffv:ScenePurpose",
-      "value": "ffv:Wildfire",
-      "label_source": "ffv:VLMSource",
+      "observed_property": "ffontov:ScenePurpose",
+      "value": "ffontov:Wildfire",
+      "label_source": "ffontov:VLMSource",
       "attributed_to": "ffd:model/example-vlm-hand-written-fixture-replace-with-real-vlm-output/0"
     }
   ]
