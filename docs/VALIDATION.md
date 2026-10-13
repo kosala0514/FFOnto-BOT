@@ -56,7 +56,21 @@ The script runs steps 4, 5, 6 and 8 below and prints PASS/FAIL for each. All out
 
 ---
 
-## Step 4 – HermiT in Protégé (interactive, good for screenshots)
+## Step 4a – HermiT without Protégé or ROBOT (Python)
+
+```bash
+pip install owlready2            # bundles HermiT; needs Java on PATH (java -version)
+python validation/reason_hermit.py
+```
+
+The script checks three things:
+- the schema is consistent and has no unsatisfiable classes
+- the knowledge-graph data is consistent with the schema
+- all 4 negative tests are detected as inconsistent
+
+It also writes HermiT's inferred types to `build/hermit_inferred_types.tsv`. Protégé is **optional**: use it only if you want screenshots or the interactive Explain view.
+
+## Step 4b – HermiT in Protégé (optional, interactive, good for screenshots)
 
 1. **Open the hub.** Choose *File → Open…* → `ontology/ffonto.ttl`. Protégé finds `catalog-v001.xml` in the same folder and loads the three modules. Check *Active ontology → Ontology imports*: all three should be listed with no red error.
 2. **Pick the reasoner.** Choose *Reasoner → HermiT*.

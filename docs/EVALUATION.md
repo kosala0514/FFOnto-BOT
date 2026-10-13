@@ -91,6 +91,44 @@ python -m qa.evaluate e2e --pool all --systems cq text2sparql text2sparql_plus -
 T2S_BIND_CONTEXT=0 python -m qa.evaluate e2e --pool all --systems text2sparql_plus
 ```
 
+### Abstentions and answer fusion
+
+A yes/no answer is scored as **yes**, **no**, **abstain** ("the knowledge graph has no information …") or **error**.
+Abstentions count as wrong but are reported separately, so "the system declined" is not mistaken for "the system said no".
+`prf` also reports yes/no results on the subset where the **gold CQ query returned rows** (the KG holds the evidence).
+The gap between the full set and this subset is the share of errors caused by missing data (scene/caption/audio
+extraction), not by question answering.
+
+`cq_fusion` is the CQ system plus one fallback: if the KG-only answer abstains, a second prompt interprets the rows
+with ontology facts and document passages (the background part is marked "general knowledge"). This helps
+risk and likelihood questions ("Does the dry grass increase the chance of rapid flame spread?"). Compare it with `cq`
+in one run; with two systems the McNemar test is printed:
+
+```bash
+python -m qa.evaluate e2e --pool all --systems cq cq_fusion --judge --embed-sim
+python -m qa.evaluate prf
+```
+In the chatbot, `ANSWER_FUSION=1` (default) turns the fallback on; `ANSWER_FUSION=0` gives strict KG-only answers.
+
+### Vision-model baseline and visual check
+
+The KG only knows what scene extraction recorded. Two more systems measure that limit:
+
+| System | What it does |
+|---|---|
+| `vlm` | Baseline without the KG: the vision model (`VISION_MODEL`) answers from the image alone. Image questions only; other questions count as errors, so compare systems on the "Yes/no questions about images" table. |
+| `cq_vlm` | `cq_fusion`, plus: for a yes/no question about an image where the KG has no positive evidence, the vision model looks at the image. Its answer is used only if it starts with "Yes", and it is marked "not recorded in the knowledge graph". |
+
+The image path comes from `ffonto:fileURI`. If those paths are from another machine, set `IMAGES_DIR` to the image folder (files are found by name).
+
+```bash
+IMAGES_DIR=~/datasets/ForestFire-VQA/images \
+python -m qa.evaluate e2e --pool all --systems cq_fusion vlm cq_vlm --judge --embed-sim
+python -m qa.evaluate prf
+```
+The `prf` report also prints the majority-class baseline for yes/no questions. Report it: a system below it is not
+yet useful for yes/no questions. The e2e CSVs contain `rows_preview` (the first result rows) for error analysis.
+
 ## Things to keep honest
 
 1. **Silver labels.** The CQ labels in `FFVQA_CQ_mapping.xlsx` were assigned by keyword rules and then hand-corrected where obviously wrong. Before reporting stage 2, review the confusion pairs in `routing_summary.md`, fix wrong labels in the spreadsheet, rebuild, and re-run. Say in the paper that the labels were reviewed.

@@ -6,6 +6,8 @@ extracted by a vision-language model (VLM)** into one knowledge graph. That grap
 
 ```
 ontology/
+  ffonto.ttl             hub: imports the three modules (open THIS in Protégé / ROBOT)
+  catalog-v001.xml       maps the module IRIs to the local files
   ffonto-core.ttl        23 classes, 39 object + 57 datatype properties (the schema)
   ffonto-vocab.ttl       374 SKOS concepts: kinds, states, activities, PPE, values, hazards, actions, ecology
   danger-rules.ttl       weather/FWI threshold rules stored as data (PLACEHOLDER values!)
@@ -20,9 +22,25 @@ rules/   R00–R07         SPARQL CONSTRUCT rules (detections, caption tagging, 
 queries/ CQ01–CQ26       one SPARQL query per competency question (+ CQ07b)
 prompts/                 VLM scene-extraction prompt, generated from the vocabulary
 scripts/
-  lift.py                raw data → JSON-LD → RDF  (data/kg.ttl)
+  lift.py                raw data → JSON-LD → RDF  (data/kg.ttl + data/graphs/<modality>.ttl)
   run_cqs.py             rules + SHACL + all CQ queries → results/
   make_prompt.py         regenerates the VLM prompt from the vocabulary
+  extract_scenes.py      runs the VLM (Ollama, qwen2.5vl:7b) over the dataset images -> data/scenes/*.json
+  rename_prefix.py       renames namespace prefixes consistently (e.g. ffo: -> ffonto:)
+validation/              ROBOT/HermiT pipeline, ROBOT report profile, OOPS! client, negative tests
+tests/                   pytest CQ test suite + data and ontology quality tests
+graphdb/                 repository config + loader (one repo, one named graph per modality)
+qa/                      natural-language Q&A: router + CQ templates + text-to-SPARQL + multimodal RAG
+                         (text, tables, figures), charts of KG answers, FastAPI, Streamlit chat UI,
+                         MCP server, evaluation (local Ollama models)
+docs/
+  VALIDATION.md          step-by-step: HermiT, OOPS!, ROBOT report, CQ test suite, SHACL
+  GRAPHDB.md             step-by-step: storing and querying the KG in GraphDB
+  QA.md                  step-by-step: chatbot over the KG (Ollama + FastAPI + Streamlit)
+  EVALUATION.md          metrics (incl. BLEU/ROUGE), procedure and paper tables for the QA evaluation
+  MULTIMODAL_RAG.md      figures/charts/tables from PDFs, visual answers, figure-retrieval evaluation
+  widoco/                HTML ontology documentation with WIDOCO + publishing on GitHub Pages / w3id (README.md)
+  FFVQA_CQ_mapping.xlsx  every dataset question mapped to its CQ
 ```
 
 ## 1. Run it
@@ -32,6 +50,10 @@ pip install -r requirements.txt          # rdflib, pyshacl
 python scripts/lift.py                   # -> data/jsonld/*.jsonld, data/kg.ttl
 python scripts/run_cqs.py                # -> results/report.md, results/CQxx.csv, results/shacl_report.txt
 python scripts/run_cqs.py CQ05 CQ24      # run selected CQs only
+pytest -q tests/                         # CQ test suite
+bash validation/validate_ontology.sh     # HermiT + ROBOT (needs Java + robot)
+python validation/oops_check.py          # OOPS! pitfall scan
+python graphdb/load_graphdb.py           # load into GraphDB (needs a running GraphDB)
 ```
 
 Open `results/report.md` to read every answer. `data/kg_inferred.ttl` holds the data plus everything the rules derived.

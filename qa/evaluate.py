@@ -523,6 +523,49 @@ def stage_prf():
     print("\n".join(lines))
 
 
+# =================================================================== final comparison (from saved CSVs)
+def stage_compare(systems):
+    """One table for all systems from their saved e2e CSVs (bootstrap 95 % CI), plus an exact McNemar test of every
+    system against the first one, on the questions both answered. No model calls."""
+    data = {}
+    for s in systems:
+        f = OUT / f"e2e_{s}.csv"
+        if not f.exists():
+            raise SystemExit(f"{f} not found – run: python -m qa.evaluate e2e --pool all --systems {s} ...")
+        data[s] = {r["question"]: r for r in csv.DictReader(f.open(encoding="utf-8"))}
+    common = set.intersection(*(set(d) for d in data.values()))
+    if not common:
+        raise SystemExit("the systems were evaluated on different questions – use the same --pool and --limit")
+    qs = sorted(common)
+    metrics = ["route_ok", "cq_ok", "exec_ok", "result_P", "result_R", "result_F1", "yes_no", "abstain", "judge_score",
+               "faith_score", "token_F1", "BLEU4", "ROUGE_L", "emb_cosine", "seconds"]
+    lines = ["# Final system comparison", "",
+             f"{len(qs)} questions answered by every system (same questions, same order). Mean [95 % bootstrap CI].", "",
+             "| Metric | " + " | ".join(systems) + " |", "|---|" + "---|" * len(systems)]
+    for m in metrics:
+        if any(m in data[s][qs[0]] for s in systems):
+            lines.append(f"| {m} | " + " | ".join(fmt_ci([_f(data[s][q].get(m)) for q in qs]) for s in systems) + " |")
+    yn = [q for q in qs if M.polarity(data[systems[0]][q]["reference"]) in ("yes", "no")]
+    if yn:
+        maj = Counter(M.polarity(data[systems[0]][q]["reference"]) for q in yn).most_common(1)[0]
+        lines += ["", f"Yes/no majority baseline (always '{maj[0]}'): {maj[1] / len(yn):.3f} (n={len(yn)})"]
+    base = systems[0]
+    lines += ["", f"## Exact McNemar tests against {base}", "",
+              "| System | Outcome | only " + base + " right | only system right | p |", "|---|---|---|---|---|"]
+    for s in systems[1:]:
+        for m, ok in [("exec_ok", lambda v: _f(v) == 1.0), ("yes_no", lambda v: _f(v) == 1.0),
+                      ("judge correct", lambda v: _f(v) == 1.0)]:
+            key = "judge_score" if m == "judge correct" else m
+            pairs = [(data[base][q].get(key), data[s][q].get(key)) for q in qs]
+            pairs = [(ok(a), ok(b)) for a, b in pairs if _f(a) is not None and _f(b) is not None]
+            if pairs:
+                b, c, p = M.mcnemar_exact([x for x, _ in pairs], [y for _, y in pairs])
+                lines.append(f"| {s} | {m} | {b} | {c} | {p:.4f} |")
+    (OUT / "final_comparison.md").write_text("\n".join(lines), encoding="utf-8")
+    print("\n".join(lines))
+    print(f"\nwritten to {OUT / 'final_comparison.md'}")
+
+
 # =================================================================== 3. judge vs human
 def stage_agreement():
     f = OUT / "human_check.csv"
@@ -558,7 +601,7 @@ def stage_agreement():
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("stage", choices=["routing", "e2e", "agreement", "figures", "prf"])
+    ap.add_argument("stage", choices=["routing", "e2e", "agreement", "figures", "prf", "compare"])
     ap.add_argument("--make-template", action="store_true", help="figures: write qa/eval/figure_questions.csv to fill in")
     ap.add_argument("--pool", choices=["heldout", "all"], default="heldout",
                     help="heldout = the 20 %% kept out by build_index --holdout; all = every labelled question, "
@@ -580,6 +623,8 @@ def main():
         return stage_agreement()
     if a.stage == "prf":
         return stage_prf()
+    if a.stage == "compare":
+        return stage_compare(a.systems)
     if a.stage == "figures":
         return stage_figures(a.judge, a.make_template)
     loo = a.pool == "all"

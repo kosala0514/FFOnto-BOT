@@ -15,10 +15,12 @@ Streamlit chat UI ──► FastAPI /chat ──► pipeline.answer()
                                          ├─ 2b. kg + NONE ─► text-to-SPARQL (schema + similar CQ queries),
                                          │                    safety check, 1 repair attempt ─► GraphDB
                                          ├─ 2c. rag       ─► ontology facts (definitions, hazard→action, …)
-                                         │                    + passages from qa/rag_docs ─► cited answer
+                                         │                    + text/table passages + FIGURES from qa/rag_docs
+                                         │                    (multimodal RAG, docs/MULTIMODAL_RAG.md) ─► cited answer
                                          │
                                          └─ 3. ANSWER (LLM) – uses ONLY the returned rows / facts / passages
-Every reply includes its evidence: route, CQ, SPARQL, rows, sources.
+Every reply includes its evidence (route, CQ, SPARQL, rows, sources) and VISUALS:
+a chart of the knowledge-graph rows, or the document figures the answer cites.
 ```
 
 ## How answers stay tied to the ontology
@@ -36,6 +38,7 @@ Every reply includes its evidence: route, CQ, SPARQL, rows, sources.
 curl -fsSL https://ollama.com/install.sh | sh
 ollama pull qwen2.5:14b          # router + answers (~9 GB at 4-bit, fits 16 GB)
 ollama pull bge-m3               # embeddings (example search + RAG)
+ollama pull qwen2.5vl:7b         # vision model: describes PDF figures/charts (multimodal RAG)
 # optional, for the text-to-SPARQL fallback:
 ollama pull qwen2.5-coder:14b    # then: export SPARQL_MODEL=qwen2.5-coder:14b
 
@@ -57,6 +60,7 @@ Model choices for 16 GB of VRAM:
 | Router + answers | `qwen2.5:14b` | `qwen3:14b`, `llama3.1:8b` (faster, a little less accurate) |
 | Text-to-SPARQL fallback | same model | `qwen2.5-coder:14b` |
 | Embeddings | `bge-m3` | `nomic-embed-text` |
+| Figures in documents (vision) | `qwen2.5vl:7b` | `gemma3:12b`, `llama3.2-vision:11b`, `minicpm-v:8b` |
 
 Using two different 14B models makes Ollama swap them in and out of GPU memory. One model for everything is the fastest option.
 
@@ -90,18 +94,20 @@ This exposes the tools `list_cqs`, `run_cq`, `sparql_select`, `ontology_lookup` 
 
 ## Evaluation (paper section)
 
-```bash
-python -m qa.build_index --holdout 0.2         # keep 20 % of the labelled questions unseen
-python -m qa.evaluate --limit 200              # stage 1: routing + CQ-selection accuracy
-python -m qa.evaluate --end-to-end --judge     # stage 2: answers vs ForestFire-VQA answers
-```
+See **docs/EVALUATION.md**: stage-wise metrics (routing, CQ selection, execution, answer, faithfulness),
+BLEU/ROUGE/token-F1/EM, yes/no agreement, LLM judge with human agreement (Cohen's κ),
+bootstrap confidence intervals and McNemar tests for CQ mode vs text-to-SPARQL.
 
-- **Stage 1** needs no scene data. It reports routing accuracy, CQ-selection accuracy and the most frequent confusions (`results/qa_eval_routing.csv`). The labels come from `docs/FFVQA_CQ_mapping.xlsx`. They were assigned automatically, so review the confusions: some will be labelling errors, not model errors.
-- **Stage 2** runs only for held-out questions whose image or audio is in GraphDB. It needs real records and scene graphs. The `--judge` grades from the local LLM are a convenience; check a sample by hand.
-- **Baseline comparison:** run stage 2 twice: normally, then with `FORCE_TEXT2SPARQL=1` (the LLM writes all SPARQL itself; the CQ templates are ignored). This gives the "CQ templates vs free text-to-SPARQL" comparison table.
+```bash
+python -m qa.build_index --holdout 0.2
+python -m qa.evaluate routing --limit 300
+python -m qa.evaluate e2e --systems cq text2sparql --judge --embed-sim --include-rag
+python -m qa.evaluate agreement
+```
 
 ## Before you rely on it
 
 - **Data:** the answers can only be as good as the knowledge graph. Remove the `fixture_*` records and example scenes from `data/`, and add real VLM scene graphs (next step).
+- **Multimodal RAG:** PDFs in `qa/rag_docs/` are indexed with their tables and figures; see `docs/MULTIMODAL_RAG.md`.
 - **RAG documents:** `qa/rag_docs/` is empty. Add trusted wildfire guidance documents. `--gk-answers` indexes the dataset's own general-knowledge answers. That is fine for a demo, but **not** for evaluating RAG on those same questions.
 - **Follow-up questions** ("and what about the house?") aren't supported yet: each message is answered on its own. Add the previous turn to the router prompt when you need it.
