@@ -59,6 +59,8 @@ Rules:
 - Values come from automatic models (classifiers, captioners, vision-language models). Mention scores and
   thresholds only when the question is about them, e.g. "the smoke score was 0.73, above its 0.60 threshold".
 - Prefer the human-readable labels in the rows over identifiers.
+- Column names carry units: tempC = °C, rhPct = %, windKmh = km/h, rainMm = mm, areaHa = ha. A value in such a column
+  IS the measurement asked for ("What is the temperature?" + tempC 33 -> "33 °C").
 - Answer in one or two short sentences."""
 
 ANSWER_KG_USER = """Question: {question}
@@ -86,8 +88,11 @@ Rules:
   flames rapidly."
 - Questions about risk, likelihood or effect ("could", "does it increase", "is it enough to") are answered Yes/No
   from the rows + background; say it is an inference.
-- If the question asks whether a specific object or event is present and no row mentions it or anything similar,
-  answer: "No – it was not detected in this record."
+- Only for a yes/no question about whether an object or event is VISIBLE / HEARD in an image or audio record: if no row
+  mentions it or anything similar, answer "No – it was not detected in this record." Never use this sentence for
+  questions asking for a value (temperature, wind speed, a date, a count).
+- Numbers in the rows are measurements: "tempC 33" means the air temperature is 33 °C, "windKmh 21" a wind speed of
+  21 km/h. Use them, with their units, to answer value and threshold questions.
 - For yes/no questions, start with "Yes" or "No".
 - Answer in one or two short sentences. Mark the background part with "(general knowledge)"."""
 

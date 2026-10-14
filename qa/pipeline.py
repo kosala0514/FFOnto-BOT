@@ -45,11 +45,25 @@ def route(question, record_desc="none", exclude_self=False):
 
 
 # ------------------------------------------------------------------ KG answering
+_SCI = re.compile(r"^[+-]?\d+(\.\d+)?[eE][+-]?\d+$")
+
+
+def _cell(v):
+    """GraphDB returns xsd:double as '3.3e+01'; the model misreads that ('temperature not recorded'), so show 33."""
+    s = str(v if v is not None else "")
+    if _SCI.match(s):
+        x = float(s)
+        return str(int(x)) if x.is_integer() and abs(x) < 1e15 else f"{x:.4g}"
+    if s.endswith("T00:00:00+00:00") or s.endswith("T00:00:00Z"):
+        return s[:10]                                    # a date, not a timestamp
+    return s
+
+
 def _table(cols, rows, limit):
     show = rows[:limit]
     if not show:
         return "(no rows)"
-    lines = [" | ".join(cols)] + [" | ".join(str(r.get(c, ""))[:80] for c in cols) for r in show]
+    lines = [" | ".join(cols)] + [" | ".join(_cell(r.get(c, ""))[:80] for c in cols) for r in show]
     return "\n".join(lines)
 
 

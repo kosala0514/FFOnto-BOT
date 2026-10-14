@@ -92,9 +92,14 @@ def make_safe(query):
     """Add missing prefixes, allow only SELECT/ASK, enforce a LIMIT, check syntax with rdflib if available."""
     q = query.strip().strip("`")
     q = re.sub(r"^sparql\s*", "", q, flags=re.I)
-    if FORBIDDEN.search(re.sub(r'"[^"]*"', '""', q)):
+    # Checks run on a copy without IRIs, strings and comments: a "# CQ24 – …" header copied from a template, or a word
+    # like "create" in a comment, must not make a valid query fail.
+    bare = re.sub(r"<[^>\s]*>", "<>", q)
+    bare = re.sub(r'"[^"\n]*"', '""', bare)
+    bare = re.sub(r"#[^\n]*", "", bare)
+    if FORBIDDEN.search(bare):
         raise KGError("only read-only SELECT/ASK queries are allowed")
-    body = re.sub(r"(?im)^\s*PREFIX\s+\S+\s*<[^>]*>\s*", "", q)
+    body = re.sub(r"(?im)^\s*(PREFIX\s+\S+\s*<>|BASE\s*<>)\s*", "", bare)
     if not re.match(r"(?is)^\s*(SELECT|ASK)\b", body):
         raise KGError("query must be a SELECT or ASK query")
     declared = set(re.findall(r"(?im)^\s*PREFIX\s+(\w*):", q))

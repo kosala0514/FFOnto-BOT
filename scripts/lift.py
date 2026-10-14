@@ -40,6 +40,28 @@ def load_concepts():
 
 CONCEPTS = load_concepts()
 
+
+def load_agent_kinds():
+    """Kinds under ffontov:AgentKind (people, animals). Only these may 'wear' PPE: ffonto:wears has domain ffonto:Agent,
+    and Agent is disjoint from Vehicle, Equipment, …, so a VLM claim like 'vehicle wears respirator' would make the
+    whole knowledge graph inconsistent. Returns None if rdflib is missing (then nothing is filtered)."""
+    try:
+        from rdflib import Graph, Namespace
+    except ImportError:
+        return None
+    g = Graph().parse(VOCAB_FILE, format="turtle")
+    V, SKOS = Namespace("http://purl.org/ffonto/vocab#"), Namespace("http://www.w3.org/2004/02/skos/core#")
+    out, todo = set(), [V.AgentKind]
+    while todo:
+        c = todo.pop()
+        for n in g.subjects(SKOS.broader, c):
+            if n not in out:
+                out.add(n); todo.append(n)
+    return {str(c).split("#", 1)[1] for c in out}
+
+
+AGENT_KINDS = load_agent_kinds()
+
 # raw class / label strings  ->  concept local name
 LABEL_MAP = {
     # image classifier classes
@@ -348,6 +370,10 @@ def normalise_scene(raw):
         if not kind:
             continue
         cl = lambda key, what: [c for c in (concept(x, what) for x in (e.get(key) or [])) if c]
+        if e.get("wears") and AGENT_KINDS is not None and kind.split(":", 1)[1] not in AGENT_KINDS:
+            warn(f"{sid}: '{e.get('kind')}' is not a person/animal but 'wears' {e['wears']} – dropped "
+                 "(would make the KG inconsistent)")
+            e = {**e, "wears": []}
         entities.append(drop_nulls({
             "@id": eid(e["id"]),
             "kind": kind,

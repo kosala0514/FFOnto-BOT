@@ -10,6 +10,3 @@ rdflib>=7.0
 pypdf>=4.0
 pymupdf>=1.24      # PDF figures, vector charts and tables for multimodal RAG
 Pillow>=10.0
-pyshacl>=0.26
-pytest>=7
-owlready2>=0.46 

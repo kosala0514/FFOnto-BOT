@@ -34,7 +34,7 @@ with st.sidebar:
     if st.button("Clear chat"):
         st.session_state.messages = []
 
-st.title("🔥 Forest-Watch")
+st.title("🔥 Forest-fire knowledge-graph assistant")
 st.caption("Answers come from the FFOnto knowledge graph in GraphDB (with charts of the result rows); "
            "general questions use ontology-grounded multimodal RAG over your documents' text, tables and figures.")
 st.session_state.setdefault("messages", [])

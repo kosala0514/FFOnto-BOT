@@ -11,7 +11,7 @@ def env(name, default):
 
 # GraphDB
 GRAPHDB_URL = env("GRAPHDB_URL", "http://localhost:7200")
-GRAPHDB_REPO = env("GRAPHDB_REPO", "ffonto-kg")
+GRAPHDB_REPO = env("GRAPHDB_REPO", "ffonto")
 
 # Ollama (local LLMs). Sized for a 16 GB GPU: a 14B model at 4-bit uses ~9-10 GB.
 OLLAMA_URL = env("OLLAMA_URL", "http://localhost:11434")
